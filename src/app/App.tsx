@@ -1,11 +1,13 @@
 import {withStore} from "./providers/withStore";
 import Header from "../widgets/header";
+import React from "react";
+import {Box} from "@mui/material";
 
 function App() {
   return (
-    <div className="App">
-      <Header/>
-    </div>
+      <Box>
+          <Header/>
+      </Box>
   )
 }
 
