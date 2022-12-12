@@ -1,26 +1,52 @@
-import React from "react";
-import {Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import React, {FC, useEffect, useState} from "react";
+import {Box, List, ListItem, ListItemButton, ListItemIcon, Typography} from "@mui/material";
 import InboxIcon from '@mui/icons-material/Inbox';
 import TodayIcon from '@mui/icons-material/Today';
 import {default as ParamsIcon} from '@mui/icons-material/Apps';
-type DrawerProps  = {
-    isDrawerOpen: boolean
+import {styled} from "@mui/material/styles";
+
+
+const CustomListText = styled(Typography)(({theme}) => ({
+    [theme.breakpoints.down(450)] : {
+        fontSize: '20px'
+    },
+    [theme.breakpoints.up(450)] : {
+        fontSize: '18px'
+    }
+}))
+
+type drawerProps = {
+    isSideBarOpen: boolean
 }
 
-const responsiveListItem  = {
-    fontSize: {md: '0.7rem', lg: '1rem'}
-}
+const Drawer : FC<drawerProps> = ({isSideBarOpen}) => {
+    const [isDrawerOpen, setIsDrawerOpen] = useState<string | null>(null)
 
+    useEffect(() => {
+        setIsDrawerOpen(localStorage.getItem('isSideBarOpen'))
+    }, [isSideBarOpen])
 
-export default function Drawer({isDrawerOpen} : DrawerProps) {
-   return (
-       <Box position={"static"}  height={"calc(100vh - 64px)"} sx = {{
-           width: { xs: '150px', sm: '200px', md: "250px", lg: "250px"},
-           background: '#f5f5f5',
-           transform: isDrawerOpen ? "translateX(0%)" : "translateX(-100%)",
-           transition: "linear .4s "
-       }}
-       >
+    const CustomBox = styled(Box)(({theme}) => ({
+        position: "static" ,
+        display: 'flex',
+        width: "250px",
+        height: "calc(100vh - 64px)",
+        background: '#f5f5f5',
+        transform: isDrawerOpen === 'true' ? "translateX(0%)" : "translateX(-100%)",
+        transition: "transform .4s linear",
+        [theme.breakpoints.down(450)] : {
+            width: "100%",
+        },
+        [theme.breakpoints.up(600)] : {
+            width: "250px"
+        },
+        [theme.breakpoints.up(900)] : {
+            width: "320px"
+        }
+    }))
+
+    return (
+       <CustomBox>
            <Box sx = {{paddingTop: "45px"}}>
                <List>
                    <ListItem disablePadding>
@@ -28,7 +54,7 @@ export default function Drawer({isDrawerOpen} : DrawerProps) {
                            <ListItemIcon>
                                <InboxIcon/>
                            </ListItemIcon>
-                           <ListItemText sx={responsiveListItem} primary="Inbox"/>
+                           <CustomListText>Inbox</CustomListText>
                        </ListItemButton>
                    </ListItem>
                    <ListItem disablePadding>
@@ -36,7 +62,7 @@ export default function Drawer({isDrawerOpen} : DrawerProps) {
                            <ListItemIcon>
                                <TodayIcon/>
                            </ListItemIcon>
-                           <ListItemText primary="Today" />
+                           <CustomListText>Today</CustomListText>
                        </ListItemButton>
                    </ListItem>
                    <ListItem disablePadding>
@@ -44,12 +70,15 @@ export default function Drawer({isDrawerOpen} : DrawerProps) {
                            <ListItemIcon>
                                <ParamsIcon/>
                            </ListItemIcon>
-                           <ListItemText primary="Filters and labels" />
+                           <CustomListText>Filters and labels</CustomListText>
                        </ListItemButton>
                    </ListItem>
                </List>
            </Box>
-        </Box>
+        </CustomBox>
 
    )
 }
+
+
+export default Drawer;

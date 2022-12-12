@@ -43,7 +43,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         width: '100%',
@@ -54,10 +53,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
-    const mobileMenuId = 'primary-search-account-menu-mobile';
     const [isSideBarOpen, setSideBarOpen] = useState<boolean>(false);
 
-    const sideBarHandler = () => setSideBarOpen((prev) => !prev);
+    const sideBarHandler = () => {
+        setSideBarOpen((prev) => !prev);
+        localStorage.setItem('isSideBarOpen', isSideBarOpen.toString())
+    }
 
     return (
         // TODO refactor menu to features
@@ -117,7 +118,6 @@ export default function Header() {
                             <IconButton
                                 size="large"
                                 aria-label="show more"
-                                aria-controls={mobileMenuId}
                                 aria-haspopup="true"
                                 color="inherit"
                             >
@@ -129,7 +129,7 @@ export default function Header() {
                     </Toolbar>
                 </Container>
             </AppBar>
-            <TemporaryDrawer isDrawerOpen={isSideBarOpen}/>
+            <TemporaryDrawer isSideBarOpen = {isSideBarOpen}/>
         </Box>
     );
 }
