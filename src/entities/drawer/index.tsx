@@ -1,10 +1,13 @@
-import React, {FC, useEffect, useState} from "react";
+import React from "react";
+import {useSelector} from "react-redux";
+
 import {Box, List, ListItem, ListItemButton, ListItemIcon, Typography} from "@mui/material";
 import InboxIcon from '@mui/icons-material/Inbox';
 import TodayIcon from '@mui/icons-material/Today';
 import {default as ParamsIcon} from '@mui/icons-material/Apps';
 import {styled} from "@mui/material/styles";
 
+import {RootReducer} from "../../app/store";
 
 const CustomListText = styled(Typography)(({theme}) => ({
     [theme.breakpoints.down(450)] : {
@@ -15,16 +18,9 @@ const CustomListText = styled(Typography)(({theme}) => ({
     }
 }))
 
-type drawerProps = {
-    isSideBarOpen: boolean
-}
-
-const Drawer : FC<drawerProps> = ({isSideBarOpen}) => {
-    const [isDrawerOpen, setIsDrawerOpen] = useState<string | null>(null)
-
-    useEffect(() => {
-        setIsDrawerOpen(localStorage.getItem('isSideBarOpen'))
-    }, [isSideBarOpen])
+const Drawer  = () => {
+    const {isOpen} = useSelector((state: RootReducer) => state.drawerReducer)
+    localStorage.setItem('isSideBarOpen', isOpen.toString())
 
     const CustomBox = styled(Box)(({theme}) => ({
         position: "static" ,
@@ -32,7 +28,7 @@ const Drawer : FC<drawerProps> = ({isSideBarOpen}) => {
         width: "250px",
         height: "calc(100vh - 64px)",
         background: '#f5f5f5',
-        transform: isDrawerOpen === 'true' ? "translateX(0%)" : "translateX(-100%)",
+        transform: isOpen ? "translateX(0%)" : "translateX(-100%)",
         transition: "transform .4s linear",
         [theme.breakpoints.down(450)] : {
             width: "100%",
@@ -76,7 +72,6 @@ const Drawer : FC<drawerProps> = ({isSideBarOpen}) => {
                </List>
            </Box>
         </CustomBox>
-
    )
 }
 

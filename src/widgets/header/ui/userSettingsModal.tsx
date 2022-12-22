@@ -10,7 +10,7 @@ type menuItem = {
     Icon: () => React.ReactElement
 }
 
-function UserMenu() {
+export default function UserSettingsMenu() {
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
     const  menuItems: menuItem[] = [
         {
@@ -81,5 +81,3 @@ function UserMenu() {
            </>
     );
 }
-
-export default UserMenu;
