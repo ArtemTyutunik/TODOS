@@ -1,12 +1,12 @@
 import {withStore} from "./providers/withStore";
-import Header from "../widgets/header";
 import React from "react";
 import {Box} from "@mui/material";
+import AppLayout from "./ui/appLayout";
 
 function App() {
   return (
       <Box>
-          <Header/>
+          <AppLayout/>
       </Box>
   )
 }
