@@ -1,6 +1,7 @@
-import Todo from "../entities/todos/ui/todo";
-import Drawer from "../entities/drawer"
 import {Grid} from "@mui/material";
+
+import Drawer from "../entities/drawer"
+import Routing from "../pages";
 
 const ContentLayout = () => {
     return (
@@ -9,7 +10,7 @@ const ContentLayout = () => {
                 <Drawer/>
             </Grid>
             <Grid item xs={6}>
-                <Todo />
+                <Routing/>
             </Grid>
         </Grid>
     )

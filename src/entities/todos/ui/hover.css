@@ -1,0 +1,6 @@
+.button-in-todo {
+    display: none;
+}
+.todo:hover .button-in-todo {
+    display: block;
+}
