@@ -1,7 +1,7 @@
 import React from "react";
 import {useSelector} from "react-redux";
 
-import {Box, List, ListItem, ListItemButton, ListItemIcon, Typography} from "@mui/material";
+import {Box, List, ListItem, ListItemButton, ListItemIcon, Tooltip, Typography} from "@mui/material";
 import InboxIcon from '@mui/icons-material/Inbox';
 import TodayIcon from '@mui/icons-material/Today';
 import {default as ParamsIcon} from '@mui/icons-material/Apps';
@@ -41,34 +41,32 @@ const Drawer  = () => {
         }
     }))
 
+
+    const drawerLinks = [
+        {label: 'Inbox', Icon: () => <InboxIcon/>},
+        {label: 'Today', Icon: () => <TodayIcon/>},
+        {label: 'Filters and labels', Icon: () => <ParamsIcon/>}
+    ]
+
     return (
        <CustomBox>
            <Box sx = {{paddingTop: "45px"}}>
                <List>
-                   <ListItem disablePadding>
-                       <ListItemButton>
-                           <ListItemIcon>
-                               <InboxIcon/>
-                           </ListItemIcon>
-                           <CustomListText>Inbox</CustomListText>
-                       </ListItemButton>
-                   </ListItem>
-                   <ListItem disablePadding>
-                       <ListItemButton >
-                           <ListItemIcon>
-                               <TodayIcon/>
-                           </ListItemIcon>
-                           <CustomListText>Today</CustomListText>
-                       </ListItemButton>
-                   </ListItem>
-                   <ListItem disablePadding>
-                       <ListItemButton >
-                           <ListItemIcon>
-                               <ParamsIcon/>
-                           </ListItemIcon>
-                           <CustomListText>Filters and labels</CustomListText>
-                       </ListItemButton>
-                   </ListItem>
+                   {
+                       drawerLinks.map( (link: {label: string, Icon:() => React.ReactElement}) => {
+                           const {label,Icon} = link
+                           return <ListItem disablePadding key={label}>
+                               <Tooltip title={label}>
+                                   <ListItemButton>
+                                       <ListItemIcon>
+                                           <Icon/>
+                                       </ListItemIcon>
+                                       <CustomListText>{label}</CustomListText>
+                                   </ListItemButton>
+                               </Tooltip>
+                           </ListItem>;
+                       })
+                   }
                </List>
            </Box>
         </CustomBox>

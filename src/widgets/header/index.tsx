@@ -1,5 +1,5 @@
 
-import {Box, AppBar, Toolbar, IconButton, Typography, Container} from '@mui/material';
+import {Box, AppBar, Toolbar, IconButton, Typography, Container, Tooltip} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
@@ -20,23 +20,27 @@ export default function Header() {
             <AppBar position="static" sx = {{boxShadow: "none"}}>
                 <Container >
                     <Toolbar>
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="open drawer"
-                            onClick={() => dispatch(toggleDrawerAction())}
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="open drawer"
-                        >
-                            <HomeIcon />
-                        </IconButton>
+                        <Tooltip title={"open drawer"}>
+                            <IconButton
+                                size="large"
+                                edge="start"
+                                color="inherit"
+                                onClick={() => dispatch(toggleDrawerAction())}
+                            >
+                                <MenuIcon/>
+                            </IconButton>
+                        </Tooltip>
+
+                        <Tooltip title={"home"}>
+                            <IconButton
+                                size="large"
+                                edge="start"
+                                color="inherit"
+                            >
+                                <HomeIcon />
+                            </IconButton>
+                        </Tooltip>
+
                         <Typography
                             variant="h6"
                             noWrap
@@ -45,6 +49,7 @@ export default function Header() {
                         >
                             TODOS
                         </Typography>
+
                         <CustomSearch>
                             <SearchIconWrapper>
                                 <SearchIcon />
@@ -54,30 +59,36 @@ export default function Header() {
                                 inputProps={{ 'aria-label': 'search' }}
                             />
                         </CustomSearch>
-                        <Box sx={{ flexGrow: 1 }} />
-                        <Box sx={{ display: { xs: 'none', md: 'flex' }, position: "relative" }}>
-                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                                <AddTaskIcon/>
-                            </IconButton>
-                            <IconButton
-                                size="large"
-                                aria-label="show 17 new notifications"
-                                color="inherit"
-                            >
-                                <CheckCircleOutlineIcon sx ={{marginRight: "5px"}}/>
-                                <Typography>0/0</Typography>
-                            </IconButton>
-                            <UserSettingsMenu/>
-                            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                            <IconButton
-                                size="large"
-                                aria-label="show more"
-                                aria-haspopup="true"
-                                color="inherit"
-                            >
-                                <MoreIcon />
-                            </IconButton>
 
+                        <Box sx={{ flexGrow: 1 }} />
+
+                        <Box sx={{ display: { xs: 'none', md: 'flex' }, position: "relative" }}>
+                            <Tooltip title={"add todo"}>
+                                <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                                    <AddTaskIcon/>
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title={'Your progress'}>
+                                <IconButton
+                                    size="large"
+                                    color="inherit"
+                                >
+                                    <CheckCircleOutlineIcon sx ={{marginRight: "5px"}}/>
+                                    <Typography>0/0</Typography>
+                                </IconButton>
+                            </Tooltip>
+                            <UserSettingsMenu/>
+
+                            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                                <Tooltip title={'more'}>
+                                    <IconButton
+                                        size="large"
+                                        aria-haspopup="true"
+                                        color="inherit"
+                                    >
+                                        <MoreIcon />
+                                    </IconButton>
+                                </Tooltip>
                             </Box>
                         </Box>
                     </Toolbar>
