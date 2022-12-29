@@ -19,6 +19,8 @@ const todoActions = [
 export interface ITodo {
     label: string,
     description?: string,
+    done?: boolean,
+    labels?: []
 }
 
 
@@ -33,12 +35,19 @@ const  Todo = ({label, description}: ITodo)  => {
                     <Box display={"flex"}
                          alignItems={"center"}
                          maxWidth={'50%'}>
-                        <Checkbox icon={<RadioButtonUncheckedIcon/>} checkedIcon={<CheckCircleOutlineIcon/>}/>
                         <Box width={'100%'}>
-                            <Typography fontSize={'20px'} fontWeight={400} lineHeight={1.3}>
-                                {label}
-                            </Typography>
-                            <Typography fontSize={'16px'} fontWeight={300} lineHeight={1} color={"#3a3939"} noWrap>
+                            <Box display = {"flex"} alignItems={"center"}>
+                                <Checkbox icon={<RadioButtonUncheckedIcon/>} checkedIcon={<CheckCircleOutlineIcon/>}/>
+                                <Typography fontSize={'20px'} fontWeight={400} lineHeight={1.3}>
+                                    {label}
+                                </Typography>
+                            </Box>
+                            <Typography fontSize={'16px'}
+                                fontWeight={300}
+                                lineHeight={1} color={"#3a3939"}
+                                noWrap
+                                paddingLeft={'42px'}
+                            >
                                 {description}
                             </Typography>
                         </Box>
