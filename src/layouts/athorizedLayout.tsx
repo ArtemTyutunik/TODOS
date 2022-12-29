@@ -3,7 +3,7 @@ import {Grid} from "@mui/material";
 import Drawer from "../entities/drawer"
 import Routing from "../pages";
 
-const ContentLayout = () => {
+const AuthorizedLayout= () => {
     return (
         <Grid container spacing={1}>
             <Grid item xs={3}>
@@ -16,4 +16,4 @@ const ContentLayout = () => {
     )
 }
 
-export default ContentLayout;
+export default AuthorizedLayout;
