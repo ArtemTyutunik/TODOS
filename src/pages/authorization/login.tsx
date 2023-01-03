@@ -3,13 +3,12 @@ import {useDispatch} from "react-redux";
 import { getAuth,signInWithEmailAndPassword } from "firebase/auth";
 
 import {app} from "../../../firebaseConfig";
-import {authUserAction} from "./model";
+import {authUser} from "./model";
 import {IFormInputs} from "../../shared/forms/interfaces/interfaces";
 
 import LoginForm from "../../entities/loginForm/loginForm";
 
 function Login() {
-
     const onSubmit= (data: IFormInputs) => loginHandler(data.login, data.password)
     const dispatch = useDispatch()
 
@@ -18,7 +17,7 @@ function Login() {
 
         signInWithEmailAndPassword(auth, login, password)
             .then((response) => {
-                dispatch(authUserAction(response))
+                dispatch(authUser(response))
                 localStorage.setItem('user', JSON.stringify(response))
             })
             .catch(e => console.log(e))

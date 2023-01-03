@@ -18,10 +18,14 @@ const userSlice = createSlice({
         authUser: (state, action) => {
             state.isAuth = true;
             state.user = {...action.payload}
+        },
+        logOutUser: (state) => {
+            state.isAuth = false;
+            state.user = {}
         }
     }
 })
 
 export const userReducer = userSlice.reducer;
 
-export const authUserAction = userSlice.actions.authUser
+export const {authUser,logOutUser} = userSlice.actions
