@@ -5,6 +5,7 @@ import {Link as RouterLink} from 'react-router-dom';
 
 import {loginValidation, passwordValidation} from "../../shared/forms/validation/validation";
 import {IFormInputs, IInputsProps} from "../../shared/forms/interfaces/interfaces";
+import ErrorMessage from "./ui/ui";
 
 
 function LoginForm({onSubmit}: IInputsProps) {
@@ -61,6 +62,7 @@ function LoginForm({onSubmit}: IInputsProps) {
                             helperText={ errors?.password?.message }
                         />}
                     />
+                    <ErrorMessage/>
                     <Button
                         type="submit"
                         fullWidth
