@@ -1,13 +1,6 @@
 import {configureStore, getDefaultMiddleware} from "@reduxjs/toolkit";
-import {drawerReducer} from "../../entities/drawer/model";
-import {todosReducer} from "../../entities/todos/model/todo";
-import {userReducer} from "../../pages/authorization/model";
+import * as reducers from './reducers'
 
-const reducer = {
-    todosReducer,
-    drawerReducer,
-    userReducer
-};
 const customizedMiddleware = getDefaultMiddleware({
     serializableCheck: false
 })
@@ -15,7 +8,7 @@ const customizedMiddleware = getDefaultMiddleware({
 const preloadedState = {};
 
 export const store = configureStore({
-    reducer,
+    reducer: {...reducers},
     devTools: process.env.NODE_ENV !== 'production',
     middleware: customizedMiddleware,
     preloadedState
