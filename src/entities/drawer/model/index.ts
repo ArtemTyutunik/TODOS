@@ -1,25 +1,21 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 export const useOpenDrawer = () => {
-    let currentValue = localStorage.getItem('isSideBarOpen')
-    let result;
+    let currentValue = localStorage.getItem('isDrawerOpen')
+    if (currentValue === null) return false
 
-    if (currentValue == null){
-        result = false
-    } else result = currentValue !== 'false';
-
-    return result;
+    return  currentValue !== 'false';
 }
 
 const drawerSlice = createSlice({
     name: 'drawer',
     initialState: {isOpen: useOpenDrawer()},
     reducers:{
-        toggleState: (state) => {
+        toggleDrawerOpen: (state) => {
             state.isOpen = !state.isOpen
         }
     }
 })
 
-export const toggleDrawerAction = drawerSlice.actions.toggleState;
+export const {toggleDrawerOpen} = drawerSlice.actions;
 export const drawerReducer = drawerSlice.reducer;

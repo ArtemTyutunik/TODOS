@@ -20,7 +20,7 @@ const CustomListText = styled(Typography)(({theme}) => ({
 
 const Drawer  = () => {
     const {isOpen} = useSelector((state: RootReducer) => state.drawerReducer)
-    localStorage.setItem('isSideBarOpen', isOpen.toString())
+    localStorage.setItem('isDrawerOpen', isOpen.toString())
 
     const CustomBox = styled(Box)(({theme}) => ({
         position: "static" ,

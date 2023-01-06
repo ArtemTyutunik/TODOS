@@ -3,7 +3,7 @@ import React from "react";
 import {Box} from "@mui/material";
 import AppLayout from "./ui/appLayout";
 
-function App() {
+const  App = () => {
   return (
       <Box>
           <AppLayout/>

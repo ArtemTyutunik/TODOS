@@ -1,6 +1,6 @@
 import {useSelector} from "react-redux";
 import {RootReducer} from "../../app/store";
-import Todo from "../../entities/todos/ui/todo";
+import Todo, {ITodo} from "../../entities/todos/ui/todo";
 import {Box} from "@mui/material";
 
 
@@ -11,7 +11,7 @@ const TodoList = () => {
     return (
         <Box mt={'20px'}>
             {
-                todos.map(todo => <Todo label={todo.label} key={todo.label}/>)
+                todos.map((todo: ITodo) => <Todo label={todo.label} key={todo.label}/>)
             }
         </Box>
     )

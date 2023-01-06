@@ -10,7 +10,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import {CustomSearch, SearchIconWrapper, StyledInputBase, UserSettingsMenu} from "./ui";
 
 import {useDispatch} from "react-redux";
-import {toggleDrawerAction} from "../../entities/drawer/model";
+import {toggleDrawerOpen} from "../../entities/drawer/model";
 
 export default function Header() {
     const dispatch = useDispatch();
@@ -25,7 +25,7 @@ export default function Header() {
                                 size="large"
                                 edge="start"
                                 color="inherit"
-                                onClick={() => dispatch(toggleDrawerAction())}
+                                onClick={() => dispatch(toggleDrawerOpen())}
                             >
                                 <MenuIcon/>
                             </IconButton>
