@@ -1,9 +1,9 @@
 import {Route, Routes} from "react-router-dom";
-import TodoList from "./todo-list";
+import TodosPage from "./todos";
 
 const Routing = () => {
     return <Routes>
-        <Route path={'/'} element={<TodoList/>}/>
+        <Route path={'/'} element={<TodosPage/>}/>
     </Routes>
 }
 
