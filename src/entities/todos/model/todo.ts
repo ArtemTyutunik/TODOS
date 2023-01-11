@@ -1,12 +1,24 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {ITodo} from "../ui/todo";
 
-const initialState: ITodo[] = []
+interface IInitialState {
+    todos: ITodo[]
+}
+
+const initialState:IInitialState = {
+    todos: []
+}
 
 const todosSlice = createSlice({
     name: 'todos',
     initialState,
-    reducers: {}
+    reducers: {
+        addNewTask: (state, action) => {
+            state.todos.push(action.payload)
+        }
+    }
 })
 
-export const todosReducer = todosSlice.reducer
+export const todosReducer = todosSlice.reducer;
+
+export const {addNewTask} = todosSlice.actions
