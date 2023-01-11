@@ -7,13 +7,26 @@ import HomeIcon from '@mui/icons-material/Home';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
+import {useState} from "react";
+import {useDispatch} from "react-redux";
 import {CustomSearch, SearchIconWrapper, StyledInputBase, UserSettingsMenu} from "./ui";
 
-import {useDispatch} from "react-redux";
 import {toggleDrawerOpen} from "../../entities/drawer/model";
+import BasicModal from "../../shared/ui/modal";
+import CreateTodoForm from "../../pages/todos/ui/createTodoForm";
+
 
 export default function Header() {
     const dispatch = useDispatch();
+    const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false)
+
+    const onClose = () => {
+        setIsAddTaskModalOpen(false)
+    }
+
+    const modalOnCloseHandler = () => {
+        setIsAddTaskModalOpen(false)
+    }
 
     return (
         <Box sx={{ flexGrow: 1 }} position={"relative"}>
@@ -64,10 +77,17 @@ export default function Header() {
 
                         <Box sx={{ display: { xs: 'none', md: 'flex' }, position: "relative" }}>
                             <Tooltip title={"add todo"}>
-                                <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                                <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={() => setIsAddTaskModalOpen(true)}>
                                     <AddTaskIcon/>
                                 </IconButton>
                             </Tooltip>
+
+                            {/* modal window to add a new task*/}
+                            <BasicModal open={isAddTaskModalOpen}
+                                        onClose={modalOnCloseHandler}>
+                                <CreateTodoForm onClose={onClose}/>
+                            </BasicModal>
+
                             <Tooltip title={'Your progress'}>
                                 <IconButton
                                     size="large"
