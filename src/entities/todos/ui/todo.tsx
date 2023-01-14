@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Box, Divider, IconButton, Tooltip, Typography} from "@mui/material";
 
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
@@ -23,8 +23,13 @@ export interface ITodo {
     labels?: []
 }
 
+interface TodoProps {
+    todo: ITodo
+}
 
-const  Todo = ({label, description}: ITodo)  => {
+
+const  Todo:FC<TodoProps> = ({todo})  => {
+    const {label, description} = todo;
     return (
         <Box mb={'25px'} sx = {{cursor: 'pointer'}} className={'todo'}>
                 <Box mb={'15px'}

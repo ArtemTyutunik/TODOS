@@ -16,7 +16,7 @@ const style = {
     minWidth: '600px',
     width: 'auto',
     height: 'auto',
-    bgColor: 'background.paper',
+    backgroundColor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
