@@ -27,7 +27,7 @@ const TodoList = () => {
     return (
         <Box mt={'20px'}>
             {
-                todos.map((todo: ITodo) => <Todo label={todo.label} key={todo.label}/>)
+                todos.map((todo: ITodo) => <Todo todo = {todo} key={todo.label}/>)
             }
         </Box>
     )
