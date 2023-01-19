@@ -24,7 +24,7 @@ const CreateTodoForm:FC<ICreateTodoFormProps> = ({onClose}) => {
     const dispatch = useDispatch()
 
     const onSubmit = (data:ITodo) => {
-        dispatch(addNewTask(data))
+        dispatch(addNewTask({...data, id: Date.now()}))
         onClose()
     }
 

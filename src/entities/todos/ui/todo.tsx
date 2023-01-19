@@ -7,8 +7,10 @@ import Checkbox from '@mui/material/Checkbox';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import CommentIcon from '@mui/icons-material/Comment';
+import {useDispatch} from "react-redux";
 
 import './hover.css'
+import {toggleTaskComplete} from "../model/todo";
 
 const todoActions = [
     {icon: <EditIcon  color={"action"}/>, label: "edit"},
@@ -18,6 +20,7 @@ const todoActions = [
 
 export interface ITodo {
     label: string,
+    id: number,
     description?: string,
     done?: boolean,
     labels?: []
@@ -29,7 +32,13 @@ interface TodoProps {
 
 
 const  Todo:FC<TodoProps> = ({todo})  => {
-    const {label, description} = todo;
+    const {label, description, done = false,id} = todo;
+    const dispatch  = useDispatch()
+
+    const onComplete = () => {
+        dispatch(toggleTaskComplete(id))
+    }
+
     return (
         <Box mb={'25px'} sx = {{cursor: 'pointer'}} className={'todo'}>
                 <Box mb={'15px'}
@@ -42,7 +51,10 @@ const  Todo:FC<TodoProps> = ({todo})  => {
                          maxWidth={'50%'}>
                         <Box width={'100%'}>
                             <Box display = {"flex"} alignItems={"center"}>
-                                <Checkbox icon={<RadioButtonUncheckedIcon/>} checkedIcon={<CheckCircleOutlineIcon/>}/>
+                                <Checkbox icon={<RadioButtonUncheckedIcon/>}
+                                          checkedIcon={<CheckCircleOutlineIcon/>}
+                                          onChange={() => onComplete()}
+                                          checked={done}/>
                                 <Typography fontSize={'20px'} fontWeight={400} lineHeight={1.3}>
                                     {label}
                                 </Typography>
