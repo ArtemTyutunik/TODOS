@@ -1,11 +1,12 @@
 import {Box} from "@mui/material";
-import {useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import {useState} from "react";
 
 import {RootReducer} from "../../../app/store";
-import Todo, {ITodo} from "../../../entities/todos/ui/todo";
+import Todo from "../../../entities/todos/ui/todo";
 import NoTodos from "./noTodos";
 import CreateTodoForm from "./createTodoForm";
+import {ITodo} from "../../../shared/interfaces";
 
 
 const TodoList = () => {

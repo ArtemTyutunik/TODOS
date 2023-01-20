@@ -17,7 +17,7 @@ const style = {
     width: 'auto',
     height: 'auto',
     backgroundColor: 'background.paper',
-    border: '2px solid #000',
+    border: 'none',
     boxShadow: 24,
     p: 4,
 }
