@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {Box, Divider, IconButton, Tooltip, Typography} from "@mui/material";
 
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
@@ -11,6 +11,8 @@ import {useDispatch} from "react-redux";
 
 import './hover.css'
 import {toggleTaskComplete} from "../model/todo";
+import EditTodoForm from "../../../pages/todos/ui/EditTodoForm";
+import {ITodo} from "../../../shared/interfaces";
 
 const todoActions = [
     {icon: <EditIcon  color={"action"}/>, label: "edit"},
@@ -18,13 +20,7 @@ const todoActions = [
     {icon:  <MoreHorizIcon color={"action"}/> , label: "more"}
 ]
 
-export interface ITodo {
-    label: string,
-    id: number,
-    description?: string,
-    done?: boolean,
-    labels?: []
-}
+
 
 interface TodoProps {
     todo: ITodo
@@ -32,12 +28,23 @@ interface TodoProps {
 
 
 const  Todo:FC<TodoProps> = ({todo})  => {
-    const {label, description, done = false,id} = todo;
+    const {label, description, done,id} = todo;
     const dispatch  = useDispatch()
+    const [isEditing, setIsEditing] = useState(false)
 
     const onComplete = () => {
         dispatch(toggleTaskComplete(id))
     }
+
+    const onEdit = () => {
+        setIsEditing(true)
+    }
+
+    const onCloseEditForm = () => {
+        setIsEditing(false)
+    }
+
+    if (isEditing) return <EditTodoForm onClose={() => onCloseEditForm} todo={todo}/>
 
     return (
         <Box mb={'25px'} sx = {{cursor: 'pointer'}} className={'todo'}>
@@ -74,7 +81,7 @@ const  Todo:FC<TodoProps> = ({todo})  => {
                         {todoActions.map(todoAction => {
                             return (
                                 <Tooltip title={todoAction.label} key={todoAction.label}>
-                                    <IconButton>
+                                    <IconButton onClick={onEdit}>
                                         {todoAction.icon}
                                     </IconButton>
                                 </Tooltip>
