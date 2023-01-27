@@ -23,15 +23,18 @@ const formStyles = {
 }
 
 const BaseTodoForm:FC<IBaseTodoFormProps> = ({onClose, onSubmit, todo}) => {
-    const {control, handleSubmit, formState: {isValid}} = useForm<IBaseFormInputsValues>()
+    const {control, handleSubmit, formState: {isValid}} = useForm<IBaseFormInputsValues>({defaultValues:{
+            label: todo?.label,
+            description: todo?.description
+        }})
 
     return <Box component='form' onSubmit={handleSubmit(onSubmit)} color = {'#515761'}>
         <Box sx={formStyles}>
             <Controller name={'label'}
-                        control={control}
                         rules={taskNameValidation}
-                        render={({ field }) => <TextField variant={"standard"}
-                                                          defaultValue={todo?.label}
+                        control={control}
+                        render={({ field }) => <TextField {...field}
+                                                          variant={"standard"}
                                                           onChange={field.onChange}
                                                           label="Task name"
                                                           fullWidth
@@ -41,8 +44,8 @@ const BaseTodoForm:FC<IBaseTodoFormProps> = ({onClose, onSubmit, todo}) => {
 
             <Controller name={'description'}
                         control={control}
-                        render={({ field }) => <TextField variant={"standard"}
-                                                          defaultValue={todo?.description}
+                        render={({ field }) => <TextField {...field}
+                                                          variant={"standard"}
                                                           onChange={field.onChange}
                                                           label="Description"
                                                           fullWidth
