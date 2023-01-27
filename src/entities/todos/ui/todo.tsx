@@ -5,21 +5,12 @@ import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Checkbox from '@mui/material/Checkbox';
 import EditIcon from '@mui/icons-material/Edit';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import CommentIcon from '@mui/icons-material/Comment';
 import {useDispatch} from "react-redux";
 
-import './hover.css'
 import {toggleTaskComplete} from "../model/todo";
 import EditTodoForm from "../../../pages/todos/ui/EditTodoForm";
 import {ITodo} from "../../../shared/interfaces";
-
-const todoActions = [
-    {icon: <EditIcon  color={"action"}/>, label: "edit"},
-    {icon:  <CommentIcon color={"action"}/>, label: "comment"},
-    {icon:  <MoreHorizIcon color={"action"}/> , label: "more"}
-]
-
+import MoreActionsMenu from "./moreActionMenu";
 
 
 interface TodoProps {
@@ -44,10 +35,10 @@ const  Todo:FC<TodoProps> = ({todo})  => {
         setIsEditing(false)
     }
 
-    if (isEditing) return <EditTodoForm onClose={() => onCloseEditForm} todo={todo}/>
+    if (isEditing) return <EditTodoForm onClose={() => onCloseEditForm()} todo={todo}/>
 
     return (
-        <Box mb={'25px'} sx = {{cursor: 'pointer'}} className={'todo'}>
+        <Box mb={'25px'} sx = {{cursor: 'pointer'}}>
                 <Box mb={'15px'}
                      display={"flex"}
                      alignItems={"center"}
@@ -77,16 +68,14 @@ const  Todo:FC<TodoProps> = ({todo})  => {
                         </Box>
                     </Box>
 
-                    <Box className={'button-in-todo'}>
-                        {todoActions.map(todoAction => {
-                            return (
-                                <Tooltip title={todoAction.label} key={todoAction.label}>
-                                    <IconButton onClick={onEdit}>
-                                        {todoAction.icon}
-                                    </IconButton>
-                                </Tooltip>
-                            )
-                        })}
+                    <Box>
+                        <Tooltip title={"Edit"}>
+                            <IconButton onClick={onEdit}>
+                                <EditIcon  color={"action"}/>
+                            </IconButton>
+                        </Tooltip>
+
+                        <MoreActionsMenu/>
                     </Box>
 
                 </Box>

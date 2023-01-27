@@ -1,5 +1,5 @@
 import React, {FC, ReactNode} from "react";
-import {Avatar, Box, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, Tooltip, Typography,} from "@mui/material";
+import {Avatar, Box, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip, Typography,} from "@mui/material";
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -8,6 +8,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import {useDispatch, useSelector} from "react-redux";
 import {RootReducer} from "../../../app/store";
 import {logOutUser} from "../../../pages/authorization/model";
+import DropdownMenu from "../../../shared/ui/dropdownMenu";
 
 type menuItem = {
     label: string,
@@ -73,22 +74,7 @@ export default function UserSettingsMenu() {
                        <AccountCircle/>
                    </IconButton>
                </Tooltip>
-               <Menu
-                   sx={{ mt: '45px'}}
-                   id="menu-appbar"
-                   anchorEl={anchorElUser}
-                   anchorOrigin={{
-                       vertical: 'top',
-                       horizontal: 'right',
-                   }}
-                   keepMounted
-                   transformOrigin={{
-                       vertical: 'top',
-                       horizontal: 'right',
-                   }}
-                   open={Boolean(anchorElUser)}
-                   onClose={handleCloseUserMenu}
-               >
+               <DropdownMenu anchorEl={anchorElUser} handleClose={() => handleCloseUserMenu()}>
                    <ListItem sx = {{padding: 0}}>
                            <Box width={'auto'}
                                 display={"flex"}
@@ -129,7 +115,7 @@ export default function UserSettingsMenu() {
                            </ListItem>
                        ))}
                    </List>
-               </Menu>
+               </DropdownMenu>
            </>
     );
 }
