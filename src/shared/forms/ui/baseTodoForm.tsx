@@ -24,8 +24,8 @@ const formStyles = {
 
 const BaseTodoForm:FC<IBaseTodoFormProps> = ({onClose, onSubmit, todo}) => {
     const {control, handleSubmit, formState: {isValid}} = useForm<IBaseFormInputsValues>({defaultValues:{
-            label: todo?.label,
-            description: todo?.description
+            label: todo ? todo.label : ' ',
+            description: todo ? todo.description : ' '
         }})
 
     return <Box component='form' onSubmit={handleSubmit(onSubmit)} color = {'#515761'}>

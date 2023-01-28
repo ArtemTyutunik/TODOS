@@ -9,6 +9,8 @@ const initialState:IInitialState = {
     todos: []
 }
 
+const findTaskById = (state:IInitialState, id: number) => state.todos.find(task => task.id === id)
+
 const todosSlice = createSlice({
     name: 'todos',
     initialState,
@@ -17,17 +19,30 @@ const todosSlice = createSlice({
             state.todos.push(action.payload)
         },
         toggleTaskComplete: (state, action) => {
-            const completedTask = state.todos.find(task => task.id === action.payload)
+            const completedTask = findTaskById(state, action.payload)
             completedTask!.done = !completedTask!.done
         },
         editTask: (state, action) => {
-            const editTask = state.todos.find(task => task.id === action.payload.id)
+            const editTask = findTaskById(state, action.payload.id)
             editTask!.label = action.payload.label;
             editTask!.description = action.payload?.description
+        },
+        deleteTask: (state, action) => {
+            const deletedTaskIndex = state.todos.findIndex(task => task.id === action.payload)
+            state.todos = [...state.todos.slice(0, deletedTaskIndex), ...state.todos.slice(deletedTaskIndex + 1)]
+        },
+        createDuplicate: (state, action) => {
+            const originTask = findTaskById(state, action.payload.id)
+            const duplicate = {...originTask!, id: Date.now()}
+            state.todos.push(duplicate)
+        },
+        setPriority: (state, action) => {
+            const task = findTaskById(state, action.payload.id)
+            task!.priority = action.payload.priority
         }
     }
 })
 
 export const todosReducer = todosSlice.reducer;
 
-export const {addNewTask,toggleTaskComplete, editTask} = todosSlice.actions
+export const {addNewTask,toggleTaskComplete, editTask,deleteTask,createDuplicate, setPriority} = todosSlice.actions
