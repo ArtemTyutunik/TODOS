@@ -1,5 +1,5 @@
 import React from 'react';
-import DropdownMenu from "../../../shared/ui/dropdownMenu";
+import DropdownMenu from "../../../shared/components/dropdownMenu";
 import {
     Box, Divider,
     IconButton, List, ListItemButton,

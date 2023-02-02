@@ -11,9 +11,9 @@ import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {CustomSearch, SearchIconWrapper, StyledInputBase, UserSettingsMenu} from "./ui";
 
-import {toggleDrawerOpen} from "../../entities/drawer/model";
-import BasicModal from "../../shared/ui/modal";
-import CreateTodoForm from "../../pages/todos/ui/createTodoForm";
+import {toggleDrawerOpen} from "../../entities/drawer/store";
+import BasicModal from "../../shared/components/modal";
+import CreateTodoForm from "../../pages/todos/components/createTodoForm";
 import {Link} from "react-router-dom";
 
 

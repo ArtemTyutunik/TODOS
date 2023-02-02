@@ -1,18 +1,18 @@
-import React, {FC} from "react";
+import React from "react";
 import {useDispatch} from "react-redux";
 
 import BaseTodoForm from "../../../shared/forms/ui/baseTodoForm";
-import {editTask} from "../../../entities/todos/model/todo";
+import {editTask} from "../../../entities/todos/store/todo";
 import {IBaseFormInputsValues} from "../../../shared/forms/interfaces/interfaces";
 import {ITodo} from "../../../shared/interfaces";
 
-interface IEditTodoFormProps {
+interface Props {
     onClose: () => void,
     todo: ITodo
 }
 
 
-const EditTodoForm:FC<IEditTodoFormProps> = ({onClose,todo}) => {
+const EditTodoForm = ({onClose,todo}: Props) => {
     const dispatch  = useDispatch();
 
     const onSubmit = (data:IBaseFormInputsValues) => {

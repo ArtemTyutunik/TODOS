@@ -5,7 +5,7 @@ import {Link as RouterLink} from 'react-router-dom';
 
 import {loginValidation, passwordValidation} from "../../shared/forms/validation/validation";
 import {IFormInputs, IInputsProps} from "../../shared/forms/interfaces/interfaces";
-import ErrorMessage from "./ui";
+import ErrorMessage from "./ui/ErrorMessage";
 
 
 function LoginForm({onSubmit}: IInputsProps) {

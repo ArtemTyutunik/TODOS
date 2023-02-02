@@ -3,7 +3,7 @@ import { useSelector} from "react-redux";
 import {useState} from "react";
 
 import {RootReducer} from "../../../app/store";
-import Todo from "../../../entities/todos/ui/todo";
+import Todo from "../../../entities/todos/components/todo";
 import NoTodos from "./noTodos";
 import CreateTodoForm from "./createTodoForm";
 import {ITodo} from "../../../shared/interfaces";

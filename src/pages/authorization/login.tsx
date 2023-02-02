@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 import { getAuth,signInWithEmailAndPassword } from "firebase/auth";
 
 import {app} from "../../../firebaseConfig";
-import {authUser, authWithError} from "./model";
+import {authUser, authWithError} from "./store";
 import {IFormInputs} from "../../shared/forms/interfaces/interfaces";
 
 import LoginForm from "../../entities/loginForm/loginForm";

@@ -84,9 +84,10 @@ const TodoCard = ({
                         </IconButton>
                     </Tooltip>
 
-                    <MoreActionsMenu onDelete={onDeleteAction}
-                                     onDuplicate = {onDuplicateAction}
-                                     onSetPriority = {setPriorityAction}/>
+                    <MoreActionsMenu
+                            onDelete={onDeleteAction}
+                            onDuplicate = {onDuplicateAction}
+                            onSetPriority = {setPriorityAction}/>
                 </Box>
 
             </Box>

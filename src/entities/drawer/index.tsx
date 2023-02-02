@@ -24,7 +24,7 @@ const inboxLink = 'inbox';
 const todayLink = 'today';
 const filtersAndLabelsLink = 'filters-and-labels'
 
-const configureActiveLink = ():string => {
+const configureActiveLink = (): string => {
     const url = window.location.pathname
     if (url === '/') return todayLink
 
@@ -40,8 +40,6 @@ const Drawer  = () => {
     localStorage.setItem('isDrawerOpen', isOpen.toString())
     const [activeLink, setActiveLink] = useState(configureActiveLink())
     const navigate = useNavigate()
-
-    const onSetActiveLink = (label: string) => setActiveLink(label)
 
     const CustomBox = styled(Box)(({theme}) => ({
         position: "static" ,
@@ -78,8 +76,8 @@ const Drawer  = () => {
                            return <ListItem  disablePadding key={label}>
                                    <ListItemButton sx={{padding: '8px', margin: '0 10px'}}
                                        className={activeLink === linkTo ? 'active' : ''}
-                                        onClick={() => {
-                                            onSetActiveLink(linkTo)
+                                       onClick={() => {
+                                            setActiveLink(label)
                                             navigate(linkTo)
                                         }}>
                                            <ListItemIcon>
