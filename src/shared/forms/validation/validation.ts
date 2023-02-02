@@ -21,3 +21,14 @@ export const passwordValidation = {
         return true;
     }
 };
+
+export const taskNameValidation = {
+    required: 'required',
+    validate: (value: string) => {
+        if(!value.replace(/^\s+|\s+$/g, '').length) {
+            return 'Cannot be empty'
+        }
+
+        return true;
+    }
+};

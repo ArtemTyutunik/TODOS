@@ -32,13 +32,14 @@ const switchColorCheckBox = (priority: string) : string => {
     }
 }
 
-const TodoCard = ({todo,
-                  onComplete,
-                  onEdit,
-                  onDeleteAction,
-                  onDuplicateAction,
-                  setPriorityAction}: TodoCardProps) => {
-
+const TodoCard = ({
+  todo,
+  onComplete,
+  onEdit,
+  onDeleteAction,
+  onDuplicateAction,
+  setPriorityAction}: TodoCardProps
+) => {
     const {label, description, done, priority = '4'} = todo;
     const checkBoxColorStyle = {
         color: switchColorCheckBox(priority)
@@ -58,7 +59,7 @@ const TodoCard = ({todo,
                         <Box display = {"flex"} alignItems={"center"}>
                             <Checkbox icon={<RadioButtonUncheckedIcon/>}
                                       checkedIcon={<CheckCircleOutlineIcon sx = {checkBoxColorStyle}/>}
-                                      onChange={() => onComplete()}
+                                      onChange={onComplete}
                                       checked={done}
                                       sx = {checkBoxColorStyle}/>
                             <Typography fontSize={'20px'} fontWeight={400} lineHeight={1.3}>

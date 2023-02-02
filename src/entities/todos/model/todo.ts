@@ -32,7 +32,7 @@ const todosSlice = createSlice({
             state.todos = [...state.todos.slice(0, deletedTaskIndex), ...state.todos.slice(deletedTaskIndex + 1)]
         },
         createDuplicate: (state, action) => {
-            const originTask = findTaskById(state, action.payload.id)
+            const originTask = findTaskById(state, action.payload)
             const duplicate = {...originTask!, id: Date.now()}
             state.todos.push(duplicate)
         },

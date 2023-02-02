@@ -9,8 +9,8 @@ export const useOpenDrawer = () => {
 
 const drawerSlice = createSlice({
     name: 'drawer',
-    initialState: {isOpen: useOpenDrawer()},
-    reducers:{
+    initialState: { isOpen: useOpenDrawer() },
+    reducers: {
         toggleDrawerOpen: (state) => {
             state.isOpen = !state.isOpen
         }

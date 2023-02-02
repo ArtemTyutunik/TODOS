@@ -32,7 +32,7 @@ const MoreActionsMenu = ({onDelete,onDuplicate,onSetPriority}: MoreActionsMenuPr
     };
 
     const handleCloseMenu = () => {
-        setAnchorEl(null);
+        setAnchorEl(null)
     };
 
     return (

@@ -14,6 +14,7 @@ import {CustomSearch, SearchIconWrapper, StyledInputBase, UserSettingsMenu} from
 import {toggleDrawerOpen} from "../../entities/drawer/model";
 import BasicModal from "../../shared/ui/modal";
 import CreateTodoForm from "../../pages/todos/ui/createTodoForm";
+import {Link} from "react-router-dom";
 
 
 export default function Header() {
@@ -33,7 +34,7 @@ export default function Header() {
             <AppBar position="static" sx = {{boxShadow: "none"}}>
                 <Container >
                     <Toolbar>
-                        <Tooltip title={"open drawer"}>
+                        <Tooltip title={"menu"}>
                             <IconButton
                                 size="large"
                                 edge="start"
@@ -49,8 +50,11 @@ export default function Header() {
                                 size="large"
                                 edge="start"
                                 color="inherit"
+                                sx={{padding:'0 10px'}}
                             >
-                                <HomeIcon />
+                                <Link to={'/'}>
+                                    <HomeIcon />
+                                </Link>
                             </IconButton>
                         </Tooltip>
 
