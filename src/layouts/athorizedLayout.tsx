@@ -1,7 +1,7 @@
 import {Grid} from "@mui/material";
 
 import Drawer from "../entities/drawer"
-import Routing from "../pages";
+import Routing from "../pages/routes";
 
 const AuthorizedLayout= () => {
     return (

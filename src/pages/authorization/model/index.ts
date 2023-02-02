@@ -13,13 +13,13 @@ const configureInitialState = () => {
 
 const userSlice = createSlice({
     name: 'authorization',
-    initialState: {...configureInitialState(), isError: false, errorMessage: null},
+    initialState: {...configureInitialState(), isError: false, errorMessage: null, firstLogin: false},
     reducers: {
         authUser: (state, action) => {
-            state.isAuth = true;
-            state.user = {...action.payload}
-            state.isError = false
-            state.errorMessage = null
+            return {...state, isAuth: true, user: {...action.payload}, isError: false, errorMessage: null, firstLogin: false}
+        },
+        signUpUser:(state, action) => {
+            return {...state, isAuth: true, user: {...action.payload}, isError: false, errorMessage: null, firstLogin: true}
         },
         logOutUser: (state) => {
             state.isAuth = false;
@@ -34,4 +34,4 @@ const userSlice = createSlice({
 
 export const userReducer = userSlice.reducer;
 
-export const {authUser,logOutUser,authWithError} = userSlice.actions
+export const {authUser,logOutUser,authWithError,signUpUser} = userSlice.actions

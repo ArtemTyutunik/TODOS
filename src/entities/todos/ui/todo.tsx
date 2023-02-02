@@ -1,75 +1,52 @@
-import React from 'react';
-import {Box, Divider, IconButton, Tooltip, Typography} from "@mui/material";
+import React, {FC, useState} from 'react';
+import {useDispatch} from "react-redux";
 
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import Checkbox from '@mui/material/Checkbox';
-import EditIcon from '@mui/icons-material/Edit';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import CommentIcon from '@mui/icons-material/Comment';
+import {createDuplicate, deleteTask, setPriority, toggleTaskComplete} from "../model/todo";
+import EditTodoForm from "../../../pages/todos/ui/EditTodoForm";
+import {ITodo} from "../../../shared/interfaces";
+import TodoCard from "./todoCard";
 
-import './hover.css'
-
-const todoActions = [
-    {icon: <EditIcon  color={"action"}/>, label: "edit"},
-    {icon:  <CommentIcon color={"action"}/>, label: "comment"},
-    {icon:  <MoreHorizIcon color={"action"}/> , label: "more"}
-]
-
-export interface ITodo {
-    label: string,
-    description?: string,
-    done?: boolean,
-    labels?: []
+interface TodoProps {
+    todo: ITodo
 }
 
 
-const  Todo = ({label, description}: ITodo)  => {
-    return (
-        <Box mb={'25px'} sx = {{cursor: 'pointer'}} className={'todo'}>
-                <Box mb={'15px'}
-                     display={"flex"}
-                     alignItems={"center"}
-                     justifyContent={"space-between"}
-                >
-                    <Box display={"flex"}
-                         alignItems={"center"}
-                         maxWidth={'50%'}>
-                        <Box width={'100%'}>
-                            <Box display = {"flex"} alignItems={"center"}>
-                                <Checkbox icon={<RadioButtonUncheckedIcon/>} checkedIcon={<CheckCircleOutlineIcon/>}/>
-                                <Typography fontSize={'20px'} fontWeight={400} lineHeight={1.3}>
-                                    {label}
-                                </Typography>
-                            </Box>
-                            <Typography fontSize={'16px'}
-                                fontWeight={300}
-                                lineHeight={1} color={"#3a3939"}
-                                noWrap
-                                paddingLeft={'42px'}
-                            >
-                                {description}
-                            </Typography>
-                        </Box>
-                    </Box>
+const  Todo:FC<TodoProps> = ({todo})  => {
+    const {id} = todo
+    const dispatch  = useDispatch()
+    const [isEditing, setIsEditing] = useState(false)
 
-                    <Box className={'button-in-todo'}>
-                        {todoActions.map(todoAction => {
-                            return (
-                                <Tooltip title={todoAction.label} key={todoAction.label}>
-                                    <IconButton>
-                                        {todoAction.icon}
-                                    </IconButton>
-                                </Tooltip>
-                            )
-                        })}
-                    </Box>
+    const onCloseEditForm = () => {
+        setIsEditing(false)
+    }
 
-                </Box>
+    const onComplete = () => {
+        dispatch(toggleTaskComplete(id))
+    }
 
-                <Divider/>
-            </Box>
-    );
+    const onEdit = () => {
+        setIsEditing(true)
+    }
+
+    const onDeleteAction = () => {
+        dispatch(deleteTask(id))
+    }
+    const onDuplicateAction = () => {
+        dispatch(createDuplicate(id))
+    }
+    const setPriorityAction = (priority: string) => {
+        dispatch(setPriority({id, priority}))
+    }
+
+    if (isEditing) return <EditTodoForm onClose={() => onCloseEditForm()} todo={todo}/>
+
+    return <TodoCard todo={todo}
+                     onDeleteAction={onDeleteAction}
+                     onDuplicateAction={onDuplicateAction}
+                     setPriorityAction={setPriorityAction}
+                     onComplete={onComplete}
+                     onEdit={onEdit}/>
+
 }
 
 export default Todo;

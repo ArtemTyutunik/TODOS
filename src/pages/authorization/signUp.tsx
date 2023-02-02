@@ -2,7 +2,7 @@ import {IFormInputs} from "../../shared/forms/interfaces/interfaces";
 import {useDispatch} from "react-redux";
 import {createUserWithEmailAndPassword, getAuth} from "firebase/auth";
 import {app} from "../../../firebaseConfig";
-import {authUser} from "./model";
+import {signUpUser} from "./model";
 import React from "react";
 import SignUpForm from "../../entities/signUpForm/signUpForm";
 
@@ -14,7 +14,7 @@ function SignUp() {
         const auth = getAuth(app);
         createUserWithEmailAndPassword(auth, login, password)
             .then(({user})=> {
-                dispatch(authUser(user))
+                dispatch(signUpUser(user))
                 localStorage.setItem('user', JSON.stringify(user))
             })
             .catch(e => console.log(e))

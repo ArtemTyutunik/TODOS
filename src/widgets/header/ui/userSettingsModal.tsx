@@ -1,5 +1,5 @@
 import React, {FC, ReactNode} from "react";
-import {Avatar, Box, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, Tooltip, Typography,} from "@mui/material";
+import {Avatar, Box, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip, Typography,} from "@mui/material";
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -8,6 +8,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import {useDispatch, useSelector} from "react-redux";
 import {RootReducer} from "../../../app/store";
 import {logOutUser} from "../../../pages/authorization/model";
+import DropdownMenu from "../../../shared/ui/dropdownMenu";
+import {useNavigate} from "react-router-dom";
 
 type menuItem = {
     label: string,
@@ -28,8 +30,10 @@ const CustomListItemButton:FC<customListProps> = ({children}) => {
 
 export default function UserSettingsMenu() {
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-    const {email} = useSelector((state: RootReducer) => state.userReducer.user.user);
+    const {user, firstLogin} = useSelector((state: RootReducer) => state.userReducer);
+
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const  menuItems: menuItem[] = [
         {
@@ -49,6 +53,7 @@ export default function UserSettingsMenu() {
             onClick: () => {
                 dispatch(logOutUser());
                 localStorage.removeItem('user')
+                navigate('/')
             }
         }]
 
@@ -60,6 +65,8 @@ export default function UserSettingsMenu() {
         setAnchorElUser(null);
     };
 
+    const email = firstLogin? user.email: user.user.email;
+
     return (
            <>
                <Tooltip title="Open settings">
@@ -69,26 +76,11 @@ export default function UserSettingsMenu() {
                        aria-label="account of current user"
                        aria-haspopup="true"
                        color="inherit"
-                       onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                       onClick={handleOpenUserMenu}>
                        <AccountCircle/>
                    </IconButton>
                </Tooltip>
-               <Menu
-                   sx={{ mt: '45px'}}
-                   id="menu-appbar"
-                   anchorEl={anchorElUser}
-                   anchorOrigin={{
-                       vertical: 'top',
-                       horizontal: 'right',
-                   }}
-                   keepMounted
-                   transformOrigin={{
-                       vertical: 'top',
-                       horizontal: 'right',
-                   }}
-                   open={Boolean(anchorElUser)}
-                   onClose={handleCloseUserMenu}
-               >
+               <DropdownMenu anchorEl={anchorElUser} handleClose={() => handleCloseUserMenu()}>
                    <ListItem sx = {{padding: 0}}>
                            <Box width={'auto'}
                                 display={"flex"}
@@ -129,7 +121,7 @@ export default function UserSettingsMenu() {
                            </ListItem>
                        ))}
                    </List>
-               </Menu>
+               </DropdownMenu>
            </>
     );
 }

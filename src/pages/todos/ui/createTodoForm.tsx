@@ -1,47 +1,25 @@
-import React from 'react';
-import {useForm,Controller} from "react-hook-form";
-import {Box, Button, TextField} from "@mui/material";
+import React, {FC} from 'react';
+import {useDispatch} from "react-redux";
 
-const formStyles = {
-    border: '1px solid #6e6d6b',
-    padding: '15px',
-    borderRadius: '5px'
+import BaseTodoForm from "../../../shared/forms/ui/baseTodoForm";
+import {addNewTask} from "../../../entities/todos/model/todo";
+import {IBaseFormInputsValues} from "../../../shared/forms/interfaces/interfaces";
+
+
+interface ICreateTodoFormProps {
+    onClose: () => void
 }
 
 
-const CreateTodoForm = () => {
-    const {control, handleSubmit} = useForm()
-    const onSubmit = (data: any) => console.log(data)
+const CreateTodoForm:FC<ICreateTodoFormProps> = ({onClose}) => {
+    const dispatch = useDispatch()
 
-    return <Box component='form' onSubmit={handleSubmit(onSubmit)} color = {'#515761'}>
-        <Box sx={formStyles}>
-            <Controller name={'name'}
-                        control={control}
-                        render={({ field }) => <TextField variant={"standard"}
-                                                          onChange={field.onChange}
-                                                          label="Task name"
-                                                          fullWidth
-                                                          autoFocus
-                                                          InputProps={{ disableUnderline: true }}/>}
-            />
+    const onSubmit = (data:IBaseFormInputsValues) => {
+        dispatch(addNewTask({...data, id: Date.now(), done: false}))
+        onClose()
+    }
 
-            <Controller name={'description'}
-                        control={control}
-                        render={({ field }) => <TextField variant={"standard"}
-                                                          onChange={field.onChange}
-                                                          label="Description"
-                                                          fullWidth
-                                                          InputProps={{ disableUnderline: true }}/>}
-            />
-        </Box>
-
-        <Box display={"flex"} marginTop={'15px'} justifyContent={"flex-end"}>
-            <Button variant="outlined" color={"inherit"} sx={{marginRight: '15px'}}>Cancel</Button>
-            <Button variant="contained" disabled>
-                Add task
-            </Button>
-        </Box>
-    </Box>
+    return <BaseTodoForm onClose={onClose} onSubmit={onSubmit}/>
 }
 
 

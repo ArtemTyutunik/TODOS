@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useSelector} from "react-redux";
 
 import {Box, List, ListItem, ListItemButton, ListItemIcon, Typography} from "@mui/material";
@@ -6,8 +6,10 @@ import InboxIcon from '@mui/icons-material/Inbox';
 import TodayIcon from '@mui/icons-material/Today';
 import {default as ParamsIcon} from '@mui/icons-material/Apps';
 import {styled} from "@mui/material/styles";
-
+import {useNavigate} from "react-router-dom";
 import {RootReducer} from "../../app/store";
+
+import './active.css'
 
 const CustomListText = styled(Typography)(({theme}) => ({
     [theme.breakpoints.down(450)] : {
@@ -18,9 +20,28 @@ const CustomListText = styled(Typography)(({theme}) => ({
     }
 }))
 
+const inboxLink = 'inbox';
+const todayLink = 'today';
+const filtersAndLabelsLink = 'filters-and-labels'
+
+const configureActiveLink = ():string => {
+    const url = window.location.pathname
+    if (url === '/') return todayLink
+
+    if (url.includes(todayLink)) return todayLink
+    else if (url.includes(inboxLink)) return inboxLink
+    else if (url.includes(filtersAndLabelsLink))  return filtersAndLabelsLink
+
+    return ''
+}
+
 const Drawer  = () => {
     const {isOpen} = useSelector((state: RootReducer) => state.drawerReducer)
     localStorage.setItem('isDrawerOpen', isOpen.toString())
+    const [activeLink, setActiveLink] = useState(configureActiveLink())
+    const navigate = useNavigate()
+
+    const onSetActiveLink = (label: string) => setActiveLink(label)
 
     const CustomBox = styled(Box)(({theme}) => ({
         position: "static" ,
@@ -41,26 +62,32 @@ const Drawer  = () => {
         }
     }))
 
-
     const drawerLinks = [
-        {label: 'Inbox', Icon: () => <InboxIcon/>},
-        {label: 'Today', Icon: () => <TodayIcon/>},
-        {label: 'Filters and labels', Icon: () => <ParamsIcon/>}
+        {label: 'Inbox',linkTo: inboxLink, Icon: () => <InboxIcon/>},
+        {label: 'Today',linkTo: todayLink, Icon: () => <TodayIcon/>},
+        {label: 'Filters and labels',linkTo: filtersAndLabelsLink, Icon: () => <ParamsIcon/>}
     ]
 
     return (
        <CustomBox>
-           <Box sx = {{paddingTop: "45px"}}>
+           <Box sx = {{paddingTop: "45px"}} width={'100%'}>
                <List>
                    {
-                       drawerLinks.map( (link: {label: string, Icon:() => React.ReactElement}) => {
-                           const {label,Icon} = link
-                           return <ListItem disablePadding key={label}>
-                                   <ListItemButton>
-                                       <ListItemIcon>
-                                           <Icon/>
-                                       </ListItemIcon>
-                                       <CustomListText>{label}</CustomListText>
+                       drawerLinks.map( (link: {label: string, linkTo: string, Icon:() => React.ReactElement}) => {
+                           const {label,linkTo,Icon} = link
+                           return <ListItem  disablePadding key={label}>
+                                   <ListItemButton sx={{padding: '8px', margin: '0 10px'}}
+                                       className={activeLink === linkTo ? 'active' : ''}
+                                        onClick={() => {
+                                            onSetActiveLink(linkTo)
+                                            navigate(linkTo)
+                                        }}>
+                                           <ListItemIcon>
+                                               <Icon/>
+                                           </ListItemIcon>
+                                           <CustomListText>
+                                                   {label}
+                                           </CustomListText>
                                    </ListItemButton>
                            </ListItem>;
                        })
