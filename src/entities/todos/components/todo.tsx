@@ -1,17 +1,16 @@
-import React, {FC, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 
-import {createDuplicate, deleteTask, setPriority, toggleTaskComplete} from "../model/todo";
-import EditTodoForm from "../../../pages/todos/ui/EditTodoForm";
+import {createDuplicate, deleteTask, setPriority, toggleTaskComplete} from "../store/todo";
+import EditTodoForm from "../../../pages/todos/components/EditTodoForm";
 import {ITodo} from "../../../shared/interfaces";
 import TodoCard from "./todoCard";
 
-interface TodoProps {
+interface Props {
     todo: ITodo
 }
 
-
-const  Todo:FC<TodoProps> = ({todo})  => {
+const  Todo = ({todo}: Props)  => {
     const {id} = todo
     const dispatch  = useDispatch()
     const [isEditing, setIsEditing] = useState(false)
@@ -38,15 +37,15 @@ const  Todo:FC<TodoProps> = ({todo})  => {
         dispatch(setPriority({id, priority}))
     }
 
-    if (isEditing) return <EditTodoForm onClose={() => onCloseEditForm()} todo={todo}/>
+    if (isEditing) return <EditTodoForm onClose={onCloseEditForm} todo={todo}/>
 
-    return <TodoCard todo={todo}
-                     onDeleteAction={onDeleteAction}
-                     onDuplicateAction={onDuplicateAction}
-                     setPriorityAction={setPriorityAction}
-                     onComplete={onComplete}
-                     onEdit={onEdit}/>
-
+    return <TodoCard
+                todo={todo}
+                onDeleteAction={onDeleteAction}
+                onDuplicateAction={onDuplicateAction}
+                setPriorityAction={setPriorityAction}
+                onComplete={onComplete}
+                onEdit={onEdit}/>
 }
 
 export default Todo;

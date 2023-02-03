@@ -16,7 +16,7 @@ const todosSlice = createSlice({
     initialState,
     reducers: {
         addNewTask: (state, action) => {
-            state.todos.push(action.payload)
+            return {...state, todos: [ action.payload, ...state.todos]}
         },
         toggleTaskComplete: (state, action) => {
             const completedTask = findTaskById(state, action.payload)
@@ -34,7 +34,7 @@ const todosSlice = createSlice({
         createDuplicate: (state, action) => {
             const originTask = findTaskById(state, action.payload)
             const duplicate = {...originTask!, id: Date.now()}
-            state.todos.push(duplicate)
+            return {...state, todos: [duplicate, ...state.todos]}
         },
         setPriority: (state, action) => {
             const task = findTaskById(state, action.payload.id)

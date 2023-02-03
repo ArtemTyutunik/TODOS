@@ -2,8 +2,8 @@ import {IFormInputs} from "../../shared/forms/interfaces/interfaces";
 import {useDispatch} from "react-redux";
 import {createUserWithEmailAndPassword, getAuth} from "firebase/auth";
 import {app} from "../../../firebaseConfig";
-import {signUpUser} from "./model";
-import React from "react";
+
+import {signUpUser} from "./store";
 import SignUpForm from "../../entities/signUpForm/signUpForm";
 
 function SignUp() {

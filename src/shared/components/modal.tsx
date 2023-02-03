@@ -1,7 +1,7 @@
-import React, {FC} from "react";
+import React from "react";
 import {Box, Modal} from "@mui/material";
 
-interface IModal {
+interface Props {
     children?: React.ReactElement;
     open: boolean,
     onClose: () => void
@@ -22,7 +22,7 @@ const style = {
     p: 4,
 }
 
-const BasicModal:FC<IModal> = ({children, open, onClose}) => {
+const BasicModal  = ({children, open, onClose}: Props) => {
     return <Modal open={open} onClose={onClose}>
         <Box sx = {style}>
             {children}

@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React from "react";
 
 import {Controller, useForm} from "react-hook-form";
 import {Box, Button, TextField} from "@mui/material";
@@ -8,7 +8,7 @@ import {taskNameValidation} from "../validation/validation";
 
 
 
-interface IBaseTodoFormProps {
+interface Props {
     onClose: () => void,
     onSubmit: (data: IBaseFormInputsValues) => void,
     todo?: ITodo
@@ -22,11 +22,11 @@ const formStyles = {
     borderRadius: '5px'
 }
 
-const BaseTodoForm:FC<IBaseTodoFormProps> = ({onClose, onSubmit, todo}) => {
+const BaseTodoForm = ({onClose, onSubmit, todo}: Props) => {
     const {control, handleSubmit, formState: {isValid}} = useForm<IBaseFormInputsValues>({defaultValues:{
             label: todo ? todo.label : '',
             description: todo ? todo.description : ''
-        }})
+    }})
 
     return <Box component='form' onSubmit={handleSubmit(onSubmit)} color = {'#515761'}>
         <Box sx={formStyles}>

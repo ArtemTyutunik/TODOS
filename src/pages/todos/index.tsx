@@ -1,5 +1,5 @@
 import {Box} from "@mui/material";
-import TodoList from "./ui/todo-list";
+import TodoList from "./components/todo-list";
 
 const TodosPage = () => {
     return <Box paddingTop={'30px'} height={'100%'}>

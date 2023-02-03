@@ -36,7 +36,7 @@ const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
                             margin="normal"
                             required
                             fullWidth
-                            label="Login"
+                            label="Email"
                             name="email"
                             type = "email"
                             autoComplete="email"

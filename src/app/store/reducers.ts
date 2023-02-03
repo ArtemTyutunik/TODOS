@@ -1,6 +1,6 @@
-import {drawerReducer} from "../../entities/drawer/model";
-import {todosReducer} from "../../entities/todos/model/todo";
-import {userReducer} from "../../pages/authorization/model";
+import {drawerReducer} from "../../entities/drawer/store";
+import {todosReducer} from "../../entities/todos/store/todo";
+import {userReducer} from "../../pages/authorization/store";
 
 export {
     drawerReducer,

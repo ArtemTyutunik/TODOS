@@ -1,10 +1,5 @@
-import React, {FC} from 'react';
 import {Box, Typography} from "@mui/material";
 import AddTaskIcon from "@mui/icons-material/AddTask";
-
-interface noTodoProps {
-    onClick: () => void
-}
 
 const boxStyles = {
     display: 'flex',
@@ -18,7 +13,11 @@ const boxStyles = {
     }
 }
 
-const NoTodos:FC<noTodoProps> = ({onClick}) => {
+interface Props {
+    onClick: () => void
+}
+
+const NoTodos = ({onClick}: Props) => {
     return (
         <Box height={'100%'} alignItems={"center"}  display={"flex"}>
             <Box display={"flex"} flexDirection={"column"}  margin={'0 auto'} alignItems={"center"}>
