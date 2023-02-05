@@ -5,6 +5,7 @@ import {Box, Button, TextField} from "@mui/material";
 import {IBaseFormInputsValues} from "../interfaces/interfaces";
 import {ITodo} from "../../interfaces";
 import {taskNameValidation} from "../validation/validation";
+import DueDateButton from "../../../pages/todos/components/DueDate/DueDateButton";
 
 
 
@@ -51,6 +52,9 @@ const BaseTodoForm = ({onClose, onSubmit, todo}: Props) => {
                                                           fullWidth
                                                           InputProps={{ disableUnderline: true }}/>}
             />
+            <Box display={"flex"} marginTop={'10px'}>
+                <DueDateButton/>
+            </Box>
         </Box>
 
         <Box display={"flex"} marginTop={'15px'} justifyContent={"flex-end"}>

@@ -14,7 +14,7 @@ const DropdownMenu = ({anchorEl,handleClose, children}: dropdownMenuProps) => {
             anchorEl={anchorEl}
             anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'right',
+                horizontal: 'left',
             }}
             keepMounted
             transformOrigin={{
