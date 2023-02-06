@@ -5,5 +5,7 @@ export interface ITodo {
     done?: boolean,
     priority?: '1' | '2' | '3'| '4'
     labels?: [],
-    date?: string | null
+    date?: IDate
 }
+
+export type IDate = string | null

@@ -3,10 +3,9 @@ import React, {useState} from "react";
 import {Controller, useForm} from "react-hook-form";
 import {Box, Button, TextField} from "@mui/material";
 import {IBaseFormInputsValues} from "../interfaces/interfaces";
-import {ITodo} from "../../interfaces";
+import {IDate, ITodo} from "../../interfaces";
 import {taskNameValidation} from "../validation/validation";
 import DueDateButton from "../../../pages/todos/components/DueDate/DueDateButton";
-
 
 
 interface Props {
@@ -29,9 +28,9 @@ const BaseTodoForm = ({onClose, onSubmit, todo}: Props) => {
             description: todo ? todo.description : ''
     }})
 
-    const [todoDate,setTodoDate] = useState<string | null>(null)
+    const [todoDate,setTodoDate] = useState<IDate>(todo?.date!)
 
-    const onDateSet = (date: string | null) => {
+    const onPassDateToBaseForm = (date: IDate) => {
         setTodoDate(date)
     }
 
@@ -58,8 +57,9 @@ const BaseTodoForm = ({onClose, onSubmit, todo}: Props) => {
                                                           fullWidth
                                                           InputProps={{ disableUnderline: true }}/>}
             />
+
             <Box display={"flex"} marginTop={'10px'}>
-                <DueDateButton date={todoDate} onDateSet={onDateSet}/>
+                <DueDateButton date={todoDate} onPassDateToBaseForm={onPassDateToBaseForm}/>
             </Box>
         </Box>
 

@@ -1,18 +1,10 @@
 import React, {useState} from 'react';
 import DropdownMenu from "../../../../shared/components/dropdownMenu";
-import {
-    Box,
-    Button,
-    Divider,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    Typography
-} from "@mui/material";
+import {Box, Button, Divider,} from "@mui/material";
 import Calendar from "./Calendar";
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import TodayIcon from '@mui/icons-material/Today';
+import DueDateMenuList from "./DueDateMenu";
+import {IDate} from "../../../../shared/interfaces";
+
 
 const buttonsStyles = {
     color: '#7d7b74',
@@ -22,22 +14,16 @@ const buttonsStyles = {
     fontSize:'13px'
 }
 
-type menuItem = {
-    label: string,
-    Icon: () => React.ReactElement,
-    onClick: () => void
-}
-
 interface Props {
-    date: string | null,
-    onDateSet: (date: string | null) => void
+    date: IDate,
+    onPassDateToBaseForm: (date: IDate) => void
 }
 
-const DueDateButton = ({date, onDateSet}: Props) => {
+const DueDateButton = ({date, onPassDateToBaseForm}: Props) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-    const onSetDate = (date: string) => {
-        onDateSet(date)
+    const onSetDate = (date: IDate) => {
+        onPassDateToBaseForm(date)
         handleCloseMenu()
     }
 
@@ -49,17 +35,6 @@ const DueDateButton = ({date, onDateSet}: Props) => {
         setAnchorEl(null)
     };
 
-    const  menuItems: menuItem[] = [
-        {
-            label: 'Today',
-            Icon: () => <TodayIcon fontSize={'small'} sx={{ color: '#058527'}}/>,
-            onClick: () => {}
-        },
-        {
-            label: 'Tomorrow',
-            Icon: () => <WbSunnyIcon fontSize={'small'} sx={{ color: '#eb8909'}}/>,
-            onClick: () => {}
-        }]
 
     return (
         <>
@@ -68,30 +43,12 @@ const DueDateButton = ({date, onDateSet}: Props) => {
                     date || 'Due date'
                 }
             </Button>
+
             <DropdownMenu anchorEl={anchorEl} handleClose={handleCloseMenu}>
                 <Box display={"flex"} flexDirection={"column"} paddingTop={'5px'}>
-                    <List>
-                        {menuItems.map(({label,Icon, onClick}) => (
-                            <ListItem
-                                key={label}
-                                onClick={() => {
-                                    handleCloseMenu();
-                                    onClick()}}
-                                sx={{padding: 0, mb: '10px'}}
-                            >
-                                <ListItemButton sx={{padding: '5px 0 5px 16px'}}>
-                                    <ListItemIcon>
-                                        <Icon/>
-                                    </ListItemIcon>
-                                    <Typography fontSize={'14px'}>
-                                        {label}
-                                    </Typography>
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
-                    </List>
+                    <DueDateMenuList onSetDate={onSetDate}/>
                     <Divider/>
-                    <Calendar onSetDate={onSetDate}/>
+                    <Calendar onSetDate={onSetDate} initialDate={date}/>
                 </Box>
             </DropdownMenu>
         </>
