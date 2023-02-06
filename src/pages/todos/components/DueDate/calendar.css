@@ -1,0 +1,15 @@
+.MuiDialogActions-root{
+    display: none !important;
+}
+
+.css-sf5t6v-PrivatePickersSlideTransition-root-MuiDayPicker-slideTransition{
+    min-height: 200px !important;
+}
+
+.css-nk89i7-MuiPickersCalendarHeader-root{
+    margin-top: 0 !important;
+}
+
+.css-cveggr-MuiListItemIcon-root{
+    min-width: 35px !important;
+}

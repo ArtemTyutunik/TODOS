@@ -8,19 +8,11 @@ import Checkbox from "@mui/material/Checkbox";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import EditIcon from "@mui/icons-material/Edit";
+import EventIcon from '@mui/icons-material/Event';
 
 import MoreActionsMenu from "./moreActionMenu";
 import {ITodo} from "../../../shared/interfaces";
-
-
-interface TodoCardProps {
-    todo: ITodo,
-    onComplete: () => void,
-    onEdit: () => void,
-    onDeleteAction: () => void,
-    onDuplicateAction: () => void,
-    setPriorityAction: (priority: string) => void
-}
+import {TodoContainerStyles, TodoDescriptionStyles, TodoFlexboxStyles, TodoLabelStyles} from "../styles";
 
 const switchColorCheckBox = (priority: string) : string => {
     switch (priority){
@@ -32,6 +24,15 @@ const switchColorCheckBox = (priority: string) : string => {
     }
 }
 
+interface TodoCardProps {
+    todo: ITodo,
+    onComplete: () => void,
+    onEdit: () => void,
+    onDeleteAction: () => void,
+    onDuplicateAction: () => void,
+    setPriorityAction: (priority: string) => void
+}
+
 const TodoCard = ({
   todo,
   onComplete,
@@ -40,40 +41,39 @@ const TodoCard = ({
   onDuplicateAction,
   setPriorityAction}: TodoCardProps
 ) => {
-    const {label, description, done, priority = '4'} = todo;
+    const {label, description, done,date, priority = '4'} = todo;
     const checkBoxColorStyle = {
         color: switchColorCheckBox(priority)
     }
 
     return (
-        <Box mb={'25px'} sx = {{cursor: 'pointer'}}>
-            <Box mb={'15px'}
-                 display={"flex"}
-                 alignItems={"center"}
-                 justifyContent={"space-between"}
-            >
-                <Box display={"flex"}
-                     alignItems={"center"}
-                     maxWidth={'50%'}>
+        <Box mb={'25px'}>
+            <Box sx = {TodoContainerStyles}>
+                <Box
+                    maxWidth={'50%'}
+                    sx={TodoFlexboxStyles}>
                     <Box width={'100%'}>
-                        <Box display = {"flex"} alignItems={"center"}>
+                        <Box sx = {TodoFlexboxStyles}>
                             <Checkbox icon={<RadioButtonUncheckedIcon/>}
                                       checkedIcon={<CheckCircleOutlineIcon sx = {checkBoxColorStyle}/>}
                                       onChange={onComplete}
                                       checked={done}
                                       sx = {checkBoxColorStyle}/>
-                            <Typography fontSize={'20px'} fontWeight={400} lineHeight={1.3}>
+                            <Typography sx = {TodoLabelStyles}>
                                 {label}
                             </Typography>
                         </Box>
-                        <Typography fontSize={'16px'}
-                                    fontWeight={300}
-                                    lineHeight={1} color={"#3a3939"}
-                                    noWrap
-                                    paddingLeft={'42px'}
-                        >
+                        <Typography noWrap sx={TodoDescriptionStyles}>
                             {description}
                         </Typography>
+                        {
+                            date && <Box sx = {TodoFlexboxStyles} paddingLeft={'42px'} mt={'5px'}>
+                                        <EventIcon sx={{color: "#808080", fontSize: '13px'}}/>
+                                        <Typography sx={{...TodoDescriptionStyles, marginLeft: '10px', paddingLeft: 0, fontSize: '13px',}}>
+                                            {date}
+                                        </Typography>
+                                    </Box>
+                        }
                     </Box>
                 </Box>
 

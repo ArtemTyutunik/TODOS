@@ -1,4 +1,4 @@
-import React, {FC, ReactNode} from "react";
+import React from "react";
 import {Avatar, Box, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip, Typography,} from "@mui/material";
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -17,15 +17,10 @@ type menuItem = {
     onClick: () => void
 }
 
-interface  customListProps {
-    children: ReactNode[]
-}
+const ListItemButtonStyles =  {
+    padding: '15px',
+    borderRadius: "5px"}
 
-const CustomListItemButton:FC<customListProps> = ({children}) => {
-    return <ListItemButton sx = {{padding: '15px', borderRadius: "5px"}} className={"str"}>
-        {children}
-    </ListItemButton>
-}
 
 
 export default function UserSettingsMenu() {
@@ -85,7 +80,7 @@ export default function UserSettingsMenu() {
                            <Box width={'auto'}
                                 display={"flex"}
                                 padding = {"5px"}>
-                               <CustomListItemButton>
+                               <ListItemButton sx = {ListItemButtonStyles}>
                                    <Avatar sx={{
                                        border:' 2px solid #48833f',
                                        background: "transparent",
@@ -95,14 +90,14 @@ export default function UserSettingsMenu() {
                                        A
                                    </Avatar>
                                    <Box>
-                                       <Typography fontWeight = {'bold'}>
+                                       <Typography fontWeight={'bold'}>
                                            {email}
                                        </Typography>
                                        <Typography>
                                            {email.replace('@gmail.com', '')}
                                        </Typography>
                                    </Box>
-                               </CustomListItemButton>
+                               </ListItemButton>
                            </Box>
                    </ListItem>
                    <Divider/>
@@ -112,12 +107,12 @@ export default function UserSettingsMenu() {
                                handleCloseUserMenu();
                                onClick()
                            }}>
-                               <CustomListItemButton>
+                               <ListItemButton sx={ListItemButtonStyles}>
                                    <ListItemIcon>
                                        <Icon/>
                                    </ListItemIcon>
                                    <ListItemText primary={label}/>
-                               </CustomListItemButton>
+                               </ListItemButton>
                            </ListItem>
                        ))}
                    </List>
