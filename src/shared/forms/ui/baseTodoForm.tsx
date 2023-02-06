@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import {Controller, useForm} from "react-hook-form";
 import {Box, Button, TextField} from "@mui/material";
@@ -11,7 +11,7 @@ import DueDateButton from "../../../pages/todos/components/DueDate/DueDateButton
 
 interface Props {
     onClose: () => void,
-    onSubmit: (data: IBaseFormInputsValues) => void,
+    onSubmit: (data: IBaseFormInputsValues, date: string | null) => void,
     todo?: ITodo
 }
 
@@ -29,7 +29,13 @@ const BaseTodoForm = ({onClose, onSubmit, todo}: Props) => {
             description: todo ? todo.description : ''
     }})
 
-    return <Box component='form' onSubmit={handleSubmit(onSubmit)} color = {'#515761'}>
+    const [todoDate,setTodoDate] = useState<string | null>(null)
+
+    const onDateSet = (date: string | null) => {
+        setTodoDate(date)
+    }
+
+    return <Box component='form' onSubmit={handleSubmit((data) => onSubmit(data,todoDate))} color = {'#515761'}>
         <Box sx={formStyles}>
             <Controller name={'label'}
                         rules={taskNameValidation}
@@ -53,7 +59,7 @@ const BaseTodoForm = ({onClose, onSubmit, todo}: Props) => {
                                                           InputProps={{ disableUnderline: true }}/>}
             />
             <Box display={"flex"} marginTop={'10px'}>
-                <DueDateButton/>
+                <DueDateButton date={todoDate} onDateSet={onDateSet}/>
             </Box>
         </Box>
 

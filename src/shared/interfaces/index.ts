@@ -4,5 +4,6 @@ export interface ITodo {
     description?: string,
     done?: boolean,
     priority?: '1' | '2' | '3'| '4'
-    labels?: []
+    labels?: [],
+    date?: string | null
 }

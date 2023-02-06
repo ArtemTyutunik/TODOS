@@ -28,8 +28,18 @@ type menuItem = {
     onClick: () => void
 }
 
-const DueDateButton = () => {
+interface Props {
+    date: string | null,
+    onDateSet: (date: string | null) => void
+}
+
+const DueDateButton = ({date, onDateSet}: Props) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+    const onSetDate = (date: string) => {
+        onDateSet(date)
+        handleCloseMenu()
+    }
 
     const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -51,11 +61,12 @@ const DueDateButton = () => {
             onClick: () => {}
         }]
 
-
     return (
         <>
             <Button variant={'outlined'} sx={buttonsStyles} onClick={handleOpenMenu}>
-                Due data
+                {
+                    date || 'Due date'
+                }
             </Button>
             <DropdownMenu anchorEl={anchorEl} handleClose={handleCloseMenu}>
                 <Box display={"flex"} flexDirection={"column"} paddingTop={'5px'}>
@@ -80,7 +91,7 @@ const DueDateButton = () => {
                         ))}
                     </List>
                     <Divider/>
-                    <Calendar/>
+                    <Calendar onSetDate={onSetDate}/>
                 </Box>
             </DropdownMenu>
         </>
