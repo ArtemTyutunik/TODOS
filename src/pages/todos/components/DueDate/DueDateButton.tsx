@@ -8,10 +8,12 @@ import {IDate} from "../../../../shared/interfaces";
 
 const buttonsStyles = {
     color: '#7d7b74',
-    borderColor: '#7d7b74',
+    backgroundColor: '#f5f5f5',
+    border: '1px solid #ddd',
+    boxShadow: 'none',
     textTransform: 'none',
     padding: '0 8px',
-    fontSize:'13px'
+    fontSize:'11px'
 }
 
 interface Props {
