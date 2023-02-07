@@ -26,6 +26,7 @@ const todosSlice = createSlice({
             const editTask = findTaskById(state, action.payload.id)
             editTask!.label = action.payload.label;
             editTask!.description = action.payload?.description
+            editTask!.date = action.payload?.date
         },
         deleteTask: (state, action) => {
             const deletedTaskIndex = state.todos.findIndex(task => task.id === action.payload)

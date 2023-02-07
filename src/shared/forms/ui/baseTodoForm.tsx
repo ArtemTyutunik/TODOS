@@ -1,12 +1,11 @@
 import React, {useState} from "react";
 
 import {Controller, useForm} from "react-hook-form";
-import {Box, Button, TextField} from "@mui/material";
+import {Box, Button, Divider, TextField} from "@mui/material";
 import {IBaseFormInputsValues} from "../interfaces/interfaces";
-import {ITodo} from "../../interfaces";
+import {IDate, ITodo} from "../../interfaces";
 import {taskNameValidation} from "../validation/validation";
 import DueDateButton from "../../../pages/todos/components/DueDate/DueDateButton";
-
 
 
 interface Props {
@@ -18,9 +17,19 @@ interface Props {
 //if todo is not undefined it means that the field values will be the corresponding todo properties
 
 const formStyles = {
-    border: '1px solid #6e6d6b',
-    padding: '15px',
-    borderRadius: '5px'
+    border: '1px solid #eee',
+    padding: '0 5px 8px 5px',
+    borderRadius: '10px'
+}
+
+const CancelButtonStyles = {
+    marginRight: '15px',
+    textTransform: 'initial',
+    backgroundColor: '#f5f5f5',
+    color: '#444',
+    fontSize: '13px',
+    boxShadow: 'none',
+    padding: '1px 10px'
 }
 
 const BaseTodoForm = ({onClose, onSubmit, todo}: Props) => {
@@ -29,9 +38,9 @@ const BaseTodoForm = ({onClose, onSubmit, todo}: Props) => {
             description: todo ? todo.description : ''
     }})
 
-    const [todoDate,setTodoDate] = useState<string | null>(null)
+    const [todoDate,setTodoDate] = useState<IDate>(todo?.date!)
 
-    const onDateSet = (date: string | null) => {
+    const onPassDateToBaseForm = (date: IDate) => {
         setTodoDate(date)
     }
 
@@ -43,7 +52,7 @@ const BaseTodoForm = ({onClose, onSubmit, todo}: Props) => {
                         render={({ field }) => <TextField {...field}
                                                           variant={"standard"}
                                                           onChange={field.onChange}
-                                                          label="Task name"
+                                                          placeholder={'Task name'}
                                                           fullWidth
                                                           autoFocus
                                                           InputProps={{ disableUnderline: true }}/>}
@@ -54,26 +63,29 @@ const BaseTodoForm = ({onClose, onSubmit, todo}: Props) => {
                         render={({ field }) => <TextField {...field}
                                                           variant={"standard"}
                                                           onChange={field.onChange}
-                                                          label="Description"
+                                                          placeholder={'Description'}
                                                           fullWidth
                                                           InputProps={{ disableUnderline: true }}/>}
             />
-            <Box display={"flex"} marginTop={'10px'}>
-                <DueDateButton date={todoDate} onDateSet={onDateSet}/>
+
+            <Box display={"flex"} mb={'5px'}>
+                <DueDateButton date={todoDate} onPassDateToBaseForm={onPassDateToBaseForm}/>
+            </Box>
+
+            <Divider/>
+
+            <Box display={"flex"} marginTop={'5px'} justifyContent={"flex-end"}>
+                <Button variant="contained" color={"inherit"}
+                        sx={CancelButtonStyles}
+                        onClick={onClose}>
+                    Cancel
+                </Button>
+                <Button variant="contained" type={'submit'} disabled={!isValid} sx={{textTransform: 'initial'}}>
+                    Submit
+                </Button>
             </Box>
         </Box>
 
-        <Box display={"flex"} marginTop={'15px'} justifyContent={"flex-end"}>
-            <Button variant="outlined" color={"inherit"}
-                    sx={{marginRight: '15px',
-                        textTransform: 'initial'}}
-                    onClick={onClose}>
-                Cancel
-            </Button>
-            <Button variant="contained" type={'submit'} disabled={!isValid} sx={{textTransform: 'initial'}}>
-                Submit
-            </Button>
-        </Box>
     </Box>
 }
 
