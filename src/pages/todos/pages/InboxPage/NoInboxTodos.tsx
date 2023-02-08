@@ -17,7 +17,7 @@ interface Props {
     onClick: () => void
 }
 
-const NoTodos = ({onClick}: Props) => {
+const NoInboxTodos = ({onClick}: Props) => {
     return (
         <Box height={'100%'} alignItems={"center"}  display={"flex"}>
             <Box display={"flex"} flexDirection={"column"}  margin={'0 auto'} alignItems={"center"}>
@@ -35,4 +35,4 @@ const NoTodos = ({onClick}: Props) => {
     );
 }
 
-export default NoTodos;
+export default NoInboxTodos;
