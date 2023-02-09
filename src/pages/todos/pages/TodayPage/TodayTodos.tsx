@@ -23,7 +23,9 @@ const TodayTodosPage = () => {
         setIsOpenForm(true)
     }
 
-    if (isOpenForm) return <CreateTodoForm onClose={onClose}/>
+    if (isOpenForm) return <Box mt={'20px'}>
+        <CreateTodoForm onClose={onClose}/>
+    </Box>
 
     return (
         <Box paddingTop={'30px'} height={'100%'}>
