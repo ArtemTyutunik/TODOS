@@ -29,8 +29,11 @@ const InboxTodosPage = () => {
     return (
         <Box paddingTop={'30px'} height={'100%'}>
             {
-                todos.length ? <TodoList todos={todos}/>
-                : <NoInboxTodos onClick={onOpenForm}/>
+                todos.length ? (
+                    <TodoList todos={todos}/>
+                ) : (
+                    <NoInboxTodos onClick={onOpenForm}/>
+                )
             }
 
         </Box>
