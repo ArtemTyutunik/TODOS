@@ -5,6 +5,7 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import DoNotDisturbIcon from "@mui/icons-material/DoNotDisturb";
 import {List, ListItem, ListItemButton, ListItemIcon, Typography} from "@mui/material";
 import {IDate} from "../../../../shared/interfaces";
+import {dateFormat} from "../../../../shared/constants";
 
 
 type menuItem = {
@@ -23,7 +24,7 @@ const DueDateMenuList= ({onSetDate}: Props) => {
         {
             label: 'Today',
             Icon: () => <TodayIcon fontSize={'small'} sx={{ color: '#058527'}}/>,
-            onItemClick: () => onSetDate(dayjs().format('MMM D'))
+            onItemClick: () => onSetDate(dayjs().format(dateFormat))
         },
         {
             label: 'Tomorrow',
@@ -31,7 +32,7 @@ const DueDateMenuList= ({onSetDate}: Props) => {
             onItemClick: () => {
                 const today = dayjs()
                 const tomorrow = today.clone().add(1,'days')
-                onSetDate(tomorrow.format('MMM D'))
+                onSetDate(tomorrow.format(dateFormat))
             }
         },
         {
