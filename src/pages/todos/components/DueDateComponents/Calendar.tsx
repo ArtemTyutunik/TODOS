@@ -7,6 +7,7 @@ import {LocalizationProvider} from "@mui/x-date-pickers";
 
 import './calendar.css'
 import {IDate} from "../../../../shared/interfaces";
+import {dateFormat} from "../../../../shared/constants";
 
 interface Props {
     onSetDate: (date: IDate) => void,
@@ -27,7 +28,7 @@ const Calendar = ({onSetDate,initialDate = null}: Props) => {
                               value={value}
                               onChange={(newValue) => {
                                   setValue(newValue);
-                                  onSetDate(newValue!.format('MMM D'))
+                                  onSetDate(newValue!.format(dateFormat))
                               }}
                               renderInput={(params) => <TextField {...params} />}
             />

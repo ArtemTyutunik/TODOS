@@ -1,11 +1,13 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {useSelector} from "react-redux";
-import {Box} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 
 import NoInboxTodos from "./NoInboxTodos";
 import TodoList from "../../components/todo-list";
 import {RootReducer} from "../../../../app/store";
 import CreateTodoForm from "../../components/createTodoForm";
+import OverdueTodos from "../../components/OverdueTodos";
+import {OverdueDate} from "../../../../shared/constants";
 
 
 const InboxTodosPage = () => {
@@ -26,11 +28,20 @@ const InboxTodosPage = () => {
         </Box>
     }
 
+    const overdueTodos = todos.filter(todo => OverdueDate(todo.date!))
+    const inboxTodos = todos.filter(todo => !OverdueDate(todo.date!))
+
     return (
         <Box paddingTop={'30px'} height={'100%'}>
+            <OverdueTodos overdueTodos={overdueTodos}/>
             {
                 todos.length ? (
-                    <TodoList todos={todos}/>
+                        <Box>
+                            <Typography fontSize={'18px'} fontWeight={'700'} color={'#202020'}>
+                                Inbox
+                            </Typography>
+                            <TodoList todos={inboxTodos}/>
+                        </Box>
                 ) : (
                     <NoInboxTodos onClick={onOpenForm}/>
                 )

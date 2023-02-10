@@ -1,10 +1,5 @@
 import React from 'react';
-import { Box,
-    Divider,
-    IconButton,
-    Tooltip,
-    Typography} from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
+import { Box, Divider, IconButton, Tooltip, Typography, Checkbox } from "@mui/material";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import EditIcon from "@mui/icons-material/Edit";
@@ -13,6 +8,7 @@ import EventIcon from '@mui/icons-material/Event';
 import MoreActionsMenu from "./moreActionMenu";
 import {ITodo} from "../../../shared/interfaces";
 import {TodoContainerStyles, TodoDescriptionStyles, TodoFlexboxStyles, TodoLabelStyles} from "../styles";
+import {OverdueDate} from "../../../shared/constants";
 
 const switchColorCheckBox = (priority: string) : string => {
     switch (priority){
@@ -46,6 +42,7 @@ const TodoCard = ({
         color: switchColorCheckBox(priority)
     }
 
+    const isOverdue = OverdueDate(date!)
     return (
         <Box mb={'25px'}>
             <Box sx = {TodoContainerStyles}>
@@ -67,9 +64,9 @@ const TodoCard = ({
                             {description}
                         </Typography>
                         {
-                            date && <Box sx = {TodoFlexboxStyles} paddingLeft={'42px'} mt={'5px'}>
-                                        <EventIcon sx={{color: "#808080", fontSize: '13px'}}/>
-                                        <Typography sx={{...TodoDescriptionStyles, marginLeft: '10px', paddingLeft: 0, fontSize: '13px',}}>
+                            date && <Box sx = {TodoFlexboxStyles} paddingLeft={'42px'} mt={'5px'} color={isOverdue ? "#c40202" : '#808080'}>
+                                        <EventIcon sx={{color: "inherit", fontSize: '13px'}}/>
+                                        <Typography sx={{...TodoDescriptionStyles, marginLeft: '10px', paddingLeft: 0, fontSize: '13px',color: 'inherit'}}>
                                             {date}
                                         </Typography>
                                     </Box>
