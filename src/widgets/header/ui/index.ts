@@ -1,12 +1,12 @@
-import {CustomSearch} from "./customSearch";
-import {SearchIconWrapper} from "./searchIconWrapper";
-import {StyledInputBase} from "./styletImputBase";
+import {CustomSearch} from './customSearch';
+import {SearchIconWrapper} from './searchIconWrapper';
+import {StyledInputBase} from './styletImputBase';
 import UserSettingsMenu from './userSettingsModal';
 
 
-export  {
-    CustomSearch,
-    SearchIconWrapper,
-    StyledInputBase,
-    UserSettingsMenu
-}
+export {
+  CustomSearch,
+  SearchIconWrapper,
+  StyledInputBase,
+  UserSettingsMenu,
+};

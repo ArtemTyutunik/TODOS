@@ -6,7 +6,8 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "google"
     ],
     "overrides": [
     ],
@@ -22,6 +23,10 @@
     "rules": {
         "react/react-in-jsx-scope": "off",
         "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
-        "@typescript-eslint/no-non-null-assertion": "off"
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "max-len": "off",
+        "require-jsdoc": "off",
+        "spaced-comment": "off",
+        "semi": "off"
     }
 }

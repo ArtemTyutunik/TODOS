@@ -1,14 +1,14 @@
-import {withStore} from "./providers/withStore";
-import React from "react";
-import {Box} from "@mui/material";
-import AppLayout from "./ui/appLayout";
+import {withStore} from './providers/withStore';
+import React from 'react';
+import {Box} from '@mui/material';
+import AppLayout from './ui/appLayout';
 
-const  App = () => {
+const App = () => {
   return (
-      <Box>
-          <AppLayout/>
-      </Box>
-  )
-}
+    <Box>
+      <AppLayout/>
+    </Box>
+  );
+};
 
-export default withStore(App)
+export default withStore(App);
