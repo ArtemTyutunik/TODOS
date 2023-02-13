@@ -1,20 +1,20 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice} from '@reduxjs/toolkit';
 
-export const OpenDrawer = () => {
-    let currentValue = localStorage.getItem('isDrawerOpen')
-    if (currentValue === null) return false
+export const openDrawer = () => {
+  const currentValue = localStorage.getItem('isDrawerOpen')
+  if (currentValue === null) return false
 
-    return  currentValue !== 'false';
+  return currentValue !== 'false'
 }
 
 const drawerSlice = createSlice({
-    name: 'drawer',
-    initialState: { isOpen: OpenDrawer() },
-    reducers: {
-        toggleDrawerOpen: (state) => {
-            state.isOpen = !state.isOpen
-        }
-    }
+  name: 'drawer',
+  initialState: {isOpen: openDrawer()},
+  reducers: {
+    toggleDrawerOpen: (state) => {
+      state.isOpen = !state.isOpen
+    },
+  },
 })
 
 export const {toggleDrawerOpen} = drawerSlice.actions;
