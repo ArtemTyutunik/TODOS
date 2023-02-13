@@ -34,11 +34,13 @@ export default function UserSettingsMenu() {
         {
             label: 'settings',
             Icon: () => <SettingsIcon/>,
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
             onClick: () => {}
         },
         {
             label: 'theme',
             Icon: () => <DarkModeIcon/>,
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
             onClick: () => {}
         },
 

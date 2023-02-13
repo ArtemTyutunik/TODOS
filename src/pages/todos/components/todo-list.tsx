@@ -8,6 +8,7 @@ interface Props {
     todos: ITodo[]
 }
 
+// eslint-disable-next-line react/display-name
 const TodoList = memo(({todos}: Props) => {
 
     return (

@@ -26,7 +26,7 @@ const NoTodayTodos = ({onClick}: Props) => {
                 <Box display={"flex"} flexDirection={"column"}  margin={'0 auto'} alignItems={"center"}>
                     <img src={imgUrl} alt={'image'}/>
                     <Typography fontWeight={500} color={'#515761'} fontSize={'20px'}>
-                        You're all done for today! Enjoy the rest of your day
+                        You`re all done for today! Enjoy the rest of your day
                     </Typography>
                     <Box sx = {boxStyles} onClick={onClick}>
                         <AddTaskIcon sx ={{color: '#1976d2'}}/>

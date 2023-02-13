@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 export const OpenDrawer = () => {
-    let currentValue = localStorage.getItem('isDrawerOpen')
+    const currentValue = localStorage.getItem('isDrawerOpen')
     if (currentValue === null) return false
 
     return  currentValue !== 'false';
