@@ -9,6 +9,7 @@ import MoreActionsMenu from './moreActionMenu';
 import {ITodo} from '../../../shared/interfaces';
 import {TodoContainerStyles, TodoDescriptionStyles, TodoFlexboxStyles, TodoLabelStyles} from '../styles';
 import {overdueDate} from '../../../shared/constants';
+import {useNavigate} from 'react-router-dom';
 
 const switchColorCheckBox = (priority: string) : string => {
   switch (priority) {
@@ -22,11 +23,11 @@ const switchColorCheckBox = (priority: string) : string => {
 
 interface TodoCardProps {
     todo: ITodo,
-    onComplete: () => void,
-    onEdit: () => void,
-    onDeleteAction: () => void,
-    onDuplicateAction: () => void,
-    setPriorityAction: (priority: string) => void
+    onComplete: (e: React.SyntheticEvent) => void,
+    onEdit: (e: React.SyntheticEvent) => void,
+    onDeleteAction: (e: React.SyntheticEvent) => void,
+    onDuplicateAction: (e: React.SyntheticEvent) => void,
+    setPriorityAction: (e: React.SyntheticEvent, priority: string) => void
 }
 
 const TodoCard = ({
@@ -37,14 +38,16 @@ const TodoCard = ({
   onDuplicateAction,
   setPriorityAction}: TodoCardProps,
 ) => {
-  const {label, description, done, date, priority = '4'} = todo;
+  const {label, description, done, date, id, priority = '4'} = todo;
+  const navigate = useNavigate()
+
   const checkBoxColorStyle = {
     color: switchColorCheckBox(priority),
   };
 
   const isOverdue = overdueDate(date!);
   return (
-    <Box mb={'25px'}>
+    <Box mb={'25px'} onClick={() => navigate(`task/${id}`)}>
       <Box sx = {TodoContainerStyles}>
         <Box
           maxWidth={'50%'}
@@ -53,7 +56,7 @@ const TodoCard = ({
             <Box sx = {TodoFlexboxStyles}>
               <Checkbox icon={<RadioButtonUncheckedIcon/>}
                 checkedIcon={<CheckCircleOutlineIcon sx = {checkBoxColorStyle}/>}
-                onChange={onComplete}
+                onClick={onComplete}
                 checked={done}
                 sx = {checkBoxColorStyle}/>
               <Typography sx = {TodoLabelStyles}>
