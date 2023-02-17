@@ -24,8 +24,7 @@ const ListItemButtonStyles = {
 
 export default function UserSettingsMenu() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  const {user, firstLogin} = useSelector((state: RootReducer) => state.userReducer);
-
+  const {user} = useSelector((state: RootReducer) => state.userReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -49,6 +48,7 @@ export default function UserSettingsMenu() {
       onClick: () => {
         dispatch(logOutUser());
         localStorage.removeItem('user');
+        localStorage.removeItem('viaLogin');
         navigate('/');
       },
     }];
@@ -61,7 +61,7 @@ export default function UserSettingsMenu() {
     setAnchorElUser(null);
   };
 
-  const email = firstLogin? user.email: user.user.email;
+  const email = user.user ? user.user.email : user.email;
 
   return (
     <>

@@ -13,13 +13,13 @@ const configureInitialState = () => {
 
 const userSlice = createSlice({
   name: 'authorization',
-  initialState: {...configureInitialState(), isError: false, errorMessage: null, firstLogin: false},
+  initialState: {...configureInitialState(), isError: false, errorMessage: null},
   reducers: {
     authUser: (state, action) => {
-      return {...state, isAuth: true, user: {...action.payload}, isError: false, errorMessage: null, firstLogin: false};
+      return {...state, isAuth: true, user: {...action.payload}, isError: false, errorMessage: null};
     },
     signUpUser: (state, action) => {
-      return {...state, isAuth: true, user: {...action.payload}, isError: false, errorMessage: null, firstLogin: true};
+      return {...state, isAuth: true, user: {...action.payload}, isError: false, errorMessage: null};
     },
     logOutUser: (state) => {
       state.isAuth = false;

@@ -1,18 +1,14 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {getBoolValueFromLocalStorage} from '../../../shared/helpers';
 
-export const openDrawer = () => {
-  const currentValue = localStorage.getItem('isDrawerOpen')
-  if (currentValue === null) return false
-
-  return currentValue !== 'false'
-}
+export const isOpenDrawer = getBoolValueFromLocalStorage('isDrawerOpen')
 
 const drawerSlice = createSlice({
   name: 'drawer',
-  initialState: {isOpen: openDrawer()},
+  initialState: {isOpenDrawer},
   reducers: {
     toggleDrawerOpen: (state) => {
-      state.isOpen = !state.isOpen
+      state.isOpenDrawer = !state.isOpenDrawer
     },
   },
 })
