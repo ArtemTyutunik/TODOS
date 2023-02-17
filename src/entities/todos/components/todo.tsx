@@ -19,21 +19,26 @@ const Todo = ({todo}: Props) => {
     setIsEditing(false);
   };
 
-  const onComplete = () => {
+  const onComplete = (e: React.SyntheticEvent) => {
+    e.stopPropagation();
     dispatch(toggleTaskComplete(id));
   };
 
-  const onEdit = () => {
+  const onEdit = (e: React.SyntheticEvent) => {
+    e.stopPropagation()
     setIsEditing(true);
   };
 
-  const onDeleteAction = () => {
+  const onDeleteAction = (e: React.SyntheticEvent) => {
+    e.stopPropagation()
     dispatch(deleteTask(id));
   };
-  const onDuplicateAction = () => {
+  const onDuplicateAction = (e: React.SyntheticEvent) => {
+    e.stopPropagation()
     dispatch(createDuplicate(id));
   };
-  const setPriorityAction = (priority: string) => {
+  const setPriorityAction = (e: React.SyntheticEvent, priority: string) => {
+    e.stopPropagation()
     dispatch(setPriority({id, priority}));
   };
 

@@ -12,9 +12,9 @@ import QueueIcon from '@mui/icons-material/Queue';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 interface MoreActionsMenuProps {
-    onDelete: () => void,
-    onDuplicate: () => void,
-    onSetPriority: (priority: string) => void
+    onDelete: (e: React.SyntheticEvent) => void,
+    onDuplicate: (e: React.SyntheticEvent) => void,
+    onSetPriority: (e: React.SyntheticEvent, priority: string) => void
 }
 
 const Priorities = [
@@ -28,10 +28,12 @@ const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenu
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation()
     setAnchorEl(event.currentTarget);
   };
 
-  const handleCloseMenu = () => {
+  const handleCloseMenu = (e: React.SyntheticEvent) => {
+    e.stopPropagation()
     setAnchorEl(null);
   };
 
@@ -43,13 +45,13 @@ const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenu
         </IconButton>
       </Tooltip>
 
-      <DropdownMenu anchorEl={anchorEl } handleClose={handleCloseMenu}>
+      <DropdownMenu anchorEl={anchorEl} handleClose={handleCloseMenu}>
         <Box padding={'0 10px'}>
           <Box m={'10px 0'}>
             <Typography>Set priority</Typography>
             <Box display={'flex'}>
               {Priorities.map((Priority) => <Box mr={'10px'} key={Priority.value}>
-                <IconButton onClick={() => onSetPriority(Priority.value)}>
+                <IconButton onClick={(event) => onSetPriority(event, Priority.value)}>
                   <Priority.Icon/>
                 </IconButton>
               </Box>,
@@ -60,7 +62,7 @@ const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenu
             <ListItemButton sx = {{padding: '10px 0', marginBottom: '10px'}} onClick={onDuplicate}>
               <QueueIcon sx={{color: 'grey'}}/>
               <Typography ml={'15px'}>
-                                    Duplicate
+                Duplicate
               </Typography>
             </ListItemButton>
           </List>
@@ -69,7 +71,7 @@ const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenu
           <ListItemButton sx = {{padding: '10px 0', margin: '10px 0'}} onClick={onDelete}>
             <DeleteIcon sx={{color: 'grey'}}/>
             <Typography ml={'15px'}>
-                                Delete
+                Delete
             </Typography>
           </ListItemButton>
         </Box>

@@ -3,7 +3,7 @@ import {Menu} from '@mui/material';
 
 interface dropdownMenuProps{
     anchorEl: null | HTMLElement,
-    handleClose: () => void,
+    handleClose: (e: React.SyntheticEvent) => void,
     children: React.ReactNode
 }
 const DropdownMenu = ({anchorEl, handleClose, children}: dropdownMenuProps) => {

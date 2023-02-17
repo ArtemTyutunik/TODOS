@@ -11,7 +11,7 @@ import {dateFormat} from '../../../../shared/constants';
 
 
 const TodayTodosPage = () => {
-  const todos = useSelector((state: RootReducer)=> state.todosReducer.todos);
+  const todos = useSelector((state: RootReducer) => state.todosReducer.todos);
   const todayTodos = todos.filter((todo) => todo.date === dayjs().format(dateFormat));
 
   const [isOpenForm, setIsOpenForm] = useState(false);
