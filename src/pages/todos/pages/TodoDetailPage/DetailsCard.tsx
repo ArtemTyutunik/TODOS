@@ -7,7 +7,7 @@ import {TodoLabelStyles} from '../../../../entities/todos/styles';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 
 
-const DetailsCard = ({todo}: { todo: ITodo }) => {
+const DetailsCard = ({todo, onComplete}: { todo: ITodo, onComplete: (e: React.SyntheticEvent) => void }) => {
   const {label, done, description} = todo
   return (
     <Box bgcolor={'fff'}>
@@ -17,6 +17,7 @@ const DetailsCard = ({todo}: { todo: ITodo }) => {
             <Box display={'flex'} alignItems={'center'}>
               <Checkbox icon={<RadioButtonUncheckedIcon/>}
                 checkedIcon={<CheckCircleOutlineIcon/>}
+                onClick={onComplete}
                 checked={done}/>
               <Typography sx = {TodoLabelStyles}>
                 {label}
