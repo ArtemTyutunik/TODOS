@@ -1,7 +1,5 @@
 import React from 'react';
-import {Box, Divider, IconButton, Tooltip, Typography, Checkbox} from '@mui/material';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import {Box, Divider, IconButton, Tooltip, Typography} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import EventIcon from '@mui/icons-material/Event';
 
@@ -10,16 +8,7 @@ import {ITodo} from '../../../shared/interfaces';
 import {TodoContainerStyles, TodoDescriptionStyles, TodoFlexboxStyles, TodoLabelStyles} from '../styles';
 import {overdueDate} from '../../../shared/constants';
 import {useNavigate} from 'react-router-dom';
-
-const switchColorCheckBox = (priority: string) : string => {
-  switch (priority) {
-    case '1': return '#cc2a25';
-    case '2': return '#ff824d';
-    case '3': return '#1531d1';
-    case '4': return '#babbc2';
-    default: return '#babbc2';
-  }
-};
+import CheckboxComponent from './Checkbox';
 
 interface TodoCardProps {
     todo: ITodo,
@@ -38,12 +27,8 @@ const TodoCard = ({
   onDuplicateAction,
   setPriorityAction}: TodoCardProps,
 ) => {
-  const {label, description, done, date, id, priority = '4'} = todo;
+  const {label, description, date, id} = todo;
   const navigate = useNavigate()
-
-  const checkBoxColorStyle = {
-    color: switchColorCheckBox(priority),
-  };
 
   const isOverdue = overdueDate(date!);
   return (
@@ -54,11 +39,7 @@ const TodoCard = ({
           sx={TodoFlexboxStyles}>
           <Box width={'100%'}>
             <Box sx = {TodoFlexboxStyles}>
-              <Checkbox icon={<RadioButtonUncheckedIcon/>}
-                checkedIcon={<CheckCircleOutlineIcon sx = {checkBoxColorStyle}/>}
-                onClick={onComplete}
-                checked={done}
-                sx = {checkBoxColorStyle}/>
+              <CheckboxComponent onComplete={onComplete} todo={todo}/>
               <Typography sx = {TodoLabelStyles}>
                 {label}
               </Typography>
