@@ -27,6 +27,7 @@
         "max-len": "off",
         "require-jsdoc": "off",
         "spaced-comment": "off",
-        "semi": "off"
+        "semi": "off",
+        "linebreak-style": "off"
     }
 }
