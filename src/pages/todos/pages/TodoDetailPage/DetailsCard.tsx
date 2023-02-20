@@ -1,24 +1,20 @@
 import React from 'react';
-import {Box, Checkbox, Grid, Typography} from '@mui/material';
+import {Box, Grid, Typography} from '@mui/material';
 import {ITodo} from '../../../../shared/interfaces';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import {TodoLabelStyles} from '../../../../entities/todos/styles';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import CheckboxComponent from '../../../../entities/todos/components/Checkbox';
 
 
 const DetailsCard = ({todo, onComplete}: { todo: ITodo, onComplete: (e: React.SyntheticEvent) => void }) => {
-  const {label, done, description} = todo
+  const {label, description} = todo
   return (
     <Box bgcolor={'fff'}>
       <Grid container>
         <Grid item md={8}>
           <Box mb={'30px'}>
             <Box display={'flex'} alignItems={'center'}>
-              <Checkbox icon={<RadioButtonUncheckedIcon/>}
-                checkedIcon={<CheckCircleOutlineIcon/>}
-                onClick={onComplete}
-                checked={done}/>
+              <CheckboxComponent onComplete={onComplete} todo={todo}/>
               <Typography sx = {TodoLabelStyles}>
                 {label}
               </Typography>
