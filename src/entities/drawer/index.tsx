@@ -36,8 +36,8 @@ const configureActiveLink = (): string => {
 };
 
 const Drawer = () => {
-  const {isOpen} = useSelector((state: RootReducer) => state.drawerReducer);
-  localStorage.setItem('isDrawerOpen', isOpen.toString());
+  const {isOpenDrawer} = useSelector((state: RootReducer) => state.drawerReducer);
+  localStorage.setItem('isDrawerOpen', isOpenDrawer.toString());
   const [activeLink, setActiveLink] = useState(configureActiveLink());
   const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ const Drawer = () => {
     width: '250px',
     height: 'calc(100vh - 64px)',
     background: '#f5f5f5',
-    transform: isOpen ? 'translateX(0%)' : 'translateX(-100%)',
+    transform: isOpenDrawer ? 'translateX(0%)' : 'translateX(-100%)',
     transition: 'transform .4s linear',
     [theme.breakpoints.down(450)]: {
       width: '100%',
