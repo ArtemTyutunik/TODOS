@@ -8,7 +8,6 @@ import {ITodo} from '../../../shared/interfaces';
 
 const CheckboxComponent = ({onComplete, todo} : { onComplete: (e: React.SyntheticEvent) => void, todo: ITodo}) => {
   const {priority = '4', done} = todo
-
   const switchColorCheckBox = (priority: string) : string => {
     switch (priority) {
       case '1': return '#cc2a25';
@@ -24,7 +23,7 @@ const CheckboxComponent = ({onComplete, todo} : { onComplete: (e: React.Syntheti
   };
 
   return (
-    <Checkbox icon={<RadioButtonUncheckedIcon/>}
+    <Checkbox icon={<RadioButtonUncheckedIcon sx = {checkBoxColorStyle}/>}
       checkedIcon={<CheckCircleOutlineIcon sx = {checkBoxColorStyle}/>}
       onClick={onComplete}
       checked={done}/>
