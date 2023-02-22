@@ -27,6 +27,8 @@
         "max-len": "off",
         "require-jsdoc": "off",
         "spaced-comment": "off",
-        "semi": "off"
+        "semi": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "linebreak-style": "off"
     }
 }
