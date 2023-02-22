@@ -1,5 +1,6 @@
 import {useDispatch} from 'react-redux';
-
+// @ts-ignore
+import {toast} from 'react-toastify';
 import {Link, useNavigate} from 'react-router-dom';
 import {Box, Button, Typography} from '@mui/material';
 
@@ -7,8 +8,6 @@ import BaseTodoForm from '../../../shared/forms/ui/baseTodoForm';
 import {addNewTask} from '../../../entities/todos/store/todo';
 import {IBaseFormInputsValues} from '../../../shared/forms/interfaces/interfaces';
 import {IDate} from '../../../shared/interfaces';
-// @ts-ignore
-import {toast} from 'react-toastify';
 
 interface Props {
     onClose: () => void
@@ -45,6 +44,7 @@ const CreateTodoForm = ({onClose}: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const notify = () => {
+    // @ts-ignore
     toast(<TodoCreatedNotification onNavigate={() => navigate('/Inbox')}/>, options);
   }
 
