@@ -1,4 +1,5 @@
 import {useDispatch} from 'react-redux';
+// @ts-ignore
 import {toast} from 'react-toastify';
 import {Link, useNavigate} from 'react-router-dom';
 import {Box, Button, Typography} from '@mui/material';
