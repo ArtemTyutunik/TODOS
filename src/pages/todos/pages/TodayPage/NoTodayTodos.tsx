@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, Typography} from '@mui/material';
-import AddTaskIcon from '@mui/icons-material/AddTask';
+import AddButtonIcon from '../../../../shared/components/AddIcon';
 
 const boxStyles = {
   'display': 'flex',
@@ -29,7 +29,7 @@ const NoTodayTodos = ({onClick}: Props) => {
                         You`re all done for today! Enjoy the rest of your day
         </Typography>
         <Box sx = {boxStyles} onClick={onClick}>
-          <AddTaskIcon sx ={{color: '#1976d2'}}/>
+          <AddButtonIcon sx={{color: '#1976d2'}}/>
           <Typography ml={'10px'} color={'inherit'} fontSize={'15px'} fontWeight={300}>
                             Add task
           </Typography>

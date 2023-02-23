@@ -4,7 +4,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import HomeIcon from '@mui/icons-material/Home';
-import AddTaskIcon from '@mui/icons-material/AddTask';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 import {useState} from 'react';
@@ -15,6 +14,7 @@ import {toggleDrawerOpen} from '../../entities/drawer/store';
 import BasicModal from '../../shared/components/modal';
 import CreateTodoForm from '../../pages/todos/components/createTodoForm';
 import {Link} from 'react-router-dom';
+import AddButtonIcon from '../../shared/components/AddIcon';
 
 
 export default function Header() {
@@ -82,7 +82,7 @@ export default function Header() {
             <Box sx={{display: {xs: 'none', md: 'flex'}, position: 'relative'}}>
               <Tooltip title={'add todo'}>
                 <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={() => setIsAddTaskModalOpen(true)}>
-                  <AddTaskIcon/>
+                  <AddButtonIcon color={'inherit'}/>
                 </IconButton>
               </Tooltip>
 
