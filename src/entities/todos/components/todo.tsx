@@ -21,7 +21,7 @@ const Todo = ({todo}: Props) => {
 
   const onComplete = (e: React.SyntheticEvent) => {
     e.stopPropagation();
-    dispatch(toggleTaskComplete(id));
+    dispatch(toggleTaskComplete(Number(id)));
   };
 
   const onEdit = (e: React.SyntheticEvent) => {
