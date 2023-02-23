@@ -1,5 +1,5 @@
 import {Box, Typography} from '@mui/material';
-import AddTaskIcon from '@mui/icons-material/AddTask';
+import AddButtonIcon from '../../../../shared/components/AddIcon';
 
 const boxStyles = {
   'display': 'flex',
@@ -25,7 +25,7 @@ const NoInboxTodos = ({onClick}: Props) => {
                     You have not added any todos yet!
         </Typography>
         <Box sx = {boxStyles} onClick={onClick}>
-          <AddTaskIcon sx ={{color: '#1976d2'}}/>
+          <AddButtonIcon color={'#1976d2'}/>
           <Typography ml={'10px'} color={'inherit'} fontSize={'15px'} fontWeight={300}>
                         Add task
           </Typography>
