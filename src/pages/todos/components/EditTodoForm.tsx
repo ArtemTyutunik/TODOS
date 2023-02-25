@@ -8,11 +8,12 @@ import {IDate, ITodo} from '../../../shared/interfaces';
 
 interface Props {
     onClose: () => void,
-    todo: ITodo
+    todo: ITodo,
+    hideActions?: boolean
 }
 
 
-const EditTodoForm = ({onClose, todo}: Props) => {
+const EditTodoForm = ({onClose, todo, hideActions}: Props) => {
   const dispatch = useDispatch();
 
   const onSubmit = (data:IBaseFormInputsValues, date: IDate) => {
@@ -20,7 +21,11 @@ const EditTodoForm = ({onClose, todo}: Props) => {
     onClose();
   };
 
-  return <BaseTodoForm onClose={onClose} onSubmit={onSubmit} todo={todo}/>;
+  return <BaseTodoForm
+    onClose={onClose}
+    onSubmit={onSubmit}
+    todo={todo}
+    hideActions = {hideActions}/>;
 };
 
 export default EditTodoForm;
