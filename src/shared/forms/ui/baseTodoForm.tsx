@@ -7,15 +7,6 @@ import {IDate, ITodo} from '../../interfaces';
 import {taskNameValidation} from '../validation/validation';
 import DueDateButton from '../../../pages/todos/components/DueDateComponents/DueDateButton';
 
-
-interface Props {
-    onClose: () => void,
-    onSubmit: (data: IBaseFormInputsValues, date: string | null) => void,
-    todo?: ITodo
-}
-
-// if todo is not undefined it means that the field values will be the corresponding todo properties
-
 const formStyles = {
   border: '1px solid #eee',
   padding: '0 5px 8px 5px',
@@ -32,7 +23,19 @@ const CancelButtonStyles = {
   padding: '1px 10px',
 };
 
-const BaseTodoForm = ({onClose, onSubmit, todo}: Props) => {
+interface Props {
+  onClose: () => void,
+  onSubmit: (data: IBaseFormInputsValues, date: string | null) => void,
+  todo?: ITodo,
+  hideActions?: boolean
+}
+// if todo is not undefined it means that the field values will be the corresponding todo properties
+
+const BaseTodoForm = ({
+  onClose,
+  onSubmit,
+  todo,
+  hideActions}: Props) => {
   const {control, handleSubmit, formState: {isValid}} = useForm<IBaseFormInputsValues>({defaultValues: {
     label: todo ? todo.label : '',
     description: todo ? todo.description : '',
@@ -67,12 +70,16 @@ const BaseTodoForm = ({onClose, onSubmit, todo}: Props) => {
           fullWidth
           InputProps={{disableUnderline: true}}/>}
       />
-
-      <Box display={'flex'} mb={'5px'}>
-        <DueDateButton date={todoDate} onPassDateToBaseForm={onPassDateToBaseForm}/>
-      </Box>
-
-      <Divider/>
+      {
+        hideActions ? null : (
+            <>
+              <Box display={'flex'} mb={'5px'}>
+                <DueDateButton date={todoDate} onPassDateToBaseForm={onPassDateToBaseForm}/>
+              </Box>
+              <Divider/>
+            </>
+        )
+      }
 
       <Box display={'flex'} marginTop={'5px'} justifyContent={'flex-end'}>
         <Button variant="contained" color={'inherit'}
