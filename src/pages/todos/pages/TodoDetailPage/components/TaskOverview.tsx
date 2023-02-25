@@ -8,19 +8,19 @@ interface Props {
     description?: string,
     onOpenForm(): void
 }
-const MyComponent = ({label, description, onOpenForm}: Props) => {
+const TaskOverview = ({label, description, onOpenForm}: Props) => {
   return (
     <Box display={'flex'} width={'100%'} flexDirection={'column'} onClick={onOpenForm}>
-      <Typography sx = {{...TodoLabelStyles, fontSize: '20px', marginBottom: '10px'}}>
+      <Typography sx = {{...TodoLabelStyles, fontSize: '20px', marginBottom: '10px', cursor: 'text'}}>
         {label}
       </Typography>
       {
               description ? (
-                  <Typography sx={{fontSize: '18px', color: 'inherit', fontWeight: 300}}>
+                  <Typography sx={{fontSize: '18px', color: 'inherit', fontWeight: 300, cursor: 'text'}}>
                     {description}
                   </Typography>
               ) : (
-                  <Box display={'flex'} alignItems={'center'} color={'#0000008F'}>
+                  <Box sx={{cursor: 'text'}} display={'flex'} alignItems={'center'} color={'#0000008F'} >
                     <DescriptionOutlinedIcon sx={{fontSize: '20px', color: 'inherit'}}/>
                     <Typography paddingLeft={'10px'} fontSize={'14px'} color={'inherit'}>
                           Description
@@ -31,4 +31,4 @@ const MyComponent = ({label, description, onOpenForm}: Props) => {
   );
 };
 
-export default MyComponent;
+export default TaskOverview;
