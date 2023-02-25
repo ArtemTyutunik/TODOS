@@ -43,14 +43,15 @@ const options = {
 const CreateTodoForm = ({onClose}: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const notify = () => {
+  const notify = (id: number) => {
     // @ts-ignore
-    toast(<TodoCreatedNotification onNavigate={() => navigate('/Inbox')}/>, options);
+    toast(<TodoCreatedNotification onNavigate={() => navigate(`task/${id}`)}/>, options);
   }
 
   const onSubmit = (data:IBaseFormInputsValues, date: IDate) => {
-    dispatch(addNewTask({...data, id: Date.now(), done: false, date: date}));
-    notify()
+    const id = Date.now()
+    dispatch(addNewTask({...data, id, done: false, date: date}));
+    notify(id)
     onClose();
   };
 
