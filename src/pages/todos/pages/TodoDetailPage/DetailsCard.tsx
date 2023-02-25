@@ -1,33 +1,47 @@
-import React from 'react';
-import {Box, Grid, Typography} from '@mui/material';
+import React, {useState} from 'react';
+import {Box, Grid} from '@mui/material';
 import {ITodo} from '../../../../shared/interfaces';
-import {TodoLabelStyles} from '../../../../entities/todos/styles';
-import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import CheckboxComponent from '../../../../entities/todos/components/Checkbox';
+import EditTodoForm from '../../components/EditTodoForm';
+import TaskOverview from './components/TaskOverview';
 
-
-const DetailsCard = ({todo, onComplete}: { todo: ITodo, onComplete: (e: React.SyntheticEvent) => void }) => {
+interface Props {
+  todo: ITodo,
+  onComplete: (e: React.SyntheticEvent) => void
+}
+const DetailsCard = ({todo, onComplete}: Props) => {
   const {label, description} = todo
+  const [isEditDetailsOpen, setIsEditDetailsOpen] = useState(false)
+
+  const onClose = () => {
+    setIsEditDetailsOpen(false)
+  }
+
+  const onOpenEditForm = () => setIsEditDetailsOpen(true)
+
   return (
     <Box bgcolor={'fff'}>
       <Grid container>
         <Grid item md={8}>
-          <Box mb={'30px'}>
-            <Box display={'flex'} alignItems={'center'}>
+          <Box mb={'30px'} display={'flex'}>
+            <Box display={'flex'}>
               <CheckboxComponent onComplete={onComplete} todo={todo}/>
-              <Typography sx = {TodoLabelStyles}>
-                {label}
-              </Typography>
             </Box>
             {
-              description || (
-                <Box display={'flex'} paddingLeft={'40px'} alignItems={'center'} color={'#0000008F'}>
-                  <DescriptionOutlinedIcon sx={{fontSize: '16px', color: 'inherit'}}/>
-                  <Typography paddingLeft={'10px'} fontSize={'14px'} color={'inherit'}>
-                        Description
-                  </Typography>
-                </Box>
-              )}
+              isEditDetailsOpen ? (
+                  <Box width={'100%'}>
+                    <EditTodoForm
+                      onClose={onClose}
+                      todo={todo}
+                      hideActions/>
+                  </Box>
+              ) : (
+                  <TaskOverview
+                    label={label}
+                    description={description}
+                    onOpenForm={onOpenEditForm}/>
+              )
+            }
           </Box>
         </Grid>
         <Grid item md={4}>
