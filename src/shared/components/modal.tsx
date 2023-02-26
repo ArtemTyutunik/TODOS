@@ -12,7 +12,6 @@ const style = {
   backgroundColor: 'background.paper',
   border: 'none',
   boxShadow: 24,
-  padding: '10px',
 };
 
 interface Props {
