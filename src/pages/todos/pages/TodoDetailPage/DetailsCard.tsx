@@ -23,7 +23,7 @@ const DetailsCard = ({todo, onComplete}: Props) => {
     <Box bgcolor={'fff'}>
       <Grid container>
         <Grid item md={8}>
-          <Box mb={'30px'} display={'flex'}>
+          <Box mb={'30px'} display={'flex'} marginRight={'10px'} marginTop={'10px'}>
             <Box display={'flex'}>
               <CheckboxComponent onComplete={onComplete} todo={todo}/>
             </Box>
@@ -45,7 +45,8 @@ const DetailsCard = ({todo, onComplete}: Props) => {
           </Box>
         </Grid>
         <Grid item md={4}>
-
+          <Box width={'100%'} height={'100%'} sx={{backgroundColor: '#fafafa'}}>
+          </Box>
         </Grid>
       </Grid>
     </Box>
