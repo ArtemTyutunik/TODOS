@@ -1,8 +1,8 @@
 import {useDispatch} from 'react-redux';
 // @ts-ignore
 import {toast} from 'react-toastify';
-import {Link, useNavigate} from 'react-router-dom';
-import {Box, Button, Typography} from '@mui/material';
+import {Link as RouterLink, useNavigate} from 'react-router-dom';
+import {Box, Button, Typography, Link as MuiLink} from '@mui/material';
 
 import BaseTodoForm from '../../../shared/forms/ui/baseTodoForm';
 import {addNewTask} from '../../../entities/todos/store/todo';
@@ -16,10 +16,12 @@ interface Props {
 const TodoCreatedNotification = ({onNavigate}: {onNavigate: () => void}) => {
   return (
     <Box display={'flex'} alignItems={'center'}>
-      <Typography>
-        Task added to <Link to={'Inbox'}>Inbox</Link>
+      <Typography marginRight={'10px'}>
+        Task added to <MuiLink component={RouterLink} color={'#1976d2'} sx={{textDecoration: 'none'}} to={'/Inbox'} >
+            Inbox
+        </MuiLink>
       </Typography>
-      <Button sx={{textTransform: 'none'}} onClick={onNavigate}>
+      <Button sx={{textTransform: 'none', marginTop: '-2px'}} onClick={onNavigate}>
         Open
       </Button>
     </Box>

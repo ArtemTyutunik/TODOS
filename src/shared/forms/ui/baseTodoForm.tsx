@@ -9,7 +9,7 @@ import DueDateButton from '../../../pages/todos/components/DueDateComponents/Due
 
 const formStyles = {
   border: '1px solid #eee',
-  padding: '0 5px 8px 5px',
+  padding: '10px 5px 8px 10px',
   borderRadius: '10px',
 };
 
