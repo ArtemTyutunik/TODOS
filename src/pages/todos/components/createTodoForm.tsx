@@ -9,10 +9,6 @@ import {addNewTask} from '../../../entities/todos/store/todo';
 import {IBaseFormInputsValues} from '../../../shared/forms/interfaces/interfaces';
 import {IDate} from '../../../shared/interfaces';
 
-interface Props {
-    onClose: () => void
-}
-
 const TodoCreatedNotification = ({onNavigate}: {onNavigate: () => void}) => {
   return (
     <Box display={'flex'} alignItems={'center'}>
@@ -41,8 +37,12 @@ const options = {
   toastId: 'customId',
 }
 
+interface Props {
+  onClose: () => void,
+  initialDate?: string
+}
 
-const CreateTodoForm = ({onClose}: Props) => {
+const CreateTodoForm = ({onClose, initialDate}: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
@@ -59,7 +59,7 @@ const CreateTodoForm = ({onClose}: Props) => {
   };
 
   return <>
-    <BaseTodoForm onClose={onClose} onSubmit={onSubmit}/>
+    <BaseTodoForm onClose={onClose} onSubmit={onSubmit} initialDate={initialDate}/>
   </>
 };
 

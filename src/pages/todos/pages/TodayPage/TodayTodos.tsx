@@ -7,12 +7,12 @@ import TodoList from '../../components/todo-list';
 import NoTodayTodos from './NoTodayTodos';
 import {useState} from 'react';
 import CreateTodoForm from '../../components/createTodoForm';
-import {dateFormat} from '../../../../shared/constants';
+import {dateToFormat} from '../../../../shared/constants';
 
 
 const TodayTodosPage = () => {
   const todos = useSelector((state: RootReducer) => state.todosReducer.todos);
-  const todayTodos = todos.filter((todo) => todo.date === dayjs().format(dateFormat));
+  const todayTodos = todos.filter((todo) => todo.date === dateToFormat(dayjs()));
 
   const [isOpenForm, setIsOpenForm] = useState(false);
 
@@ -26,15 +26,18 @@ const TodayTodosPage = () => {
 
   if (isOpenForm) {
     return <Box mt={'20px'}>
-      <CreateTodoForm onClose={onClose}/>
+      <CreateTodoForm onClose={onClose} initialDate={dateToFormat(dayjs())}/>
     </Box>;
   }
 
   return (
     <Box paddingTop={'30px'} height={'100%'}>
       {
-                todayTodos.length ? <TodoList todos={todayTodos}/> :
-                    <NoTodayTodos onClick={onOpenForm}/>
+        todayTodos.length ? (
+            <TodoList todos={todayTodos}/>
+        ) : (
+            <NoTodayTodos onClick={onOpenForm}/>
+        )
       }
     </Box>
   );

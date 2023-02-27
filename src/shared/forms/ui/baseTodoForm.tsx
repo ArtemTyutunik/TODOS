@@ -27,6 +27,7 @@ interface Props {
   onClose: () => void,
   onSubmit: (data: IBaseFormInputsValues, date: string | null) => void,
   todo?: ITodo,
+  initialDate?: string,
   hideActions?: boolean
 }
 // if todo is not undefined it means that the field values will be the corresponding todo properties
@@ -35,13 +36,14 @@ const BaseTodoForm = ({
   onClose,
   onSubmit,
   todo,
+  initialDate,
   hideActions}: Props) => {
   const {control, handleSubmit, formState: {isValid}} = useForm<IBaseFormInputsValues>({defaultValues: {
     label: todo ? todo.label : '',
     description: todo ? todo.description : '',
   }});
 
-  const [todoDate, setTodoDate] = useState<IDate>(todo?.date!);
+  const [todoDate, setTodoDate] = useState<IDate>(initialDate || todo?.date!);
 
   const onPassDateToBaseForm = (date: IDate) => {
     setTodoDate(date);

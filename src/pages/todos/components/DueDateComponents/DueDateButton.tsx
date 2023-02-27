@@ -5,7 +5,6 @@ import Calendar from './Calendar';
 import DueDateMenuList from './DueDateMenu';
 import {IDate} from '../../../../shared/interfaces';
 
-
 const buttonsStyles = {
   color: '#7d7b74',
   backgroundColor: '#f5f5f5',
@@ -36,7 +35,6 @@ const DueDateButton = ({date, onPassDateToBaseForm}: Props) => {
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
-
 
   return (
     <>
