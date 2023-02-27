@@ -6,11 +6,12 @@ const style = {
   top: '20%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  minWidth: '50%',
+  minWidth: '500px',
   width: 'auto',
   height: 'auto',
   backgroundColor: 'background.paper',
   border: 'none',
+  borderRadius: '12px',
   boxShadow: 24,
 };
 

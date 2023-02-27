@@ -45,6 +45,7 @@ const options = {
 const CreateTodoForm = ({onClose}: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
+
   const notify = (id: number) => {
     // @ts-ignore
     toast(<TodoCreatedNotification onNavigate={() => navigate(`task/${id}`)}/>, options);

@@ -20,7 +20,7 @@ const DetailsCard = ({todo, onComplete}: Props) => {
   const onOpenEditForm = () => setIsEditDetailsOpen(true)
 
   return (
-    <Box bgcolor={'fff'}>
+    <Box bgcolor={'#fff'} minWidth={'700px'}>
       <Grid container>
         <Grid item md={8}>
           <Box mb={'30px'} display={'flex'} marginRight={'10px'} marginTop={'10px'}>
