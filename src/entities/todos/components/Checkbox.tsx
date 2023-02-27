@@ -3,7 +3,7 @@ import React from 'react';
 import {Checkbox} from '@mui/material';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import {ITodo} from '../../../shared/interfaces';
+import {ITodo} from '@shared/interfaces';
 
 
 const CheckboxComponent = ({onComplete, todo} : { onComplete: (e: React.SyntheticEvent) => void, todo: ITodo}) => {

@@ -7,8 +7,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {RootReducer} from '../../../app/store';
-import {logOutUser} from '../../../pages/authorization/store';
-import DropdownMenu from '../../../shared/components/dropdownMenu';
+import {logOutUser} from '@pages/authorization/store';
+import DropdownMenu from '@shared/components/dropdownMenu';
 import {useNavigate} from 'react-router-dom';
 
 type menuItem = {

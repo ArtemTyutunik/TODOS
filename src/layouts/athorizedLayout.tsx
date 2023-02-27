@@ -1,8 +1,8 @@
 import {Grid} from '@mui/material';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Drawer from '../entities/drawer';
-import Routing from '../pages/routes';
+import Drawer from '@entities/drawer';
+import Routing from '@pages/routes';
 import {ToastContainer} from 'react-toastify';
 
 const AuthorizedLayout= () => {

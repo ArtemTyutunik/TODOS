@@ -4,9 +4,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import EventIcon from '@mui/icons-material/Event';
 
 import MoreActionsMenu from './moreActionMenu';
-import {ITodo} from '../../../shared/interfaces';
+import {ITodo} from '@shared/interfaces';
 import {TodoContainerStyles, TodoDescriptionStyles, TodoFlexboxStyles, TodoLabelStyles} from '../styles';
-import {overdueDate} from '../../../shared/constants';
+import {overdueDate} from '@shared/constants';
 import {useNavigate} from 'react-router-dom';
 import CheckboxComponent from './Checkbox';
 
