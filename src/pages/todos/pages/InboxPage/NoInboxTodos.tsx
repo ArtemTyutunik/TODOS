@@ -1,5 +1,5 @@
 import {Box, Typography} from '@mui/material';
-import AddButtonIcon from '../../../../shared/components/AddIcon';
+import AddButtonIcon from '@shared/components/AddIcon';
 
 const boxStyles = {
   'display': 'flex',

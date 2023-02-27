@@ -4,9 +4,9 @@ import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 
 import {app} from '../../../firebaseConfig';
 import {authUser, authWithError} from './store';
-import {IFormInputs} from '../../shared/forms/interfaces/interfaces';
+import {IFormInputs} from '@shared/forms/interfaces/interfaces';
 
-import LoginForm from '../../entities/loginForm/loginForm';
+import LoginForm from '@entities/loginForm/loginForm';
 
 function Login() {
   const onSubmit= (data: IFormInputs) => loginHandler(data.login, data.password);

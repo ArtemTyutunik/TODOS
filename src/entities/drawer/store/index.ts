@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {getBoolValueFromLocalStorage} from '../../../shared/helpers';
+import {getBoolValueFromLocalStorage} from '@shared/helpers';
 
 export const isOpenDrawer = getBoolValueFromLocalStorage('isDrawerOpen')
 

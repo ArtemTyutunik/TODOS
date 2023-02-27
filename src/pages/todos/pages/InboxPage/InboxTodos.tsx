@@ -7,7 +7,7 @@ import TodoList from '../../components/todo-list';
 import {RootReducer} from '../../../../app/store';
 import CreateTodoForm from '../../components/createTodoForm';
 import OverdueTodos from '../../components/OverdueTodos';
-import {overdueDate} from '../../../../shared/constants';
+import {overdueDate} from '@shared/constants';
 
 
 const InboxTodosPage = () => {

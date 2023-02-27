@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {ITodo} from '../../../shared/interfaces';
+import {ITodo} from '@shared/interfaces';
 
 interface IInitialState {
     todos: ITodo[]

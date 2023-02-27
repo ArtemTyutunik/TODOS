@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import DropdownMenu from '../../../../shared/components/dropdownMenu';
+import DropdownMenu from '@shared/components/dropdownMenu';
 import {Box, Button, Divider} from '@mui/material';
 import Calendar from './Calendar';
 import DueDateMenuList from './DueDateMenu';
-import {IDate} from '../../../../shared/interfaces';
+import {IDate} from '@shared/interfaces';
 
 
 const buttonsStyles = {

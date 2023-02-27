@@ -1,10 +1,10 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
 
-import BaseTodoForm from '../../../shared/forms/ui/baseTodoForm';
-import {editTask} from '../../../entities/todos/store/todo';
-import {IBaseFormInputsValues} from '../../../shared/forms/interfaces/interfaces';
-import {IDate, ITodo} from '../../../shared/interfaces';
+import BaseTodoForm from '@shared/forms/ui/baseTodoForm';
+import {editTask} from '@entities/todos/store/todo';
+import {IBaseFormInputsValues} from '@shared/forms/interfaces/interfaces';
+import {IDate, ITodo} from '@shared/interfaces';
 
 interface Props {
     onClose: () => void,

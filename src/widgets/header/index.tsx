@@ -1,4 +1,3 @@
-
 import {Box, AppBar, Toolbar, IconButton, Typography, Container, Tooltip} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
@@ -10,11 +9,11 @@ import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {CustomSearch, SearchIconWrapper, StyledInputBase, UserSettingsMenu} from './ui';
 
-import {toggleDrawerOpen} from '../../entities/drawer/store';
-import BasicModal from '../../shared/components/modal';
-import CreateTodoForm from '../../pages/todos/components/createTodoForm';
+import {toggleDrawerOpen} from '@entities/drawer/store';
+import BasicModal from '@shared/components/modal';
+import CreateTodoForm from '@pages/todos/components/createTodoForm';
 import {Link} from 'react-router-dom';
-import AddButtonIcon from '../../shared/components/AddIcon';
+import AddButtonIcon from '@shared/components/AddIcon';
 
 
 export default function Header() {

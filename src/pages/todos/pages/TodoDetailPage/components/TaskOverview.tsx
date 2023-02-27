@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, Typography} from '@mui/material';
-import {TodoLabelStyles} from '../../../../../entities/todos/styles';
+import {TodoLabelStyles} from '@entities/todos/styles';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 
 interface Props {

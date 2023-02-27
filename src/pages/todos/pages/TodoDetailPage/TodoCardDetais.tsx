@@ -2,9 +2,9 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootReducer} from '../../../../app/store';
 import {useParams} from 'react-router-dom';
-import BasicModal from '../../../../shared/components/modal';
+import BasicModal from '@shared/components/modal';
 import DetailsCard from './DetailsCard';
-import {toggleTaskComplete} from '../../../../entities/todos/store/todo';
+import {toggleTaskComplete} from '@entities/todos/store/todo';
 
 const TodoDetailPage = () => {
   const {id} = useParams()
