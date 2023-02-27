@@ -1,6 +1,6 @@
 import dayjs, {Dayjs} from 'dayjs';
 
-export const dateFormat = 'MMM D'
+export const dateFormat = 'MMM D';
 
 export const overdueDate = (date: string): boolean => {
   return dayjs(date).isBefore(dayjs().format(dateFormat));
@@ -9,3 +9,5 @@ export const overdueDate = (date: string): boolean => {
 export const dateToFormat = (date: Dayjs) => {
   return date.format(dateFormat)
 }
+
+export const TODAY = dateToFormat(dayjs())

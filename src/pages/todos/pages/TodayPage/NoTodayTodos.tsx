@@ -1,18 +1,6 @@
 import React from 'react';
 import {Box, Typography} from '@mui/material';
-import AddButtonIcon from '../../../../shared/components/AddIcon';
-
-const boxStyles = {
-  'display': 'flex',
-  'alignItems': 'center',
-  'marginTop': '20px',
-  'color': '#515761',
-  'cursor': 'pointer',
-
-  '&:hover': {
-    color: '#1976d2',
-  },
-};
+import AddTaskButton from '../../components/DueDateComponents/AddTaskButton';
 
 interface Props {
     onClick: () => void
@@ -28,12 +16,7 @@ const NoTodayTodos = ({onClick}: Props) => {
         <Typography fontWeight={500} color={'#515761'} fontSize={'20px'}>
                         You`re all done for today! Enjoy the rest of your day
         </Typography>
-        <Box sx = {boxStyles} onClick={onClick}>
-          <AddButtonIcon sx={{color: '#1976d2'}}/>
-          <Typography ml={'10px'} color={'inherit'} fontSize={'15px'} fontWeight={300}>
-                            Add task
-          </Typography>
-        </Box>
+        <AddTaskButton onCreate={onClick}/>
       </Box>
     </Box>
   );
