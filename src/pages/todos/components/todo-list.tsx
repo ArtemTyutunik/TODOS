@@ -5,7 +5,7 @@ import Todo from '../../../entities/todos/components/todo';
 import {ITodo} from '../../../shared/interfaces';
 import CreateTodoForm from './createTodoForm';
 import {TODAY} from '../../../shared/constants';
-import AddTaskButton from './DueDateComponents/AddTaskButton';
+import AddTaskButton from './AddTaskButton';
 
 interface Props {
     todos: ITodo[]

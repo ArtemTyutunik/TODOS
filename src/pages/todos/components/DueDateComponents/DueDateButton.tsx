@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import DropdownMenu from '../../../../shared/components/dropdownMenu';
 import {Box, Button, Divider} from '@mui/material';
-import Calendar from './Calendar';
+
 import DueDateMenuList from './DueDateMenu';
 import {IDate} from '../../../../shared/interfaces';
+import Calendar from './Calendar';
 
 const buttonsStyles = {
   color: '#7d7b74',

@@ -1,5 +1,5 @@
 import React from 'react';
-import AddButtonIcon from '../../../../shared/components/AddIcon';
+import AddButtonIcon from '../../../shared/components/AddIcon';
 import {Box, Typography} from '@mui/material';
 
 const boxStyles = {

@@ -3,12 +3,13 @@ import {useSelector} from 'react-redux';
 import {Box} from '@mui/material';
 
 import NoInboxTodos from './NoInboxTodos';
-import TodoList from '../../components/todo-list';
 import {RootReducer} from '../../../../app/store';
-import CreateTodoForm from '../../components/createTodoForm';
-import OverdueTodos from '../../components/OverdueTodos';
 import {overdueDate} from '../../../../shared/constants';
-import PageTitle from '../../components/PageTitle';
+import {
+  OverdueTodos,
+  CreateTodoForm,
+  TodoList,
+  PageTitle} from '../../components';
 
 
 const InboxTodosPage = () => {

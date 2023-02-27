@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, Typography} from '@mui/material';
-import AddTaskButton from '../../components/DueDateComponents/AddTaskButton';
+import AddTaskButton from '../../components/AddTaskButton';
 
 interface Props {
     onClick: () => void

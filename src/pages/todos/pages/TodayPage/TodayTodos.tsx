@@ -3,9 +3,8 @@ import {useState} from 'react';
 import {Box} from '@mui/material';
 
 import {RootReducer} from '../../../../app/store';
-import TodoList from '../../components/todo-list';
 import NoTodayTodos from './NoTodayTodos';
-import CreateTodoForm from '../../components/createTodoForm';
+import {CreateTodoForm, TodoList} from '../../components';
 import {TODAY} from '../../../../shared/constants';
 
 
