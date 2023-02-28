@@ -5,11 +5,11 @@ import {Box, Button, Divider, TextField} from '@mui/material';
 import {IBaseFormInputsValues} from '../interfaces/interfaces';
 import {IDate, ITodo} from '../../interfaces';
 import {taskNameValidation} from '../validation/validation';
-import DueDateButton from '../../../pages/todos/components/DueDateComponents/DueDateButton';
+import {DueDateButton} from '../../../pages/todos/components/';
 
 const formStyles = {
   border: '1px solid #eee',
-  padding: '0 5px 8px 5px',
+  padding: '10px 5px 8px 10px',
   borderRadius: '10px',
 };
 
@@ -27,6 +27,7 @@ interface Props {
   onClose: () => void,
   onSubmit: (data: IBaseFormInputsValues, date: string | null) => void,
   todo?: ITodo,
+  initialDate?: string,
   hideActions?: boolean
 }
 // if todo is not undefined it means that the field values will be the corresponding todo properties
@@ -35,13 +36,14 @@ const BaseTodoForm = ({
   onClose,
   onSubmit,
   todo,
+  initialDate,
   hideActions}: Props) => {
   const {control, handleSubmit, formState: {isValid}} = useForm<IBaseFormInputsValues>({defaultValues: {
     label: todo ? todo.label : '',
     description: todo ? todo.description : '',
   }});
 
-  const [todoDate, setTodoDate] = useState<IDate>(todo?.date!);
+  const [todoDate, setTodoDate] = useState<IDate>(initialDate || todo?.date!);
 
   const onPassDateToBaseForm = (date: IDate) => {
     setTodoDate(date);

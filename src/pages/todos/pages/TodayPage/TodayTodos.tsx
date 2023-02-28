@@ -1,18 +1,16 @@
 import {useSelector} from 'react-redux';
-import dayjs from 'dayjs';
+import {useState} from 'react';
 import {Box} from '@mui/material';
 
 import {RootReducer} from '../../../../app/store';
-import TodoList from '../../components/todo-list';
 import NoTodayTodos from './NoTodayTodos';
-import {useState} from 'react';
-import CreateTodoForm from '../../components/createTodoForm';
-import {dateFormat} from '../../../../shared/constants';
+import {CreateTodoForm, TodoList} from '../../components';
+import {TODAY} from '../../../../shared/constants';
 
 
 const TodayTodosPage = () => {
   const todos = useSelector((state: RootReducer) => state.todosReducer.todos);
-  const todayTodos = todos.filter((todo) => todo.date === dayjs().format(dateFormat));
+  const todayTodos = todos.filter((todo) => todo.date === TODAY);
 
   const [isOpenForm, setIsOpenForm] = useState(false);
 
@@ -26,15 +24,18 @@ const TodayTodosPage = () => {
 
   if (isOpenForm) {
     return <Box mt={'20px'}>
-      <CreateTodoForm onClose={onClose}/>
+      <CreateTodoForm onClose={onClose} initialDate={TODAY}/>
     </Box>;
   }
 
   return (
     <Box paddingTop={'30px'} height={'100%'}>
       {
-                todayTodos.length ? <TodoList todos={todayTodos}/> :
-                    <NoTodayTodos onClick={onOpenForm}/>
+        todayTodos.length ? (
+            <TodoList todos={todayTodos}/>
+        ) : (
+            <NoTodayTodos onClick={onOpenForm}/>
+        )
       }
     </Box>
   );

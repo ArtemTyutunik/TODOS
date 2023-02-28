@@ -12,7 +12,7 @@ import {CustomSearch, SearchIconWrapper, StyledInputBase, UserSettingsMenu} from
 
 import {toggleDrawerOpen} from '../../entities/drawer/store';
 import BasicModal from '../../shared/components/modal';
-import CreateTodoForm from '../../pages/todos/components/createTodoForm';
+import {CreateTodoForm} from '../../pages/todos/components';
 import {Link} from 'react-router-dom';
 import AddButtonIcon from '../../shared/components/AddIcon';
 

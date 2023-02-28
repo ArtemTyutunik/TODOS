@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
-import {Box, Typography} from '@mui/material';
+import {Box} from '@mui/material';
 
 import NoInboxTodos from './NoInboxTodos';
-import TodoList from '../../components/todo-list';
 import {RootReducer} from '../../../../app/store';
-import CreateTodoForm from '../../components/createTodoForm';
-import OverdueTodos from '../../components/OverdueTodos';
 import {overdueDate} from '../../../../shared/constants';
+import {
+  OverdueTodos,
+  CreateTodoForm,
+  TodoList,
+  PageTitle} from '../../components';
 
 
 const InboxTodosPage = () => {
@@ -37,9 +39,9 @@ const InboxTodosPage = () => {
       {
                 todos.length ? (
                         <Box>
-                          <Typography fontSize={'18px'} fontWeight={'700'} color={'#202020'}>
+                          <PageTitle>
                                 Inbox
-                          </Typography>
+                          </PageTitle>
                           <TodoList todos={inboxTodos}/>
                         </Box>
                 ) : (
