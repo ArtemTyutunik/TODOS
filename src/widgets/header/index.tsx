@@ -1,20 +1,18 @@
-
+import {useState} from 'react';
+import {useDispatch} from 'react-redux';
 import {Box, AppBar, Toolbar, IconButton, Typography, Container, Tooltip} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import HomeIcon from '@mui/icons-material/Home';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-
-import {useState} from 'react';
-import {useDispatch} from 'react-redux';
 import {CustomSearch, SearchIconWrapper, StyledInputBase, UserSettingsMenu} from './ui';
 
-import {toggleDrawerOpen} from '../../entities/drawer/store';
-import BasicModal from '../../shared/components/modal';
-import {CreateTodoForm} from '../../pages/todos/components';
+import {toggleDrawerOpen} from '@entities/drawer/store';
+import BasicModal from '@shared/components/modal';
+import {CreateTodoForm} from '@pages/todos/components/';
 import {Link} from 'react-router-dom';
-import AddButtonIcon from '../../shared/components/AddIcon';
+import AddButtonIcon from '@shared/components/AddIcon';
 
 
 export default function Header() {

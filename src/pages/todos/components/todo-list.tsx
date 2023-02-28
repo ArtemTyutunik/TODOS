@@ -1,10 +1,10 @@
 import React, {memo, useState} from 'react';
 import {Box} from '@mui/material';
 
-import Todo from '../../../entities/todos/components/todo';
-import {ITodo} from '../../../shared/interfaces';
+import Todo from '@entities/todos/components/todo';
+import {ITodo} from '@shared/interfaces';
 import CreateTodoForm from './createTodoForm';
-import {TODAY} from '../../../shared/constants';
+import {TODAY} from '@shared/constants';
 import AddTaskButton from './AddTaskButton';
 
 interface Props {

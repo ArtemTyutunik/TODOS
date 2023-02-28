@@ -9,6 +9,10 @@ import {addNewTask} from '@entities/todos/store/todo';
 import {IBaseFormInputsValues} from '@shared/forms/interfaces/interfaces';
 import {IDate} from '@shared/interfaces';
 
+interface Props {
+    onClose: () => void
+}
+
 const TodoCreatedNotification = ({onNavigate}: {onNavigate: () => void}) => {
   return (
     <Box display={'flex'} alignItems={'center'}>

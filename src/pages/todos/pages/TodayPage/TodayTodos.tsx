@@ -5,7 +5,7 @@ import {Box} from '@mui/material';
 import {RootReducer} from '../../../../app/store';
 import NoTodayTodos from './NoTodayTodos';
 import {CreateTodoForm, TodoList} from '../../components';
-import {TODAY} from '../../../../shared/constants';
+import {TODAY} from '@shared/constants';
 
 
 const TodayTodosPage = () => {
