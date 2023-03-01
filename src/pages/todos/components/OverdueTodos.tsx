@@ -1,5 +1,5 @@
 import React from 'react';
-import {ITodo} from '../../../shared/interfaces';
+import {ITodo} from '@shared/interfaces';
 import TodoList from './todo-list';
 import {Box, Typography} from '@mui/material';
 

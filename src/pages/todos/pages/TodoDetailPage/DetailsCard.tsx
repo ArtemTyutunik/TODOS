@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Box, Grid} from '@mui/material';
-import {ITodo} from '../../../../shared/interfaces';
-import CheckboxComponent from '../../../../entities/todos/components/Checkbox';
-import {EditTodoForm} from '../../components';
+import {ITodo} from '@shared/interfaces';
+import CheckboxComponent from '@entities/todos/components/Checkbox';
+import {EditTodoForm} from '../../components/';
 import TaskOverview from './components/TaskOverview';
 
 interface Props {

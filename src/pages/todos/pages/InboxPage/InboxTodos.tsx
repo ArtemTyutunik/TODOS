@@ -3,8 +3,8 @@ import {useSelector} from 'react-redux';
 import {Box} from '@mui/material';
 
 import NoInboxTodos from './NoInboxTodos';
-import {RootReducer} from '../../../../app/store';
-import {overdueDate} from '../../../../shared/constants';
+import {RootReducer} from '@app/store';
+import {overdueDate} from '@shared/constants';
 import {
   OverdueTodos,
   CreateTodoForm,

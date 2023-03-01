@@ -1,5 +1,5 @@
 import {useSelector} from 'react-redux';
-import {RootReducer} from '../../../app/store';
+import {RootReducer} from '@app/store';
 import {Alert} from '@mui/material';
 
 

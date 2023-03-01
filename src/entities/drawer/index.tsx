@@ -7,7 +7,7 @@ import TodayIcon from '@mui/icons-material/Today';
 import {default as ParamsIcon} from '@mui/icons-material/Apps';
 import {styled} from '@mui/material/styles';
 import {useNavigate} from 'react-router-dom';
-import {RootReducer} from '../../app/store';
+import {RootReducer} from '@app/store';
 
 import './active.css';
 

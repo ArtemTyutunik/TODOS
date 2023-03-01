@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import DropdownMenu from '../../../../shared/components/dropdownMenu';
+import DropdownMenu from '@shared/components/dropdownMenu';
 import {Box, Button, Divider} from '@mui/material';
-
-import DueDateMenuList from './DueDateMenu';
-import {IDate} from '../../../../shared/interfaces';
 import Calendar from './Calendar';
+import DueDateMenuList from './DueDateMenu';
+import {IDate} from '@shared/interfaces';
+
 
 const buttonsStyles = {
   color: '#7d7b74',
@@ -36,7 +36,6 @@ const DueDateButton = ({date, onPassDateToBaseForm}: Props) => {
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
-
   return (
     <>
       <Button variant={'outlined'} sx={buttonsStyles} onClick={handleOpenMenu}>

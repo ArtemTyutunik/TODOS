@@ -4,10 +4,14 @@ import {toast} from 'react-toastify';
 import {Link as RouterLink, useNavigate} from 'react-router-dom';
 import {Box, Button, Typography, Link as MuiLink} from '@mui/material';
 
-import BaseTodoForm from '../../../shared/forms/ui/baseTodoForm';
-import {addNewTask} from '../../../entities/todos/store/todo';
-import {IBaseFormInputsValues} from '../../../shared/forms/interfaces/interfaces';
-import {IDate} from '../../../shared/interfaces';
+import BaseTodoForm from '@shared/forms/ui/baseTodoForm';
+import {addNewTask} from '@entities/todos/store/todo';
+import {IBaseFormInputsValues} from '@shared/forms/interfaces/interfaces';
+import {IDate} from '@shared/interfaces';
+
+interface Props {
+    onClose: () => void
+}
 
 const TodoCreatedNotification = ({onNavigate}: {onNavigate: () => void}) => {
   return (

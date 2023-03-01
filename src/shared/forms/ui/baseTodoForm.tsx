@@ -5,7 +5,7 @@ import {Box, Button, Divider, TextField} from '@mui/material';
 import {IBaseFormInputsValues} from '../interfaces/interfaces';
 import {IDate, ITodo} from '../../interfaces';
 import {taskNameValidation} from '../validation/validation';
-import {DueDateButton} from '../../../pages/todos/components/';
+import {DueDateButton} from '@pages/todos/components/';
 
 const formStyles = {
   border: '1px solid #eee',

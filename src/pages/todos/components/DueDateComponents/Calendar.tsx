@@ -6,8 +6,8 @@ import {TextField} from '@mui/material';
 import {LocalizationProvider} from '@mui/x-date-pickers';
 
 import './calendar.css';
-import {IDate} from '../../../../shared/interfaces';
-import {dateFormat} from '../../../../shared/constants';
+import {IDate} from '@shared/interfaces';
+import {dateFormat} from '@shared/constants';
 
 interface Props {
     onSetDate: (date: IDate) => void,

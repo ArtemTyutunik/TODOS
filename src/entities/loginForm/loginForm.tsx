@@ -3,8 +3,8 @@ import {Controller, useForm, useFormState} from 'react-hook-form';
 import {Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography} from '@mui/material';
 import {Link as RouterLink} from 'react-router-dom';
 
-import {loginValidation, passwordValidation} from '../../shared/forms/validation/validation';
-import {IFormInputs, IInputsProps} from '../../shared/forms/interfaces/interfaces';
+import {loginValidation, passwordValidation} from '@shared/forms/validation/validation';
+import {IFormInputs, IInputsProps} from '@shared/forms/interfaces/interfaces';
 import ErrorMessage from './ui/ErrorMessage';
 
 
