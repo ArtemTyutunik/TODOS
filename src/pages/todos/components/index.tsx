@@ -1,5 +1,4 @@
 import CreateTodoForm from './createTodoForm';
-import DueDateButton from './DueDateComponents';
 import EditTodoForm from './EditTodoForm';
 import OverdueTodos from './OverdueTodos';
 import PageTitle from './PageTitle';
@@ -11,5 +10,4 @@ export {
   TodoList,
   CreateTodoForm,
   EditTodoForm,
-  DueDateButton,
 }

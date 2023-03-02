@@ -8,4 +8,4 @@ export interface ITodo {
     date?: IDate
 }
 
-export type IDate = string | null
+export type IDate = string | undefined
