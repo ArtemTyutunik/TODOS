@@ -4,15 +4,18 @@ import {ITodo} from '@shared/interfaces';
 import CheckboxComponent from '@entities/todos/components/Checkbox';
 import {EditTodoForm} from '../../components/';
 import TaskOverview from './components/TaskOverview';
+import DetailActionPanelItem from '@pages/todos/pages/TodoDetailPage/components/DetailsActionsPanelItem';
+import DueDateButton from '@shared/components/DueDateComponents';
+import {useTodoDate} from '@entities/todos/hooks';
 
 interface Props {
   todo: ITodo,
   onComplete: (e: React.SyntheticEvent) => void
 }
 const DetailsCard = ({todo, onComplete}: Props) => {
-  const {label, description} = todo
+  const {label, description, date} = todo
   const [isEditDetailsOpen, setIsEditDetailsOpen] = useState(false)
-
+  const [todoDate, setTodoDate] = useTodoDate(date, todo.id)
   const onClose = () => {
     setIsEditDetailsOpen(false)
   }
@@ -45,7 +48,10 @@ const DetailsCard = ({todo, onComplete}: Props) => {
           </Box>
         </Grid>
         <Grid item md={4}>
-          <Box width={'100%'} height={'100%'} sx={{backgroundColor: '#fafafa'}}>
+          <Box width={'100%'} height={'100%'} sx={{backgroundColor: '#fafafa'}} padding={'10px 25px'}>
+            <DetailActionPanelItem label={'Due date'}>
+              <DueDateButton date={todoDate} variant={'Standard'} onPassDateToBaseForm={setTodoDate}/>
+            </DetailActionPanelItem>
           </Box>
         </Grid>
       </Grid>
