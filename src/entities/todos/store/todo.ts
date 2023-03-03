@@ -41,9 +41,21 @@ const todosSlice = createSlice({
       const task = findTaskById(state, action.payload.id);
             task!.priority = action.payload.priority;
     },
+    dispatchNewDate: (state, action) => {
+      const task = findTaskById(state, action.payload.id);
+      if (task) {
+        task.date = action.payload.newDate
+      }
+    },
   },
 });
 
 export const todosReducer = todosSlice.reducer;
 
-export const {addNewTask, toggleTaskComplete, editTask, deleteTask, createDuplicate, setPriority} = todosSlice.actions;
+export const {addNewTask,
+  toggleTaskComplete,
+  editTask,
+  deleteTask,
+  createDuplicate,
+  setPriority,
+  dispatchNewDate} = todosSlice.actions;

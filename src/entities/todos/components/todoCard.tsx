@@ -1,14 +1,13 @@
 import React from 'react';
+import {useNavigate} from 'react-router-dom';
 import {Box, Divider, IconButton, Tooltip, Typography} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import EventIcon from '@mui/icons-material/Event';
 
 import MoreActionsMenu from './moreActionMenu';
 import {ITodo} from '@shared/interfaces';
 import {TodoContainerStyles, TodoDescriptionStyles, TodoFlexboxStyles, TodoLabelStyles} from '../styles';
-import {overdueDate} from '@shared/constants';
-import {useNavigate} from 'react-router-dom';
 import CheckboxComponent from './Checkbox';
+import DueDateButton from '@shared/components/DueDateComponents';
 
 interface TodoCardProps {
     todo: ITodo,
@@ -30,7 +29,6 @@ const TodoCard = ({
   const {label, description, date, id} = todo;
   const navigate = useNavigate()
 
-  const isOverdue = overdueDate(date!);
   return (
     <Box mb={'25px'} onClick={() => navigate(`task/${id}`)}>
       <Box sx = {TodoContainerStyles}>
@@ -48,11 +46,8 @@ const TodoCard = ({
               {description}
             </Typography>
             {
-              date && <Box sx = {TodoFlexboxStyles} paddingLeft={'42px'} mt={'5px'} color={isOverdue ? '#c40202' : '#808080'}>
-                <EventIcon sx={{color: 'inherit', fontSize: '13px'}}/>
-                <Typography sx={{...TodoDescriptionStyles, marginLeft: '10px', paddingLeft: 0, fontSize: '13px', color: 'inherit'}}>
-                  {date}
-                </Typography>
+              date && <Box ml={'46px'}>
+                <DueDateButton date={date} variant={'Standard'}/>
               </Box>
             }
           </Box>

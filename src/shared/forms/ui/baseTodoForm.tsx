@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {Controller, useForm} from 'react-hook-form';
 import {Box, Button, Divider, TextField} from '@mui/material';
 import {IBaseFormInputsValues} from '../interfaces/interfaces';
 import {IDate, ITodo} from '../../interfaces';
 import {taskNameValidation} from '../validation/validation';
-import {DueDateButton} from '@pages/todos/components/';
+import DueDateButton from '@shared/components/DueDateComponents';
+import {useTodoDate} from '@entities/todos/hooks';
 
 const formStyles = {
   border: '1px solid #eee',
@@ -25,7 +26,7 @@ const CancelButtonStyles = {
 
 interface Props {
   onClose: () => void,
-  onSubmit: (data: IBaseFormInputsValues, date: string | null) => void,
+  onSubmit: (data: IBaseFormInputsValues, date: IDate) => void,
   todo?: ITodo,
   initialDate?: string,
   hideActions?: boolean
@@ -43,8 +44,7 @@ const BaseTodoForm = ({
     description: todo ? todo.description : '',
   }});
 
-  const [todoDate, setTodoDate] = useState<IDate>(initialDate || todo?.date!);
-
+  const [todoDate, setTodoDate] = useTodoDate(initialDate || todo?.date!, todo?.id);
   const onPassDateToBaseForm = (date: IDate) => {
     setTodoDate(date);
   };

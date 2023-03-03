@@ -32,7 +32,7 @@ const TodayTodosPage = () => {
     <Box paddingTop={'30px'} height={'100%'}>
       {
         todayTodos.length ? (
-            <TodoList todos={todayTodos}/>
+            <TodoList todos={todayTodos} initialDate={TODAY}/>
         ) : (
             <NoTodayTodos onClick={onOpenForm}/>
         )

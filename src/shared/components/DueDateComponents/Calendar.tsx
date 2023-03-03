@@ -14,7 +14,7 @@ interface Props {
     initialDate: IDate
 }
 
-const Calendar = ({onSetDate, initialDate = null}: Props) => {
+const Calendar = ({onSetDate, initialDate}: Props) => {
   const currentYear = dayjs().year();
   const correctDate = initialDate && currentYear + initialDate;
   const [value, setValue] = React.useState<Dayjs | null>(dayjs(correctDate));
