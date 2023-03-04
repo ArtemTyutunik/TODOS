@@ -7,9 +7,9 @@ import {
   Typography,
 } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import FlagIcon from '@mui/icons-material/Flag';
 import QueueIcon from '@mui/icons-material/Queue';
 import DeleteIcon from '@mui/icons-material/Delete';
+import {PrioritiesFlags} from '@shared/components/PrioritiesFlags';
 
 interface MoreActionsMenuProps {
     onDelete: (e: React.SyntheticEvent) => void,
@@ -17,12 +17,6 @@ interface MoreActionsMenuProps {
     onSetPriority: (e: React.SyntheticEvent, priority: string) => void
 }
 
-const Priorities = [
-  {value: '1', Icon: () => <FlagIcon sx={{color: '#cc2a25'}}/>},
-  {value: '2', Icon: () => <FlagIcon sx={{color: '#ff824d'}}/>},
-  {value: '3', Icon: () => <FlagIcon sx={{color: '#1531d1'}}/>},
-  {value: '4', Icon: () => <FlagIcon sx={{color: '#babbc2'}}/>},
-];
 
 const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenuProps) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -50,7 +44,7 @@ const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenu
           <Box m={'10px 0'}>
             <Typography>Set priority</Typography>
             <Box display={'flex'}>
-              {Priorities.map((Priority) => <Box mr={'10px'} key={Priority.value}>
+              {PrioritiesFlags.map((Priority) => <Box mr={'10px'} key={Priority.value}>
                 <IconButton onClick={(event) => onSetPriority(event, Priority.value)}>
                   <Priority.Icon/>
                 </IconButton>

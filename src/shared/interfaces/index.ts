@@ -3,9 +3,10 @@ export interface ITodo {
     id: number,
     description?: string,
     done?: boolean,
-    priority?: '1' | '2' | '3'| '4'
+    priority?: Priority,
     labels?: [],
     date?: IDate
 }
 
+export type Priority = '1' | '2' | '3'| '4'
 export type IDate = string | undefined
