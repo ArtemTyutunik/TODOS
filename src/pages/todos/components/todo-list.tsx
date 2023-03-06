@@ -32,7 +32,7 @@ const TodoList = memo(({todos, initialDate}: Props) => {
       )
 
   return (
-    <Box mt={'20px'}>
+    <Box mt={'20px'} paddingBottom={'20px'}>
       {
         todos.map((todo: ITodo) => <Todo todo = {todo} key={todo.id}/>)
       }
