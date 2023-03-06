@@ -45,7 +45,7 @@ const Drawer = () => {
     position: 'static',
     display: 'flex',
     width: '250px',
-    height: 'calc(100vh - 64px)',
+    height: '100%',
     background: '#f5f5f5',
     transform: isOpenDrawer ? 'translateX(0%)' : 'translateX(-100%)',
     transition: 'transform .4s linear',
