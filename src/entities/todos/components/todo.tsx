@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch} from 'react-redux';
 
 import {createDuplicate, deleteTask, setPriority, toggleTaskComplete} from '../store/todo';
 import {EditTodoForm} from '@pages/todos/components';
 import {ITodo} from '@shared/interfaces';
 import TodoCard from './todoCard';
+import useVisable from '@shared/hooks/useVisable';
 
 interface Props {
     todo: ITodo
@@ -13,11 +14,8 @@ interface Props {
 const Todo = ({todo}: Props) => {
   const {id} = todo;
   const dispatch = useDispatch();
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, openEditing, closeEditing] = useVisable(false);
 
-  const onCloseEditForm = () => {
-    setIsEditing(false);
-  };
 
   const onComplete = (e: React.SyntheticEvent) => {
     e.stopPropagation();
@@ -26,7 +24,7 @@ const Todo = ({todo}: Props) => {
 
   const onEdit = (e: React.SyntheticEvent) => {
     e.stopPropagation()
-    setIsEditing(true);
+    openEditing()
   };
 
   const onDeleteAction = (e: React.SyntheticEvent) => {
@@ -42,7 +40,7 @@ const Todo = ({todo}: Props) => {
     dispatch(setPriority({id, priority}));
   };
 
-  if (isEditing) return <EditTodoForm onClose={onCloseEditForm} todo={todo}/>;
+  if (isEditing) return <EditTodoForm onClose={closeEditing} todo={todo}/>;
 
   return <TodoCard
     todo={todo}

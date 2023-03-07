@@ -7,8 +7,8 @@ const buttonsStyles = {
   border: '1px solid #ddd',
   boxShadow: 'none',
   textTransform: 'none',
-  padding: '0 8px',
   fontSize: '11px',
+  padding: 0,
 };
 
 interface Props {

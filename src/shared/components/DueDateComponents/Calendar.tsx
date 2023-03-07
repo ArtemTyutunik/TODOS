@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState} from 'react';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, {Dayjs} from 'dayjs';
 import {StaticDatePicker} from '@mui/x-date-pickers/StaticDatePicker';
@@ -17,7 +17,7 @@ interface Props {
 const Calendar = ({onSetDate, initialDate}: Props) => {
   const currentYear = dayjs().year();
   const correctDate = initialDate && currentYear + initialDate;
-  const [value, setValue] = React.useState<Dayjs | null>(dayjs(correctDate));
+  const [value, setValue] = useState<Dayjs | null>(dayjs(correctDate));
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>

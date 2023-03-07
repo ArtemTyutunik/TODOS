@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Box, Grid, SelectChangeEvent} from '@mui/material';
 import {ITodo, Priority} from '@shared/interfaces';
 import CheckboxComponent from '@entities/todos/components/Checkbox';
@@ -11,6 +11,7 @@ import PriorityButton from '@shared/components/Priority/PriorityButton';
 import useSelectPriority from '@shared/hooks/useSelectPriority';
 import {useDispatch} from 'react-redux';
 import {setPriority} from '@entities/todos/store/todo';
+import useVisable from '@shared/hooks/useVisable';
 
 interface Props {
   todo: ITodo,
@@ -20,21 +21,15 @@ interface Props {
 const DetailsCard = ({todo, onComplete}: Props) => {
   const {label, description, date, id} = todo
   const dispatch = useDispatch()
-  const [isEditDetailsOpen, setIsEditDetailsOpen] = useState(false)
+  const [isEditDetailsOpen, openEditDetails, closeEditDetails] = useVisable(false)
   const [todoDate, setTodoDate] = useTodoDate(date, id)
   const [priority, onSelected] = useSelectPriority(todo.priority)
-
-  const onClose = () => {
-    setIsEditDetailsOpen(false)
-  }
 
   const onPriorityHandler = (event: SelectChangeEvent<Priority>) => {
     const priority = event.target.value
     onSelected(event)
     dispatch(setPriority({id, priority}))
   }
-
-  const onOpenEditForm = () => setIsEditDetailsOpen(true)
 
   return (
     <Box bgcolor={'#fff'} minWidth={'700px'}>
@@ -48,7 +43,7 @@ const DetailsCard = ({todo, onComplete}: Props) => {
               isEditDetailsOpen ? (
                   <Box width={'100%'}>
                     <EditTodoForm
-                      onClose={onClose}
+                      onClose={closeEditDetails}
                       todo={todo}
                       hideActions/>
                   </Box>
@@ -56,7 +51,7 @@ const DetailsCard = ({todo, onComplete}: Props) => {
                   <TaskOverview
                     label={label}
                     description={description}
-                    onOpenForm={onOpenEditForm}/>
+                    onOpenForm={openEditDetails}/>
               )
             }
           </Box>
