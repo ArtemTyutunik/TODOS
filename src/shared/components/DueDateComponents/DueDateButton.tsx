@@ -1,24 +1,14 @@
 import React, {useState} from 'react';
 import DropdownMenu from '@shared/components/dropdownMenu';
-import {Box, Button, Divider, Typography} from '@mui/material';
+import {Box, Divider, Typography} from '@mui/material';
 import Calendar from './Calendar';
 import DueDateMenuList from './DueDateMenu';
 import {IDate} from '@shared/interfaces';
 import {TodoDescriptionStyles, TodoFlexboxStyles} from '@entities/todos/styles';
 import EventIcon from '@mui/icons-material/Event';
 import {overdueDate} from '@shared/constants';
+import ActionButton from '@shared/components/ActionButton';
 
-
-const buttonsStyles = {
-  maxWidth: '70px',
-  color: '#7d7b74',
-  backgroundColor: '#f5f5f5',
-  border: '1px solid #ddd',
-  boxShadow: 'none',
-  textTransform: 'none',
-  padding: '0 8px',
-  fontSize: '11px',
-};
 type DueDateButtonType = 'Standard' | 'Outline';
 
 interface Props {
@@ -47,11 +37,11 @@ const DueDateButton = ({date, onPassDateToBaseForm, variant = 'Outline'}: Props)
   return (
     <>
       { variant === 'Outline' ? (
-          <Button variant={'outlined'} sx={buttonsStyles} onClick={handleOpenMenu}>
+          <ActionButton onClickHandler={handleOpenMenu}>
             {
               date || 'Due date'
             }
-          </Button>
+          </ActionButton>
       ) : (
           <Box sx = {{...TodoFlexboxStyles, cursor: 'pointer'}} mt={'5px'} color={isOverdue ? '#c40202' : '#808080'} onClick={handleOpenMenu}>
             <EventIcon sx={{color: 'inherit', fontSize: '13px'}}/>

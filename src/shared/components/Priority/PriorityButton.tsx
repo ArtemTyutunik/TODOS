@@ -1,18 +1,8 @@
 import React from 'react';
-import {Button, SelectChangeEvent} from '@mui/material';
+import {SelectChangeEvent} from '@mui/material';
 import {Priority} from '@shared/interfaces';
 import PrioritySelect from '@shared/components/Priority/PrioritySelector';
-
-
-const buttonsStyles = {
-  color: '#7d7b74',
-  backgroundColor: '#f5f5f5',
-  border: '1px solid #ddd',
-  boxShadow: 'none',
-  textTransform: 'none',
-  fontSize: '11px',
-  padding: 0,
-};
+import ActionButton from '@shared/components/ActionButton';
 
 interface Props {
   initialPriority?: Priority | string,
@@ -22,9 +12,9 @@ interface Props {
 const PriorityButton = ({initialPriority = '4', changeHandler, variant}: Props) => {
   return (
       variant === 'standard' ? (
-        <Button sx={buttonsStyles} variant={'outlined'}>
+        <ActionButton>
           <PrioritySelect initialPriority={initialPriority} changeHandler={changeHandler}/>
-        </Button>
+        </ActionButton>
       ) : (
             <PrioritySelect initialPriority={initialPriority} changeHandler={changeHandler}/>
       )
