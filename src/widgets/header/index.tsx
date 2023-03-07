@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {Box, AppBar, Toolbar, IconButton, Typography, Container, Tooltip} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -13,19 +12,12 @@ import BasicModal from '@shared/components/modal';
 import {CreateTodoForm} from '@pages/todos/components/';
 import {Link} from 'react-router-dom';
 import AddButtonIcon from '@shared/components/AddIcon';
+import useVisable from '@shared/hooks/useVisable';
 
 
 export default function Header() {
   const dispatch = useDispatch();
-  const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false);
-
-  const onClose = () => {
-    setIsAddTaskModalOpen(false);
-  };
-
-  const modalOnCloseHandler = () => {
-    setIsAddTaskModalOpen(false);
-  };
+  const [isAddTaskModalOpen, openAddTaskModalOpen, closeAddTaskModalOpen] = useVisable(false);
 
   return (
     <Box sx={{flexGrow: 1}} position={'relative'}>
@@ -79,15 +71,15 @@ export default function Header() {
 
             <Box sx={{display: {xs: 'none', md: 'flex'}, position: 'relative'}}>
               <Tooltip title={'add todo'}>
-                <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={() => setIsAddTaskModalOpen(true)}>
+                <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={openAddTaskModalOpen}>
                   <AddButtonIcon color={'inherit'}/>
                 </IconButton>
               </Tooltip>
 
               {/* modal window to add a new task*/}
               <BasicModal open={isAddTaskModalOpen}
-                onClose={modalOnCloseHandler}>
-                <CreateTodoForm onClose={onClose}/>
+                onClose={closeAddTaskModalOpen}>
+                <CreateTodoForm onClose={closeAddTaskModalOpen}/>
               </BasicModal>
 
               <Tooltip title={'Your progress'}>

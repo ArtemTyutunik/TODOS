@@ -1,10 +1,11 @@
-import React, {memo, useState} from 'react';
+import React, {memo} from 'react';
 import {Box} from '@mui/material';
 
 import Todo from '@entities/todos/components/todo';
 import {IDate, ITodo} from '@shared/interfaces';
 import CreateTodoForm from './createTodoForm';
 import AddTaskButton from './AddTaskButton';
+import useVisable from '@shared/hooks/useVisable';
 
 interface Props {
     todos: ITodo[],
@@ -13,22 +14,14 @@ interface Props {
 
 // eslint-disable-next-line react/display-name
 const TodoList = memo(({todos, initialDate}: Props) => {
-  const [isOpenForm, setIsOpenForm] = useState(false);
-
-  const onClose = () => {
-    setIsOpenForm(false);
-  };
-
-  const onOpenForm = () => {
-    setIsOpenForm(true);
-  };
+  const [isOpenForm, openForm, closeForm] = useVisable(false);
 
   const form = isOpenForm ? (
           <Box mt={'20px'}>
-            <CreateTodoForm onClose={onClose} initialDate={initialDate}/>
+            <CreateTodoForm onClose={closeForm} initialDate={initialDate}/>
           </Box>
       ) : (
-        <AddTaskButton onCreate={onOpenForm}/>
+        <AddTaskButton onCreate={openForm}/>
       )
 
   return (

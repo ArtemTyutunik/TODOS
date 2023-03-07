@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useSelector} from 'react-redux';
 import {Box} from '@mui/material';
 
@@ -10,23 +10,16 @@ import {
   CreateTodoForm,
   TodoList,
   PageTitle} from '../../components';
+import useVisable from '@shared/hooks/useVisable';
 
 
 const InboxTodosPage = () => {
   const todos = useSelector((state: RootReducer) => state.todosReducer.todos);
-  const [isOpenForm, setIsOpenForm] = useState(false);
-
-  const onClose = () => {
-    setIsOpenForm(false);
-  };
-
-  const onOpenForm = () => {
-    setIsOpenForm(true);
-  };
+  const [isOpenForm, openForm, closeForm] = useVisable(false);
 
   if (isOpenForm) {
     return <Box mt={'20px'}>
-      <CreateTodoForm onClose={onClose}/>
+      <CreateTodoForm onClose={closeForm}/>
     </Box>;
   }
 
@@ -45,7 +38,7 @@ const InboxTodosPage = () => {
                           <TodoList todos={inboxTodos}/>
                         </Box>
                 ) : (
-                    <NoInboxTodos onClick={onOpenForm}/>
+                    <NoInboxTodos onClick={openForm}/>
                 )
       }
 
