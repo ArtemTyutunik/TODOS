@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import {Avatar, Box, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip, Typography} from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -9,7 +10,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootReducer} from '@app/store';
 import {logOutUser} from '@pages/authorization/store';
 import DropdownMenu from '@shared/components/dropdownMenu';
-import {useNavigate} from 'react-router-dom';
 
 type menuItem = {
     label: string,
@@ -23,7 +23,7 @@ const ListItemButtonStyles = {
 
 
 export default function UserSettingsMenu() {
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const {user} = useSelector((state: RootReducer) => state.userReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -48,7 +48,6 @@ export default function UserSettingsMenu() {
       onClick: () => {
         dispatch(logOutUser());
         localStorage.removeItem('user');
-        localStorage.removeItem('viaLogin');
         navigate('/');
       },
     }];
@@ -60,8 +59,6 @@ export default function UserSettingsMenu() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  const email = user.user ? user.user.email : user.email;
 
   return (
     <>
@@ -76,7 +73,7 @@ export default function UserSettingsMenu() {
           <AccountCircle/>
         </IconButton>
       </Tooltip>
-      <DropdownMenu anchorEl={anchorElUser} handleClose={() => handleCloseUserMenu()}>
+      <DropdownMenu anchorEl={anchorElUser} handleClose={handleCloseUserMenu}>
         <ListItem sx = {{padding: 0}}>
           <Box width={'auto'}
             display={'flex'}
@@ -88,14 +85,14 @@ export default function UserSettingsMenu() {
                 color: '#48833f',
                 marginRight: '30px',
               }}>
-                                       A
+                 A
               </Avatar>
               <Box>
                 <Typography fontWeight={'bold'}>
-                  {email}
+                  {user.user.email}
                 </Typography>
                 <Typography>
-                  {email.replace('@gmail.com', '')}
+                  {user.user.email.replace('@gmail.com', '')}
                 </Typography>
               </Box>
             </ListItemButton>
