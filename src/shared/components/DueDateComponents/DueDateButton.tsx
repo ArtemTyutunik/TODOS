@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import DropdownMenu from '@shared/components/dropdownMenu';
 import {Box, Divider, Typography} from '@mui/material';
 import Calendar from './Calendar';
@@ -8,6 +8,7 @@ import {TodoDescriptionStyles, TodoFlexboxStyles} from '@entities/todos/styles';
 import EventIcon from '@mui/icons-material/Event';
 import {overdueDate} from '@shared/constants';
 import ActionButton from '@shared/components/ActionButton';
+import useAnchorElement from '@shared/hooks/useAnchorElement';
 
 type DueDateButtonType = 'Standard' | 'Outline';
 
@@ -18,19 +19,15 @@ interface Props {
 }
 
 const DueDateButton = ({date, onPassDateToBaseForm, variant = 'Outline'}: Props) => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [anchorElUser, addAnchorEl, removeAnchorEl] = useAnchorElement(null);
 
   const onSetDate = (date: IDate) => {
     onPassDateToBaseForm && onPassDateToBaseForm(date);
-    handleCloseMenu();
+    removeAnchorEl();
   };
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
+    addAnchorEl(event.currentTarget);
   };
 
   const isOverdue = overdueDate(date!);
@@ -54,7 +51,7 @@ const DueDateButton = ({date, onPassDateToBaseForm, variant = 'Outline'}: Props)
           )
       }
 
-      <DropdownMenu anchorEl={anchorEl} handleClose={handleCloseMenu}>
+      <DropdownMenu anchorEl={anchorElUser} handleClose={removeAnchorEl}>
         <Box display={'flex'} flexDirection={'column'} paddingTop={'5px'}>
           <DueDateMenuList onSetDate={onSetDate}/>
           <Divider/>

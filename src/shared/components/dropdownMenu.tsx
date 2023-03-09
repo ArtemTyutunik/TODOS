@@ -1,8 +1,9 @@
 import React from 'react';
 import {Menu} from '@mui/material';
+import {Anchor} from '@shared/interfaces';
 
 interface dropdownMenuProps{
-    anchorEl: null | HTMLElement,
+    anchorEl: Anchor,
     handleClose: (e: React.SyntheticEvent) => void,
     children: React.ReactNode
 }

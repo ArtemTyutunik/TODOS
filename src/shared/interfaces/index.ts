@@ -10,3 +10,4 @@ export interface ITodo {
 
 export type Priority = '1' | '2' | '3'| '4'
 export type IDate = string | undefined
+export type Anchor = null | HTMLElement

@@ -10,6 +10,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import QueueIcon from '@mui/icons-material/Queue';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {PrioritiesFlags} from '@shared/components/PrioritiesFlags';
+import useAnchorElement from '@shared/hooks/useAnchorElement';
 
 interface MoreActionsMenuProps {
     onDelete: (e: React.SyntheticEvent) => void,
@@ -19,16 +20,16 @@ interface MoreActionsMenuProps {
 
 
 const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenuProps) => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, addAnchorEl] = useAnchorElement(null);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation()
-    setAnchorEl(event.currentTarget);
+    addAnchorEl(event.currentTarget);
   };
 
   const handleCloseMenu = (e: React.SyntheticEvent) => {
     e.stopPropagation()
-    setAnchorEl(null);
+    addAnchorEl(null);
   };
 
   return (

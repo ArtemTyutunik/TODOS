@@ -1,15 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useNavigate} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 import {Avatar, Box, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip, Typography} from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import {useDispatch, useSelector} from 'react-redux';
 import {RootReducer} from '@app/store';
 import {logOutUser} from '@pages/authorization/store';
 import DropdownMenu from '@shared/components/dropdownMenu';
+import useAnchorElement from '@shared/hooks/useAnchorElement';
 
 type menuItem = {
     label: string,
@@ -23,7 +24,7 @@ const ListItemButtonStyles = {
 
 
 export default function UserSettingsMenu() {
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [anchorElUser, addAnchorEl, removeAnchorEl] = useAnchorElement(null);
   const {user} = useSelector((state: RootReducer) => state.userReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,11 +54,7 @@ export default function UserSettingsMenu() {
     }];
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+    addAnchorEl(event.currentTarget);
   };
 
   return (
@@ -73,7 +70,7 @@ export default function UserSettingsMenu() {
           <AccountCircle/>
         </IconButton>
       </Tooltip>
-      <DropdownMenu anchorEl={anchorElUser} handleClose={handleCloseUserMenu}>
+      <DropdownMenu anchorEl={anchorElUser} handleClose={removeAnchorEl}>
         <ListItem sx = {{padding: 0}}>
           <Box width={'auto'}
             display={'flex'}
@@ -102,8 +99,8 @@ export default function UserSettingsMenu() {
         <List>
           {menuItems.map(({label, Icon, onClick}) => (
             <ListItem key={label} onClick={() => {
-              handleCloseUserMenu();
               onClick();
+              removeAnchorEl();
             }}>
               <ListItemButton sx={ListItemButtonStyles}>
                 <ListItemIcon>
