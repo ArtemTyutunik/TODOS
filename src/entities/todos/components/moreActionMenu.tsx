@@ -20,7 +20,7 @@ interface MoreActionsMenuProps {
 
 
 const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenuProps) => {
-  const [anchorEl, addAnchorEl] = useAnchorElement(null);
+  const [anchorEl, addAnchorEl, removeAnchorEl] = useAnchorElement(null);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation()
@@ -29,7 +29,7 @@ const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenu
 
   const handleCloseMenu = (e: React.SyntheticEvent) => {
     e.stopPropagation()
-    addAnchorEl(null);
+    removeAnchorEl();
   };
 
   return (

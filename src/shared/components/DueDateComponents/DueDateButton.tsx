@@ -41,7 +41,7 @@ const DueDateButton = ({date, onPassDateToBaseForm, variant = 'Outline'}: Props)
           </ActionButton>
       ) : (
           <Box sx = {{...TodoFlexboxStyles, cursor: 'pointer'}} mt={'5px'} color={isOverdue ? '#c40202' : '#808080'} onClick={handleOpenMenu}>
-            <EventIcon sx={{color: 'inherit', fontSize: '13px'}}/>
+            <EventIcon sx={{color: 'inherit', fontSize: '16px'}}/>
             <Typography sx={{...TodoDescriptionStyles, marginLeft: '10px', paddingLeft: 0, fontSize: '13px', color: 'inherit'}}>
               {
                 date || 'Due date'

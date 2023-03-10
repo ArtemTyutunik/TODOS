@@ -2,6 +2,7 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Box, Divider, IconButton, Tooltip, Typography} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import LabelIcon from '@mui/icons-material/Label';
 
 import MoreActionsMenu from './moreActionMenu';
 import {ITodo} from '@shared/interfaces';
@@ -26,7 +27,7 @@ const TodoCard = ({
   onDuplicateAction,
   setPriorityAction}: TodoCardProps,
 ) => {
-  const {label, description, date, id} = todo;
+  const {label, description, date, id, Label} = todo;
   const navigate = useNavigate()
 
   return (
@@ -45,11 +46,23 @@ const TodoCard = ({
             <Typography noWrap sx={TodoDescriptionStyles}>
               {description}
             </Typography>
-            {
-              date && <Box ml={'46px'}>
-                <DueDateButton date={date} variant={'Standard'}/>
+            <Box display={'flex'} alignItems={'center'}>
+              <Box>
+                {
+                  date && <Box ml={'46px'}>
+                    <DueDateButton date={date} variant={'Standard'}/>
+                  </Box>
+                }
               </Box>
-            }
+              <Box marginLeft={'20px'} display={'flex'} alignItems={'center'} color={'#808080'}>
+                <LabelIcon sx={{color: 'inherit', fontSize: '18px'}}/>
+                <Typography sx={{...TodoDescriptionStyles, paddingLeft: '5px'}}>
+                  {Label}
+                </Typography>
+              </Box>
+            </Box>
+
+
           </Box>
         </Box>
 

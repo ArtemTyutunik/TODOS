@@ -7,7 +7,7 @@ import {Box, Button, Typography, Link as MuiLink} from '@mui/material';
 import BaseTodoForm from '@shared/forms/ui/baseTodoForm';
 import {addNewTask} from '@entities/todos/store/todo';
 import {IBaseFormInputsValues} from '@shared/forms/interfaces/interfaces';
-import {IDate, Priority} from '@shared/interfaces';
+import {IDate, Priority, Label} from '@shared/interfaces';
 
 interface Props {
     onClose: () => void
@@ -56,10 +56,10 @@ const CreateTodoForm = ({onClose, initialDate}: Props) => {
   }
 
 
-  const onSubmit = (data:IBaseFormInputsValues, date: IDate, priority: Priority | string | undefined ) => {
+  const onSubmit = (data:IBaseFormInputsValues, date: IDate, priority: Priority | string | undefined, Label: Label ) => {
     const id = Date.now()
     const todoPriority = priority || '4'
-    dispatch(addNewTask({...data, id, done: false, date: date, priority: todoPriority}));
+    dispatch(addNewTask({...data, id, done: false, date: date, priority: todoPriority, Label}));
     notify(id)
     onClose();
   };

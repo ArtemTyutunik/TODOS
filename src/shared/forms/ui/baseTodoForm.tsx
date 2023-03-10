@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {Controller, useForm} from 'react-hook-form';
 import {Box, Button, Divider, TextField} from '@mui/material';
 import {IBaseFormInputsValues} from '../interfaces/interfaces';
-import {IDate, ITodo, Priority} from '../../interfaces';
+import {IDate, ITodo, Priority, Label} from '../../interfaces';
 import {taskNameValidation} from '../validation/validation';
 import DueDateButton from '@shared/components/DueDateComponents';
 import {useTodoDate} from '@entities/todos/hooks';
 import PriorityButton from '@shared/components/Priority/PriorityButton';
 import useSelectPriority from '@shared/hooks/useSelectPriority';
+import AddLabelButton from '@shared/components/AddLabel/AddLabelButton';
 
 const formStyles = {
   border: '1px solid #eee',
@@ -28,7 +29,7 @@ const CancelButtonStyles = {
 
 interface Props {
   onClose: () => void,
-  onSubmit: (data: IBaseFormInputsValues, date: IDate, priority: Priority | string | undefined) => void,
+  onSubmit: (data: IBaseFormInputsValues, date: IDate, priority: Priority | string | undefined, Label: Label) => void,
   todo?: ITodo,
   initialDate?: string,
   hideActions?: boolean
@@ -46,13 +47,13 @@ const BaseTodoForm = ({
   }});
 
   const [todoDate, setTodoDate] = useTodoDate(initialDate || todo?.date!, todo?.id);
-  const [priority, setPriority] = useSelectPriority(todo?.priority)
+  const [priority, setPriority] = useSelectPriority(todo?.priority);
+  const [Label, setLabel] = useState(todo ? todo.Label : '')
 
   const onPassDateToBaseForm = (date: IDate) => {
     setTodoDate(date);
   };
-
-  return <Box component='form' onSubmit={handleSubmit((data) => onSubmit(data, todoDate, priority))} color = {'#515761'}>
+  return <Box component='form' onSubmit={handleSubmit((data) => onSubmit(data, todoDate, priority, Label))} color = {'#515761'}>
     <Box sx={formStyles}>
       <Controller name={'label'}
         rules={taskNameValidation}
@@ -76,16 +77,19 @@ const BaseTodoForm = ({
           InputProps={{disableUnderline: true}}/>}
       />
       {
-        hideActions ? null : (
-            <Box display={'flex'} alignItems={'center'}>
-              <Box display={'flex'} mr={'15px'}>
-                <DueDateButton date={todoDate} onPassDateToBaseForm={onPassDateToBaseForm}/>
-              </Box>
-              <Box display={'flex'}>
-                <PriorityButton initialPriority={priority} changeHandler={setPriority} variant={'standard'}/>
-              </Box>
-              <Divider/>
+        !hideActions && (
+          <Box display={'flex'} alignItems={'center'}>
+            <Box mr={'15px'}>
+              <DueDateButton date={todoDate} onPassDateToBaseForm={onPassDateToBaseForm}/>
             </Box>
+            <Box mr={'15px'}>
+              <PriorityButton initialPriority={priority} changeHandler={setPriority} variant={'standard'}/>
+            </Box>
+            <Box>
+              <AddLabelButton initialLabel={Label} onAddNewLabel={(newLabel: string | undefined) => setLabel(newLabel)}/>
+            </Box>
+            <Divider/>
+          </Box>
         )
       }
 

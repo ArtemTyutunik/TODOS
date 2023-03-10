@@ -4,13 +4,12 @@ import {Anchor} from '@shared/interfaces';
 
 interface dropdownMenuProps{
     anchorEl: Anchor,
-    handleClose: (e: React.SyntheticEvent) => void,
+    handleClose: (e: React.MouseEvent<HTMLElement>) => void,
     children: React.ReactNode
 }
 const DropdownMenu = ({anchorEl, handleClose, children}: dropdownMenuProps) => {
   return (
     <Menu
-      sx = {{width: 'auto'}}
       id="menu"
       anchorEl={anchorEl}
       anchorOrigin={{
