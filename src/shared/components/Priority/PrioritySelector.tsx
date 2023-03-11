@@ -28,6 +28,12 @@ const FormStyles = {
   '.css-1636szt': {
     display: 'none !important',
   },
+  '.css-igs3ac': {
+    border: 'none',
+  },
+  '.css-1fu6acg': {
+    marginBottom: '-3px',
+  },
 
 }
 
