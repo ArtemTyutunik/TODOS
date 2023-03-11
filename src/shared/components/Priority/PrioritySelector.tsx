@@ -24,6 +24,9 @@ const FormStyles = {
     'fontSize': '12px',
     'color': '#808080',
   },
+  'MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1636szt': {
+    display: 'none !important',
+  },
 
 }
 
