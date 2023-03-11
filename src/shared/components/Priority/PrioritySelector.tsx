@@ -7,6 +7,9 @@ const FormStyles = {
   '.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input': {
     padding: 0,
   },
+  'css-qiwgdb': {
+    padding: 0,
+  },
   '.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon': {
     display: 'none',
   },
