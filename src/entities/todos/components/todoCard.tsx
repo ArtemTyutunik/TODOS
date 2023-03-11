@@ -55,10 +55,14 @@ const TodoCard = ({
                 }
               </Box>
               <Box marginLeft={'20px'} display={'flex'} alignItems={'center'} color={'#808080'}>
-                <LabelIcon sx={{color: 'inherit', fontSize: '18px'}}/>
-                <Typography sx={{...TodoDescriptionStyles, paddingLeft: '5px'}}>
-                  {Label}
-                </Typography>
+                {
+                  Label && <Box>
+                    <LabelIcon sx={{color: 'inherit', fontSize: '18px'}}/>
+                    <Typography sx={{...TodoDescriptionStyles, paddingLeft: '5px'}}>
+                      {Label}
+                    </Typography>
+                  </Box>
+                }
               </Box>
             </Box>
 
