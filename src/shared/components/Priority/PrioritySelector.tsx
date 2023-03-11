@@ -4,11 +4,12 @@ import {PrioritiesFlags} from '@shared/components/PrioritiesFlags';
 const FormStyles = {
   'width': '100%',
   'margin': '0 5px',
+  'border': 'none',
   '.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input': {
     padding: 0,
   },
-  'css-qiwgdb': {
-    padding: 0,
+  '.css-qiwgdb': {
+    padding: '0 !important',
   },
   '.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon': {
     display: 'none',
@@ -24,7 +25,7 @@ const FormStyles = {
     'fontSize': '12px',
     'color': '#808080',
   },
-  'MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1636szt': {
+  '.css-1636szt': {
     display: 'none !important',
   },
 
