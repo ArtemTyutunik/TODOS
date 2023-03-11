@@ -2,7 +2,6 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {Avatar, Box, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip, Typography} from '@mui/material';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -36,13 +35,6 @@ export default function UserSettingsMenu() {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onClick: () => {},
     },
-    {
-      label: 'theme',
-      Icon: () => <DarkModeIcon/>,
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      onClick: () => {},
-    },
-
     {
       label: 'logout',
       Icon: () => <LogoutIcon/>,
