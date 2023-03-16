@@ -13,7 +13,7 @@ const style = {
   border: 'none',
   borderRadius: '12px',
   boxShadow: 24,
-  padding: '10px 0 0 10px',
+  padding: '10px',
 };
 
 interface Props {

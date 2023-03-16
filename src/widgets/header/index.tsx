@@ -31,7 +31,7 @@ export default function Header() {
                 color="inherit"
                 onClick={() => dispatch(toggleDrawerOpen())}
               >
-                <MenuIcon/>
+                <MenuIcon sx={{marginTop: '-3px'}}/>
               </IconButton>
             </Tooltip>
 

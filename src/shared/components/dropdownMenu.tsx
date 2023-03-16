@@ -23,8 +23,7 @@ const DropdownMenu = ({anchorEl, handleClose, children}: dropdownMenuProps) => {
       }}
       open={Boolean(anchorEl)}
       onClose={handleClose}
-
-    >
+      sx={{marginTop: '10px'}}>
       {children}
     </Menu>
   );
