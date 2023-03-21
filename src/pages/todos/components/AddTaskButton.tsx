@@ -1,18 +1,18 @@
 import React from 'react';
 import AddButtonIcon from '@shared/components/AddIcon';
-import {Box, Typography} from '@mui/material';
+import {Box, Theme, Typography} from '@mui/material';
 
-const boxStyles = {
+const boxStyles = (theme: Theme) => ({
   'display': 'flex',
   'alignItems': 'center',
   'marginTop': '20px',
-  'color': '#515761',
+  'color': theme.description,
   'cursor': 'pointer',
 
   '&:hover': {
-    color: '#1976d2',
+    color: theme.palette.primary.main,
   },
-};
+});
 
 interface Props {
     onCreate(): void
@@ -20,9 +20,9 @@ interface Props {
 const AddTaskButton = ({onCreate}: Props) => {
   return (
     <Box sx = {boxStyles} onClick={onCreate}>
-      <AddButtonIcon sx={{color: '#1976d2'}}/>
+      <AddButtonIcon sx={{color: 'primary.main'}}/>
       <Typography ml={'10px'} color={'inherit'} fontSize={'15px'} fontWeight={300}>
-                Add task
+         Add task
       </Typography>
     </Box>
   );

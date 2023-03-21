@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Grid, SelectChangeEvent} from '@mui/material';
+import {Box, Grid, SelectChangeEvent, useTheme} from '@mui/material';
 import {ITodo, Priority} from '@shared/interfaces';
 import CheckboxComponent from '@entities/todos/components/Checkbox';
 import {EditTodoForm} from '../../components/';
@@ -20,6 +20,7 @@ interface Props {
 
 const DetailsCard = ({todo, onComplete}: Props) => {
   const {label, description, date, id} = todo
+  const theme = useTheme()
   const dispatch = useDispatch()
   const [isEditDetailsOpen, openEditDetails, closeEditDetails] = useVisable(false)
   const [todoDate, setTodoDate] = useTodoDate(date, id)
@@ -32,7 +33,7 @@ const DetailsCard = ({todo, onComplete}: Props) => {
   }
 
   return (
-    <Box bgcolor={'#fff'} minWidth={'700px'}>
+    <Box bgcolor={theme.background.paper} minWidth={'700px'}>
       <Grid container>
         <Grid item md={8}>
           <Box mb={'30px'} display={'flex'} marginRight={'10px'} marginTop={'10px'}>

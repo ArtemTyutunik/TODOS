@@ -1,6 +1,6 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
-import {Box, Divider, IconButton, Tooltip, Typography} from '@mui/material';
+import {Box, Divider, IconButton, Tooltip, Typography, useTheme} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import LabelIcon from '@mui/icons-material/Label';
 
@@ -29,7 +29,7 @@ const TodoCard = ({
 ) => {
   const {label, description, date, id, Label} = todo;
   const navigate = useNavigate()
-
+  const theme = useTheme()
   return (
     <Box mb={'25px'} onClick={() => navigate(`task/${id}`)}>
       <Box sx = {TodoContainerStyles}>
@@ -54,7 +54,7 @@ const TodoCard = ({
                   </Box>
                 }
               </Box>
-              <Box marginLeft={'20px'} color={'#808080'}>
+              <Box marginLeft={'20px'} color={theme.text.main}>
                 {
                   Label && <Box display={'flex'} alignItems={'center'}>
                     <LabelIcon sx={{color: 'inherit', fontSize: '18px'}}/>

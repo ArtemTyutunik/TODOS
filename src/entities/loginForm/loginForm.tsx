@@ -24,7 +24,7 @@ function LoginForm({onSubmit}: IInputsProps) {
         }}
       >
         <Typography component="h1" variant="h5">
-                    Login
+           Login
         </Typography>
         <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{mt: 1}}>
           <Controller
@@ -72,12 +72,12 @@ function LoginForm({onSubmit}: IInputsProps) {
             variant="contained"
             sx={{mt: 3, mb: 2}}
           >
-                        Login
+            Login
           </Button>
           <Grid container>
             <Grid item>
               <Link variant="body2" component = {RouterLink} to = 'sign-up'>
-                {'Don\'t have an account? Sign Up'}
+                {'Don`t have an account? Sign Up'}
               </Link>
             </Grid>
           </Grid>

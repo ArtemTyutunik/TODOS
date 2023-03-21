@@ -1,3 +1,5 @@
+import {Theme} from '@mui/material';
+
 export const TodoContainerStyles = {
   mb: '10px',
   display: 'flex',
@@ -17,10 +19,10 @@ export const TodoLabelStyles = {
   lineHeight: 1.3,
 };
 
-export const TodoDescriptionStyles = {
+export const TodoDescriptionStyles = (theme: Theme) => ({
   fontSize: '16px',
   fontWeight: 300,
   lineHeight: 1,
-  color: '#808080',
+  color: theme.text.main,
   paddingLeft: '42px',
-};
+});

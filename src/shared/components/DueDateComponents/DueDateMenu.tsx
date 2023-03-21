@@ -36,7 +36,7 @@ const DueDateMenuList= ({onSetDate}: Props) => {
     },
     {
       label: 'No date',
-      Icon: () => <DoNotDisturbIcon fontSize={'small'} sx={{color: '#808080'}}/>,
+      Icon: () => <DoNotDisturbIcon fontSize={'small'} sx={(theme) => ({color: theme.text.main})}/>,
       onItemClick: () => onSetDate(undefined),
     }];
 

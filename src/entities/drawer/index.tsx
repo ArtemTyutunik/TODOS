@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+import {styled} from '@mui/material/styles';
 
 import {Box, List, ListItem, ListItemButton, ListItemIcon, Typography} from '@mui/material';
 import InboxIcon from '@mui/icons-material/Inbox';
 import TodayIcon from '@mui/icons-material/Today';
 import {default as ParamsIcon} from '@mui/icons-material/Apps';
-import {styled} from '@mui/material/styles';
-import {useNavigate} from 'react-router-dom';
 import {RootReducer} from '@app/store';
 
 import './active.css';
@@ -46,7 +46,7 @@ const Drawer = () => {
     display: 'flex',
     width: '250px',
     height: '100%',
-    background: '#f5f5f5',
+    background: theme.background.lightGrey,
     transform: isOpenDrawer ? 'translateX(0%)' : 'translateX(-100%)',
     transition: 'transform .4s linear',
     [theme.breakpoints.down(450)]: {
@@ -68,7 +68,7 @@ const Drawer = () => {
 
   return (
     <CustomBox>
-      <Box sx = {{paddingTop: '45px'}} width={'100%'}>
+      <Box paddingTop={'45px'} width={'100%'}>
         <List>
           {
             drawerLinks.map( (link: {label: string, linkTo: string, Icon:() => React.ReactElement}) => {

@@ -1,4 +1,4 @@
-import {Box, Typography} from '@mui/material';
+import {Box, Typography, useTheme} from '@mui/material';
 import AddTaskButton from '../../components/AddTaskButton';
 
 interface Props {
@@ -6,10 +6,11 @@ interface Props {
 }
 
 const NoInboxTodos = ({onClick}: Props) => {
+  const theme = useTheme()
   return (
     <Box height={'100%'} alignItems={'center'} display={'flex'}>
       <Box display={'flex'} flexDirection={'column'} margin={'0 auto'} alignItems={'center'}>
-        <Typography fontWeight={500} color={'#515761'} fontSize={'20px'}>
+        <Typography fontWeight={500} color={theme.description} fontSize={'20px'}>
                     You have not added any todos yet!
         </Typography>
         <AddTaskButton onCreate={onClick}/>

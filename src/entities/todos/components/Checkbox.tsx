@@ -1,20 +1,21 @@
 import React from 'react';
 
-import {Checkbox} from '@mui/material';
+import {Checkbox, useTheme} from '@mui/material';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import {ITodo} from '@shared/interfaces';
 
 
 const CheckboxComponent = ({onComplete, todo} : { onComplete: (e: React.SyntheticEvent) => void, todo: ITodo}) => {
+  const theme = useTheme()
   const {priority = '4', done} = todo
   const switchColorCheckBox = (priority: string) : string => {
     switch (priority) {
-      case '1': return '#cc2a25';
-      case '2': return '#ff824d';
-      case '3': return '#1531d1';
-      case '4': return '#babbc2';
-      default: return '#babbc2';
+      case '1': return theme.priority.first;
+      case '2': return theme.priority.second;
+      case '3': return theme.priority.third;
+      case '4': return theme.priority.fourth;
+      default: return theme.priority.fourth;
     }
   };
 
