@@ -23,7 +23,7 @@ const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
         }}
       >
         <Typography component="h1" variant="h5">
-                    Sign up
+          Sign up
         </Typography>
 
         <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{mt: 1}}>
@@ -70,7 +70,7 @@ const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
             variant="contained"
             sx={{mt: 3, mb: 2}}
           >
-                        Sign Up
+              Sign Up
           </Button>
         </Box>
         <Grid container>
