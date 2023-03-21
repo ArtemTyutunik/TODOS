@@ -1,7 +1,8 @@
-import {Box, FormControl, MenuItem, Select, SelectChangeEvent, Typography} from '@mui/material';
+import {Box, FormControl, MenuItem, Select, SelectChangeEvent, Theme, Typography, useTheme} from '@mui/material';
 import {Priority} from '@shared/interfaces';
 import {PrioritiesFlags} from '@shared/components/PrioritiesFlags';
-const FormStyles = {
+
+const FormStyles = (theme: Theme) => ({
   'width': '100%',
   'margin': '0 5px',
   'border': 'none',
@@ -23,7 +24,7 @@ const FormStyles = {
   '.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input': {
     'padding': 0,
     'fontSize': '12px',
-    'color': '#808080',
+    'color': theme.text.main,
   },
   '.css-1636szt': {
     display: 'none !important',
@@ -35,7 +36,7 @@ const FormStyles = {
     marginBottom: '-3px',
   },
 
-}
+})
 
 
 interface Props {
@@ -44,6 +45,7 @@ interface Props {
 }
 
 const PrioritySelect = ({initialPriority, changeHandler}: Props) => {
+  const theme = useTheme()
   return (
     <FormControl sx={FormStyles}>
       <Select
@@ -56,7 +58,7 @@ const PrioritySelect = ({initialPriority, changeHandler}: Props) => {
           PrioritiesFlags.map((Priority) => <MenuItem value={Priority.value} key={Priority.value} sx={{display: 'flex'}}>
             <Box display={'flex'} alignItems={'center'}>
               <Priority.Icon/>
-              <Typography color={'#808080'} fontSize={'12px'} fontWeight={400} ml={'15px'}>
+              <Typography color={theme.text.main} fontSize={'12px'} fontWeight={400} ml={'15px'}>
                 {`Priority ${Priority.value}`}
               </Typography>
             </Box>

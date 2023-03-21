@@ -1,13 +1,14 @@
-import {withStore} from './providers/withStore';
 import React from 'react';
-import {Box} from '@mui/material';
+import {ThemeProvider} from '@mui/material';
 import AppLayout from './ui/appLayout';
+import theme from '@app/theme';
+import {withStore} from './providers/withStore';
 
 const App = () => {
   return (
-    <Box>
+    <ThemeProvider theme={theme}>
       <AppLayout/>
-    </Box>
+    </ThemeProvider>
   );
 };
 

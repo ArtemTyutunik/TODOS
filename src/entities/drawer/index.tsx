@@ -46,7 +46,7 @@ const Drawer = () => {
     display: 'flex',
     width: '250px',
     height: '100%',
-    background: '#f5f5f5',
+    background: theme.background.lightGrey,
     transform: isOpenDrawer ? 'translateX(0%)' : 'translateX(-100%)',
     transition: 'transform .4s linear',
     [theme.breakpoints.down(450)]: {

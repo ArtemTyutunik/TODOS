@@ -17,7 +17,7 @@ const TodoCreatedNotification = ({onNavigate}: {onNavigate: () => void}) => {
   return (
     <Box display={'flex'} alignItems={'center'}>
       <Typography marginRight={'10px'}>
-        Task added to <MuiLink component={RouterLink} color={'#1976d2'} sx={{textDecoration: 'none'}} to={'/Inbox'} >
+        Task added to <MuiLink component={RouterLink} color={'primary.main'} sx={{textDecoration: 'none'}} to={'/Inbox'} >
             Inbox
         </MuiLink>
       </Typography>

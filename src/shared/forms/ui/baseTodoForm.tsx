@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import {Controller, useForm} from 'react-hook-form';
-import {Box, Button, Divider, TextField} from '@mui/material';
+import {Box, Button, Divider, TextField, Theme} from '@mui/material';
 import {IBaseFormInputsValues} from '../interfaces/interfaces';
 import {IDate, ITodo, Priority, Label} from '../../interfaces';
 import {taskNameValidation} from '../validation/validation';
@@ -17,15 +17,15 @@ const formStyles = {
   borderRadius: '10px',
 };
 
-const CancelButtonStyles = {
+const CancelButtonStyles = (theme: Theme) => ({
   marginRight: '15px',
   textTransform: 'initial',
-  backgroundColor: '#f5f5f5',
+  backgroundColor: theme.background.lightGrey,
   color: '#444',
   fontSize: '13px',
   boxShadow: 'none',
   padding: '1px 10px',
-};
+});
 
 interface Props {
   onClose: () => void,
@@ -53,7 +53,9 @@ const BaseTodoForm = ({
   const onPassDateToBaseForm = (date: IDate) => {
     setTodoDate(date);
   };
-  return <Box component='form' onSubmit={handleSubmit((data) => onSubmit(data, todoDate, priority, Label))} color = {'#515761'}>
+  return <Box component='form'
+    onSubmit={handleSubmit((data) => onSubmit(data, todoDate, priority, Label))}
+    sx={(theme) => ({color: theme.description})}>
     <Box sx={formStyles}>
       <Controller name={'label'}
         rules={taskNameValidation}

@@ -1,15 +1,15 @@
 import React from 'react';
-import {Button} from '@mui/material';
+import {Button, Theme} from '@mui/material';
 
-const buttonsStyles = {
+const buttonsStyles = (theme: Theme) => ({
   color: '#7d7b74',
-  backgroundColor: '#f5f5f5',
+  backgroundColor: theme.background.lightGrey,
   border: '1px solid #ddd',
   boxShadow: 'none',
   textTransform: 'none',
   fontSize: '11px',
   padding: 0,
-};
+});
 
 interface Props {
     children: React.ReactNode

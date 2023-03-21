@@ -1,7 +1,20 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {Avatar, Box, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip, Typography} from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Tooltip,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -27,6 +40,7 @@ export default function UserSettingsMenu() {
   const {user} = useSelector((state: RootReducer) => state.userReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const menuItems: menuItem[] = [
     {
@@ -69,9 +83,9 @@ export default function UserSettingsMenu() {
             padding = {'5px'}>
             <ListItemButton sx = {ListItemButtonStyles}>
               <Avatar sx={{
-                border: ' 2px solid #48833f',
+                border: `2px solid ${theme.avatar}`,
                 background: 'transparent',
-                color: '#48833f',
+                color: theme.avatar,
                 marginRight: '30px',
               }}>
                  A
