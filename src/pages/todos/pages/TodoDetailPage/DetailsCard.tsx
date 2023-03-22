@@ -35,7 +35,7 @@ const DetailsCard = ({todo, onComplete}: Props) => {
   return (
     <Box bgcolor={theme.background.paper} minWidth={'700px'}>
       <Grid container>
-        <Grid item md={8}>
+        <Grid item tablet={8}>
           <Box mb={'30px'} display={'flex'} marginRight={'10px'} marginTop={'10px'}>
             <Box display={'flex'}>
               <CheckboxComponent onComplete={onComplete} todo={todo}/>
@@ -57,7 +57,7 @@ const DetailsCard = ({todo, onComplete}: Props) => {
             }
           </Box>
         </Grid>
-        <Grid item md={4}>
+        <Grid item tablet={4}>
           <Box width={'100%'} height={'100%'} sx={{backgroundColor: '#fafafa'}} padding={'10px 25px'}>
             <DetailActionPanelItem label={'Due date'}>
               <DueDateButton date={todoDate} variant={'Standard'} onPassDateToBaseForm={setTodoDate}/>

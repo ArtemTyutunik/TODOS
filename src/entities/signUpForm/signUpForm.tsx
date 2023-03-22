@@ -12,7 +12,7 @@ const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
   const {handleSubmit, control} = useForm<IFormInputs>({mode: 'onChange'});
   const {errors, isValid} = useFormState({control});
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="laptop">
       <CssBaseline />
       <Box
         sx={{
