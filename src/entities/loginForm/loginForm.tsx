@@ -13,7 +13,7 @@ function LoginForm({onSubmit}: IInputsProps) {
   const {errors, isValid} = useFormState({control});
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="laptop">
       <CssBaseline />
       <Box
         sx={{
