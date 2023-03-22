@@ -72,6 +72,7 @@ export default function UserSettingsMenu() {
           aria-label="account of current user"
           aria-haspopup="true"
           color="inherit"
+          sx={{padding: {mobile: '0', tablet: '16px'}, marginRight: '3px'}}
           onClick={handleOpenUserMenu}>
           <AccountCircle/>
         </IconButton>
