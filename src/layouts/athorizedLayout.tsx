@@ -16,10 +16,10 @@ const AuthorizedLayout= () => {
   return (
     <>
       <Grid container spacing={1} sx={{marginTop: 0}} height={'calc(100vh - 64px)'}>
-        <Grid item xs={3} paddingTop={'0 !important'}>
+        <Grid item laptop={3} paddingTop={'0 !important'}>
           <Drawer/>
         </Grid>
-        <Grid item xs={9} sx={GridItemStyles} >
+        <Grid item laptop={9} sx={GridItemStyles} >
           <Routing/>
         </Grid>
       </Grid>
