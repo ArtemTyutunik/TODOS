@@ -1,6 +1,7 @@
 import {createTheme} from '@mui/material';
 
 declare module '@mui/material/styles' {
+
   interface Theme {
     description: string,
     background: {
@@ -40,6 +41,20 @@ declare module '@mui/material/styles' {
     },
     avatar: string
   }
+
+  interface BreakpointOverrides {
+    sm: false;
+    md: false;
+    lg: false;
+    xl: false;
+    xs: false;
+    mobile: true;
+    largeMobile: true;
+    tablet: true;
+    laptop: true;
+    desktop: true;
+  }
+
 }
 
 const theme = createTheme({
@@ -65,6 +80,15 @@ const theme = createTheme({
     fourth: '#babbc2',
   },
   avatar: '#48833f',
+  breakpoints: {
+    values: {
+      mobile: 0,
+      largeMobile: 570,
+      tablet: 750,
+      laptop: 1024,
+      desktop: 1200,
+    },
+  },
 })
 
 export default theme;
