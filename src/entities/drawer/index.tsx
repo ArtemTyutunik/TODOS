@@ -47,8 +47,8 @@ const Drawer = () => {
     width: '250px',
     height: '100%',
     background: theme.background.lightGrey,
-    transform: isOpenDrawer ? 'translateX(0%)' : 'translateX(-100%)',
-    transition: 'transform .4s linear',
+    opacity: isOpenDrawer ? 0 : 1,
+    visibility: isOpenDrawer ? 'hidden' : 'visible',
     [theme.breakpoints.down(450)]: {
       width: '100%',
     },

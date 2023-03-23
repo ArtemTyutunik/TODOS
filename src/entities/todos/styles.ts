@@ -19,8 +19,8 @@ export const TodoLabelStyles = {
   lineHeight: 1.3,
 };
 
-export const TodoDescriptionStyles = (theme: Theme) => ({
-  fontSize: '16px',
+export const todoDescriptionStyles = (theme: Theme) => ({
+  fontSize: {mobile: '13px', largeMobile: '16px'},
   fontWeight: 300,
   lineHeight: 1,
   color: theme.text.main,

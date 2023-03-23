@@ -12,10 +12,15 @@ const NoTodayTodos = ({onClick}: Props) => {
   const theme = useTheme();
   return (
     <Box height={'100%'} alignItems={'center'} display={'flex'}>
-      <Box display={'flex'} flexDirection={'column'} margin={'0 auto'} alignItems={'center'}>
+      <Box display={'flex'}
+        flexDirection={'column'}
+        margin={'0 auto'}
+        alignItems={'center'}
+        textAlign={'center'}
+      >
         <img src={imgUrl} alt={'image'}/>
-        <Typography fontWeight={500} color={theme.description} fontSize={'20px'}>
-                        You`re all done for today! Enjoy the rest of your day
+        <Typography fontWeight={500} color={theme.description} fontSize={{mobile: '16px', largeMobile: '20px'}}>
+                            You`re all done for today! Enjoy the rest of your day
         </Typography>
         <AddTaskButton onCreate={onClick}/>
       </Box>

@@ -6,7 +6,7 @@ import LabelIcon from '@mui/icons-material/Label';
 
 import MoreActionsMenu from './moreActionMenu';
 import {ITodo} from '@shared/interfaces';
-import {TodoContainerStyles, TodoDescriptionStyles, TodoFlexboxStyles, TodoLabelStyles} from '../styles';
+import {TodoContainerStyles, todoDescriptionStyles, TodoFlexboxStyles, TodoLabelStyles} from '../styles';
 import CheckboxComponent from './Checkbox';
 import DueDateButton from '@shared/components/DueDateComponents';
 
@@ -33,8 +33,7 @@ const TodoCard = ({
   return (
     <Box mb={'25px'} onClick={() => navigate(`task/${id}`)}>
       <Box sx = {TodoContainerStyles}>
-        <Box
-          maxWidth={'50%'}
+        <Box maxWidth={{mobile: '100%', largeMobile: '50%'}}
           sx={TodoFlexboxStyles}>
           <Box width={'100%'}>
             <Box sx = {TodoFlexboxStyles}>
@@ -43,22 +42,22 @@ const TodoCard = ({
                 {label}
               </Typography>
             </Box>
-            <Typography noWrap sx={TodoDescriptionStyles}>
+            <Typography noWrap sx={todoDescriptionStyles}>
               {description}
             </Typography>
-            <Box display={'flex'} alignItems={'center'}>
-              <Box>
+            <Box display={'flex'} alignItems={'center'} >
+              <Box marginRight={'20px'}>
                 {
                   date && <Box ml={'46px'}>
                     <DueDateButton date={date} variant={'Standard'}/>
                   </Box>
                 }
               </Box>
-              <Box marginLeft={'20px'} color={theme.text.main}>
+              <Box color={theme.text.main}>
                 {
                   Label && <Box display={'flex'} alignItems={'center'}>
-                    <LabelIcon sx={{color: 'inherit', fontSize: '18px'}}/>
-                    <Typography sx={{...TodoDescriptionStyles, paddingLeft: '5px'}}>
+                    <LabelIcon sx={{color: 'inherit', fontSize: {mobile: '14px', largeMobile: '18px'}}}/>
+                    <Typography sx={{...todoDescriptionStyles(theme), paddingLeft: '5px'}} >
                       {Label}
                     </Typography>
                   </Box>

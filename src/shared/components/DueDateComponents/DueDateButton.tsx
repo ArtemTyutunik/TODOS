@@ -4,7 +4,7 @@ import {Box, Divider, Typography} from '@mui/material';
 import Calendar from './Calendar';
 import DueDateMenuList from './DueDateMenu';
 import {IDate} from '@shared/interfaces';
-import {TodoDescriptionStyles, TodoFlexboxStyles} from '@entities/todos/styles';
+import {todoDescriptionStyles, TodoFlexboxStyles} from '@entities/todos/styles';
 import EventIcon from '@mui/icons-material/Event';
 import {overdueDate} from '@shared/constants';
 import ActionButton from '@shared/components/ActionButton';
@@ -40,11 +40,17 @@ const DueDateButton = ({date, onPassDateToBaseForm, variant = 'Outline'}: Props)
             }
           </ActionButton>
       ) : (
-          <Box sx={(theme) => ({...TodoFlexboxStyles, cursor: 'pointer', color: isOverdue ? theme.text.danger : theme.text.main})}
-            onClick={handleOpenMenu}
-            mt={'5px'}>
-            <EventIcon sx={{color: 'inherit', fontSize: '16px'}}/>
-            <Typography sx={{...TodoDescriptionStyles, marginLeft: '10px', paddingLeft: 0, fontSize: '13px', color: 'inherit'}}>
+          <Box sx={(theme) => ({...TodoFlexboxStyles,
+            cursor: 'pointer',
+            color: isOverdue ? theme.text.danger : theme.text.main})}
+          onClick={handleOpenMenu}
+          mt={'5px'}>
+            <EventIcon sx={{color: 'inherit', fontSize: {mobile: '14px', largeMobile: '18px'}}}/>
+            <Typography sx={{...todoDescriptionStyles,
+              marginLeft: '10px',
+              paddingLeft: 0,
+              fontSize: '12px',
+              color: 'inherit'}}>
               {
                 date || 'Due date'
               }
