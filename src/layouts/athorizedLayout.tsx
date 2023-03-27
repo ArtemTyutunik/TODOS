@@ -1,11 +1,11 @@
 import {Box} from '@mui/material';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Drawer from '@entities/drawer';
 import Routing from '@pages/routes';
 import {ToastContainer} from 'react-toastify';
 import {useSelector} from 'react-redux';
 import {RootReducer} from '@app/store';
+import Drawer from '@entities/drawer';
 
 const gridItemStyles = (isDrawerOpen: boolean) => ({
   height: '100%',
@@ -13,7 +13,7 @@ const gridItemStyles = (isDrawerOpen: boolean) => ({
   maxHeight: 'calc(100vh - 56px)',
   padding: '0',
   paddingTop: '0 !important',
-  marginLeft: isDrawerOpen ? 0 : '320px',
+  marginLeft: {largeMobile: 0, tablet: isDrawerOpen ? '270px' : 0, laptop: isDrawerOpen ? '350px' : 0},
   position: 'relative',
 })
 
@@ -22,7 +22,10 @@ const AuthorizedLayout= () => {
   return (
     <>
       <Box sx={{marginTop: 0}} height={'calc(100vh - 56px)'}>
-        <Box paddingTop={'0 !important'} position={'absolute'} height={'calc(100vh - 56px)'}>
+        <Box paddingTop={'0 !important'}
+          position={'absolute'}
+          height={'calc(100vh - 56px)'}
+          display={isOpenDrawer ? 'block' : 'none'}>
           <Drawer/>
         </Box>
         <Box sx={gridItemStyles(isOpenDrawer)}>
