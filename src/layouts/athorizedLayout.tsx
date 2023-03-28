@@ -1,28 +1,43 @@
-import {Grid} from '@mui/material';
-import 'react-toastify/dist/ReactToastify.css';
-
-import Drawer from '@entities/drawer';
-import Routing from '@pages/routes';
+import {useSelector} from 'react-redux';
 import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {Box} from '@mui/material';
 
-const GridItemStyles = {
+import Routing from '@pages/routes';
+import {RootReducer} from '@app/store';
+import {LaptopDrawer, MobileDrawer} from '@entities/drawer';
+
+
+const routesStyles = (isDrawerOpen: boolean) => ({
+  height: '100%',
   overflow: 'scroll',
   maxHeight: 'calc(100vh - 56px)',
-  padding: '0 260px',
+  padding: '0',
   paddingTop: '0 !important',
-}
+  marginLeft: {largeMobile: 0, tablet: isDrawerOpen ? '270px' : 0, laptop: isDrawerOpen ? '350px' : 0},
+  position: 'relative',
+})
 
 const AuthorizedLayout= () => {
+  const {isOpenDrawer} = useSelector((state: RootReducer) => state.drawerReducer);
   return (
     <>
-      <Grid container spacing={1} sx={{marginTop: 0}} height={'calc(100vh - 64px)'}>
-        <Grid item laptop={3} paddingTop={'0 !important'}>
-          <Drawer/>
-        </Grid>
-        <Grid item laptop={9} sx={GridItemStyles} >
-          <Routing/>
-        </Grid>
-      </Grid>
+      <Box sx={{marginTop: 0}} height={'calc(100vh - 56px)'}>
+        <Box paddingTop={'0 !important'}
+          position={'absolute'}
+          height={'calc(100vh - 56px)'}
+          display={isOpenDrawer ? 'block' : 'none'}>
+          <LaptopDrawer/>
+          <MobileDrawer/>
+        </Box>
+        <Box sx={routesStyles(isOpenDrawer)}>
+          <Box width={{mobile: '100%', largeMobile: '80%'}}
+            margin={{mobile: '0', largeMobile: '0 auto'}}
+            padding={{mobile: '0 20px', largeMobile: 0}}>
+            <Routing/>
+          </Box>
+        </Box>
+      </Box>
       <ToastContainer/>
     </>
   );
