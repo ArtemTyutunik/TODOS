@@ -1,17 +1,14 @@
 import {Box, Drawer, Theme} from '@mui/material';
 
 import DrawerMenu from '@entities/drawer/components/drawerMenu';
-import './active.css';
+import '../active.css';
 import {styled} from '@mui/material/styles';
-import {useState} from 'react';
 
-const DrawerStyles = (theme: Theme) => ({
+const LaptopDrawerStyles = (theme: Theme) => ({
+  'display': {largeMobile: 'none', tablet: 'block'},
   'position': 'static',
   'height': '100%',
   'background': theme.background.lightGrey,
-  '.css-4t3x6l-MuiPaper-root-MuiDrawer-paper': {
-    width: '320px',
-  },
   '.css-12i7wg6-MuiPaper-root-MuiDrawer-paper': {
     position: 'unset',
     backgroundColor: 'transparent',
@@ -31,11 +28,8 @@ const CustomDrawer = styled(Drawer)(({theme}) => ({
 }));
 
 const DrawerLaptop = () => {
-  const [isOpen] = useState(true)
   return (
-    <CustomDrawer variant={'permanent'} sx={DrawerStyles}
-      open={isOpen}
-      onClose={() => console.log('celck')}>
+    <CustomDrawer variant={'permanent'} sx={LaptopDrawerStyles}>
       <Box paddingTop={'45px'} width={'100%'}>
         <DrawerMenu/>
       </Box>
@@ -44,4 +38,4 @@ const DrawerLaptop = () => {
 };
 
 
-export default Drawer;
+export default DrawerLaptop;
