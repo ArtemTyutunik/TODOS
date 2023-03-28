@@ -1,8 +1,8 @@
 import {Box, Drawer, Theme} from '@mui/material';
-
+import {styled} from '@mui/material/styles';
 import DrawerMenu from '@entities/drawer/components/drawerMenu';
 import '../active.css';
-import {styled} from '@mui/material/styles';
+
 
 const LaptopDrawerStyles = (theme: Theme) => ({
   'display': {largeMobile: 'none', tablet: 'block'},
