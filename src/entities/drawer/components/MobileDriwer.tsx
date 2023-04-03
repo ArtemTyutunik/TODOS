@@ -7,7 +7,7 @@ import {toggleDrawerOpen} from '@entities/drawer/store';
 
 const MobileDrawerStyles = {
   'display': {largeMobile: 'block', tablet: 'none'},
-  '.css-4t3x6l-MuiPaper-root-MuiDrawer-paper': {
+  '.css-4t3x6l-MuiPaper-root-MuiDrawer-paper, .css-wf16b5': {
     width: '320px',
     paddingTop: '54px',
   },
