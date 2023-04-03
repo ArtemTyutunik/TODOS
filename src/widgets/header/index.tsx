@@ -1,4 +1,4 @@
-import {useDispatch} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {Box, AppBar, Toolbar, IconButton, Typography, Container, Tooltip} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
@@ -15,8 +15,9 @@ import useVisable from '@shared/hooks/useVisable';
 
 
 export default function Header() {
-  const dispatch = useDispatch();
-  const [isAddTaskModalOpen, openAddTaskModalOpen, closeAddTaskModalOpen] = useVisable(false);
+  const [, toggleDrawer] = useToggleDrawer();
+  const [isAddTaskModalOpen, openAddTaskModalOpen, closeAddTaskModal] = useVisable(false);
+
 
   return (
     <Box sx={{flexGrow: 1}} position={'relative'}>
@@ -31,7 +32,7 @@ export default function Header() {
                 edge="start"
                 color="inherit"
                 sx={{padding: {mobile: '0 10px', tablet: '8px'}}}
-                onClick={() => dispatch(toggleDrawerOpen())}
+                onClick={toggleDrawer}
               >
                 <MenuIcon sx={{marginTop: '-3px'}}/>
               </IconButton>
