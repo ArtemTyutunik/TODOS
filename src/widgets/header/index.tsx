@@ -6,12 +6,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import {CustomSearch, SearchIconWrapper, StyledInputBase, UserSettingsMenu} from './ui';
 
-import {toggleDrawerOpen} from '@entities/drawer/store';
 import BasicModal from '@shared/components/modal';
 import {CreateTodoForm} from '@pages/todos/components/';
-import {Link} from 'react-router-dom';
 import AddButtonIcon from '@shared/components/AddIcon';
 import useVisable from '@shared/hooks/useVisable';
+import useToggleDrawer from '@entities/drawer/hooks/useToggleDrawer';
 
 
 export default function Header() {
@@ -81,8 +80,8 @@ export default function Header() {
 
               {/* modal window to add a new task*/}
               <BasicModal open={isAddTaskModalOpen}
-                onClose={closeAddTaskModalOpen}>
-                <CreateTodoForm onClose={closeAddTaskModalOpen}/>
+                onClose={closeAddTaskModal}>
+                <CreateTodoForm onClose={closeAddTaskModal}/>
               </BasicModal>
 
               <Tooltip title={'Your progress'}>
