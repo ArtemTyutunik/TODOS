@@ -1,31 +1,24 @@
-import {useDispatch, useSelector} from 'react-redux';
 import {Box, Drawer, Typography} from '@mui/material';
 
 import DrawerMenu from '@entities/drawer/components/drawerMenu';
-import {RootReducer} from '@app/store';
-import {toggleDrawerOpen} from '@entities/drawer/store';
+import useToggleDrawer from '@entities/drawer/hooks/useToggleDrawer';
 
 const MobileDrawerStyles = {
   'display': {largeMobile: 'block', tablet: 'none'},
-  '.css-4t3x6l-MuiPaper-root-MuiDrawer-paper': {
+  '.css-4t3x6l-MuiPaper-root-MuiDrawer-paper, .css-wf16b5': {
     width: '320px',
     paddingTop: '54px',
   },
 }
 
 const MobileDrawer = () => {
-  const {isOpenDrawer} = useSelector((state: RootReducer) => state.drawerReducer);
-  const dispatch = useDispatch()
-
-  const onCloseHandler = () => {
-    dispatch(toggleDrawerOpen())
-  }
+  const [isOpenDrawer, toggleDrawer] = useToggleDrawer();
 
   return (
     <Drawer variant={'temporary'}
       sx={MobileDrawerStyles}
       open={isOpenDrawer}
-      onClose={onCloseHandler}
+      onClose={toggleDrawer}
     >
       <Box>
         <Typography

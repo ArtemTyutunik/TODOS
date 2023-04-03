@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Grid, SelectChangeEvent, useTheme} from '@mui/material';
+import {Box, SelectChangeEvent, useTheme} from '@mui/material';
 import {ITodo, Priority} from '@shared/interfaces';
 import CheckboxComponent from '@entities/todos/components/Checkbox';
 import {EditTodoForm} from '../../components/';
@@ -33,13 +33,13 @@ const DetailsCard = ({todo, onComplete}: Props) => {
   }
 
   return (
-    <Box bgcolor={theme.background.paper} minWidth={'700px'}>
-      <Grid container>
-        <Grid item tablet={8}>
-          <Box mb={'30px'} display={'flex'} marginRight={'10px'} marginTop={'10px'}>
-            <Box display={'flex'}>
+    <Box bgcolor={theme.background.paper} minWidth={{mobile: '330px', largeMobile: '400px', tablet: '700px'}}>
+      <Box display={'flex'}>
+        <Box mb={'30px'} display={'flex'} width={'60%'} marginRight={'10px'} marginTop={'10px'}>
+          <>
+            <div>
               <CheckboxComponent onComplete={onComplete} todo={todo}/>
-            </Box>
+            </div>
             {
               isEditDetailsOpen ? (
                   <Box width={'100%'}>
@@ -55,9 +55,9 @@ const DetailsCard = ({todo, onComplete}: Props) => {
                     onOpenForm={openEditDetails}/>
               )
             }
-          </Box>
-        </Grid>
-        <Grid item tablet={4}>
+          </>
+        </Box>
+        <Box width={'40%'}>
           <Box width={'100%'} height={'100%'} sx={{backgroundColor: '#fafafa'}} padding={'10px 25px'}>
             <DetailActionPanelItem label={'Due date'}>
               <DueDateButton date={todoDate} variant={'Standard'} onPassDateToBaseForm={setTodoDate}/>
@@ -66,8 +66,8 @@ const DetailsCard = ({todo, onComplete}: Props) => {
               <PriorityButton initialPriority={priority} changeHandler={onPriorityHandler} variant={'short'}/>
             </DetailActionPanelItem>
           </Box>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </Box>
   );
 };

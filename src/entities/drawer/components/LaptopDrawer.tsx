@@ -9,7 +9,7 @@ const LaptopDrawerStyles = (theme: Theme) => ({
   'position': 'static',
   'height': '100%',
   'background': theme.background.lightGrey,
-  '.css-12i7wg6-MuiPaper-root-MuiDrawer-paper': {
+  '.css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-1l8j5k8': {
     position: 'unset',
     backgroundColor: 'transparent',
   },

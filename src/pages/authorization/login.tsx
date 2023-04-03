@@ -1,5 +1,6 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 
 import {app} from '../../../firebaseConfig';
@@ -10,6 +11,7 @@ import useLocalStorage from '@shared/hooks/useLocalStorage';
 
 function Login() {
   const onSubmit= (data: IFormInputs) => loginHandler(data.login, data.password);
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const [, setValueLocalStorage] = useLocalStorage('user', null)
 
@@ -20,6 +22,7 @@ function Login() {
         .then((response) => {
           dispatch(authUser(response));
           setValueLocalStorage(response)
+          navigate('/today')
         })
         .catch((e: {code: string}) => {
           dispatch(authWithError(e.code));
