@@ -76,7 +76,7 @@ function LoginForm({onSubmit}: IInputsProps) {
           </Button>
           <Grid container>
             <Grid item>
-              <Link variant="body2" component = {RouterLink} to = 'sign-up'>
+              <Link variant="body2" component = {RouterLink} to='/sign-up'>
                 {'Don`t have an account? Sign Up'}
               </Link>
             </Grid>

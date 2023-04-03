@@ -72,14 +72,14 @@ const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
           >
               Sign Up
           </Button>
-        </Box>
-        <Grid container>
-          <Grid item>
-            <Link variant="body2" component = {RouterLink} to = '/'>
-              {'Have account? Login'}
-            </Link>
+          <Grid container>
+            <Grid item>
+              <Link variant="body2" component = {RouterLink} to = '/'>
+                {'Have account? Login'}
+              </Link>
+            </Grid>
           </Grid>
-        </Grid>
+        </Box>
       </Box>
     </Container>
   );
