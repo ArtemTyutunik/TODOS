@@ -15,8 +15,11 @@ const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
+    fetchTasks: (state, action) => {
+      return {...state, todos: [...action.payload, ...state.todos]};
+    },
     addNewTask: (state, action) => {
-      return {...state, todos: [action.payload, ...state.todos]};
+      return {...state, todos: [...state.todos, action.payload]};
     },
     toggleTaskComplete: (state, action) => {
       const completedTask = findTaskById(state, action.payload);
@@ -60,4 +63,5 @@ export const {addNewTask,
   deleteTask,
   createDuplicate,
   setPriority,
-  dispatchNewDate} = todosSlice.actions;
+  dispatchNewDate,
+  fetchTasks} = todosSlice.actions;
