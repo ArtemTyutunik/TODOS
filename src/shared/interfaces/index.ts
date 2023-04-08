@@ -3,7 +3,7 @@ export interface ITodo {
     id: number,
     description?: string,
     done?: boolean,
-    priority?: Priority,
+    priority: Priority,
     Label?: string,
     date?: IDate
 }

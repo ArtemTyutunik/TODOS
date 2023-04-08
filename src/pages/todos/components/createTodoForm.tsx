@@ -56,7 +56,7 @@ const CreateTodoForm = ({onClose, initialDate}: Props) => {
   }
 
 
-  const onSubmit = (data:IBaseFormInputsValues, date: IDate, priority: Priority | string | undefined, Label: Label ) => {
+  const onSubmit = (data:IBaseFormInputsValues, date: IDate, priority: Priority | undefined, Label: Label ) => {
     const id = Date.now()
     const todoPriority = priority || '4'
     dispatch(addNewTask({...data, id, done: false, date: date, priority: todoPriority, Label}));

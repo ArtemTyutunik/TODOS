@@ -29,7 +29,7 @@ const CancelButtonStyles = (theme: Theme) => ({
 
 interface Props {
   onClose: () => void,
-  onSubmit: (data: IBaseFormInputsValues, date: IDate, priority: Priority | string | undefined, Label: Label) => void,
+  onSubmit: (data: IBaseFormInputsValues, date: IDate, priority: Priority | undefined, Label: Label) => void,
   todo?: ITodo,
   initialDate?: string,
   hideActions?: boolean
