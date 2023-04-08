@@ -19,7 +19,7 @@ const todosSlice = createSlice({
       return {...state, todos: [...action.payload, ...state.todos]};
     },
     addNewTask: (state, action) => {
-      return {...state, todos: [action.payload, ...state.todos]};
+      return {...state, todos: [...state.todos, action.payload]};
     },
     toggleTaskComplete: (state, action) => {
       const completedTask = findTaskById(state, action.payload);
