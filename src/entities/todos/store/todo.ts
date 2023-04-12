@@ -37,11 +37,6 @@ const todosSlice = createSlice({
       const deletedTaskIndex = state.todos.findIndex((task) => task.id === action.payload);
       state.todos = [...state.todos.slice(0, deletedTaskIndex), ...state.todos.slice(deletedTaskIndex + 1)];
     },
-    createDuplicate: (state, action) => {
-      const originTask = findTaskById(state, action.payload);
-      const duplicate = {...originTask!, id: Date.now()};
-      return {...state, todos: [duplicate, ...state.todos]};
-    },
     setPriority: (state, action) => {
       const task = findTaskById(state, action.payload.id);
             task!.priority = action.payload.priority;
@@ -61,7 +56,6 @@ export const {addNewTask,
   toggleTaskComplete,
   editTask,
   deleteTask,
-  createDuplicate,
   setPriority,
   dispatchNewDate,
   fetchTasks} = todosSlice.actions;

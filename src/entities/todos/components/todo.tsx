@@ -1,12 +1,12 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
 
-import {createDuplicate, deleteTask, setPriority, toggleTaskComplete} from '../store/todo';
+import {addNewTask, deleteTask, setPriority, toggleTaskComplete} from '../store/todo';
 import {EditTodoForm} from '@pages/todos/components';
 import {ITodo} from '@shared/interfaces';
 import TodoCard from './todoCard';
 import useVisable from '@shared/hooks/useVisable';
-import {deleteTodoById} from '@shared/api/services/fetchTodos';
+import {deleteTodoById, postNewTodo} from '@shared/api/services/fetchTodos';
 
 interface Props {
     todo: ITodo
@@ -34,7 +34,9 @@ const Todo = ({todo}: Props) => {
   };
   const onDuplicateAction = (e: React.SyntheticEvent) => {
     e.stopPropagation()
-    dispatch(createDuplicate(id));
+    const newTodo = ({...todo, id: Date.now()})
+    dispatch(addNewTask(newTodo));
+    postNewTodo('1234', newTodo).then((response) => console.log(response))
   };
   const setPriorityAction = (e: React.SyntheticEvent, priority: string) => {
     e.stopPropagation()
