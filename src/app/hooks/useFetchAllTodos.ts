@@ -1,23 +1,23 @@
 import {useDispatch} from 'react-redux';
 import {useEffect, useState} from 'react';
 import {fetchTasks} from '@entities/todos/store/todo';
+import {getUserTodos} from '@shared/api/services/fetchTodos';
+import {ITodo} from '@shared/interfaces';
 
 export const useFetchAllTodos = () => {
   const dispatch = useDispatch();
   const [isFetching, setIsFetching] = useState(false)
 
-  useEffect(() => {
-    const fetchingData = () => new Promise((resolve) => {
-      setIsFetching(true)
-      fetch('http://localhost:4444/api/get_all/1234')
-          .then((res) => res.json())
-          .then((res) => resolve(res))
-    })
+  const onFulfilled = (result: ITodo[]) => {
+    setIsFetching(false)
+    dispatch(fetchTasks(result))
+  }
 
-    fetchingData().then((res) => {
-      setIsFetching(false)
-      dispatch(fetchTasks(res))
-    })
+  useEffect(() => {
+    setIsFetching(true)
+    getUserTodos('1234')
+        // @ts-ignore
+        .then((result) => onFulfilled(result))
   }, [])
 
   return [isFetching]

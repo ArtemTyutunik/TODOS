@@ -6,6 +6,7 @@ import {EditTodoForm} from '@pages/todos/components';
 import {ITodo} from '@shared/interfaces';
 import TodoCard from './todoCard';
 import useVisable from '@shared/hooks/useVisable';
+import {deleteTodoById} from '@shared/api/services/fetchTodos';
 
 interface Props {
     todo: ITodo
@@ -15,7 +16,6 @@ const Todo = ({todo}: Props) => {
   const {id} = todo;
   const dispatch = useDispatch();
   const [isEditing, openEditing, closeEditing] = useVisable(false);
-
 
   const onComplete = (e: React.SyntheticEvent) => {
     e.stopPropagation();
@@ -30,6 +30,7 @@ const Todo = ({todo}: Props) => {
   const onDeleteAction = (e: React.SyntheticEvent) => {
     e.stopPropagation()
     dispatch(deleteTask(id));
+    deleteTodoById(id)
   };
   const onDuplicateAction = (e: React.SyntheticEvent) => {
     e.stopPropagation()
