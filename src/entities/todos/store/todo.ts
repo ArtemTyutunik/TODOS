@@ -11,6 +11,15 @@ const initialState: IInitialState = {
 
 const findTaskById = (state: IInitialState, id: number) => state.todos.find((task) => task.id === id);
 
+const updateTodoInState = (state: IInitialState, todo: ITodo) => {
+  const index = state.todos.findIndex((element) => element.id === todo.id)
+  if (index !== undefined) {
+    return {...state,
+      todos: [...state.todos.slice(0, index), todo, ...state.todos.slice(index+1)],
+    }
+  }
+}
+
 const todosSlice = createSlice({
   name: 'todos',
   initialState,
@@ -26,14 +35,7 @@ const todosSlice = createSlice({
             completedTask!.done = !completedTask!.done;
     },
     editTask: (state, action) => {
-      const editTask = findTaskById(state, action.payload.id);
-      const index = editTask && state.todos.findIndex((element) => element.id === editTask.id)
-
-      if (index !== undefined) {
-        return {...state,
-          todos: [...state.todos.slice(0, index), action.payload, ...state.todos.slice(index+1)],
-        }
-      }
+      return updateTodoInState(state, action.payload)
     },
     deleteTask: (state, action) => {
       const deletedTaskIndex = state.todos.findIndex((task) => task.id === action.payload);
@@ -41,12 +43,14 @@ const todosSlice = createSlice({
     },
     setPriority: (state, action) => {
       const task = findTaskById(state, action.payload.id);
-            task!.priority = action.payload.priority;
+      if (task) {
+        return updateTodoInState(state, {...task, priority: action.payload.priority})
+      }
     },
     dispatchNewDate: (state, action) => {
       const task = findTaskById(state, action.payload.id);
       if (task) {
-        task.date = action.payload.newDate
+        return updateTodoInState(state, {...task, date: action.payload.newDate})
       }
     },
   },
