@@ -5,11 +5,11 @@ interface IInitialState {
     todos: ITodo[]
 }
 
-const initialState:IInitialState = {
+const initialState: IInitialState = {
   todos: [],
 };
 
-const findTaskById = (state:IInitialState, id: number) => state.todos.find((task) => task.id === id);
+const findTaskById = (state: IInitialState, id: number) => state.todos.find((task) => task.id === id);
 
 const todosSlice = createSlice({
   name: 'todos',
@@ -27,11 +27,13 @@ const todosSlice = createSlice({
     },
     editTask: (state, action) => {
       const editTask = findTaskById(state, action.payload.id);
-            editTask!.label = action.payload.label;
-            editTask!.description = action.payload?.description;
-            editTask!.date = action.payload?.date;
-            editTask!.priority = action.payload?.priority;
-            editTask!.Label = action.payload?.Label;
+      const index = editTask && state.todos.findIndex((element) => element.id === editTask.id)
+
+      if (index !== undefined) {
+        return {...state,
+          todos: [...state.todos.slice(0, index), action.payload, ...state.todos.slice(index+1)],
+        }
+      }
     },
     deleteTask: (state, action) => {
       const deletedTaskIndex = state.todos.findIndex((task) => task.id === action.payload);
