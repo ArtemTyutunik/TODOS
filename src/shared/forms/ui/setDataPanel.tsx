@@ -1,4 +1,3 @@
-import {useContext} from 'react';
 import {Box, Divider} from '@mui/material';
 import DueDateButton from '@shared/components/DueDateComponents';
 import PriorityButton from '@shared/components/Priority/PriorityButton';
