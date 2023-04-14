@@ -1,15 +1,12 @@
 import React, {useState} from 'react';
-
-import {Controller, useForm} from 'react-hook-form';
-import {Box, Button, Divider, TextField, Theme} from '@mui/material';
+import {useForm} from 'react-hook-form';
+import {Box, Button, SelectChangeEvent, Theme} from '@mui/material';
 import {IBaseFormInputsValues} from '../interfaces/interfaces';
 import {IDate, ITodo, Priority, Label} from '../../interfaces';
-import {taskNameValidation} from '../validation/validation';
-import DueDateButton from '@shared/components/DueDateComponents';
 import {useTodoDate} from '@entities/todos/hooks';
-import PriorityButton from '@shared/components/Priority/PriorityButton';
 import useSelectPriority from '@shared/hooks/useSelectPriority';
-import AddLabelButton from '@shared/components/AddLabel/AddLabelButton';
+import TodoFormInputs from '@shared/forms/ui/Inputs';
+import FormActions from '@shared/forms/ui/setDataPanel';
 
 const formStyles = {
   border: '1px solid #eee',
@@ -27,6 +24,15 @@ const CancelButtonStyles = (theme: Theme) => ({
   padding: '1px 10px',
 });
 
+interface IFormContext {
+  todoDate: IDate,
+  setTodoDate: (newDate: IDate) => void,
+  priority: Priority | undefined,
+  setPriority: (event: SelectChangeEvent<Priority>) => void,
+  Label: string | undefined,
+  setLabel: React.Dispatch<React.SetStateAction<string | undefined>>
+}
+
 interface Props {
   onClose: () => void,
   onSubmit: (data: IBaseFormInputsValues, date: IDate, priority: Priority | undefined, Label: Label) => void,
@@ -34,6 +40,8 @@ interface Props {
   initialDate?: string,
   hideActions?: boolean
 }
+
+export const FormContext = React.createContext<IFormContext>(null!)
 
 const BaseTodoForm = ({
   onClose,
@@ -50,50 +58,24 @@ const BaseTodoForm = ({
   const [priority, setPriority] = useSelectPriority(todo?.priority);
   const [Label, setLabel] = useState(todo ? todo.Label : '')
 
-  const onPassDateToBaseForm = (date: IDate) => {
-    setTodoDate(date);
-  };
+  const formContextValues = {
+    todoDate,
+    setTodoDate,
+    priority,
+    setPriority,
+    Label,
+    setLabel,
+  }
+
   return <Box component='form'
     onSubmit={handleSubmit((data) => onSubmit(data, todoDate, priority, Label))}
     sx={(theme) => ({color: theme.description})}>
     <Box sx={formStyles}>
-      <Controller name={'label'}
-        rules={taskNameValidation}
-        control={control}
-        render={({field}) => <TextField {...field}
-          variant={'standard'}
-          onChange={field.onChange}
-          placeholder={'Task name'}
-          fullWidth
-          autoFocus
-          InputProps={{disableUnderline: true}}/>}
-      />
+      <TodoFormInputs control={control}/>
 
-      <Controller name={'description'}
-        control={control}
-        render={({field}) => <TextField {...field}
-          variant={'standard'}
-          onChange={field.onChange}
-          placeholder={'Description'}
-          fullWidth
-          InputProps={{disableUnderline: true}}/>}
-      />
-      {
-        !hideActions && (
-          <Box display={'flex'} alignItems={'center'}>
-            <Box mr={'15px'}>
-              <DueDateButton date={todoDate} onPassDateToBaseForm={onPassDateToBaseForm}/>
-            </Box>
-            <Box mr={'15px'}>
-              <PriorityButton initialPriority={priority} changeHandler={setPriority} variant={'standard'}/>
-            </Box>
-            <Box>
-              <AddLabelButton initialLabel={Label} onAddNewLabel={(newLabel: string | undefined) => setLabel(newLabel)}/>
-            </Box>
-            <Divider/>
-          </Box>
-        )
-      }
+      <FormContext.Provider value={formContextValues}>
+        <FormActions hideActions={hideActions}/>
+      </FormContext.Provider>
 
       <Box display={'flex'} marginTop={'5px'} justifyContent={'flex-end'}>
         <Button variant="contained" color={'inherit'}
