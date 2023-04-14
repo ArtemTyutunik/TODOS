@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 
 import BaseTodoForm from '@shared/forms/ui/baseTodoForm';
 import {editTask} from '@entities/todos/store/todo';
-import {IBaseFormInputsValues} from '@shared/forms/interfaces/interfaces';
+import {BaseFormInputs} from '@shared/forms/interfaces/interfaces';
 import {IDate, ITodo, Priority, Label} from '@shared/interfaces';
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
 const EditTodoForm = ({onClose, todo, hideActions}: Props) => {
   const dispatch = useDispatch();
 
-  const onSubmit = (data:IBaseFormInputsValues, date: IDate, priority: Priority | string | undefined, Label: Label) => {
+  const onSubmit = (data:BaseFormInputs, date: IDate, priority: Priority | string | undefined, Label: Label) => {
     dispatch(editTask({...todo, ...data, date, priority, Label}));
     onClose();
   };
