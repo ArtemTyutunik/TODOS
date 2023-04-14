@@ -2,10 +2,10 @@ import {Controller} from 'react-hook-form';
 import {TextField} from '@mui/material';
 import {Control} from 'react-hook-form'
 import {taskNameValidation} from '@shared/forms/validation/validation';
-import {IBaseFormInputsValues} from '@shared/forms/interfaces/interfaces';
+import {BaseFormInputs} from '@shared/forms/interfaces/interfaces';
 
 interface Props {
-    control: Control<IBaseFormInputsValues>
+    control: Control<BaseFormInputs>
 }
 const TodoFormInputs = ({control}: Props) => {
   return (

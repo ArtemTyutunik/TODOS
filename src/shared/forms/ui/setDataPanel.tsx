@@ -28,4 +28,4 @@ const FormActions = ({hideActions}: Props) => {
 }
 
 
-export default SetDataPanel;
+export default FormActions;
