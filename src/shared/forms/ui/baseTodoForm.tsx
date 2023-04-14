@@ -75,9 +75,9 @@ const BaseTodoForm = ({
     <Box sx={formStyles}>
       <TodoFormInputs control={control}/>
 
-      <FormContext.Provider value={formContextValues}>
+      <BaseFormContext values={formContextValues}>
         <FormActions hideActions={hideActions}/>
-      </FormContext.Provider>
+      </BaseFormContext>
 
       <FormSubmissionButtons isValid={isValid} onClose={onClose}/>
     </Box>

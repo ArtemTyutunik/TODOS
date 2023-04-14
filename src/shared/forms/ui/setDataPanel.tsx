@@ -3,13 +3,13 @@ import {Box, Divider} from '@mui/material';
 import DueDateButton from '@shared/components/DueDateComponents';
 import PriorityButton from '@shared/components/Priority/PriorityButton';
 import AddLabelButton from '@shared/components/AddLabel/AddLabelButton';
-import {FormContext} from '@shared/forms/ui/baseTodoForm';
+import {useFormContext} from '@shared/forms/hooks/UseBaseFormContext';
 
 interface Props {
     hideActions?: boolean
 }
-const SetDataPanel = ({hideActions}: Props) => {
-  const {todoDate, setTodoDate, priority, setPriority, Label, setLabel} = useContext(FormContext)
+const FormActions = ({hideActions}: Props) => {
+  const {todoDate, setTodoDate, priority, setPriority, Label, setLabel} = useFormContext()
 
   return !hideActions ? (
     <Box display={'flex'} alignItems={'center'}>
