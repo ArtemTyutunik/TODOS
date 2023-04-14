@@ -7,6 +7,8 @@ import {useTodoDate} from '@entities/todos/hooks';
 import useSelectPriority from '@shared/hooks/useSelectPriority';
 import TodoFormInputs from '@shared/forms/ui/Inputs';
 import FormActions from '@shared/forms/ui/setDataPanel';
+import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
+import BaseFormContext from '@shared/forms/hooks/UseBaseFormContext';
 
 const formStyles = {
   border: '1px solid #eee',
@@ -77,19 +79,7 @@ const BaseTodoForm = ({
         <FormActions hideActions={hideActions}/>
       </FormContext.Provider>
 
-      <Box display={'flex'} marginTop={'5px'} justifyContent={'flex-end'}>
-        <Button variant="contained" color={'inherit'}
-          sx={CancelButtonStyles}
-          onClick={onClose}>
-                    Cancel
-        </Button>
-        <Button variant="contained"
-          type={'submit'}
-          disabled={!isValid}
-          sx={{textTransform: 'initial'}}>
-                    Submit
-        </Button>
-      </Box>
+      <FormSubmissionButtons isValid={isValid} onClose={onClose}/>
     </Box>
 
   </Box>;
