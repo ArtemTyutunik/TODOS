@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, SelectChangeEvent, useTheme} from '@mui/material';
-import {ITodo, Priority} from '@shared/interfaces';
+import {IDate, ITodo, Priority} from '@shared/interfaces';
 import CheckboxComponent from '@entities/todos/components/Checkbox';
 import {EditTodoForm} from '../../components/';
 import TaskOverview from './components/TaskOverview';
@@ -12,6 +12,7 @@ import useSelectPriority from '@shared/hooks/useSelectPriority';
 import {useDispatch} from 'react-redux';
 import {setPriority} from '@entities/todos/store/todo';
 import useVisable from '@shared/hooks/useVisable';
+import {sendUpdatedTodo} from '@shared/api/services/fetchTodos';
 
 interface Props {
   todo: ITodo,
@@ -28,8 +29,15 @@ const DetailsCard = ({todo, onComplete}: Props) => {
 
   const onPriorityHandler = (event: SelectChangeEvent<Priority>) => {
     const priority = event.target.value
+    const data = {id, priority}
     onSelected(event)
-    dispatch(setPriority({id, priority}))
+    sendUpdatedTodo(data)
+    dispatch(setPriority(data))
+  }
+
+  const onDateSelect = (newDate: IDate) => {
+    setTodoDate(newDate)
+    sendUpdatedTodo({id, date: newDate})
   }
 
   return (
@@ -60,7 +68,7 @@ const DetailsCard = ({todo, onComplete}: Props) => {
         <Box width={'40%'}>
           <Box width={'100%'} height={'100%'} sx={{backgroundColor: '#fafafa'}} padding={'10px 25px'}>
             <DetailActionPanelItem label={'Due date'}>
-              <DueDateButton date={todoDate} variant={'Standard'} onPassDateToBaseForm={setTodoDate}/>
+              <DueDateButton date={todoDate} variant={'Standard'} onPassDateToBaseForm={onDateSelect}/>
             </DetailActionPanelItem>
             <DetailActionPanelItem label={'Set priority'}>
               <PriorityButton initialPriority={priority} changeHandler={onPriorityHandler} variant={'short'}/>
