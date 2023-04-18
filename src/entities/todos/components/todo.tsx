@@ -6,7 +6,7 @@ import {EditTodoForm} from '@pages/todos/components';
 import {ITodo} from '@shared/interfaces';
 import TodoCard from './todoCard';
 import useVisable from '@shared/hooks/useVisable';
-import {deleteTodoById, postNewTodo} from '@shared/api/services/fetchTodos';
+import {deleteTodoById, postNewTodo, sendUpdatedTodo} from '@shared/api/services/fetchTodos';
 
 interface Props {
     todo: ITodo
@@ -19,6 +19,7 @@ const Todo = ({todo}: Props) => {
 
   const onComplete = (e: React.SyntheticEvent) => {
     e.stopPropagation();
+    sendUpdatedTodo({id, done: !todo.done})
     dispatch(toggleTaskComplete(Number(id)));
   };
 
@@ -40,7 +41,9 @@ const Todo = ({todo}: Props) => {
   };
   const setPriorityAction = (e: React.SyntheticEvent, priority: string) => {
     e.stopPropagation()
-    dispatch(setPriority({id, priority}));
+    const data = {id, priority}
+    sendUpdatedTodo(data)
+    dispatch(setPriority(data));
   };
 
   if (isEditing) return <EditTodoForm onClose={closeEditing} todo={todo}/>;
