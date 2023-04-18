@@ -1,9 +1,6 @@
 import React from 'react';
 import {Box, SelectChangeEvent, useTheme} from '@mui/material';
 import {IDate, ITodo, Priority} from '@shared/interfaces';
-import CheckboxComponent from '@entities/todos/components/Checkbox';
-import {EditTodoForm} from '../../components/';
-import TaskOverview from './components/TaskOverview';
 import DetailActionPanelItem from '@pages/todos/pages/TodoDetailPage/components/DetailsActionsPanelItem';
 import DueDateButton from '@shared/components/DueDateComponents';
 import {useTodoDate} from '@entities/todos/hooks';
@@ -11,8 +8,8 @@ import PriorityButton from '@shared/components/Priority/PriorityButton';
 import useSelectPriority from '@shared/hooks/useSelectPriority';
 import {useDispatch} from 'react-redux';
 import {setPriority} from '@entities/todos/store/todo';
-import useVisable from '@shared/hooks/useVisable';
 import {sendUpdatedTodo} from '@shared/api/services/fetchTodos';
+import InfoCard from '@pages/todos/pages/TodoDetailPage/components/InfoCard';
 
 interface Props {
   todo: ITodo,
@@ -20,10 +17,9 @@ interface Props {
 }
 
 const DetailsCard = ({todo, onComplete}: Props) => {
-  const {label, description, date, id} = todo
+  const {date, id} = todo
   const theme = useTheme()
   const dispatch = useDispatch()
-  const [isEditDetailsOpen, openEditDetails, closeEditDetails] = useVisable(false)
   const [todoDate, setTodoDate] = useTodoDate(date, id)
   const [priority, onSelected] = useSelectPriority(todo.priority)
 
@@ -43,28 +39,8 @@ const DetailsCard = ({todo, onComplete}: Props) => {
   return (
     <Box bgcolor={theme.background.paper} minWidth={{mobile: '330px', largeMobile: '400px', tablet: '700px'}}>
       <Box display={'flex'}>
-        <Box mb={'30px'} display={'flex'} width={'60%'} marginRight={'10px'} marginTop={'10px'}>
-          <>
-            <div>
-              <CheckboxComponent onComplete={onComplete} todo={todo}/>
-            </div>
-            {
-              isEditDetailsOpen ? (
-                  <Box width={'100%'}>
-                    <EditTodoForm
-                      onClose={closeEditDetails}
-                      todo={todo}
-                      hideActions/>
-                  </Box>
-              ) : (
-                  <TaskOverview
-                    label={label}
-                    description={description}
-                    onOpenForm={openEditDetails}/>
-              )
-            }
-          </>
-        </Box>
+        <InfoCard todo={todo} onComplete={onComplete}/>
+
         <Box width={'40%'}>
           <Box width={'100%'} height={'100%'} sx={{backgroundColor: '#fafafa'}} padding={'10px 25px'}>
             <DetailActionPanelItem label={'Due date'}>
