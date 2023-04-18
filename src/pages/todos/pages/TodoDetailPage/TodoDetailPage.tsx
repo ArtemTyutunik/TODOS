@@ -10,7 +10,7 @@ const TodoDetailPage = () => {
   const {id} = useParams()
   const todos = useSelector((state: RootReducer) => state.todosReducer.todos);
   const dispatch = useDispatch()
-  const detailedTodo = todos.find( (todo) => todo.id === Number(id))
+  const detailedTodo = todos.find((todo) => todo.id === Number(id))
 
   const onComplete = (e: React.SyntheticEvent) => {
     e.stopPropagation();
@@ -19,9 +19,7 @@ const TodoDetailPage = () => {
 
   return (
     detailedTodo ?
-    <BasicModal open={true} onClose={()=>{
-      window.history.back()
-    }}>
+    <BasicModal open={true} onClose={()=> window.history.back()}>
       <DetailsCard todo={detailedTodo!} onComplete={onComplete}/>
     </BasicModal> : null
   );
