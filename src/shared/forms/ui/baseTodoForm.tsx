@@ -31,8 +31,8 @@ const BaseTodoForm = ({
   initialDate,
   hideActions}: Props) => {
   const defaultInputValues = {
-    label: todo ? todo.label : '',
-    description: todo ? todo.description : '',
+    label: todo?.label || '',
+    description: todo?.description || '',
   }
 
   const {control, handleSubmit, formState: {isValid}} = useForm<BaseFormInputs>({defaultValues: defaultInputValues});
