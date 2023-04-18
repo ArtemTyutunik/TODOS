@@ -64,8 +64,6 @@ const TodoCard = ({
                 }
               </Box>
             </Box>
-
-
           </Box>
         </Box>
 

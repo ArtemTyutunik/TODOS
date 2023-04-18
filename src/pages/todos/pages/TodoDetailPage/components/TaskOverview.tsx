@@ -23,7 +23,7 @@ const TaskOverview = ({label, description, onOpenForm}: Props) => {
                   <Box sx={{cursor: 'text'}} display={'flex'} alignItems={'center'} color={'#0000008F'} >
                     <DescriptionOutlinedIcon sx={{fontSize: '20px', color: 'inherit'}}/>
                     <Typography paddingLeft={'10px'} fontSize={'14px'} color={'inherit'}>
-                          Description
+                        Description
                     </Typography>
                   </Box>
               )}
