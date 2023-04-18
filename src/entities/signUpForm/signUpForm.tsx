@@ -1,16 +1,14 @@
 import React, {FC} from 'react';
-
-import {useForm, useFormState, Controller} from 'react-hook-form';
-import {Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography} from '@mui/material';
-
+import {useForm, useFormState} from 'react-hook-form';
+import {Box, Button, Container, CssBaseline, Grid, Link, Typography} from '@mui/material';
 import {IFormInputs, IInputsProps} from '@shared/forms/interfaces/interfaces';
-import {loginValidation, passwordValidation} from '@shared/forms/validation/validation';
 import {Link as RouterLink} from 'react-router-dom';
+import FormInputs from '@entities/signUpForm/FormInputs';
 
 
 const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
   const {handleSubmit, control} = useForm<IFormInputs>({mode: 'onChange'});
-  const {errors, isValid} = useFormState({control});
+  const {isValid} = useFormState({control});
   return (
     <Container component="main" maxWidth="laptop">
       <CssBaseline />
@@ -27,42 +25,7 @@ const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
         </Typography>
 
         <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{mt: 1}}>
-          <Controller
-            control={control}
-            name={'login'}
-            rules={loginValidation}
-            render={({field}) => <TextField
-              onChange={field.onChange}
-              margin="normal"
-              required
-              fullWidth
-              label="Email"
-              name="email"
-              type = "email"
-              autoComplete="email"
-              autoFocus
-              error={ !!errors?.login?.message }
-              helperText={ errors?.login?.message }
-            />}
-          />
-          <Controller
-            control={control}
-            name={'password'}
-            rules = {passwordValidation}
-            render={({field}) => <TextField
-              onChange={field.onChange}
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              error={ !!errors?.password?.message }
-              helperText={ errors?.password?.message }
-            />}
-          />
+          <FormInputs control={control}/>
           <Button
             type="submit"
             fullWidth
