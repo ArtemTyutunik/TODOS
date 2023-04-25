@@ -1,7 +1,7 @@
 import {useDispatch} from 'react-redux';
 import {useEffect, useState} from 'react';
 import {fetchTasks} from '@entities/todos/store/todo';
-import {getUserTodos} from '@shared/api/services/fetchTodos';
+import {getUserTodos} from '@shared/api/services/todosService/fetchTodos';
 import {ITodo} from '@shared/interfaces';
 
 export const useFetchAllTodos = () => {
@@ -15,9 +15,7 @@ export const useFetchAllTodos = () => {
 
   useEffect(() => {
     setIsFetching(true)
-    getUserTodos('1234')
-        // @ts-ignore
-        .then((result) => onFulfilled(result))
+    onFulfilled([])
   }, [])
 
   return [isFetching]

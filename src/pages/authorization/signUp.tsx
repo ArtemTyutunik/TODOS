@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import {signUpUser} from './store';
 import SignUpForm from '@entities/signUpForm/signUpForm';
 import useLocalStorage from '@shared/hooks/useLocalStorage';
+import {signUpWithLoginAndPassword} from '@shared/api/services/authorizationService';
 
 function SignUp() {
   const dispatch = useDispatch();

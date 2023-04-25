@@ -93,10 +93,10 @@ export default function UserSettingsMenu() {
               </Avatar>
               <Box>
                 <Typography fontWeight={'bold'}>
-                  {user.user.email}
+                  {user?.login}
                 </Typography>
                 <Typography>
-                  {user.user.email.replace('@gmail.com', '')}
+                  {user?.login.replace('@gmail.com', '')}
                 </Typography>
               </Box>
             </ListItemButton>
