@@ -1,8 +1,6 @@
 import {IFormInputs} from '@shared/forms/interfaces/interfaces';
 import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
-import {createUserWithEmailAndPassword, getAuth} from 'firebase/auth';
-import {app} from '../../../firebaseConfig';
 
 import {signUpUser} from './store';
 import SignUpForm from '@entities/signUpForm/signUpForm';
@@ -15,8 +13,7 @@ function SignUp() {
   const onSubmit = (data: IFormInputs) => signUpHandler(data.login, data.password);
 
   function signUpHandler(login: string, password: string) {
-    const auth = getAuth(app);
-    createUserWithEmailAndPassword(auth, login, password)
+    signUpWithLoginAndPassword(login, password)
         .then((response)=> {
           dispatch(signUpUser(response));
           navigate('/today')
