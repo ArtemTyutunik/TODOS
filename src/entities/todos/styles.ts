@@ -14,7 +14,7 @@ export const TodoFlexboxStyles = {
 };
 
 export const TodoLabelStyles = {
-  fontSize: '20px',
+  fontSize: '17px',
   fontWeight: 400,
   lineHeight: 1.3,
 };
