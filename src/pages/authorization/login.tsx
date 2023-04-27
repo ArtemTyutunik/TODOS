@@ -20,8 +20,8 @@ function Login() {
           setValueLocalStorage(response)
           navigate('/today')
         })
-        .catch((e: {code: string}) => {
-          dispatch(authWithError(e.code));
+        .catch((error) => {
+          dispatch(authWithError(error));
         });
   };
   return (

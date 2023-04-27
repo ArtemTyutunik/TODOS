@@ -1,5 +1,17 @@
 import {fetchRequest} from '@shared/api/services/constants';
 
+//@ts-ignore
+const processRequest = async (response) => {
+  if (!response.ok) {
+    const data = await response.text()
+    if (response.status == 500) {
+      throw new Error('Sorry unexpected error. Try later.')
+    }
+    throw new Error(data)
+  } else {
+    return response.json()
+  }
+}
 
 export const loginWithLoginAndPassword = (login: string, password: string ) => new Promise((resolve, reject) => {
   const options = {
@@ -12,14 +24,14 @@ export const loginWithLoginAndPassword = (login: string, password: string ) => n
 
   fetchRequest('auth', options)
       // @ts-ignore
-      .then((response) => response.json())
-      .then((response) => {
-        resolve(response)
+      .then(processRequest)
+      .then((refactor) => {
+        resolve(refactor)
       })
-      .catch((error) => reject(error))
+      .catch((error) => reject(error.message))
 })
 
-export const signUpWithLoginAndPassword = (login: string, password: string ) => new Promise((resolve, reject) => {
+export const signUpWithLoginAndPassword = (login: string, password: string ) => new Promise( (resolve, reject) => {
   const options = {
     method: 'POST',
     headers: {
@@ -28,9 +40,12 @@ export const signUpWithLoginAndPassword = (login: string, password: string ) => 
     body: JSON.stringify({login, password}),
   }
 
-  fetchRequest('sign_in', options)
-      // @ts-ignore
-      .then((result) => result.json())
-      .then((result) => resolve(result))
-      .catch((error) => reject(error))
+  fetchRequest('sign_up', options)
+      .then(processRequest)
+      .then((result) => {
+        resolve(result)
+      })
+      .catch((error) => {
+        reject(error.message)
+      })
 })

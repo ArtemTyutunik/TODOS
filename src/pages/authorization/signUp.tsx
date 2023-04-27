@@ -2,7 +2,7 @@ import {IFormInputs} from '@shared/forms/interfaces/interfaces';
 import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
-import {signUpUser} from './store';
+import {authWithError, signUpUser} from './store';
 import SignUpForm from '@entities/signUpForm/signUpForm';
 import useLocalStorage from '@shared/hooks/useLocalStorage';
 import {signUpWithLoginAndPassword} from '@shared/api/services/authorizationService';
@@ -20,7 +20,9 @@ function SignUp() {
           navigate('/today')
           setValueLocalStorage(response);
         })
-        .catch((e) => console.log(e));
+        .catch((error) => {
+          dispatch(authWithError(error))
+        });
   }
 
   return <SignUpForm onSubmit={onSubmit}/>;
