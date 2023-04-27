@@ -6,7 +6,7 @@ import {EditTodoForm} from '@pages/todos/components';
 import {ITodo} from '@shared/interfaces';
 import TodoCard from './todoCard';
 import useVisable from '@shared/hooks/useVisable';
-import {deleteTodoById, postNewTodo, sendUpdatedTodo} from '@shared/api/services/fetchTodos';
+import {deleteTodoById, postNewTodo, sendUpdatedTodo} from '@shared/api/services/todosService/fetchTodos';
 
 interface Props {
     todo: ITodo

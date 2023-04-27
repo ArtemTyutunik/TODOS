@@ -2,7 +2,7 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import {Box, Container, CssBaseline, Typography} from '@mui/material';
 import {IFormInputs, IInputsProps} from '@shared/forms/interfaces/interfaces';
-import ErrorMessage from './ui/ErrorMessage';
+import ErrorMessage from '@shared/forms/authorization/ErrorMessage';
 import SubmitButton from '@shared/forms/authorization/SubmitButton';
 import FormLink from '@shared/forms/authorization/FormLink';
 import LoginInputs from '@entities/loginForm/ui/FormInputs';

@@ -6,6 +6,7 @@ import FormInputs from '@entities/signUpForm/FormInputs';
 import SubmitButton from '@shared/forms/authorization/SubmitButton';
 import FromLink from '@shared/forms/authorization/FormLink';
 import FormWrapper from '@shared/forms/authorization/FormWrapper';
+import ErrorMessage from '@shared/forms/authorization/ErrorMessage';
 
 const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
   const {handleSubmit, control} = useForm<IFormInputs>({mode: 'onChange'});
@@ -21,6 +22,7 @@ const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
 
           <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{mt: 1}}>
             <FormInputs control={control}/>
+            <ErrorMessage/>
             <SubmitButton control={control}>
               Sign up
             </SubmitButton>

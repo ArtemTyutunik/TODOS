@@ -5,7 +5,7 @@ import BaseTodoForm from '@shared/forms/ui/baseTodoForm';
 import {editTask} from '@entities/todos/store/todo';
 import {BaseFormInputs} from '@shared/forms/interfaces/interfaces';
 import {IDate, ITodo, Priority, Label} from '@shared/interfaces';
-import {sendUpdatedTodo} from '@shared/api/services/fetchTodos';
+import {sendUpdatedTodo} from '@shared/api/services/todosService/fetchTodos';
 
 interface Props {
     onClose: () => void,

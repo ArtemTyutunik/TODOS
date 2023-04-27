@@ -8,7 +8,7 @@ import PriorityButton from '@shared/components/Priority/PriorityButton';
 import useSelectPriority from '@shared/hooks/useSelectPriority';
 import {useDispatch} from 'react-redux';
 import {setPriority} from '@entities/todos/store/todo';
-import {sendUpdatedTodo} from '@shared/api/services/fetchTodos';
+import {sendUpdatedTodo} from '@shared/api/services/todosService/fetchTodos';
 import InfoCard from '@pages/todos/pages/TodoDetailPage/components/InfoCard';
 
 interface Props {
