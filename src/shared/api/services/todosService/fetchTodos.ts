@@ -12,11 +12,12 @@ export const getUserTodos = () => new Promise((resolve, reject) => {
 })
 
 export const deleteTodoById = (id: number) => new Promise(() => {
+  const url = `delete?user_id=${userId}&todo_id=${id}`
   const options = {
     method: 'DELETE',
   }
 
-  fetchRequest(`/delete/${id}`, options)
+  fetchRequest(url, options)
       .then((result) => console.log(result))
       .catch((error) => console.log(error))
 })
