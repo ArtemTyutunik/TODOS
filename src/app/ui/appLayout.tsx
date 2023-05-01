@@ -1,4 +1,4 @@
-import Header from '../../widgets/header';
+import Header from '../../widgets/header/header';
 import AuthorizedLayout from '@layouts/athorizedLayout';
 import {useSelector} from 'react-redux';
 import {RootReducer} from '../store';

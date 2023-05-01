@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {Link} from 'react-router-dom';
 import {Box, AppBar, Toolbar, IconButton, Typography, Container, Tooltip} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -13,7 +14,7 @@ import useVisable from '@shared/hooks/useVisable';
 import useToggleDrawer from '@entities/drawer/hooks/useToggleDrawer';
 
 
-export default function Header() {
+export default memo(function Header() {
   const [, toggleDrawer] = useToggleDrawer();
   const [isAddTaskModalOpen, openAddTaskModalOpen, closeAddTaskModal] = useVisable(false);
 
@@ -99,5 +100,5 @@ export default function Header() {
         </Container>
       </AppBar>
     </Box>
-  );
-}
+  )
+})
