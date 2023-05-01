@@ -3,7 +3,7 @@ import {fetchRequest} from '@shared/api/services/constants';
 
 const {user_id: userId} = JSON.parse(window.localStorage.getItem('user') || '')
 
-export const getUserTodos = (userId: string) => new Promise((resolve, reject) => {
+export const getUserTodos = () => new Promise((resolve, reject) => {
   fetchRequest(`get_all/${userId}`)
       // @ts-ignore
       .then((result) => result.json())
