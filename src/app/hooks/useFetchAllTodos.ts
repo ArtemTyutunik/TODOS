@@ -15,7 +15,10 @@ export const useFetchAllTodos = () => {
 
   useEffect(() => {
     setIsFetching(true)
-    onFulfilled([])
+    getUserTodos()
+        //@ts-ignore
+        .then(onFulfilled)
+        .catch((error) => console.log(error))
   }, [])
 
   return [isFetching]
