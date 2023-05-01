@@ -37,7 +37,7 @@ const Todo = ({todo}: Props) => {
     e.stopPropagation()
     const newTodo = ({...todo, id: Date.now()})
     dispatch(addNewTask(newTodo));
-    postNewTodo('1234', newTodo).then((response) => console.log(response))
+    postNewTodo(newTodo).then((response) => console.log(response))
   };
   const setPriorityAction = (e: React.SyntheticEvent, priority: string) => {
     e.stopPropagation()

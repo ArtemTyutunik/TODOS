@@ -61,7 +61,7 @@ const CreateTodoForm = ({onClose, initialDate}: Props) => {
     const id = Date.now()
     const todoPriority = priority || '4'
 
-    postNewTodo('1234', {...data, id, done: false, date: date, priority: todoPriority, Label})
+    postNewTodo({...data, id, done: false, date: date, priority: todoPriority, Label})
         .then(() => {
           dispatch(addNewTask({...data, id, done: false, date: date, priority: todoPriority, Label}));
           notify(id)

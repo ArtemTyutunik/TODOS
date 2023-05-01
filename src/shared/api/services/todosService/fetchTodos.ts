@@ -1,6 +1,7 @@
 import {ITodo} from '@shared/interfaces';
 import {fetchRequest} from '@shared/api/services/constants';
 
+const {user_id: userId} = JSON.parse(window.localStorage.getItem('user') || '')
 
 export const getUserTodos = (userId: string) => new Promise((resolve, reject) => {
   fetchRequest(`get_all/${userId}`)
@@ -20,16 +21,17 @@ export const deleteTodoById = (id: number) => new Promise(() => {
       .catch((error) => console.log(error))
 })
 
-export const postNewTodo = (userId: string, data: ITodo) => new Promise((resolve, reject) => {
+export const postNewTodo = (data: ITodo) => new Promise((resolve, reject) => {
   const whiteList = ['label', 'id', 'description', 'done', 'priority', 'Label', 'date', 'user_id']
+  const url = `create_todo?user_id=${userId}`
   const options = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({...data, user_id: userId}, whiteList),
+    body: JSON.stringify(data, whiteList),
   }
-  fetchRequest('create_todo', options)
+  fetchRequest(url, options)
       .then((result) => resolve(result))
       .catch((error) => reject(error))
 })
