@@ -38,16 +38,15 @@ export const postNewTodo = (data: ITodo) => new Promise((resolve, reject) => {
 })
 
 export const sendUpdatedTodo = (updatedData: any) => new Promise((resolve) => {
-  const {id, ...rest} = updatedData
-
+  const url = `update?user_id=${userId}`
   const options = {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(rest, (key, value) => value === undefined ? null : value),
+    body: JSON.stringify(updatedData, (key, value) => value === undefined ? null : value),
   }
-  fetchRequest(`update/${id}`, options)
+  fetchRequest(url, options)
       .then((response) => resolve(response))
 })
 
