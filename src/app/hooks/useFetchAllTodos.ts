@@ -1,10 +1,10 @@
 import {useDispatch} from 'react-redux';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {fetchTasks} from '@entities/todos/store/todo';
 import {getUserTodos} from '@shared/api/services/todosService/fetchTodos';
 import {ITodo} from '@shared/interfaces';
 
-export const useFetchAllTodos = () => {
+export const useFetchAllTodos = (): [boolean, () => void] => {
   const dispatch = useDispatch();
   const [isFetching, setIsFetching] = useState(false)
 
@@ -13,13 +13,13 @@ export const useFetchAllTodos = () => {
     dispatch(fetchTasks(result))
   }
 
-  useEffect(() => {
+  const fetchTodos = () => {
     setIsFetching(true)
     getUserTodos()
         //@ts-ignore
         .then(onFulfilled)
         .catch((error) => console.log(error))
-  }, [])
+  }
 
-  return [isFetching]
+  return [isFetching, fetchTodos]
 }

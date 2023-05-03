@@ -1,7 +1,15 @@
 import {ITodo} from '@shared/interfaces';
 import {fetchRequest} from '@shared/api/services/constants';
 
-const {user_id: userId} = JSON.parse(window.localStorage.getItem('user') || '')
+const getUserFromLocalStorage = () => {
+  const userData = window.localStorage.getItem('user')
+  if (userData) {
+    return JSON.parse(userData)
+  } else return {}
+}
+
+
+const {user_id: userId} = getUserFromLocalStorage()
 
 export const getUserTodos = () => new Promise((resolve, reject) => {
   fetchRequest(`get_all/${userId}`)
