@@ -1,11 +1,9 @@
 import Header from '../../widgets/header/header';
 import AuthorizedLayout from '@layouts/athorizedLayout';
-import {useSelector} from 'react-redux';
-import {RootReducer} from '../store';
 import UnauthorizedLayout from '@layouts/unathorizedLayout';
+import {memo} from 'react';
 
-const AppLayout = () => {
-  const {isAuth} = useSelector((state: RootReducer) => state.userReducer);
+const AppLayout = ({isAuth}: {isAuth: boolean}) => {
   return isAuth ?
         <>
           <Header/>
@@ -14,4 +12,4 @@ const AppLayout = () => {
         <UnauthorizedLayout/>;
 };
 
-export default AppLayout;
+export default memo(AppLayout);
