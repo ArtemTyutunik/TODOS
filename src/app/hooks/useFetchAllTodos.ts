@@ -1,25 +1,27 @@
-import {useDispatch} from 'react-redux';
-import {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useEffect, useState} from 'react';
 import {fetchTasks} from '@entities/todos/store/todo';
 import {getUserTodos} from '@shared/api/services/todosService/fetchTodos';
 import {ITodo} from '@shared/interfaces';
+import {userIdSelector} from '@pages/authorization/store';
 
-export const useFetchAllTodos = (): [boolean, () => void] => {
+export const useFetchAllTodos = (): [boolean] => {
   const dispatch = useDispatch();
   const [isFetching, setIsFetching] = useState(false)
+  const userId = useSelector(userIdSelector)
 
   const onFulfilled = (result: ITodo[]) => {
-    setIsFetching(false)
     dispatch(fetchTasks(result))
+    setIsFetching(false)
   }
 
-  const fetchTodos = () => {
+  useEffect(() => {
     setIsFetching(true)
-    getUserTodos()
+    getUserTodos(userId)
         //@ts-ignore
         .then(onFulfilled)
         .catch((error) => console.log(error))
-  }
+  }, [])
 
-  return [isFetching, fetchTodos]
+  return [isFetching]
 }

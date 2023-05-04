@@ -6,10 +6,11 @@ import DueDateButton from '@shared/components/DueDateComponents';
 import {useTodoDate} from '@entities/todos/hooks';
 import PriorityButton from '@shared/components/Priority/PriorityButton';
 import useSelectPriority from '@shared/hooks/useSelectPriority';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setPriority} from '@entities/todos/store/todo';
 import {sendUpdatedTodo} from '@shared/api/services/todosService/fetchTodos';
 import InfoCard from '@pages/todos/pages/TodoDetailPage/components/InfoCard';
+import {userIdSelector} from '@pages/authorization/store';
 
 interface Props {
   todo: ITodo,
@@ -19,6 +20,7 @@ interface Props {
 const DetailsCard = ({todo, onComplete}: Props) => {
   const {date, id} = todo
   const theme = useTheme()
+  const userId = useSelector(userIdSelector)
   const dispatch = useDispatch()
   const [todoDate, setTodoDate] = useTodoDate(date, id)
   const [priority, onSelected] = useSelectPriority(todo.priority)
@@ -27,13 +29,13 @@ const DetailsCard = ({todo, onComplete}: Props) => {
     const priority = event.target.value
     const data = {id, priority}
     onSelected(event)
-    sendUpdatedTodo(data)
+    sendUpdatedTodo(data, userId)
     dispatch(setPriority(data))
   }
 
   const onDateSelect = (newDate: IDate) => {
     setTodoDate(newDate)
-    sendUpdatedTodo({id, date: newDate})
+    sendUpdatedTodo({id, date: newDate}, userId)
   }
 
   return (
