@@ -25,7 +25,7 @@ const todosSlice = createSlice({
   initialState,
   reducers: {
     fetchTasks: (state, action) => {
-      return {...state, todos: [...action.payload, ...state.todos]};
+      return {...state, todos: [...action.payload]};
     },
     addNewTask: (state, action) => {
       return {...state, todos: [...state.todos, action.payload]};
