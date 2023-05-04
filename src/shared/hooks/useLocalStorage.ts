@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-export default function useLocalStorage<T>(key: string, initialValue: T) {
+export default function useLocalStorage<T>(key: string, initialValue?: T) {
   const [storedValue, setStoredValue] = useState(() => {
     if (!window) {
       return initialValue;

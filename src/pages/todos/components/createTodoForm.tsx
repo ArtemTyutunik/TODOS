@@ -1,4 +1,4 @@
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 // @ts-ignore
 import {toast} from 'react-toastify';
 import {Link as RouterLink, useNavigate} from 'react-router-dom';
@@ -9,6 +9,7 @@ import {addNewTask} from '@entities/todos/store/todo';
 import {BaseFormInputs} from '@shared/forms/interfaces/interfaces';
 import {IDate, Priority, Label} from '@shared/interfaces';
 import {postNewTodo} from '@shared/api/services/todosService/fetchTodos';
+import {userIdSelector} from '@pages/authorization/store';
 
 interface Props {
     onClose: () => void
@@ -50,6 +51,8 @@ interface Props {
 const CreateTodoForm = ({onClose, initialDate}: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
+  const userId = useSelector(userIdSelector)
+
 
   const notify = (id: number) => {
     // @ts-ignore
@@ -60,10 +63,11 @@ const CreateTodoForm = ({onClose, initialDate}: Props) => {
   const onSubmit = (data:BaseFormInputs, date: IDate, priority: Priority | undefined, Label: Label ) => {
     const id = Date.now()
     const todoPriority = priority || '4'
+    const createdTodo = {...data, id, done: false, date: date, priority: todoPriority, Label}
 
-    postNewTodo({...data, id, done: false, date: date, priority: todoPriority, Label})
+    postNewTodo(createdTodo, userId)
         .then(() => {
-          dispatch(addNewTask({...data, id, done: false, date: date, priority: todoPriority, Label}));
+          dispatch(addNewTask(createdTodo));
           notify(id)
           onClose();
         })

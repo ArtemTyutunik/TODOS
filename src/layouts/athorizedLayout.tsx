@@ -6,6 +6,8 @@ import {Box} from '@mui/material';
 import Routing from '@pages/routes';
 import {RootReducer} from '@app/store';
 import {LaptopDrawer, MobileDrawer} from '@entities/drawer';
+import {useFetchAllTodos} from '@app/hooks/useFetchAllTodos';
+import SpinnerComponent from '@app/ui/SpinnerComponent/SpinnerComponent';
 
 
 const routesStyles = (isDrawerOpen: boolean) => ({
@@ -20,7 +22,10 @@ const routesStyles = (isDrawerOpen: boolean) => ({
 
 const AuthorizedLayout= () => {
   const {isOpenDrawer} = useSelector((state: RootReducer) => state.drawerReducer);
+  const [isFetching] = useFetchAllTodos()
   return (
+      isFetching ?
+          <SpinnerComponent/> :
     <>
       <Box sx={{marginTop: 0}} height={'calc(100vh - 56px)'}>
         <Box paddingTop={'0 !important'}

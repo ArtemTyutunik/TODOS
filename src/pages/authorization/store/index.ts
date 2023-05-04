@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {RootReducer} from '@app/store';
 
 const configureInitialState = () => {
   const storageRes = localStorage.getItem('user');
@@ -33,5 +34,7 @@ const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
+
+export const userIdSelector = (state: RootReducer) => state.userReducer.user.user_id
 
 export const {authUser, logOutUser, authWithError, signUpUser} = userSlice.actions;
