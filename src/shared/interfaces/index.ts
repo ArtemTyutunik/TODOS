@@ -5,6 +5,7 @@ export interface ITodo {
     done?: boolean,
     priority: Priority,
     Label?: string,
+    Tags?: string[],
     date?: IDate
 }
 
