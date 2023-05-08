@@ -3,6 +3,8 @@ import ActionButton from '@shared/components/ActionButton';
 import {Box, TextField} from '@mui/material';
 import useAnchorElement from '@shared/hooks/useAnchorElement';
 import DropdownMenu from '@shared/components/dropdownMenu';
+import TagsList from '@shared/components/AddLabel/TagsList';
+import './AddLabelsStyles.css'
 
 interface Props {
   initialLabel: string | undefined,
@@ -43,6 +45,7 @@ const AddLabelButton = ({initialLabel, onAddNewLabel}: Props) => {
               value={label}
               onChange={(e) => setLabel(e.target.value)}
             />
+            <TagsList/>
           </form>
         </Box>
       </DropdownMenu>
