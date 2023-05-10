@@ -47,6 +47,12 @@ const todosSlice = createSlice({
         return updateTodoInState(state, {...task, priority: action.payload.priority})
       }
     },
+    addNewTodoTag: (state, action) => {
+      const task = findTaskById(state, action.payload.id);
+      if (task) {
+        return updateTodoInState(state, {...task, Tags: [...task.Tags!, action.payload.newTag]})
+      }
+    },
     dispatchNewDate: (state, action) => {
       const task = findTaskById(state, action.payload.id);
       if (task) {
@@ -64,4 +70,5 @@ export const {addNewTask,
   deleteTask,
   setPriority,
   dispatchNewDate,
+  addNewTodoTag,
   fetchTasks} = todosSlice.actions;

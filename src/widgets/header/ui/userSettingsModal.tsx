@@ -53,6 +53,7 @@ export default function UserSettingsMenu() {
       label: 'logout',
       Icon: () => <LogoutIcon/>,
       onClick: () => {
+        // @ts-ignore
         dispatch(logOutUser());
         localStorage.removeItem('user');
         navigate('/');
