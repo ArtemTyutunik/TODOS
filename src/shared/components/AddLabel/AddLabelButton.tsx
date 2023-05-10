@@ -1,18 +1,26 @@
 import React, {useState} from 'react';
-import ActionButton from '@shared/components/ActionButton';
+import {useSelector} from 'react-redux';
 import {Box, TextField} from '@mui/material';
+import ActionButton from '@shared/components/ActionButton';
 import useAnchorElement from '@shared/hooks/useAnchorElement';
 import DropdownMenu from '@shared/components/dropdownMenu';
 import TagsList from '@shared/components/AddLabel/TagsList';
+import NoTagsComponent from '@shared/components/AddLabel/noTagsComponent';
+import {userTags} from '@pages/authorization/store';
+
 import './AddLabelsStyles.css'
 
+
 interface Props {
-  initialLabel: string | undefined,
-  onAddNewLabel: (newLabel: string | undefined) => void
+  Tags: string[],
+  onAddNewLabel: (newLabel: string) => void
 }
-const AddLabelButton = ({initialLabel, onAddNewLabel}: Props) => {
-  const [anchorEl, addAnchorEl] = useAnchorElement(null)
-  const [label, setLabel] = useState(initialLabel)
+const AddLabelButton = ({Tags, onAddNewLabel}: Props) => {
+  const [anchorEl, addAnchorEl] = useAnchorElement(null);
+  const [search, setSearch] = useState('');
+  const tags = useSelector(userTags)
+
+  const filteredTags = tags.filter((item: string) => item.includes(search));
 
   const onOpenDropdown = (e: React.MouseEvent<HTMLElement>) => {
     addAnchorEl(e.currentTarget)
@@ -23,30 +31,28 @@ const AddLabelButton = ({initialLabel, onAddNewLabel}: Props) => {
     addAnchorEl(null)
   }
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    onAddNewLabel(label)
-    setLabel('')
-    addAnchorEl(null)
-  }
   return (
     <ActionButton onClickHandler={onOpenDropdown}>
       <Box>
-        {initialLabel || 'Add Label'}
+        Add Label
       </Box>
 
       <DropdownMenu anchorEl={anchorEl} handleClose={onCloseDropdown}>
         <Box>
-          <form onSubmit={onSubmit}>
-            <TextField
-              sx={{padding: '0px'}}
-              placeholder={'Type a label'}
-              value={label}
-              onChange={(e) => setLabel(e.target.value)}
-            />
-            <TagsList/>
-          </form>
+          <TextField
+            sx={{padding: '0px'}}
+            placeholder={'Type a label'}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            inputProps={{autoComplete: 'off'}}
+          />
+          <Box width={'100%'} maxHeight={'150px'}>
+            {
+                filteredTags.length > 0 ?
+                    <TagsList tags={filteredTags} todoCurrentTags={Tags}/>:
+                    search ? <NoTagsComponent search={search}/> : null
+            }
+          </Box>
         </Box>
       </DropdownMenu>
 
