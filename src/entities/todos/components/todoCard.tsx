@@ -8,6 +8,7 @@ import {ITodo} from '@shared/interfaces';
 import {TodoContainerStyles, todoDescriptionStyles, TodoFlexboxStyles, TodoLabelStyles} from '../styles';
 import CheckboxComponent from './Checkbox';
 import DueDateButton from '@shared/components/DueDateComponents';
+import TagLinks from '@entities/todos/components/TagsPanel';
 
 interface TodoCardProps {
     todo: ITodo,
@@ -38,9 +39,12 @@ const TodoCard = ({
           <Box width={'100%'}>
             <Box sx = {TodoFlexboxStyles}>
               <CheckboxComponent onComplete={onComplete} todo={todo}/>
-              <Typography sx = {TodoLabelStyles}>
+              <Typography sx = {TodoLabelStyles} marginRight={'20px'}>
                 {label}
               </Typography>
+              {
+                Tags && <TagLinks tags={Tags}/>
+              }
             </Box>
             <Typography noWrap sx={todoDescriptionStyles}>
               {description}
