@@ -1,8 +1,7 @@
-import {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Box} from '@mui/material';
 import {BaseFormInputs} from '../interfaces/interfaces';
-import {IDate, ITodo, Priority, Label} from '../../interfaces';
+import {IDate, ITodo, Priority} from '../../interfaces';
 import {useTodoDate} from '@entities/todos/hooks';
 import useSelectPriority from '@shared/hooks/useSelectPriority';
 import TodoFormInputs from '@shared/forms/ui/Inputs';
@@ -21,7 +20,7 @@ const formStyles = {
 
 interface Props {
   onClose: () => void,
-  onSubmit: (data: BaseFormInputs, date: IDate, priority: Priority | undefined, Label: Label) => void,
+  onSubmit: (data: BaseFormInputs, date: IDate, priority: Priority | undefined) => void,
   todo?: ITodo,
   initialDate?: string,
   hideActions?: boolean
@@ -47,7 +46,6 @@ const BaseTodoForm = ({
   const dispatch = useDispatch()
   const [todoDate, setTodoDate] = useTodoDate(initialDate || todo?.date, todo?.id);
   const [priority, setPriority] = useSelectPriority(todo?.priority);
-  const [Label] = useState(todo ? todo.Label : '')
   const Tags = useTodoTags(todo?.id)
 
   const onSelectTag = (newTag: string) => {
@@ -69,7 +67,7 @@ const BaseTodoForm = ({
   }
 
   return <Box component='form'
-    onSubmit={handleSubmit((data) => onSubmit(data, todoDate, priority, Label))}
+    onSubmit={handleSubmit((data) => onSubmit(data, todoDate, priority))}
     sx={(theme) => ({color: theme.description})}
   >
     <Box sx={formStyles}>
