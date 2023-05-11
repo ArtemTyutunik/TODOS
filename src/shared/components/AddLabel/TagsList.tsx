@@ -4,15 +4,17 @@ import TurnedInIcon from '@mui/icons-material/TurnedIn';
 
 interface Props {
     tags: string[],
-    todoCurrentTags: string[]
+    todoCurrentTags: string[],
+    onSelect: (newTag: string) => void
 }
-const TagsList = ({tags, todoCurrentTags}: Props) => {
+const TagsList = ({tags, todoCurrentTags, onSelect}: Props) => {
   return (
     <List>
       {
         tags.length > 0 ?
            tags.map((tag) => <TagsItem tag={tag}
              key={tag}
+             onSelect={() => onSelect(tag)}
              checked={todoCurrentTags.includes(tag)}
            />) :
            null
@@ -21,9 +23,16 @@ const TagsList = ({tags, todoCurrentTags}: Props) => {
   );
 };
 
-function TagsItem({tag, checked}: {tag: string, checked: boolean}) {
+interface TagsItemProps {
+    tag: string,
+    checked: boolean,
+    onSelect: () => void
+}
+
+function TagsItem({tag, checked, onSelect}: TagsItemProps) {
   return <ListItem sx={{padding: '0'}}>
     <ListItemButton
+      onClick={onSelect}
       role={undefined}
       dense
       sx={{padding: '0 8px'}}

@@ -49,7 +49,9 @@ const AddLabelButton = ({Tags, onAddNewLabel}: Props) => {
           <Box width={'100%'} maxHeight={'150px'}>
             {
                 filteredTags.length > 0 ?
-                    <TagsList tags={filteredTags} todoCurrentTags={Tags}/>:
+                    <TagsList tags={filteredTags}
+                      todoCurrentTags={Tags}
+                      onSelect={onAddNewLabel}/>:
                     search ? <NoTagsComponent search={search}/> : null
             }
           </Box>
