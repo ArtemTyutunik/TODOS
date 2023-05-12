@@ -1,7 +1,8 @@
 import {useState} from 'react';
 import {Anchor} from '@shared/interfaces';
 
-const useAnchorElement = (initialValue: Anchor): [Anchor, (newAnchorEl: Anchor) => void, () => void] => {
+const useAnchorElement = (initialValue: Anchor):
+    [Anchor, (newAnchorEl: Anchor) => void, () => void] => {
   const [anchorEl, setAnchorEl] = useState(initialValue)
 
   const addAnchorEl = (newAnchorEl: Anchor) => {
