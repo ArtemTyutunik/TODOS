@@ -30,16 +30,16 @@ const InboxTodosPage = () => {
     <Box paddingTop={'30px'} height={'100%'}>
       <OverdueTodos overdueTodos={overdueTodos}/>
       {
-                todos.length ? (
-                        <Box>
-                          <PageTitle>
-                                Inbox
-                          </PageTitle>
-                          <TodoList todos={inboxTodos}/>
-                        </Box>
-                ) : (
-                    <NoInboxTodos onClick={openForm}/>
-                )
+        todos.length ? (
+          <Box>
+            <PageTitle>
+                  Inbox
+            </PageTitle>
+            <TodoList todos={inboxTodos}/>
+          </Box>
+        ) : (
+            <NoInboxTodos onClick={openForm}/>
+        )
       }
 
     </Box>

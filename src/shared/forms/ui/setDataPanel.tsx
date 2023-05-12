@@ -8,7 +8,7 @@ interface Props {
     hideActions?: boolean
 }
 const FormActions = ({hideActions}: Props) => {
-  const {todoDate, setTodoDate, priority, setPriority, Label, setLabel} = useFormContext()
+  const {todoDate, setTodoDate, priority, setPriority, Tags, onSelectTag} = useFormContext()
 
   return !hideActions ? (
     <Box display={'flex'} alignItems={'center'}>
@@ -19,7 +19,7 @@ const FormActions = ({hideActions}: Props) => {
         <PriorityButton initialPriority={priority} changeHandler={setPriority} variant={'standard'}/>
       </Box>
       <Box>
-        <AddLabelButton initialLabel={Label} onAddNewLabel={(newLabel: string | undefined) => setLabel(newLabel)}/>
+        <AddLabelButton Tags={Tags} onAddNewLabel={(newLabel: string) => onSelectTag(newLabel)}/>
       </Box>
       <Divider/>
     </Box>

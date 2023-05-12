@@ -10,8 +10,8 @@ const FilterAndLabelsPage = () => {
       <Box height={'auto'} display={'flex'} maxWidth={'360px'} margin={'0 auto'}>
         <Box display={'flex'} flexDirection={'column'} margin={'0 auto'} alignItems={'center'}>
           <img src={imgUrl} alt={'image'}/>
-          <Typography fontWeight={600} fontSize={'20px'} color={theme.description}>
-              This page is still under development
+          <Typography fontWeight={600} fontSize={'20px'} color={theme.description} textAlign={'center'}>
+              This page will be available in nearest future
           </Typography>
         </Box>
       </Box>

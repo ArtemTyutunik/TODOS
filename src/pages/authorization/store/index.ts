@@ -14,13 +14,16 @@ const configureInitialState = () => {
 
 const userSlice = createSlice({
   name: 'authorization',
-  initialState: {...configureInitialState(), isError: false, errorMessage: null},
+  initialState: {...configureInitialState(),
+    isError: false,
+    errorMessage: null,
+    tags: []},
   reducers: {
     authUser: (state, action) => {
-      return {...state, isAuth: true, user: {...action.payload}, isError: false, errorMessage: null};
+      return {...state, isAuth: true, user: {...action.payload}};
     },
     signUpUser: (state, action) => {
-      return {...state, isAuth: true, user: {...action.payload}, isError: false, errorMessage: null};
+      return {...state, isAuth: true, user: {...action.payload}};
     },
     logOutUser: (state) => {
       state.isAuth = false;
@@ -30,11 +33,17 @@ const userSlice = createSlice({
       state.isError = true;
       state.errorMessage = action.payload;
     },
+    // @ts-ignore
+    //Fixme
+    addNewUserTag: (state, action) => {
+      return {...state, tags: [...state.tags, action.payload]}
+    },
   },
 });
 
 export const userReducer = userSlice.reducer;
 
 export const userIdSelector = (state: RootReducer) => state.userReducer.user.user_id
+export const userTags = (state: RootReducer) => state.userReducer.tags
 
-export const {authUser, logOutUser, authWithError, signUpUser} = userSlice.actions;
+export const {authUser, logOutUser, authWithError, signUpUser, addNewUserTag} = userSlice.actions;

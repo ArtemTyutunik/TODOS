@@ -47,6 +47,22 @@ const todosSlice = createSlice({
         return updateTodoInState(state, {...task, priority: action.payload.priority})
       }
     },
+    addNewTodoTag: (state, action) => {
+      const task = findTaskById(state, action.payload.id);
+      if (task) {
+        return updateTodoInState(state, {...task, Tags: [...task.Tags || [], action.payload.tag]})
+      }
+    },
+    deleteTodoTag: (state, action) => {
+      const task = findTaskById(state, action.payload.id);
+      if (task) {
+        const {Tags} = task
+        const index = Tags!.indexOf(action.payload.tag)
+        return updateTodoInState(state, {...task,
+          Tags: [...Tags!.slice(0, index), ...Tags!.slice(index+1)],
+        })
+      }
+    },
     dispatchNewDate: (state, action) => {
       const task = findTaskById(state, action.payload.id);
       if (task) {
@@ -64,4 +80,6 @@ export const {addNewTask,
   deleteTask,
   setPriority,
   dispatchNewDate,
-  fetchTasks} = todosSlice.actions;
+  addNewTodoTag,
+  fetchTasks,
+  deleteTodoTag} = todosSlice.actions;
