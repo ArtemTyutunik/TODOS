@@ -26,11 +26,6 @@ interface Props {
   hideActions?: boolean
 }
 
-const useTodoTags = (id: number | undefined) => {
-  const allTodos = useSelector((state: RootReducer) => state.todosReducer.todos)
-  return allTodos.find((todo) => todo.id === id)?.Tags || []
-}
-
 const BaseTodoForm = ({
   onClose,
   onSubmit,
@@ -89,5 +84,10 @@ const BaseTodoForm = ({
 
   </Box>;
 };
+
+function useTodoTags(id: number | undefined) {
+  const allTodos = useSelector((state: RootReducer) => state.todosReducer.todos)
+  return allTodos.find((todo) => todo.id === id)?.Tags || []
+}
 
 export default BaseTodoForm;
