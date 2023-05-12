@@ -1,9 +1,8 @@
 import {useForm} from 'react-hook-form';
-import {Box} from '@mui/material';
+import {Box, SelectChangeEvent} from '@mui/material';
 import {BaseFormInputs} from '../interfaces/interfaces';
-import {IDate, ITodo, Priority} from '../../interfaces';
+import {ITodo, Priority} from '../../interfaces';
 import {useTodoDate} from '@entities/todos/hooks';
-import useSelectPriority from '@shared/hooks/useSelectPriority';
 import TodoFormInputs from '@shared/forms/ui/Inputs';
 import FormActions from '@shared/forms/ui/setDataPanel';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
@@ -11,6 +10,7 @@ import BaseFormContext from '@shared/forms/hooks/UseBaseFormContext';
 import {useDispatch, useSelector} from 'react-redux';
 import {addNewTodoTag, deleteTodoTag} from '@entities/todos/store/todo';
 import {RootReducer} from '@app/store';
+import useBaseFormReducer from '@shared/forms/hooks/useBaseFormReducer';
 
 const formStyles = {
   border: '1px solid #eee',
@@ -20,7 +20,7 @@ const formStyles = {
 
 interface Props {
   onClose: () => void,
-  onSubmit: (data: BaseFormInputs, date: IDate, priority: Priority | undefined) => void,
+  onSubmit: (newTodo: ITodo) => void,
   todo?: ITodo,
   initialDate?: string,
   hideActions?: boolean
@@ -44,12 +44,12 @@ const BaseTodoForm = ({
 
   const {control, handleSubmit, formState: {isValid}} = useForm<BaseFormInputs>({defaultValues: defaultInputValues});
   const dispatch = useDispatch()
-  const [todoDate, setTodoDate] = useTodoDate(initialDate || todo?.date, todo?.id);
-  const [priority, setPriority] = useSelectPriority(todo?.priority);
-  const Tags = useTodoTags(todo?.id)
+  const [formState, formDispatch] = useBaseFormReducer(todo)
+  const [todoDate, setTodoDate] = useTodoDate(initialDate || formState?.date, formState?.id);
+  const Tags = useTodoTags(formState?.id)
 
   const onSelectTag = (newTag: string) => {
-    const payload = {tag: newTag, id: todo?.id}
+    const payload = {tag: newTag, id: formState?.id}
     if (!Tags.includes(newTag)) {
       dispatch(addNewTodoTag(payload))
     } else {
@@ -57,17 +57,24 @@ const BaseTodoForm = ({
     }
   }
 
+  const setPriority = (event: SelectChangeEvent<Priority>) => {
+    formDispatch({type: 'CHANGE_PRIORITY', payload: event.target.value})
+  }
+
   const formContextValues = {
     todoDate,
     setTodoDate,
-    priority,
+    priority: formState.priority,
     setPriority,
     Tags,
     onSelectTag,
   }
 
   return <Box component='form'
-    onSubmit={handleSubmit((data) => onSubmit(data, todoDate, priority))}
+    onSubmit={handleSubmit((data) => {
+      const newTodo = {...formState, ...data, date: todoDate, Tags}
+      onSubmit(newTodo)
+    })}
     sx={(theme) => ({color: theme.description})}
   >
     <Box sx={formStyles}>

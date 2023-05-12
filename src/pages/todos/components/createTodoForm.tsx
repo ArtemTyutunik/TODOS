@@ -5,8 +5,7 @@ import {Box, Button, Typography, Link as MuiLink} from '@mui/material';
 
 import BaseTodoForm from '@shared/forms/ui/baseTodoForm';
 import {addNewTask} from '@entities/todos/store/todo';
-import {BaseFormInputs} from '@shared/forms/interfaces/interfaces';
-import {IDate, Priority} from '@shared/interfaces';
+import {ITodo} from '@shared/interfaces';
 import {postNewTodo} from '@shared/api/services/todosService/fetchTodos';
 import {userIdSelector} from '@pages/authorization/store';
 
@@ -28,15 +27,11 @@ const CreateTodoForm = ({onClose, initialDate}: Props) => {
     toast(<TodoCreatedNotification onNavigate={() => navigate(`task/${id}`)}/>, options);
   }
 
-  const onSubmit = (data:BaseFormInputs, date: IDate, priority: Priority | undefined ) => {
-    const id = Date.now()
-    const todoPriority = priority || '4'
-    const createdTodo = {...data, id, done: false, date: date, priority: todoPriority}
-
-    postNewTodo(createdTodo, userId)
+  const onSubmit = (newTodo: ITodo ) => {
+    postNewTodo(newTodo, userId)
         .then(() => {
-          dispatch(addNewTask(createdTodo));
-          notify(id)
+          dispatch(addNewTask(newTodo));
+          notify(newTodo.id)
           onClose();
         })
   };
