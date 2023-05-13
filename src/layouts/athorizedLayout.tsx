@@ -11,13 +11,13 @@ import SpinnerComponent from '@app/ui/SpinnerComponent/SpinnerComponent';
 
 
 const routesStyles = (isDrawerOpen: boolean) => ({
-  height: '100%',
-  overflow: 'scroll',
-  maxHeight: 'calc(100vh - 56px)',
-  padding: '0',
-  paddingTop: '0 !important',
-  marginLeft: {largeMobile: 0, tablet: isDrawerOpen ? '270px' : 0, laptop: isDrawerOpen ? '350px' : 0},
-  position: 'relative',
+  'height': '100%',
+  'overflow': 'scroll',
+  'maxHeight': 'calc(100vh - 56px)',
+  'padding': '0',
+  'paddingTop': '0 !important',
+  'marginLeft': {largeMobile: 0, tablet: isDrawerOpen ? '270px' : 0, laptop: isDrawerOpen ? '350px' : 0},
+  'position': 'relative',
 })
 
 const AuthorizedLayout= () => {
