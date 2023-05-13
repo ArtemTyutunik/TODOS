@@ -34,7 +34,7 @@ const TodoCard = ({
   return (
     <Box mb={'25px'} onClick={() => navigate(`task/${id}`)}>
       <Box sx = {TodoContainerStyles}>
-        <Box maxWidth={{mobile: '100%', largeMobile: '50%'}}
+        <Box maxWidth={{mobile: '100%'}}
           sx={TodoFlexboxStyles}>
           <Box width={'100%'}>
             <Box sx = {TodoFlexboxStyles}>
@@ -61,7 +61,7 @@ const TodoCard = ({
           </Box>
         </Box>
 
-        <Box>
+        <Box className={'ActionsMenu'}>
           <Tooltip title={'Edit'}>
             <IconButton onClick={onEdit}>
               <EditIcon color={'action'}/>
