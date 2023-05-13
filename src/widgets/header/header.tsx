@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import {Box, AppBar, Toolbar, IconButton, Typography, Container, Tooltip} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import {UserSettingsMenu} from './ui';
 
 import BasicModal from '@shared/components/modal';
@@ -11,12 +10,12 @@ import {CreateTodoForm} from '@pages/todos/components/';
 import AddButtonIcon from '@shared/components/AddIcon';
 import useVisable from '@shared/hooks/useVisable';
 import useToggleDrawer from '@entities/drawer/hooks/useToggleDrawer';
+import ProgressComponent from './ui/ProgresComponent';
 
 
 export default memo(function Header() {
   const [, toggleDrawer] = useToggleDrawer();
   const [isAddTaskModalOpen, openAddTaskModalOpen, closeAddTaskModal] = useVisable(false);
-
 
   return (
     <Box sx={{flexGrow: 1}} position={'relative'}>
@@ -83,16 +82,7 @@ export default memo(function Header() {
                 onClose={closeAddTaskModal}>
                 <CreateTodoForm onClose={closeAddTaskModal}/>
               </BasicModal>
-
-              <Tooltip title={'Your progress'}>
-                <IconButton
-                  size="large"
-                  color="inherit"
-                >
-                  <CheckCircleOutlineIcon sx ={{marginRight: '5px'}}/>
-                  <Typography>0/0</Typography>
-                </IconButton>
-              </Tooltip>
+              <ProgressComponent/>
             </Box>
             <UserSettingsMenu/>
           </Toolbar>
