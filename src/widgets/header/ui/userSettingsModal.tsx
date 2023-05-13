@@ -15,7 +15,7 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import SettingsIcon from '@mui/icons-material/Settings';
+//import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 
@@ -43,12 +43,11 @@ export default function UserSettingsMenu() {
   const theme = useTheme();
 
   const menuItems: menuItem[] = [
-    {
-      label: 'settings',
-      Icon: () => <SettingsIcon/>,
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      onClick: () => {},
-    },
+    // {
+    //   label: 'settings',
+    //   Icon: () => <SettingsIcon/>,
+    //   onClick: () => {},
+    // },
     {
       label: 'logout',
       Icon: () => <LogoutIcon/>,

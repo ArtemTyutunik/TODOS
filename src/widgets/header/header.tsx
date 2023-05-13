@@ -2,10 +2,9 @@ import {memo} from 'react';
 import {Link} from 'react-router-dom';
 import {Box, AppBar, Toolbar, IconButton, Typography, Container, Tooltip} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 import HomeIcon from '@mui/icons-material/Home';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import {CustomSearch, SearchIconWrapper, StyledInputBase, UserSettingsMenu} from './ui';
+import {UserSettingsMenu} from './ui';
 
 import BasicModal from '@shared/components/modal';
 import {CreateTodoForm} from '@pages/todos/components/';
@@ -60,15 +59,15 @@ export default memo(function Header() {
               TODOS
             </Typography>
 
-            <CustomSearch>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{'aria-label': 'search'}}
-              />
-            </CustomSearch>
+            {/*<CustomSearch>*/}
+            {/*  <SearchIconWrapper>*/}
+            {/*    <SearchIcon />*/}
+            {/*  </SearchIconWrapper>*/}
+            {/*  <StyledInputBase*/}
+            {/*    placeholder="Search…"*/}
+            {/*    inputProps={{'aria-label': 'search'}}*/}
+            {/*  />*/}
+            {/*</CustomSearch>*/}
 
             <Box sx={{flexGrow: 1}} />
 
