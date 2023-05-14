@@ -61,13 +61,13 @@ const BaseTodoForm = ({
     setTodoDate,
     priority: formState.priority,
     setPriority,
-    Tags,
+    todoTags,
     onSelectTag,
   }
 
   return <Box component='form'
     onSubmit={handleSubmit((data) => {
-      const newTodo = {...formState, ...data, date: todoDate, Tags}
+      const newTodo = {...formState, ...data, date: todoDate, tags: todoTags}
       onSubmit(newTodo)
     })}
     sx={(theme) => ({color: theme.description})}

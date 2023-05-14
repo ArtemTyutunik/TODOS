@@ -4,7 +4,7 @@ export interface ITodo {
     description?: string,
     done?: boolean,
     priority: Priority,
-    Tags?: string[],
+    tags?: string[],
     date?: IDate
 }
 

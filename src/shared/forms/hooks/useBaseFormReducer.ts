@@ -6,7 +6,7 @@ const initialStateFunction = (todo?: ITodo) => ({
   id: todo?.id || Date.now(),
   label: todo?.label || '',
   description: todo?.description || '',
-  Tags: todo?.Tags || [],
+  tags: todo?.tags || [],
   date: todo?.date || '',
   priority: todo?.priority || '4',
   done: todo?.done || false,

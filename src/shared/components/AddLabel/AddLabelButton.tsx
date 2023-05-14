@@ -1,21 +1,20 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Box, TextField} from '@mui/material';
+import {userTags} from '@pages/authorization/store';
 import ActionButton from '@shared/components/ActionButton';
 import useAnchorElement from '@shared/hooks/useAnchorElement';
 import DropdownMenu from '@shared/components/dropdownMenu';
 import TagsList from '@shared/components/AddLabel/TagsList';
 import NoTagsComponent from '@shared/components/AddLabel/noTagsComponent';
-import {userTags} from '@pages/authorization/store';
 
 import './AddLabelsStyles.css'
 
-
 interface Props {
-  Tags: string[],
+  todoTags: string[],
   onAddNewLabel: (newLabel: string) => void
 }
-const AddLabelButton = ({Tags, onAddNewLabel}: Props) => {
+const AddLabelButton = ({todoTags, onAddNewLabel}: Props) => {
   const [anchorEl, addAnchorEl] = useAnchorElement(null);
   const [search, setSearch] = useState('');
   const tags = useSelector(userTags)
@@ -50,7 +49,7 @@ const AddLabelButton = ({Tags, onAddNewLabel}: Props) => {
             {
                 filteredTags.length > 0 ?
                     <TagsList tags={filteredTags}
-                      todoCurrentTags={Tags}
+                      todoCurrentTags={todoTags}
                       onSelect={onAddNewLabel}/>:
                     search ? <NoTagsComponent search={search}/> : null
             }

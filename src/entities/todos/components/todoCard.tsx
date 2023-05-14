@@ -27,7 +27,7 @@ const TodoCard = ({
   onDuplicateAction,
   setPriorityAction}: TodoCardProps,
 ) => {
-  const {label, description, date, id, Tags} = todo;
+  const {label, description, date, id, tags} = todo;
 
   const navigate = useNavigate()
 
@@ -43,7 +43,7 @@ const TodoCard = ({
                 {label}
               </Typography>
               {
-                Tags && <TagLinks tags={Tags}/>
+                tags && <TagLinks tags={tags}/>
               }
             </Box>
             <Typography noWrap sx={todoDescriptionStyles}>

@@ -7,7 +7,7 @@ export interface IFormContext {
     setTodoDate: (newDate: IDate) => void,
     priority: Priority | undefined,
     setPriority: (event: SelectChangeEvent<Priority>) => void,
-    Tags: string[],
+    todoTags: string[],
     onSelectTag: (newTag: string) => void
 }
 
