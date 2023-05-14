@@ -2,14 +2,12 @@ import {useForm} from 'react-hook-form';
 import {Box, SelectChangeEvent} from '@mui/material';
 import {BaseFormInputs} from '../interfaces/interfaces';
 import {ITodo, Priority} from '../../interfaces';
+import {useTags} from '@shared/components/AddLabel/useTags';
 import {useTodoDate} from '@entities/todos/hooks';
 import TodoFormInputs from '@shared/forms/ui/Inputs';
 import FormActions from '@shared/forms/ui/setDataPanel';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 import BaseFormContext from '@shared/forms/hooks/UseBaseFormContext';
-import {useDispatch, useSelector} from 'react-redux';
-import {addNewTodoTag, deleteTodoTag} from '@entities/todos/store/todo';
-import {RootReducer} from '@app/store';
 import useBaseFormReducer from '@shared/forms/hooks/useBaseFormReducer';
 
 const formStyles = {
@@ -38,19 +36,9 @@ const BaseTodoForm = ({
   }
 
   const {control, handleSubmit, formState: {isValid}} = useForm<BaseFormInputs>({defaultValues: defaultInputValues});
-  const dispatch = useDispatch()
   const [formState, formDispatch] = useBaseFormReducer(todo)
   const [todoDate, setTodoDate] = useTodoDate(initialDate || formState?.date, formState?.id);
-  const Tags = useTodoTags(formState?.id)
-
-  const onSelectTag = (newTag: string) => {
-    const payload = {tag: newTag, id: formState?.id}
-    if (!Tags.includes(newTag)) {
-      dispatch(addNewTodoTag(payload))
-    } else {
-      dispatch(deleteTodoTag(payload))
-    }
-  }
+  const [todoTags, onSelectTag] = useTags(formState, !!todo);
 
   const setPriority = (event: SelectChangeEvent<Priority>) => {
     formDispatch({type: 'CHANGE_PRIORITY', payload: event.target.value})
@@ -84,10 +72,5 @@ const BaseTodoForm = ({
 
   </Box>;
 };
-
-function useTodoTags(id: number | undefined) {
-  const allTodos = useSelector((state: RootReducer) => state.todosReducer.todos)
-  return allTodos.find((todo) => todo.id === id)?.Tags || []
-}
 
 export default BaseTodoForm;
