@@ -34,6 +34,10 @@ const userSlice = createSlice({
       state.errorMessage = action.payload;
     },
     // @ts-ignore
+    getUserTags: (state, action) => {
+      return {...state, tags: [...action.payload]}
+    },
+    // @ts-ignore
     //Fixme
     addNewUserTag: (state, action) => {
       return {...state, tags: [...state.tags, action.payload]}
@@ -46,4 +50,4 @@ export const userReducer = userSlice.reducer;
 export const userIdSelector = (state: RootReducer) => state.userReducer.user.user_id
 export const userTags = (state: RootReducer) => state.userReducer.tags
 
-export const {authUser, logOutUser, authWithError, signUpUser, addNewUserTag} = userSlice.actions;
+export const {authUser, logOutUser, authWithError, signUpUser, addNewUserTag, getUserTags} = userSlice.actions;

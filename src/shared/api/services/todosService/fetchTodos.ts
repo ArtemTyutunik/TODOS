@@ -48,3 +48,19 @@ export const sendUpdatedTodo = (updatedData: any, userId: string) => new Promise
       .then((response) => resolve(response))
 })
 
+export const fetchUserTags = (userId: string) => new Promise((resolve, reject) => {
+  const url = `get_tags?user_id=${userId}`;
+  fetchRequest(url)
+      //@ts-ignore
+      .then((response) => response.json())
+      .then((result) => resolve(result))
+      .catch((error) => reject(error))
+})
+
+export const createNewUserTag = async (newTag: string, userId: string) => {
+  const options = {
+    method: 'POST',
+  }
+  fetch(`http://localhost:4444/api/add_tag?user_id=${userId}&tag=${newTag}`, options)
+}
+
