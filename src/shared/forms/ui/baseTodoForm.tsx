@@ -2,7 +2,7 @@ import {useForm} from 'react-hook-form';
 import {Box, SelectChangeEvent} from '@mui/material';
 import {BaseFormInputs} from '../interfaces/interfaces';
 import {ITodo, Priority} from '../../interfaces';
-import {useTags} from '@shared/components/AddLabel/useTags';
+import {useTags} from '@shared/components/Tags/useTags';
 import {useTodoDate} from '@entities/todos/hooks';
 import TodoFormInputs from '@shared/forms/ui/Inputs';
 import FormActions from '@shared/forms/ui/setDataPanel';
