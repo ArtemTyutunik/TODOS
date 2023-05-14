@@ -21,7 +21,7 @@ export default memo(function Header() {
     <Box sx={{flexGrow: 1}} position={'relative'}>
       <AppBar position="static" sx = {{boxShadow: 'none'}}>
         <Container sx={{margin: {laptop: '0 auto'},
-          maxWidth: {laptop: '1200px'},
+          width: {laptop: '100%'},
           padding: {mobile: '0px', laptop: '0 16px'}}}>
           <Toolbar>
             <Tooltip title={'menu'}>
@@ -53,7 +53,10 @@ export default memo(function Header() {
               variant="h6"
               noWrap
               component="div"
-              sx={{display: {mobile: 'none', largeMobile: 'block'}}}
+              sx={{
+                display: {mobile: 'none', largeMobile: 'block'},
+                transform: 'translateY(-2px)',
+              }}
             >
               TODOS
             </Typography>
