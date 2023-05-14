@@ -13,9 +13,9 @@ const filtersAndLabelsLink = 'filters-and-labels';
 
 
 const drawerLinks = [
-  {label: 'Inbox', linkTo: inboxLink, Icon: () => <InboxIcon/>},
-  {label: 'Today', linkTo: todayLink, Icon: () => <TodayIcon/>},
-  {label: 'Filters and labels', linkTo: filtersAndLabelsLink, Icon: () => <FilterListIcon/>},
+  {label: 'Inbox', linkTo: inboxLink, Icon: () => <InboxIcon sx={{color: '#246fe0'}}/>},
+  {label: 'Today', linkTo: todayLink, Icon: () => <TodayIcon sx={{color: '#058527'}}/>},
+  {label: 'Filters and labels', linkTo: filtersAndLabelsLink, Icon: () => <FilterListIcon sx={{color: '#eb8909'}}/>},
 ];
 
 const CustomListText = styled(Typography)(({theme}) => ({
