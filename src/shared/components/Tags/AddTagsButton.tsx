@@ -34,14 +34,14 @@ const AddTagsButton = ({todoTags, onAddNewLabel}: Props) => {
   return (
     <ActionButton onClickHandler={onOpenDropdown}>
       <Box>
-        Add Label
+        Tags
       </Box>
 
       <DropdownMenu anchorEl={anchorEl} handleClose={onCloseDropdown}>
         <Box>
           <TextField
             sx={{padding: '0px'}}
-            placeholder={'Type a label'}
+            placeholder={'Search tag'}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             id={'tagsInputInner'}
