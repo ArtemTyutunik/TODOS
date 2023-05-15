@@ -12,11 +12,11 @@ import TagLinks from '@entities/todos/components/TagsPanel';
 
 interface TodoCardProps {
     todo: ITodo,
-    onComplete: (e: React.SyntheticEvent) => void,
-    onEdit: (e: React.SyntheticEvent) => void,
-    onDeleteAction: (e: React.SyntheticEvent) => void,
-    onDuplicateAction: (e: React.SyntheticEvent) => void,
-    setPriorityAction: (e: React.SyntheticEvent, priority: string) => void
+    onComplete: () => void,
+    onEdit: () => void,
+    onDeleteAction: () => void,
+    onDuplicateAction: () => void,
+    setPriorityAction: (priority: string) => void
 }
 
 const TodoCard = ({
@@ -28,7 +28,6 @@ const TodoCard = ({
   setPriorityAction}: TodoCardProps,
 ) => {
   const {label, description, date, id, tags} = todo;
-
   const navigate = useNavigate()
 
   return (
@@ -36,8 +35,8 @@ const TodoCard = ({
       <Box sx = {TodoContainerStyles}>
         <Box maxWidth={{mobile: '100%'}}
           sx={TodoFlexboxStyles}>
-          <Box width={'100%'}>
-            <Box sx = {TodoFlexboxStyles}>
+          <Box width={'100%'} onClick={(e: React.SyntheticEvent) => e.stopPropagation()}>
+            <Box sx = {TodoFlexboxStyles} >
               <CheckboxComponent onComplete={onComplete} todo={todo}/>
               <Typography sx = {TodoLabelStyles} marginRight={'20px'}>
                 {label}
@@ -61,7 +60,7 @@ const TodoCard = ({
           </Box>
         </Box>
 
-        <Box className={'ActionsMenu'}>
+        <Box className={'ActionsMenu'} onClick={(e: React.SyntheticEvent) => e.stopPropagation()}>
           <Tooltip title={'Edit'}>
             <IconButton onClick={onEdit}>
               <EditIcon color={'action'}/>

@@ -19,30 +19,21 @@ const Todo = ({todo}: Props) => {
   const userId = useSelector(userIdSelector)
   const [isEditing, openEditing, closeEditing] = useVisable(false);
 
-  const onComplete = (e: React.SyntheticEvent) => {
-    e.stopPropagation();
+  const onComplete = () => {
     sendUpdatedTodo({id, done: !todo.done}, userId)
     dispatch(toggleTaskComplete(Number(id)));
   };
 
-  const onEdit = (e: React.SyntheticEvent) => {
-    e.stopPropagation()
-    openEditing()
-  };
-
-  const onDeleteAction = (e: React.SyntheticEvent) => {
-    e.stopPropagation()
+  const onDeleteAction = () => {
     dispatch(deleteTask(id));
     deleteTodoById(id, userId)
   };
-  const onDuplicateAction = (e: React.SyntheticEvent) => {
-    e.stopPropagation()
+  const onDuplicateAction = () => {
     const newTodo = ({...todo, id: Date.now()})
     dispatch(addNewTask(newTodo));
     postNewTodo(newTodo, userId).then((response) => console.log(response))
   };
-  const setPriorityAction = (e: React.SyntheticEvent, priority: string) => {
-    e.stopPropagation()
+  const setPriorityAction = (priority: string) => {
     const data = {id, priority}
     sendUpdatedTodo(data, userId)
     dispatch(setPriority(data));
@@ -56,7 +47,7 @@ const Todo = ({todo}: Props) => {
     onDuplicateAction={onDuplicateAction}
     setPriorityAction={setPriorityAction}
     onComplete={onComplete}
-    onEdit={onEdit}/>;
+    onEdit={openEditing}/>;
 };
 
 export default Todo;
