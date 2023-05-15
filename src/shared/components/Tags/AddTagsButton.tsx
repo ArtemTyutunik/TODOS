@@ -44,7 +44,8 @@ const AddTagsButton = ({todoTags, onAddNewLabel}: Props) => {
             placeholder={'Type a label'}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            inputProps={{autoComplete: 'off'}}
+            id={'tagsInputInner'}
+            inputProps={{autoComplete: 'off', id: 'tagsInput'}}
           />
           <Box width={'100%'} maxHeight={'150px'}>
             {

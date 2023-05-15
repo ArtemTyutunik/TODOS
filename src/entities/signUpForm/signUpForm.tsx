@@ -20,7 +20,10 @@ const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
             Sign up
           </Typography>
 
-          <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{mt: 1}}>
+          <Box component="form"
+            className={'AuthForm'}
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate sx={{mt: 1}}>
             <FormInputs control={control}/>
             <ErrorMessage/>
             <SubmitButton control={control}>
