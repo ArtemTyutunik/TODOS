@@ -32,9 +32,11 @@ export const useFetchAllTodos = (): [boolean] => {
   }
 
   useEffect(() => {
+    const pageLoader = document.querySelector('.loader-container')
     Promise.all([getTodos(), getTags()])
         .then(() => {
           setIsFetching(false)
+          pageLoader?.remove()
         })
   }, [])
 
