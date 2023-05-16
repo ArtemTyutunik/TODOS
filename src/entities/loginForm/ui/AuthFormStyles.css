@@ -1,0 +1,10 @@
+.AuthForm fieldset {
+    border-color: rgba(0, 0, 0, 0.23) !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+}
+
+.AuthForm input {
+    padding: 1rem !important;
+
+}

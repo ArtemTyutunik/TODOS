@@ -1,36 +1,38 @@
 import React from 'react';
-import DropdownMenu from '@shared/components/dropdownMenu';
-import {
-  Box, Divider,
-  IconButton, List, ListItemButton,
-  Tooltip,
-  Typography,
-} from '@mui/material';
+import {Box, IconButton, Tooltip, Typography} from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import QueueIcon from '@mui/icons-material/Queue';
-import DeleteIcon from '@mui/icons-material/Delete';
-import {PrioritiesFlags} from '@shared/components/PrioritiesFlags';
+import DropdownMenu from '@shared/components/dropdownMenu';
+import DropdownActionMenu from '@entities/todos/components/DropdownActionMenu';
 import useAnchorElement from '@shared/hooks/useAnchorElement';
+import useVisable from '@shared/hooks/useVisable';
+import BasicModal from '@shared/components/modal';
+import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 
 interface MoreActionsMenuProps {
-    onDelete: (e: React.SyntheticEvent) => void,
-    onDuplicate: (e: React.SyntheticEvent) => void,
-    onSetPriority: (e: React.SyntheticEvent, priority: string) => void
+    onDelete: () => void,
+    onDuplicate: () => void,
+    onSetPriority: (priority: string) => void
 }
 
 
 const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenuProps) => {
   const [anchorEl, addAnchorEl, removeAnchorEl] = useAnchorElement(null);
+  const [isDeleteModalOpen, openDeleteModalOpen, closeDeleteModalOpen] = useVisable(false)
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    event.stopPropagation()
     addAnchorEl(event.currentTarget);
   };
 
-  const handleCloseMenu = (e: React.SyntheticEvent) => {
-    e.stopPropagation()
-    removeAnchorEl();
-  };
+  function ConfirmDeleteModal() {
+    return <BasicModal open={isDeleteModalOpen} onClose={closeDeleteModalOpen}>
+      <Box>
+        <Typography sx={(theme) => ({color: theme.text.main, padding: '20px 10px'})}>
+            Are you sure that you want to delete this task?
+        </Typography>
+        <FormSubmissionButtons isValid={true} onClose={closeDeleteModalOpen} onSubmit={onDelete}/>
+      </Box>
+    </BasicModal>
+  }
 
   return (
     <>
@@ -40,37 +42,12 @@ const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenu
         </IconButton>
       </Tooltip>
 
-      <DropdownMenu anchorEl={anchorEl} handleClose={handleCloseMenu}>
-        <Box padding={'0 10px'}>
-          <Box m={'10px 0'}>
-            <Typography>Set priority</Typography>
-            <Box display={'flex'}>
-              {PrioritiesFlags.map((Priority) => <Box mr={'10px'} key={Priority.value}>
-                <IconButton onClick={(event) => onSetPriority(event, Priority.value)}>
-                  <Priority.Icon/>
-                </IconButton>
-              </Box>,
-              )}
-            </Box>
-          </Box>
-          <List>
-            <ListItemButton sx = {{padding: '10px 0', marginBottom: '10px'}} onClick={onDuplicate}>
-              <QueueIcon sx={{color: 'grey'}}/>
-              <Typography ml={'15px'}>
-                Duplicate
-              </Typography>
-            </ListItemButton>
-          </List>
-
-          <Divider/>
-          <ListItemButton sx = {{padding: '10px 0', margin: '10px 0'}} onClick={onDelete}>
-            <DeleteIcon sx={{color: 'grey'}}/>
-            <Typography ml={'15px'}>
-                Delete
-            </Typography>
-          </ListItemButton>
-        </Box>
+      <DropdownMenu anchorEl={anchorEl} handleClose={removeAnchorEl}>
+        <DropdownActionMenu onDelete={openDeleteModalOpen} onDuplicate={onDuplicate} onSetPriority={onSetPriority}/>
       </DropdownMenu>
+      {
+        isDeleteModalOpen && <ConfirmDeleteModal/>
+      }
     </>
   );
 };

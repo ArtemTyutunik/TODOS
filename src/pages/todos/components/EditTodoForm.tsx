@@ -1,10 +1,14 @@
 import React from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import BaseTodoForm from '@shared/forms/ui/baseTodoForm';
 import {editTask} from '@entities/todos/store/todo';
-import {IBaseFormInputsValues} from '@shared/forms/interfaces/interfaces';
-import {IDate, ITodo, Priority, Label} from '@shared/interfaces';
+import {ITodo} from '@shared/interfaces';
+import {sendUpdatedTodo} from '@shared/api/services/todosService/fetchTodos';
+import {userIdSelector} from '@pages/authorization/store';
+import {toast} from 'react-toastify';
+import {options} from '@shared/components/Notification/constants';
+import TodoEditedNotification from '@shared/components/Notification/TodoEdited';
 
 interface Props {
     onClose: () => void,
@@ -12,12 +16,19 @@ interface Props {
     hideActions?: boolean
 }
 
+const notify = () => {
+  toast(<TodoEditedNotification/>, options);
+}
 
 const EditTodoForm = ({onClose, todo, hideActions}: Props) => {
   const dispatch = useDispatch();
+  const userId = useSelector(userIdSelector)
 
-  const onSubmit = (data:IBaseFormInputsValues, date: IDate, priority: Priority | string | undefined, Label: Label) => {
-    dispatch(editTask({...todo, ...data, date, priority, Label}));
+  const onSubmit = (newTodo: ITodo) => {
+    const updated = {...todo, ...newTodo}
+    dispatch(editTask(updated));
+    sendUpdatedTodo(updated, userId)
+        .then(notify)
     onClose();
   };
 

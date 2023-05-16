@@ -3,6 +3,7 @@ import {SelectChangeEvent} from '@mui/material';
 import {Priority} from '@shared/interfaces';
 import PrioritySelect from '@shared/components/Priority/PrioritySelector';
 import ActionButton from '@shared/components/ActionButton';
+import './PriorityStyles.css'
 
 interface Props {
   initialPriority?: Priority | string,

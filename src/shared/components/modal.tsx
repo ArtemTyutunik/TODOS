@@ -3,10 +3,9 @@ import {Box, Modal} from '@mui/material';
 
 const style = {
   position: 'absolute',
-  top: '20%',
+  top: '40%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  minWidth: '500px',
   width: 'auto',
   height: 'auto',
   backgroundColor: 'background.paper',

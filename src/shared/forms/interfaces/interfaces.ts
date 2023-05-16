@@ -7,7 +7,7 @@ export interface IFormInputs {
     password: string
 }
 
-export interface IBaseFormInputsValues {
+export interface BaseFormInputs {
     label: string,
     description?: string
 }

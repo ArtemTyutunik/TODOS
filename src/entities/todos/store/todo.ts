@@ -5,48 +5,68 @@ interface IInitialState {
     todos: ITodo[]
 }
 
-const initialState:IInitialState = {
+const initialState: IInitialState = {
   todos: [],
 };
 
-const findTaskById = (state:IInitialState, id: number) => state.todos.find((task) => task.id === id);
+const findTaskById = (state: IInitialState, id: number) => state.todos.find((task) => task.id === id);
+
+const updateTodoInState = (state: IInitialState, todo: ITodo) => {
+  const index = state.todos.findIndex((element) => element.id === todo.id)
+  if (index !== undefined) {
+    return {...state,
+      todos: [...state.todos.slice(0, index), todo, ...state.todos.slice(index+1)],
+    }
+  }
+}
 
 const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
+    fetchTasks: (state, action) => {
+      return {...state, todos: [...action.payload]};
+    },
     addNewTask: (state, action) => {
-      return {...state, todos: [action.payload, ...state.todos]};
+      return {...state, todos: [...state.todos, action.payload]};
     },
     toggleTaskComplete: (state, action) => {
       const completedTask = findTaskById(state, action.payload);
             completedTask!.done = !completedTask!.done;
     },
     editTask: (state, action) => {
-      const editTask = findTaskById(state, action.payload.id);
-            editTask!.label = action.payload.label;
-            editTask!.description = action.payload?.description;
-            editTask!.date = action.payload?.date;
-            editTask!.priority = action.payload?.priority;
-            editTask!.Label = action.payload?.Label;
+      return updateTodoInState(state, action.payload)
     },
     deleteTask: (state, action) => {
       const deletedTaskIndex = state.todos.findIndex((task) => task.id === action.payload);
       state.todos = [...state.todos.slice(0, deletedTaskIndex), ...state.todos.slice(deletedTaskIndex + 1)];
     },
-    createDuplicate: (state, action) => {
-      const originTask = findTaskById(state, action.payload);
-      const duplicate = {...originTask!, id: Date.now()};
-      return {...state, todos: [duplicate, ...state.todos]};
-    },
     setPriority: (state, action) => {
       const task = findTaskById(state, action.payload.id);
-            task!.priority = action.payload.priority;
+      if (task) {
+        return updateTodoInState(state, {...task, priority: action.payload.priority})
+      }
+    },
+    addNewTodoTag: (state, action) => {
+      const task = findTaskById(state, action.payload.id);
+      if (task) {
+        return updateTodoInState(state, {...task, tags: [...task.tags || [], action.payload.tag]})
+      }
+    },
+    deleteTodoTag: (state, action) => {
+      const task = findTaskById(state, action.payload.id);
+      if (task) {
+        const {tags} = task
+        const index = tags!.indexOf(action.payload.tag)
+        return updateTodoInState(state, {...task,
+          tags: [...tags!.slice(0, index), ...tags!.slice(index+1)],
+        })
+      }
     },
     dispatchNewDate: (state, action) => {
       const task = findTaskById(state, action.payload.id);
       if (task) {
-        task.date = action.payload.newDate
+        return updateTodoInState(state, {...task, date: action.payload.newDate})
       }
     },
   },
@@ -58,6 +78,8 @@ export const {addNewTask,
   toggleTaskComplete,
   editTask,
   deleteTask,
-  createDuplicate,
   setPriority,
-  dispatchNewDate} = todosSlice.actions;
+  dispatchNewDate,
+  addNewTodoTag,
+  fetchTasks,
+  deleteTodoTag} = todosSlice.actions;

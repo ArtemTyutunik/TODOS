@@ -1,11 +1,25 @@
 import {Theme} from '@mui/material';
 
 export const TodoContainerStyles = {
-  mb: '10px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  cursor: 'pointer',
+  'mb': '10px',
+  'position': 'relative',
+  'display': 'flex',
+  'alignItems': 'center',
+  'justifyContent': 'space-between',
+  'cursor': 'pointer',
+  '&: hover': {
+    '& .ActionsMenu': {
+      opacity: 1,
+    },
+  },
+  '& .ActionsMenu': {
+    opacity: 0,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    zIndex: 5,
+    background: '#fff',
+  },
 };
 
 export const TodoFlexboxStyles = {
@@ -14,7 +28,7 @@ export const TodoFlexboxStyles = {
 };
 
 export const TodoLabelStyles = {
-  fontSize: '20px',
+  fontSize: '17px',
   fontWeight: 400,
   lineHeight: 1.3,
 };

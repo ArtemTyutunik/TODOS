@@ -20,6 +20,7 @@ const CheckboxComponent = ({onComplete, todo} : { onComplete: (e: React.Syntheti
   };
 
   const checkBoxColorStyle = {
+    fontSize: '18px',
     color: switchColorCheckBox(priority),
   };
 

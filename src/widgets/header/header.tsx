@@ -1,28 +1,27 @@
-import {useDispatch} from 'react-redux';
+import {memo} from 'react';
+import {Link} from 'react-router-dom';
 import {Box, AppBar, Toolbar, IconButton, Typography, Container, Tooltip} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 import HomeIcon from '@mui/icons-material/Home';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import {CustomSearch, SearchIconWrapper, StyledInputBase, UserSettingsMenu} from './ui';
+import {UserSettingsMenu} from './ui';
 
-import {toggleDrawerOpen} from '@entities/drawer/store';
 import BasicModal from '@shared/components/modal';
 import {CreateTodoForm} from '@pages/todos/components/';
-import {Link} from 'react-router-dom';
 import AddButtonIcon from '@shared/components/AddIcon';
 import useVisable from '@shared/hooks/useVisable';
+import useToggleDrawer from '@entities/drawer/hooks/useToggleDrawer';
+import ProgressComponent from './ui/ProgresComponent';
 
 
-export default function Header() {
-  const dispatch = useDispatch();
-  const [isAddTaskModalOpen, openAddTaskModalOpen, closeAddTaskModalOpen] = useVisable(false);
+export default memo(function Header() {
+  const [, toggleDrawer] = useToggleDrawer();
+  const [isAddTaskModalOpen, openAddTaskModalOpen, closeAddTaskModal] = useVisable(false);
 
   return (
     <Box sx={{flexGrow: 1}} position={'relative'}>
       <AppBar position="static" sx = {{boxShadow: 'none'}}>
         <Container sx={{margin: {laptop: '0 auto'},
-          maxWidth: {laptop: '1200px'},
+          width: {laptop: '100%'},
           padding: {mobile: '0px', laptop: '0 16px'}}}>
           <Toolbar>
             <Tooltip title={'menu'}>
@@ -31,7 +30,7 @@ export default function Header() {
                 edge="start"
                 color="inherit"
                 sx={{padding: {mobile: '0 10px', tablet: '8px'}}}
-                onClick={() => dispatch(toggleDrawerOpen())}
+                onClick={toggleDrawer}
               >
                 <MenuIcon sx={{marginTop: '-3px'}}/>
               </IconButton>
@@ -54,20 +53,23 @@ export default function Header() {
               variant="h6"
               noWrap
               component="div"
-              sx={{display: {mobile: 'none', largeMobile: 'block'}}}
+              sx={{
+                display: {mobile: 'none', largeMobile: 'block'},
+                transform: 'translateY(-2px)',
+              }}
             >
               TODOS
             </Typography>
 
-            <CustomSearch>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{'aria-label': 'search'}}
-              />
-            </CustomSearch>
+            {/*<CustomSearch>*/}
+            {/*  <SearchIconWrapper>*/}
+            {/*    <SearchIcon />*/}
+            {/*  </SearchIconWrapper>*/}
+            {/*  <StyledInputBase*/}
+            {/*    placeholder="Search…"*/}
+            {/*    inputProps={{'aria-label': 'search'}}*/}
+            {/*  />*/}
+            {/*</CustomSearch>*/}
 
             <Box sx={{flexGrow: 1}} />
 
@@ -80,24 +82,15 @@ export default function Header() {
 
               {/* modal window to add a new task*/}
               <BasicModal open={isAddTaskModalOpen}
-                onClose={closeAddTaskModalOpen}>
-                <CreateTodoForm onClose={closeAddTaskModalOpen}/>
+                onClose={closeAddTaskModal}>
+                <CreateTodoForm onClose={closeAddTaskModal}/>
               </BasicModal>
-
-              <Tooltip title={'Your progress'}>
-                <IconButton
-                  size="large"
-                  color="inherit"
-                >
-                  <CheckCircleOutlineIcon sx ={{marginRight: '5px'}}/>
-                  <Typography>0/0</Typography>
-                </IconButton>
-              </Tooltip>
+              <ProgressComponent/>
             </Box>
             <UserSettingsMenu/>
           </Toolbar>
         </Container>
       </AppBar>
     </Box>
-  );
-}
+  )
+})
