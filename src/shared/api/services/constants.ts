@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:4444/api/'
+const BASE_URL = 'https://fast-scrubland-15893.herokuapp.com/api/'
 
 export const fetchRequest = (url: string, options: RequestInit = {}) => new Promise((resolve, reject) => {
   fetch(`${BASE_URL}${url}`, options)
