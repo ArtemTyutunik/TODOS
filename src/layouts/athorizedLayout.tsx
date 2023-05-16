@@ -8,6 +8,7 @@ import {RootReducer} from '@app/store';
 import {LaptopDrawer, MobileDrawer} from '@entities/drawer';
 import {useFetchAllTodos} from '@app/hooks/useFetchAllTodos';
 import SpinnerComponent from '@app/ui/SpinnerComponent/SpinnerComponent';
+import Header from '../widgets/header/header';
 
 
 const routesStyles = (isDrawerOpen: boolean) => ({
@@ -27,6 +28,7 @@ const AuthorizedLayout= () => {
       isFetching ?
           <SpinnerComponent/> :
     <>
+      <Header/>
       <Box sx={{marginTop: 0}} height={'calc(100vh - 56px)'}>
         <Box paddingTop={'0 !important'}
           position={'absolute'}
