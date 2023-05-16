@@ -5,9 +5,9 @@ import QueueIcon from '@mui/icons-material/Queue';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 interface DropdownActionMenuProps {
-    onDelete: (e: React.SyntheticEvent) => void,
-    onDuplicate: (e: React.SyntheticEvent) => void,
-    onSetPriority: (e: React.SyntheticEvent, priority: string) => void
+    onDelete: () => void,
+    onDuplicate: () => void,
+    onSetPriority: (priority: string) => void
 }
 
 const DropdownActionMenu = ({onDelete, onDuplicate, onSetPriority}: DropdownActionMenuProps) => {
@@ -17,7 +17,7 @@ const DropdownActionMenu = ({onDelete, onDuplicate, onSetPriority}: DropdownActi
         <Typography>Set priority</Typography>
         <Box display={'flex'}>
           {PrioritiesFlags.map((Priority) => <Box mr={'10px'} key={Priority.value}>
-            <IconButton onClick={(event) => onSetPriority(event, Priority.value)}>
+            <IconButton onClick={() => onSetPriority(Priority.value)}>
               <Priority.Icon/>
             </IconButton>
           </Box>,

@@ -1,21 +1,21 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Box, TextField} from '@mui/material';
+import {userTags} from '@pages/authorization/store';
 import ActionButton from '@shared/components/ActionButton';
 import useAnchorElement from '@shared/hooks/useAnchorElement';
 import DropdownMenu from '@shared/components/dropdownMenu';
-import TagsList from '@shared/components/AddLabel/TagsList';
-import NoTagsComponent from '@shared/components/AddLabel/noTagsComponent';
-import {userTags} from '@pages/authorization/store';
+import TagsList from '@shared/components/Tags/TagsList';
+import NoTagsComponent from '@shared/components/Tags/noTagsComponent';
 
-import './AddLabelsStyles.css'
-
+import './TagsStyles.css'
 
 interface Props {
-  Tags: string[],
+  todoTags: string[],
   onAddNewLabel: (newLabel: string) => void
 }
-const AddLabelButton = ({Tags, onAddNewLabel}: Props) => {
+
+const AddTagsButton = ({todoTags, onAddNewLabel}: Props) => {
   const [anchorEl, addAnchorEl] = useAnchorElement(null);
   const [search, setSearch] = useState('');
   const tags = useSelector(userTags)
@@ -34,23 +34,24 @@ const AddLabelButton = ({Tags, onAddNewLabel}: Props) => {
   return (
     <ActionButton onClickHandler={onOpenDropdown}>
       <Box>
-        Add Label
+        Tags
       </Box>
 
       <DropdownMenu anchorEl={anchorEl} handleClose={onCloseDropdown}>
         <Box>
           <TextField
             sx={{padding: '0px'}}
-            placeholder={'Type a label'}
+            placeholder={'Search tag'}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            inputProps={{autoComplete: 'off'}}
+            id={'tagsInputInner'}
+            inputProps={{autoComplete: 'off', id: 'tagsInput'}}
           />
           <Box width={'100%'} maxHeight={'150px'}>
             {
                 filteredTags.length > 0 ?
                     <TagsList tags={filteredTags}
-                      todoCurrentTags={Tags}
+                      todoCurrentTags={todoTags}
                       onSelect={onAddNewLabel}/>:
                     search ? <NoTagsComponent search={search}/> : null
             }
@@ -62,4 +63,4 @@ const AddLabelButton = ({Tags, onAddNewLabel}: Props) => {
   );
 };
 
-export default AddLabelButton;
+export default AddTagsButton;

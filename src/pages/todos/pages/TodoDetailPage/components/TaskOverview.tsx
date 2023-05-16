@@ -11,7 +11,7 @@ interface Props {
 const TaskOverview = ({label, description, onOpenForm}: Props) => {
   return (
     <Box display={'flex'} width={'100%'} flexDirection={'column'} onClick={onOpenForm}>
-      <Typography sx = {{...TodoLabelStyles, fontSize: '20px', marginBottom: '10px', cursor: 'text'}}>
+      <Typography sx = {{...TodoLabelStyles, marginBottom: '10px', cursor: 'text'}}>
         {label}
       </Typography>
       {

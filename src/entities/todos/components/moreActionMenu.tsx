@@ -1,29 +1,38 @@
 import React from 'react';
-import {IconButton, Tooltip} from '@mui/material';
+import {Box, IconButton, Tooltip, Typography} from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DropdownMenu from '@shared/components/dropdownMenu';
 import DropdownActionMenu from '@entities/todos/components/DropdownActionMenu';
 import useAnchorElement from '@shared/hooks/useAnchorElement';
+import useVisable from '@shared/hooks/useVisable';
+import BasicModal from '@shared/components/modal';
+import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 
 interface MoreActionsMenuProps {
-    onDelete: (e: React.SyntheticEvent) => void,
-    onDuplicate: (e: React.SyntheticEvent) => void,
-    onSetPriority: (e: React.SyntheticEvent, priority: string) => void
+    onDelete: () => void,
+    onDuplicate: () => void,
+    onSetPriority: (priority: string) => void
 }
 
 
 const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenuProps) => {
   const [anchorEl, addAnchorEl, removeAnchorEl] = useAnchorElement(null);
+  const [isDeleteModalOpen, openDeleteModalOpen, closeDeleteModalOpen] = useVisable(false)
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    event.stopPropagation()
     addAnchorEl(event.currentTarget);
   };
 
-  const handleCloseMenu = (e: React.SyntheticEvent) => {
-    e.stopPropagation()
-    removeAnchorEl();
-  };
+  function ConfirmDeleteModal() {
+    return <BasicModal open={isDeleteModalOpen} onClose={closeDeleteModalOpen}>
+      <Box>
+        <Typography sx={(theme) => ({color: theme.text.main, padding: '20px 10px'})}>
+            Are you sure that you want to delete this task?
+        </Typography>
+        <FormSubmissionButtons isValid={true} onClose={closeDeleteModalOpen} onSubmit={onDelete}/>
+      </Box>
+    </BasicModal>
+  }
 
   return (
     <>
@@ -33,9 +42,12 @@ const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenu
         </IconButton>
       </Tooltip>
 
-      <DropdownMenu anchorEl={anchorEl} handleClose={handleCloseMenu}>
-        <DropdownActionMenu onDelete={onDelete} onDuplicate={onDuplicate} onSetPriority={onSetPriority}/>
+      <DropdownMenu anchorEl={anchorEl} handleClose={removeAnchorEl}>
+        <DropdownActionMenu onDelete={openDeleteModalOpen} onDuplicate={onDuplicate} onSetPriority={onSetPriority}/>
       </DropdownMenu>
+      {
+        isDeleteModalOpen && <ConfirmDeleteModal/>
+      }
     </>
   );
 };

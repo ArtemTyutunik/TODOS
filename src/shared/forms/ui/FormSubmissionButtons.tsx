@@ -14,8 +14,9 @@ const CancelButtonStyles = (theme: Theme) => ({
 interface Props {
     isValid: boolean,
     onClose: () => void
+    onSubmit?: (e: React.SyntheticEvent) => void
 }
-const FormSubmissionButtons = ({isValid, onClose}: Props) => {
+const FormSubmissionButtons = ({isValid, onClose, onSubmit}: Props) => {
   return (
     <Box display={'flex'} marginTop={'5px'} justifyContent={'flex-end'}>
       <Button variant="contained" color={'inherit'}
@@ -25,6 +26,7 @@ const FormSubmissionButtons = ({isValid, onClose}: Props) => {
       </Button>
       <Button variant="contained"
         type={'submit'}
+        onClick={onSubmit}
         disabled={!isValid}
         sx={{textTransform: 'initial'}}>
           Submit

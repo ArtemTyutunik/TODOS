@@ -1,14 +1,15 @@
 import {Box, Divider} from '@mui/material';
 import DueDateButton from '@shared/components/DueDateComponents';
 import PriorityButton from '@shared/components/Priority/PriorityButton';
-import AddLabelButton from '@shared/components/AddLabel/AddLabelButton';
+import AddTagsButton from '@shared/components/Tags/AddTagsButton';
 import {useFormContext} from '@shared/forms/hooks/UseBaseFormContext';
 
 interface Props {
     hideActions?: boolean
 }
+
 const FormActions = ({hideActions}: Props) => {
-  const {todoDate, setTodoDate, priority, setPriority, Tags, onSelectTag} = useFormContext()
+  const {todoDate, setTodoDate, priority, setPriority, todoTags, onSelectTag} = useFormContext()
 
   return !hideActions ? (
     <Box display={'flex'} alignItems={'center'}>
@@ -19,7 +20,7 @@ const FormActions = ({hideActions}: Props) => {
         <PriorityButton initialPriority={priority} changeHandler={setPriority} variant={'standard'}/>
       </Box>
       <Box>
-        <AddLabelButton Tags={Tags} onAddNewLabel={(newLabel: string) => onSelectTag(newLabel)}/>
+        <AddTagsButton todoTags={todoTags} onAddNewLabel={(newLabel: string) => onSelectTag(newLabel)}/>
       </Box>
       <Divider/>
     </Box>

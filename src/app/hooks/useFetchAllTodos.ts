@@ -1,26 +1,43 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useState} from 'react';
 import {fetchTasks} from '@entities/todos/store/todo';
-import {getUserTodos} from '@shared/api/services/todosService/fetchTodos';
+import {fetchUserTags, getUserTodos} from '@shared/api/services/todosService/fetchTodos';
 import {ITodo} from '@shared/interfaces';
-import {userIdSelector} from '@pages/authorization/store';
+import {getUserTags, userIdSelector} from '@pages/authorization/store';
 
 export const useFetchAllTodos = (): [boolean] => {
   const dispatch = useDispatch();
-  const [isFetching, setIsFetching] = useState(false)
+  const [isFetching, setIsFetching] = useState(true)
   const userId = useSelector(userIdSelector)
 
-  const onFulfilled = (result: ITodo[]) => {
+  const onFulfilledTodosRequest = (result: ITodo[]) => {
     dispatch(fetchTasks(result))
-    setIsFetching(false)
+  }
+
+  const getTodos = () => {
+    getUserTodos(userId)
+        //@ts-ignore
+        .then(onFulfilledTodosRequest)
+        .catch((error) => console.log(error))
+  }
+
+  const onFulfilledTagsRequest = (result: string[]) => {
+    dispatch(getUserTags(result))
+  }
+
+  const getTags = () => {
+    fetchUserTags(userId)
+        //@ts-ignore
+        .then(onFulfilledTagsRequest)
   }
 
   useEffect(() => {
-    setIsFetching(true)
-    getUserTodos(userId)
-        //@ts-ignore
-        .then(onFulfilled)
-        .catch((error) => console.log(error))
+    const pageLoader = document.querySelector('.loader-container')
+    Promise.all([getTodos(), getTags()])
+        .then(() => {
+          setIsFetching(false)
+          pageLoader?.remove()
+        })
   }, [])
 
   return [isFetching]

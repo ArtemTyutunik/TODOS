@@ -7,7 +7,7 @@ import SubmitButton from '@shared/forms/authorization/SubmitButton';
 import FormLink from '@shared/forms/authorization/FormLink';
 import LoginInputs from '@entities/loginForm/ui/FormInputs';
 import FormWrapper from '@shared/forms/authorization/FormWrapper';
-
+import './ui/AuthFormStyles.css'
 
 function LoginForm({onSubmit}: IInputsProps) {
   const {handleSubmit, control} = useForm<IFormInputs>();
@@ -20,7 +20,10 @@ function LoginForm({onSubmit}: IInputsProps) {
           <Typography component="h1" variant="h5">
               Login
           </Typography>
-          <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{mt: 1}}>
+          <Box component="form"
+            className={'AuthForm'}
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate sx={{mt: 1}}>
             <LoginInputs control={control}/>
             <ErrorMessage/>
 
