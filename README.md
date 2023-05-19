@@ -1,7 +1,7 @@
 # TODOS
 ** If you don`t want to sign up you can log in via this email:
 login: testuser@gmail.com
-password: 12345678
+password: qwerty12345
 ## About
 Todos is an open source application where everyone can effectively use it to manage your time.
 
