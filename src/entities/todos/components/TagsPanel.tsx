@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import {styled} from '@mui/material/styles';
 
 interface Props {
@@ -16,14 +15,15 @@ const TagLinks = ({tags}: Props) => {
 };
 
 const TagLink = ({link}: {link: string}) => {
-  return <CustomTagLink to={link}>
+  return <CustomTagLink>
     {link}
   </CustomTagLink>
 }
 
-const CustomTagLink = styled(Link)(({theme}) => ({
+const CustomTagLink = styled('span')(({theme}) => ({
   backgroundColor: theme.background.lightGrey,
   fontSize: '16px',
+  cursor: 'text',
   padding: '2px 14px',
   color: 'rgb(0, 0, 0)',
   fontWeight: 400,
