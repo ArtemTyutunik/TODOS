@@ -7,7 +7,7 @@ import Routing from '@pages/routes';
 import {RootReducer} from '@app/store';
 import {LaptopDrawer, MobileDrawer} from '@entities/drawer';
 import {useFetchAllTodos} from '@app/hooks/useFetchAllTodos';
-import SpinnerComponent from '@app/ui/SpinnerComponent/SpinnerComponent';
+import SpinnerComponent from '@app/../shared/components/SpinnerComponent/SpinnerComponent';
 import Header from '../widgets/header/header';
 
 
