@@ -2,11 +2,13 @@ import {createSlice} from '@reduxjs/toolkit';
 import {ITodo} from '@shared/interfaces';
 
 interface IInitialState {
-    todos: ITodo[]
+  todos: ITodo[],
+  isFetched: boolean
 }
 
 const initialState: IInitialState = {
   todos: [],
+  isFetched: false,
 };
 
 const findTaskById = (state: IInitialState, id: number) => state.todos.find((task) => task.id === id);
@@ -25,7 +27,7 @@ const todosSlice = createSlice({
   initialState,
   reducers: {
     fetchTasks: (state, action) => {
-      return {...state, todos: [...action.payload]};
+      return {...state, todos: [...action.payload], isFetched: true};
     },
     addNewTask: (state, action) => {
       return {...state, todos: [...state.todos, action.payload]};
