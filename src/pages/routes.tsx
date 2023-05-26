@@ -4,6 +4,7 @@ import {Suspense} from 'react';
 import {useSelector} from 'react-redux';
 import {RootReducer} from '@app/store';
 import SpinnerComponent from '@shared/components/SpinnerComponent/SpinnerComponent';
+import {TODAY_LINK, INBOX_LINK, FILTERS_AND_TAGS_LINK} from '@shared/constants';
 
 const TodayTodosPage = lazy(() => import('./todos/pages/TodayPage/TodayTodos'))
 const InboxTodosPage = lazy(() => import('./todos/pages/InboxPage/InboxTodos'))
@@ -17,15 +18,15 @@ const Routing = () => {
       <>
         <Routes>
           <Route path={'/'} element={<Navigate to="/today" replace={true}/>}/>
-          <Route path={'today'} element={
+          <Route path={TODAY_LINK} element={
             <Suspense fallback={null}>
               <TodayTodosPage/>
             </Suspense>
           }/>
-          <Route path={'inbox'} element={<Suspense fallback={null}>
+          <Route path={INBOX_LINK} element={<Suspense fallback={null}>
             <InboxTodosPage/>
           </Suspense>}/>
-          <Route path={'filters-and-tags'} element={<Suspense fallback={null}>
+          <Route path={FILTERS_AND_TAGS_LINK} element={<Suspense fallback={null}>
             <FilterAndTagsPage/>
           </Suspense>}/>
           <Route path={'/:day?/task/:id'} element={<Suspense fallback={null}>
