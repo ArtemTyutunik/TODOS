@@ -8,7 +8,7 @@ import SpinnerComponent from '@shared/components/SpinnerComponent/SpinnerCompone
 const TodayTodosPage = lazy(() => import('./todos/pages/TodayPage/TodayTodos'))
 const InboxTodosPage = lazy(() => import('./todos/pages/InboxPage/InboxTodos'))
 const TodoDetailPage = lazy(() => import('./todos/pages/TodoDetailPage/TodoDetailPage'))
-const FilterAndLabelsPage = lazy(() => import('./todos/pages/FiltersAndLabelsPage/FiltersAndlabelsPage'))
+const FilterAndTagsPage = lazy(() => import('./todos/pages/FiltersAndTagsPage/FiltersAndTagsPage'))
 
 const Routing = () => {
   const isFetched = useSelector((state: RootReducer) => state.todosReducer.isFetched)
@@ -25,8 +25,8 @@ const Routing = () => {
           <Route path={'inbox'} element={<Suspense fallback={null}>
             <InboxTodosPage/>
           </Suspense>}/>
-          <Route path={'filters-and-labels'} element={<Suspense fallback={null}>
-            <FilterAndLabelsPage/>
+          <Route path={'filters-and-tags'} element={<Suspense fallback={null}>
+            <FilterAndTagsPage/>
           </Suspense>}/>
           <Route path={'/:day?/task/:id'} element={<Suspense fallback={null}>
             <TodoDetailPage/>

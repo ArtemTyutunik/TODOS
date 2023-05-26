@@ -9,13 +9,13 @@ import useTodosCount from '@entities/drawer/hooks/useTodosCount';
 
 const inboxLink = 'inbox';
 const todayLink = 'today';
-const filtersAndLabelsLink = 'filters-and-labels';
+const filtersAndTagsLink = 'filters-and-tags';
 
 
 const drawerLinks = [
   {label: 'Inbox', linkTo: inboxLink, Icon: () => <InboxIcon sx={{color: '#246fe0'}}/>},
   {label: 'Today', linkTo: todayLink, Icon: () => <TodayIcon sx={{color: '#058527'}}/>},
-  {label: 'Filters and labels', linkTo: filtersAndLabelsLink, Icon: () => <FilterListIcon sx={{color: '#eb8909'}}/>},
+  {label: 'Filters and Tags', linkTo: filtersAndTagsLink, Icon: () => <FilterListIcon sx={{color: '#eb8909'}}/>},
 ];
 
 const CustomListText = styled(Typography)(({theme}) => ({
@@ -33,7 +33,7 @@ const configureActiveLink = (): string => {
 
   if (url.includes(todayLink)) return todayLink;
   else if (url.includes(inboxLink)) return inboxLink;
-  else if (url.includes(filtersAndLabelsLink)) return filtersAndLabelsLink;
+  else if (url.includes(filtersAndTagsLink)) return filtersAndTagsLink;
 
   return '';
 };
