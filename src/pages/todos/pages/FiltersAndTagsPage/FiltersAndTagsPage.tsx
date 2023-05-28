@@ -1,5 +1,6 @@
 import {Box} from '@mui/material';
 import {PageTitle} from '@pages/todos/components';
+import TagsSection from '@pages/todos/pages/FiltersAndTagsPage/components/tags/TagsSection';
 
 
 const FilterAndTagsPage = () => {
@@ -8,6 +9,8 @@ const FilterAndTagsPage = () => {
     <PageTitle>
       Filters and Tags
     </PageTitle>
+
+    <TagsSection/>
   </Box>
 };
 
