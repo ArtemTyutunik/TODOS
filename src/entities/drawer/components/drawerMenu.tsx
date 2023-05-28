@@ -7,6 +7,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import {styled} from '@mui/material/styles';
 import useTodosCount from '@entities/drawer/hooks/useTodosCount';
 import {INBOX_LINK, TODAY_LINK, FILTERS_AND_TAGS_LINK} from '@shared/constants';
+import TodosCount from '@shared/components/TodosCount';
 
 
 const drawerLinks = [
@@ -64,11 +65,11 @@ const DrawerMenu = () => {
                 </CustomListText>
               </Box>
 
-              <Typography color={'#aaa'} fontSize={'13px'}>
+              <TodosCount>
                 {/*Fixme*/}
                 {/*@ts-ignore*/}
                 {todosCount[label]}
-              </Typography>
+              </TodosCount>
             </ListItemButton>
           </ListItem>;
         })
