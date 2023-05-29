@@ -25,7 +25,7 @@ const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenu
 
   function ConfirmDeleteModal() {
     return <BasicModal open={isDeleteModalOpen} onClose={closeDeleteModalOpen}>
-      <Box>
+      <Box padding={'10px'}>
         <Typography sx={(theme) => ({color: theme.text.main, padding: '20px 10px'})}>
             Are you sure that you want to delete this task?
         </Typography>
