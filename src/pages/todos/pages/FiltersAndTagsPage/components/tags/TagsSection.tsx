@@ -3,6 +3,8 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AddIcon from '@shared/components/AddIcon';
 import {useState} from 'react';
 import TagsList from '@pages/todos/pages/FiltersAndTagsPage/components/tags/TagsList';
+import CreateNewModal from '@pages/todos/pages/FiltersAndTagsPage/components/CreateNewModal';
+import useVisable from '@shared/hooks/useVisable';
 
 const arrowIconStyles = () => ({
   'fontSize': '14px',
@@ -17,6 +19,7 @@ const arrowIconStyles = () => ({
 
 const TagsSection = () => {
   const [isListShown, setIsListShown] = useState(false)
+  const [isOpen, open, close] = useVisable(false)
   return (
     <>
       <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} mt={'20px'} mb={'5px'}>
@@ -30,7 +33,7 @@ const TagsSection = () => {
              Tags
           </Typography>
         </Box>
-        <IconButton sx={{padding: '0px'}}>
+        <IconButton sx={{padding: '0px'}} onClick={open}>
           <AddIcon/>
         </IconButton>
       </Box>
@@ -38,6 +41,8 @@ const TagsSection = () => {
       {
         (isListShown && <TagsList/>)
       }
+      {/*  Modal to create new Tag*/}
+      <CreateNewModal isOpen={isOpen} onClose={close}/>
     </>
 
   );

@@ -13,7 +13,7 @@ const TagsList = () => {
         userTags.length !== 0 ?
             userTags.map((tag) => <TagItem key={tag}>{tag}</TagItem>) :
             <Box sx={{padding: '16px 0', fontSize: '16px', color: 'grey'}}>
-              A place for your marks.
+              A place for your tags.
             </Box>
       }
     </Box>
