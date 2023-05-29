@@ -61,6 +61,6 @@ export const createNewUserTag = async (newTag: string, userId: string) => {
   const options = {
     method: 'POST',
   }
-  fetch(`http://localhost:4444/api/add_tag?user_id=${userId}&tag=${newTag}`, options)
+  fetchRequest(`add_tag?user_id=${userId}&tag=${newTag}`, options)
 }
 
