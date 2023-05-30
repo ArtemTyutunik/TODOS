@@ -10,7 +10,7 @@ const TagsList = () => {
   return (
     <Box mt={'10px'}>
       {
-        userTags.length !== 0 ?
+        userTags.length > 0 ?
             userTags.map((tag) => <TagItem key={tag}>{tag}</TagItem>) :
             <Box sx={{padding: '16px 0', fontSize: '16px', color: 'grey'}}>
               A place for your tags.

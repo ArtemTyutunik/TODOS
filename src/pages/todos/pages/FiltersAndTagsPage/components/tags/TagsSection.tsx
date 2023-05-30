@@ -11,6 +11,7 @@ const arrowIconStyles = () => ({
   'position': 'absolute',
   'left': '-25px',
   'padding': '4px',
+  'borderRadius': '4px',
 
   '&.rotated': {
     transform: 'rotate(90deg)',
@@ -26,14 +27,14 @@ const TagsSection = () => {
         <Box display={'flex'} alignItems={'center'} position={'relative'}>
           <IconButton sx={arrowIconStyles()}
             className={isListShown ? 'rotated': ''}
-            onClick={() => setIsListShown((prevState: boolean) => !prevState)}>
+            onClick={() => setIsListShown((prevState) => !prevState)}>
             <ArrowForwardIosIcon sx={{fontSize: 'inherit', color: 'grey'}}/>
           </IconButton>
           <Typography fontWeight={600} fontSize={'15px'}>
              Tags
           </Typography>
         </Box>
-        <IconButton sx={{padding: '0px'}} onClick={open}>
+        <IconButton sx={{padding: '0px', borderRadius: '4px'}} onClick={open}>
           <AddIcon/>
         </IconButton>
       </Box>
