@@ -1,16 +1,9 @@
-import React from 'react';
 import {IconButton} from '@mui/material';
+import {styled} from '@mui/material/styles';
 
-interface Props {
-    children: React.ReactElement
-}
-
-const CustomIconButton = ({children}: Props) => {
-  return (
-    <IconButton sx={{'borderRadius': '4px', 'padding': '4px'}}>
-      {children}
-    </IconButton>
-  );
-};
+const CustomIconButton = styled(IconButton)(() => ({
+  'borderRadius': '4px',
+  'padding': '4px',
+}))
 
 export default CustomIconButton;

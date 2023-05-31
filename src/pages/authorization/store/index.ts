@@ -42,6 +42,9 @@ const userSlice = createSlice({
     addNewUserTag: (state, action) => {
       return {...state, tags: [...state.tags, action.payload]}
     },
+    deleteTag: (state, action) => {
+      return {...state, tags: [...state.tags.filter((tag) => tag !== action.payload)]}
+    },
   },
 });
 
@@ -50,4 +53,4 @@ export const userReducer = userSlice.reducer;
 export const userIdSelector = (state: RootReducer) => state.userReducer.user.user_id
 export const userTags = (state: RootReducer) => state.userReducer.tags
 
-export const {authUser, logOutUser, authWithError, signUpUser, addNewUserTag, getUserTags} = userSlice.actions;
+export const {authUser, logOutUser, authWithError, signUpUser, addNewUserTag, getUserTags, deleteTag} = userSlice.actions;

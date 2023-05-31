@@ -1,12 +1,11 @@
 import React from 'react';
-import {Box, IconButton, Tooltip, Typography} from '@mui/material';
+import {IconButton, Tooltip} from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DropdownMenu from '@shared/components/dropdownMenu';
 import DropdownActionMenu from '@entities/todos/components/DropdownActionMenu';
 import useAnchorElement from '@shared/hooks/useAnchorElement';
 import useVisable from '@shared/hooks/useVisable';
-import BasicModal from '@shared/components/modal';
-import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
+import ConfirmDeleteModal from '@shared/components/ConfirmDeletion';
 
 interface MoreActionsMenuProps {
     onDelete: () => void,
@@ -23,17 +22,6 @@ const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenu
     addAnchorEl(event.currentTarget);
   };
 
-  function ConfirmDeleteModal() {
-    return <BasicModal open={isDeleteModalOpen} onClose={closeDeleteModalOpen}>
-      <Box padding={'10px'}>
-        <Typography sx={(theme) => ({color: theme.text.main, padding: '20px 10px'})}>
-            Are you sure that you want to delete this task?
-        </Typography>
-        <FormSubmissionButtons isValid={true} onClose={closeDeleteModalOpen} onSubmit={onDelete}/>
-      </Box>
-    </BasicModal>
-  }
-
   return (
     <>
       <Tooltip title={'More actions'}>
@@ -46,7 +34,9 @@ const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenu
         <DropdownActionMenu onDelete={openDeleteModalOpen} onDuplicate={onDuplicate} onSetPriority={onSetPriority}/>
       </DropdownMenu>
       {
-        isDeleteModalOpen && <ConfirmDeleteModal/>
+        isDeleteModalOpen && <ConfirmDeleteModal isOpen
+          onSubmit={onDelete}
+          onClose={closeDeleteModalOpen}/>
       }
     </>
   );

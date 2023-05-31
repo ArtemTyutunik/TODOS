@@ -64,3 +64,10 @@ export const createNewUserTag = async (newTag: string, userId: string) => {
   fetchRequest(`add_tag?user_id=${userId}&tag=${newTag}`, options)
 }
 
+export const deleteUserTag = async (tag: string, userId: string) => {
+  const options = {
+    method: 'DELETE',
+  }
+  fetchRequest(`/delete_tag?user_id=${userId}&tag=${tag}`, options)
+}
+

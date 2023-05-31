@@ -1,5 +1,5 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RootReducer} from '@app/store';
 import {Box, Typography} from '@mui/material';
 import {default as LabelIcon} from '@mui/icons-material/LocalOffer';
@@ -8,14 +8,28 @@ import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutli
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CustomIconButton from '@pages/todos/pages/FiltersAndTagsPage/components/CustomIconButton';
+import {deleteTag} from '@pages/authorization/store';
+import {deleteUserTag} from '@shared/api/services/todosService/fetchTodos';
+import ConfirmDeleteModal from '@shared/components/ConfirmDeletion';
+import useVisable from '@shared/hooks/useVisable';
 
 const TagsList = () => {
   const userTags = useSelector((state: RootReducer ) => state.userReducer.tags)
+  const dispatch = useDispatch()
+  const userId = useSelector((state: RootReducer ) => state.userReducer.user.user_id)
+
+  const onDeleteTag = (tag: string) => {
+    dispatch(deleteTag(tag))
+    deleteUserTag(tag, userId)
+  }
+
   return (
     <Box mt={'10px'}>
       {
         userTags.length > 0 ?
-            userTags.map((tag) => <TagItem key={tag}>{tag}</TagItem>) :
+            userTags.map((tag) => <TagItem key={tag}
+              tag={tag}
+              onDelete={onDeleteTag}/>) :
             <Box sx={{padding: '16px 0', fontSize: '16px', color: 'grey'}}>
               A place for your tags.
             </Box>
@@ -60,12 +74,18 @@ const iconStyles = {
   fontSize: '20px',
 }
 
-function TagItem({children}: {children: React.ReactElement}) {
+interface TagItemProps {
+  tag: string,
+  onDelete: (tag: string) => void
+}
+
+function TagItem({tag, onDelete}: TagItemProps) {
+  const [isConfirmDeleteModalVisable, openConfirmDeleteModal, onCloseConfirmDeleteModal] = useVisable(false)
   return <>
     <Box sx={tagItemContainer}>
       <Box display={'flex'} alignItems={'center'}>
         <LabelIcon sx={tagNameStyle}/>
-        <Typography marginLeft={'10px'} color={'#333333'}>{children}</Typography>
+        <Typography marginLeft={'10px'} color={'#333333'}>{tag}</Typography>
       </Box>
       <TodosCount>
         1
@@ -79,9 +99,13 @@ function TagItem({children}: {children: React.ReactElement}) {
           <DriveFileRenameOutlineIcon sx={iconStyles}/>
         </CustomIconButton>
 
-        <CustomIconButton>
+        <CustomIconButton onClick={openConfirmDeleteModal}>
           <DeleteOutlineIcon sx={iconStyles}/>
         </CustomIconButton>
+        {/*delete confirmation modal*/}
+        <ConfirmDeleteModal isOpen={isConfirmDeleteModalVisable}
+          onClose={onCloseConfirmDeleteModal}
+          onSubmit={() => onDelete(tag)}/>
       </Box>
     </Box>
   </>
