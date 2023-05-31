@@ -4,6 +4,10 @@ import {RootReducer} from '@app/store';
 import {Box, Typography} from '@mui/material';
 import {default as LabelIcon} from '@mui/icons-material/LocalOffer';
 import TodosCount from '@shared/components/TodosCount';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import CustomIconButton from '@pages/todos/pages/FiltersAndTagsPage/components/CustomIconButton';
 
 const TagsList = () => {
   const userTags = useSelector((state: RootReducer ) => state.userReducer.tags)
@@ -27,14 +31,35 @@ const tagNameStyle = {
 }
 
 const tagItemContainer = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  padding: '8px 0',
-  mt: '5px',
-  cursor: 'pointer',
-  borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+  'display': 'flex',
+  'position': 'relative',
+  'alignItems': 'center',
+  'justifyContent': 'space-between',
+  'padding': '8px 0',
+  'mt': '5px',
+  'cursor': 'pointer',
+  'borderBottom': '1px solid rgba(0, 0, 0, 0.12)',
+  '&:hover': {
+    '.tag_actions': {
+      opacity: 1,
+    },
+  },
 }
+
+const tagActionStyles = {
+  position: 'absolute',
+  backgroundColor: '#fff',
+  opacity: 0,
+  zIndex: 9,
+  top: 0,
+  right: 0,
+}
+
+const iconStyles = {
+  color: '#a09f9f',
+  fontSize: '20px',
+}
+
 function TagItem({children}: {children: React.ReactElement}) {
   return <>
     <Box sx={tagItemContainer}>
@@ -45,6 +70,19 @@ function TagItem({children}: {children: React.ReactElement}) {
       <TodosCount>
         1
       </TodosCount>
+      <Box className='tag_actions' sx={tagActionStyles}>
+        <CustomIconButton>
+          <FavoriteBorderIcon sx={iconStyles}/>
+        </CustomIconButton>
+
+        <CustomIconButton>
+          <DriveFileRenameOutlineIcon sx={iconStyles}/>
+        </CustomIconButton>
+
+        <CustomIconButton>
+          <DeleteOutlineIcon sx={iconStyles}/>
+        </CustomIconButton>
+      </Box>
     </Box>
   </>
 }
