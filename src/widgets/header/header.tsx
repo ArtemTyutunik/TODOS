@@ -6,7 +6,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import {UserSettingsMenu} from './ui';
 
 import BasicModal from '@shared/components/modal';
-import {CreateTodoForm} from '@pages/todos/components/';
+import {CreateTodoForm} from '@features/CreateOrEditTodo';
 import AddButtonIcon from '@shared/components/AddIcon';
 import useVisable from '@shared/hooks/useVisable';
 import useToggleDrawer from '@entities/drawer/hooks/useToggleDrawer';

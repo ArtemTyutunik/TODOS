@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {addNewTask, deleteTask, setPriority, toggleTaskComplete} from '../store/todo';
-import {EditTodoForm} from '@pages/todos/components';
+import {EditTodoForm} from '@features/CreateOrEditTodo';
 import {ITodo} from '@shared/interfaces';
 import TodoCard from './todoCard';
 import useVisable from '@shared/hooks/useVisable';

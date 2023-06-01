@@ -2,8 +2,9 @@ import {useSelector} from 'react-redux';
 import {Box} from '@mui/material';
 
 import {RootReducer} from '@app/store';
+import {CreateTodoForm} from '@features/CreateOrEditTodo';
 import NoTodayTodos from './NoTodayTodos';
-import {CreateTodoForm, TodoList} from '../../components';
+import {TodoList} from '../../components';
 import {TODAY} from '@shared/constants';
 import useVisable from '@shared/hooks/useVisable';
 
