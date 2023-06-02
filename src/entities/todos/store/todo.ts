@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {ITodo} from '@shared/interfaces';
+import {RootReducer} from '@app/store';
 
 interface IInitialState {
   todos: ITodo[],
@@ -85,3 +86,5 @@ export const {addNewTask,
   addNewTodoTag,
   fetchTasks,
   deleteTodoTag} = todosSlice.actions;
+
+export const allTodosSelector = (state: RootReducer) => state.todosReducer.todos

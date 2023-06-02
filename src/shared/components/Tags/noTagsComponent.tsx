@@ -1,10 +1,13 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Box, IconButton, List, ListItem, ListItemButton, Typography} from '@mui/material';
-import {addNewUserTag, userIdSelector} from '@pages/authorization/store/'
+import {userIdSelector} from '@pages/authorization/store/'
 import AddIcon from '@shared/components/AddIcon';
 import {createNewUserTag} from '@shared/api/services/todosService/fetchTodos';
+import {addNewUserTag} from '@entities/tag/store/tagStore';
 
+
+//have to be string
 interface Props {
     search: string
 }
@@ -13,8 +16,12 @@ const NoTagsComponent = ({search}: Props) => {
   const userId = useSelector(userIdSelector)
 
   const onClickHandler = () => {
+    const configuredNewTag = {
+      name: search,
+      settings: {},
+    }
     createNewUserTag(search, userId)
-        .then(() => dispatch(addNewUserTag(search)))
+        .then(() => dispatch(addNewUserTag(configuredNewTag)))
   }
 
 

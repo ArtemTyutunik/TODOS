@@ -1,14 +1,15 @@
 import React from 'react';
 import {styled} from '@mui/material/styles';
+import {ITag} from '@shared/interfaces';
 
 interface Props {
-    tags: string[]
+    tags: ITag[]
 }
 const TagLinks = ({tags}: Props) => {
   return (
     <>
       {
-        tags.map((tag) => <TagLink key={tag} link={tag}/>)
+        tags.map((tag) => <TagLink key={tag.name} link={tag.name}/>)
       }
     </>
   );

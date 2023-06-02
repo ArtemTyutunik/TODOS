@@ -21,7 +21,7 @@ export const deleteTodoById = (id: number, userId: string) => new Promise(() => 
 })
 
 export const postNewTodo = (data: ITodo, userId: string) => new Promise((resolve, reject) => {
-  const whiteList = ['label', 'id', 'description', 'done', 'priority', 'Label', 'date', 'user_id']
+  const whiteList = ['label', 'tags', 'id', 'description', 'done', 'priority', 'Label', 'date', 'user_id']
   const url = `create_todo?user_id=${userId}`
   const options = {
     method: 'POST',
@@ -50,10 +50,15 @@ export const sendUpdatedTodo = (updatedData: any, userId: string) => new Promise
 
 export const fetchUserTags = (userId: string) => new Promise((resolve, reject) => {
   const url = `get_tags?user_id=${userId}`;
+  const configuredNewTag = (tagName: string) => ({
+    name: tagName,
+    settings: {},
+  })
+
   fetchRequest(url)
       //@ts-ignore
       .then((response) => response.json())
-      .then((result) => resolve(result))
+      .then( (result) => resolve(result.map(configuredNewTag)))
       .catch((error) => reject(error))
 })
 

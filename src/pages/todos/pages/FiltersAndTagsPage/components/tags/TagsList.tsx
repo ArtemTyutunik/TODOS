@@ -1,6 +1,5 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {RootReducer} from '@app/store';
 import {Box, Typography} from '@mui/material';
 import {default as LabelIcon} from '@mui/icons-material/LocalOffer';
 import TodosCount from '@shared/components/TodosCount';
@@ -8,15 +7,16 @@ import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutli
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CustomIconButton from '@pages/todos/pages/FiltersAndTagsPage/components/CustomIconButton';
-import {deleteTag} from '@pages/authorization/store';
 import {deleteUserTag} from '@shared/api/services/todosService/fetchTodos';
 import ConfirmDeleteModal from '@shared/components/ConfirmDeletion';
 import useVisable from '@shared/hooks/useVisable';
+import {deleteTag, userTagsSelector} from '@entities/tag/store/tagStore';
+import {userIdSelector} from '@pages/authorization/store';
 
 const TagsList = () => {
-  const userTags = useSelector((state: RootReducer ) => state.userReducer.tags)
+  const userTags = useSelector(userTagsSelector)
   const dispatch = useDispatch()
-  const userId = useSelector((state: RootReducer ) => state.userReducer.user.user_id)
+  const userId = useSelector(userIdSelector)
 
   const onDeleteTag = (tag: string) => {
     dispatch(deleteTag(tag))
@@ -27,8 +27,8 @@ const TagsList = () => {
     <Box mt={'10px'}>
       {
         userTags.length > 0 ?
-            userTags.map((tag) => <TagItem key={tag}
-              tag={tag}
+            userTags.map((tag) => <TagItem key={tag.name}
+              tag={tag.name}
               onDelete={onDeleteTag}/>) :
             <Box sx={{padding: '16px 0', fontSize: '16px', color: 'grey'}}>
               A place for your tags.
@@ -81,6 +81,7 @@ interface TagItemProps {
 
 function TagItem({tag, onDelete}: TagItemProps) {
   const [isConfirmDeleteModalVisable, openConfirmDeleteModal, onCloseConfirmDeleteModal] = useVisable(false)
+  console.log(tag)
   return <>
     <Box sx={tagItemContainer}>
       <Box display={'flex'} alignItems={'center'}>

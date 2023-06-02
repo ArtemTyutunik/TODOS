@@ -4,7 +4,9 @@ import {Box, TextField, Typography} from '@mui/material';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 import {createNewUserTag} from '@shared/api/services/todosService/fetchTodos';
 import {useDispatch, useSelector} from 'react-redux';
-import {addNewUserTag, userIdSelector} from '@pages/authorization/store';
+import {userIdSelector} from '@pages/authorization/store';
+import ColorTagSelect from '@pages/todos/pages/FiltersAndTagsPage/components/ColorTagSelect';
+import {addNewUserTag} from '@entities/tag/store/tagStore';
 
 interface Props {
     isOpen: boolean,
@@ -24,6 +26,9 @@ const inputSectionStyle = {
     '& fieldset': {
       'border': '1px solid #ddd !important',
     },
+  },
+  '& .create-tag-input': {
+    width: '100%',
   },
 }
 
@@ -49,14 +54,22 @@ const CreateNewModal = ({isOpen, onClose}: Props) => {
           </Typography>
         </Box>
         <Box sx={inputSectionStyle}>
-          <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
+          <Box mb={'15px'}>
+            <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
               Tag name
-          </Typography>
-          <TextField onChange={(e) => setTagName(e.currentTarget.value)}
-            value={tagName}
-            variant={'outlined'}
-            className={'create-tag-input'}
-            inputProps={{autoFocus: true}}/>
+            </Typography>
+            <TextField onChange={(e) => setTagName(e.currentTarget.value)}
+              value={tagName}
+              variant={'outlined'}
+              className={'create-tag-input'}
+              inputProps={{autoFocus: true}}/>
+          </Box>
+          <Box>
+            <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
+              Tag color
+            </Typography>
+            <ColorTagSelect/>
+          </Box>
         </Box>
         <Box margin={'10px 0'} paddingRight={'15px'}>
           <FormSubmissionButtons onClose={onClose} isValid={isValid} onSubmit={onSubmit}/>

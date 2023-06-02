@@ -4,7 +4,7 @@ export interface ITodo {
     description?: string,
     done?: boolean,
     priority: Priority,
-    tags?: string[],
+    tags?: ITag[],
     date?: IDate
 }
 
@@ -18,3 +18,13 @@ export interface IUser {
     todos: ITodo[],
     user_id: string
 }
+
+export type ITag = {
+    name: string,
+    settings?: {
+        colorBG: string,
+        colorText: string,
+    }
+}
+
+
