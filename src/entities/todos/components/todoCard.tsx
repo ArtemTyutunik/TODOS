@@ -29,7 +29,6 @@ const TodoCard = ({
 ) => {
   const {label, description, date, id, tags} = todo;
   const navigate = useNavigate()
-
   return (
     <Box sx={{mb: '25px', cursor: 'pointer'}}
       onClick={() => navigate(`task/${id}`)}

@@ -2,6 +2,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useState} from 'react';
 import {addNewTodoTag, allTodosSelector, deleteTodoTag} from '@entities/todos/store/todo';
 import {ITag, ITodo} from '@shared/interfaces';
+import {configureNewTag} from '@entities/tag/utils/configureInitialTag';
 
 
 export const useTags = (formState: ITodo, firstCreation: boolean):
@@ -15,10 +16,8 @@ export const useTags = (formState: ITodo, firstCreation: boolean):
   const todoTags = firstCreation ? existingTodoTags: todoWithoutIdTags
 
   const onSelectTag = (newTag: string) => {
-    const configuredNewTag = {
-      name: newTag,
-    }
-    const payload = {tag: configuredNewTag, id: formState.id}
+    const configuredTag = configureNewTag(newTag)
+    const payload = {tag: configuredTag, id: formState.id}
 
     const isIncludes = (arr: ITag[], newTag: string) => {
       const allNames = arr.map((item) => item.name)
@@ -27,7 +26,7 @@ export const useTags = (formState: ITodo, firstCreation: boolean):
 
     if (!isIncludes(todoTags, newTag)) {
             firstCreation ? dispatch(addNewTodoTag(payload)) :
-                setTodoWithoutIdTags((prev) => [...prev, configuredNewTag])
+                setTodoWithoutIdTags((prev) => [...prev, configuredTag])
     } else {
             firstCreation ? dispatch(deleteTodoTag(payload)):
                 setTodoWithoutIdTags((prev) => prev.filter((item) => item.name !== newTag))

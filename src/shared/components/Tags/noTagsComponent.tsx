@@ -5,6 +5,7 @@ import {userIdSelector} from '@pages/authorization/store/'
 import AddIcon from '@shared/components/AddIcon';
 import {createNewUserTag} from '@shared/api/services/todosService/fetchTodos';
 import {addNewUserTag} from '@entities/tag/store/tagStore';
+import {configureNewTag} from '@entities/tag/utils/configureInitialTag';
 
 
 //have to be string
@@ -16,12 +17,10 @@ const NoTagsComponent = ({search}: Props) => {
   const userId = useSelector(userIdSelector)
 
   const onClickHandler = () => {
-    const configuredNewTag = {
-      name: search,
-      settings: {},
-    }
-    createNewUserTag(search, userId)
-        .then(() => dispatch(addNewUserTag(configuredNewTag)))
+    const configuredTag = configureNewTag(search)
+
+    createNewUserTag(configuredTag, userId)
+        .then(() => dispatch(addNewUserTag(configuredTag)))
   }
 
 

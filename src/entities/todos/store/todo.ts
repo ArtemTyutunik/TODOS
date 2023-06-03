@@ -60,9 +60,9 @@ const todosSlice = createSlice({
       const task = findTaskById(state, action.payload.id);
       if (task) {
         const {tags} = task
-        const index = tags!.indexOf(action.payload.tag)
+        const index = tags?.map((tag) => tag.name).indexOf(action.payload.tag.name)
         return updateTodoInState(state, {...task,
-          tags: [...tags!.slice(0, index), ...tags!.slice(index+1)],
+          tags: [...tags!.slice(0, index), ...tags!.slice(index!+1)],
         })
       }
     },

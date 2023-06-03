@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {userIdSelector} from '@pages/authorization/store';
 import ColorTagSelect from '@pages/todos/pages/FiltersAndTagsPage/components/ColorTagSelect';
 import {addNewUserTag} from '@entities/tag/store/tagStore';
+import {configureNewTag} from '@entities/tag/utils/configureInitialTag';
 
 interface Props {
     isOpen: boolean,
@@ -39,8 +40,9 @@ const CreateNewModal = ({isOpen, onClose}: Props) => {
   const dispatch = useDispatch()
 
   const onSubmit = () => {
-    createNewUserTag(tagName, userId)
-    dispatch(addNewUserTag(tagName))
+    const newTag = configureNewTag(tagName)
+    createNewUserTag(newTag, userId)
+    dispatch(addNewUserTag(newTag))
     setTagName('')
     onClose()
   }

@@ -39,7 +39,7 @@ function TagsItem({tag, checked, onSelect}: TagsItemProps) {
       sx={{padding: '0 8px'}}
     >
       <IconButton>
-        <TurnedInIcon sx={{fontSize: '16px'}}/>
+        <TurnedInIcon sx={{fontSize: '16px', color: tag.settings?.colorBG}}/>
       </IconButton>
       <ListItemText primary={`${tag.name}`}
         sx={(theme) => ({

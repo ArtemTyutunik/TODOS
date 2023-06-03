@@ -12,6 +12,7 @@ import ConfirmDeleteModal from '@shared/components/ConfirmDeletion';
 import useVisable from '@shared/hooks/useVisable';
 import {deleteTag, userTagsSelector} from '@entities/tag/store/tagStore';
 import {userIdSelector} from '@pages/authorization/store';
+import {ITag} from '@shared/interfaces';
 
 const TagsList = () => {
   const userTags = useSelector(userTagsSelector)
@@ -28,7 +29,7 @@ const TagsList = () => {
       {
         userTags.length > 0 ?
             userTags.map((tag) => <TagItem key={tag.name}
-              tag={tag.name}
+              tag={tag}
               onDelete={onDeleteTag}/>) :
             <Box sx={{padding: '16px 0', fontSize: '16px', color: 'grey'}}>
               A place for your tags.
@@ -38,11 +39,11 @@ const TagsList = () => {
   );
 };
 
-const tagNameStyle = {
+const tagNameStyle = (color: string) => ( {
   fontSize: '15px',
-  color: 'rgb(128, 128, 128)',
+  color: color,
   fontFamily: '-apple-system',
-}
+})
 
 const tagItemContainer = {
   'display': 'flex',
@@ -75,7 +76,7 @@ const iconStyles = {
 }
 
 interface TagItemProps {
-  tag: string,
+  tag: ITag,
   onDelete: (tag: string) => void
 }
 
@@ -85,8 +86,8 @@ function TagItem({tag, onDelete}: TagItemProps) {
   return <>
     <Box sx={tagItemContainer}>
       <Box display={'flex'} alignItems={'center'}>
-        <LabelIcon sx={tagNameStyle}/>
-        <Typography marginLeft={'10px'} color={'#333333'}>{tag}</Typography>
+        <LabelIcon sx={tagNameStyle(tag.settings!.colorBG)}/>
+        <Typography marginLeft={'10px'} color={'#333333'}>{tag.name}</Typography>
       </Box>
       <TodosCount>
         1
@@ -106,7 +107,7 @@ function TagItem({tag, onDelete}: TagItemProps) {
         {/*delete confirmation modal*/}
         <ConfirmDeleteModal isOpen={isConfirmDeleteModalVisable}
           onClose={onCloseConfirmDeleteModal}
-          onSubmit={() => onDelete(tag)}/>
+          onSubmit={() => onDelete(tag.name)}/>
       </Box>
     </Box>
   </>

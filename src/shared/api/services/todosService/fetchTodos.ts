@@ -1,6 +1,6 @@
-import {ITodo} from '@shared/interfaces';
+import {ITag, ITodo} from '@shared/interfaces';
 import {fetchRequest} from '@shared/api/services/constants';
-
+//Fixme
 export const getUserTodos = (userId: string) => new Promise((resolve, reject) => {
   fetchRequest(`get_all/${userId}`)
       // @ts-ignore
@@ -21,16 +21,16 @@ export const deleteTodoById = (id: number, userId: string) => new Promise(() => 
 })
 
 export const postNewTodo = (data: ITodo, userId: string) => new Promise((resolve, reject) => {
-  const whiteList = ['label', 'tags', 'id', 'description', 'done', 'priority', 'Label', 'date', 'user_id']
-  const url = `create_todo?user_id=${userId}`
+  const url = `http://localhost:4444/api/create_todo?user_id=${userId}`
   const options = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data, whiteList),
+    body: JSON.stringify(data),
   }
-  fetchRequest(url, options)
+  console.log(JSON.stringify(data))
+  fetch(url, options)
       .then((result) => resolve(result))
       .catch((error) => reject(error))
 })
@@ -49,24 +49,27 @@ export const sendUpdatedTodo = (updatedData: any, userId: string) => new Promise
 })
 
 export const fetchUserTags = (userId: string) => new Promise((resolve, reject) => {
-  const url = `get_tags?user_id=${userId}`;
-  const configuredNewTag = (tagName: string) => ({
-    name: tagName,
-    settings: {},
-  })
+  const url = `/get_tags?user_id=${userId}`;
 
   fetchRequest(url)
-      //@ts-ignore
-      .then((response) => response.json())
-      .then( (result) => resolve(result.map(configuredNewTag)))
+      .then((response) => {
+        //@ts-ignore
+        return response.json()
+      })
+      .then( (result) => resolve(result))
       .catch((error) => reject(error))
 })
 
-export const createNewUserTag = async (newTag: string, userId: string) => {
+export const createNewUserTag = async (newTag: ITag, userId: string) => {
   const options = {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newTag.settings),
   }
-  fetchRequest(`add_tag?user_id=${userId}&tag=${newTag}`, options)
+  console.log(JSON.stringify(newTag.settings))
+  fetchRequest(`/add_tag?user_id=${userId}&tag=${newTag.name}`, options)
 }
 
 export const deleteUserTag = async (tag: string, userId: string) => {
