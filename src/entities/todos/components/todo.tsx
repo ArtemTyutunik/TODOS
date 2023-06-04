@@ -31,7 +31,7 @@ const Todo = ({todo}: Props) => {
   const onDuplicateAction = () => {
     const newTodo = ({...todo, id: Date.now()})
     dispatch(addNewTask(newTodo));
-    postNewTodo(newTodo, userId).then((response) => console.log(response))
+    postNewTodo(newTodo, userId)
   };
   const setPriorityAction = (priority: string) => {
     const data = {id, priority}

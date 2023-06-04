@@ -1,79 +1,98 @@
 export const colors: colorType[] = [
   {
     name: 'Charcoal',
-    colorRGB: 'rgb(129 129 130)',
+    background: 'rgb(129 129 130)',
+    textColor: '#ffffff',
   },
   {
     name: 'Berry Red',
-    colorRGB: 'rgb(184, 37, 111)',
+    background: 'rgb(184, 37, 111)',
+    textColor: '#ffffff',
   },
   {
     name: 'Red',
-    colorRGB: 'rgb(219, 64, 53)',
+    background: 'rgb(219, 64, 53)',
+    textColor: '#ffffff',
   },
   {
     name: 'Orange',
-    colorRGB: 'rgb(255, 153, 51)',
+    background: 'rgb(255, 153, 51)',
+    textColor: '#ffffff',
   },
   {
     name: 'Yellow',
-    colorRGB: 'rgb(250, 208, 0)',
+    background: 'rgb(250, 208, 0)',
+    textColor: '#ffffff',
   },
   {
     name: 'Olive Green',
-    colorRGB: 'rgb(126, 204, 73)',
+    background: 'rgb(126, 204, 73)',
+    textColor: '#ffffff',
   },
   {
     name: 'Lime Green',
-    colorRGB: 'rgb(126, 204, 73)',
+    background: 'rgb(126, 204, 73)',
+    textColor: '#ffffff',
   },
   {
     name: 'Green',
-    colorRGB: 'rgb(41, 148, 56)',
+    background: 'rgb(41, 148, 56)',
+    textColor: '#ffffff',
   },
   {
     name: 'Mint Green',
-    colorRGB: 'rgb(106, 204, 188)',
+    background: 'rgb(106, 204, 188)',
+    textColor: '#ffffff',
   },
   {
     name: 'Teal',
-    colorRGB: 'rgb(21, 143, 173)',
+    background: 'rgb(21, 143, 173)',
+    textColor: '#ffffff',
   },
   {
     name: 'Sky Blue',
-    colorRGB: 'rgb(20, 170, 245)',
+    background: 'rgb(20, 170, 245)',
+    textColor: '#ffffff',
   },
   {
     name: 'Light Blue',
-    colorRGB: 'rgb(150, 195, 235)',
+    background: 'rgb(150, 195, 235)',
+    textColor: '#ffffff',
   },
   {
     name: 'Blue',
-    colorRGB: 'rgb(64, 115, 255)',
+    background: 'rgb(64, 115, 255)',
+    textColor: '#ffffff',
   },
   {
     name: 'Grape',
-    colorRGB: 'rgb(136, 77, 255)',
+    background: 'rgb(136, 77, 255)',
+    textColor: '#ffffff',
   },
   {
     name: 'Violet',
-    colorRGB: 'rgb(175, 56, 235)',
+    background: 'rgb(175, 56, 235)',
+    textColor: '#ffffff',
   },
   {
     name: 'Lavender',
-    colorRGB: 'rgb(235, 150, 235)',
+    background: 'rgb(235, 150, 235)',
+    textColor: '#ffffff',
   },
   {
     name: 'Magenta',
-    colorRGB: 'rgb(224, 81, 148)',
+    background: 'rgb(224, 81, 148)',
+    textColor: '#ffffff',
   },
   {
     name: 'Salmon',
-    colorRGB: 'rgb(255, 141, 133)',
+    background: 'rgb(255, 141, 133)',
+    textColor: '#ffffff',
   },
 ]
 
 export type colorType = {
-    name: string
-    colorRGB: string
+    name: string,
+    background: string,
+    textColor: string,
 }

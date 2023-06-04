@@ -29,7 +29,6 @@ const CreateTodoForm = ({onClose, initialDate}: Props) => {
   }
 
   const onSubmit = (newTodo: ITodo ) => {
-    console.log(newTodo)
     postNewTodo(newTodo, userId)
         .then(() => {
           dispatch(addNewTask(newTodo));

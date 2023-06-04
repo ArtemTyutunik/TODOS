@@ -82,11 +82,11 @@ interface TagItemProps {
 
 function TagItem({tag, onDelete}: TagItemProps) {
   const [isConfirmDeleteModalVisable, openConfirmDeleteModal, onCloseConfirmDeleteModal] = useVisable(false)
-  console.log(tag)
+
   return <>
     <Box sx={tagItemContainer}>
       <Box display={'flex'} alignItems={'center'}>
-        <LabelIcon sx={tagNameStyle(tag.settings!.colorBG)}/>
+        <LabelIcon sx={tagNameStyle(tag.settings!.background)}/>
         <Typography marginLeft={'10px'} color={'#333333'}>{tag.name}</Typography>
       </Box>
       <TodosCount>

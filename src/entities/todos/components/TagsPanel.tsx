@@ -17,7 +17,7 @@ const TagLinks = ({tags}: Props) => {
 };
 
 const TagLink = ({tag}: {tag: ITag}) => {
-  return <CustomTagLink sx={{backgroundColor: tag.settings?.colorBG, color: tag.settings?.colorText}}>
+  return <CustomTagLink sx={{backgroundColor: tag.settings?.background, color: tag.settings?.textColor}}>
     {tag.name}
   </CustomTagLink>
 }

@@ -3,7 +3,8 @@ import {ITag} from '@shared/interfaces';
 export const configureNewTag = (name: string): ITag => ( {
   name: name,
   settings: {
-    colorBG: '#d37171',
-    colorText: '#fff',
+    name: 'Charcoal',
+    background: 'rgb(129 129 130)',
+    textColor: '#ffffff',
   },
 })

@@ -21,7 +21,7 @@ export const deleteTodoById = (id: number, userId: string) => new Promise(() => 
 })
 
 export const postNewTodo = (data: ITodo, userId: string) => new Promise((resolve, reject) => {
-  const url = `http://localhost:4444/api/create_todo?user_id=${userId}`
+  const url = `create_todo?user_id=${userId}`
   const options = {
     method: 'POST',
     headers: {
@@ -29,8 +29,8 @@ export const postNewTodo = (data: ITodo, userId: string) => new Promise((resolve
     },
     body: JSON.stringify(data),
   }
-  console.log(JSON.stringify(data))
-  fetch(url, options)
+
+  fetchRequest(url, options)
       .then((result) => resolve(result))
       .catch((error) => reject(error))
 })
@@ -68,7 +68,7 @@ export const createNewUserTag = async (newTag: ITag, userId: string) => {
     },
     body: JSON.stringify(newTag.settings),
   }
-  console.log(JSON.stringify(newTag.settings))
+
   fetchRequest(`/add_tag?user_id=${userId}&tag=${newTag.name}`, options)
 }
 
