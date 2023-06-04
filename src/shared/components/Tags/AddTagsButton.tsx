@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Box, TextField} from '@mui/material';
-import {userTags} from '@pages/authorization/store';
+import {userTagsSelector} from '@entities/tag/store/tagStore';
 import ActionButton from '@shared/components/ActionButton';
 import useAnchorElement from '@shared/hooks/useAnchorElement';
 import DropdownMenu from '@shared/components/dropdownMenu';
@@ -9,18 +9,19 @@ import TagsList from '@shared/components/Tags/TagsList';
 import NoTagsComponent from '@shared/components/Tags/noTagsComponent';
 
 import './TagsStyles.css'
+import {ITag} from '@shared/interfaces';
 
 interface Props {
-  todoTags: string[],
+  todoTags: ITag[],
   onAddNewLabel: (newLabel: string) => void
 }
 
 const AddTagsButton = ({todoTags, onAddNewLabel}: Props) => {
   const [anchorEl, addAnchorEl] = useAnchorElement(null);
   const [search, setSearch] = useState('');
-  const tags = useSelector(userTags)
+  const tags: ITag[] = useSelector(userTagsSelector)
 
-  const filteredTags = tags.filter((item: string) => item.includes(search));
+  const filteredTags = tags.filter((item: ITag) => item.name.includes(search));
 
   const onOpenDropdown = (e: React.MouseEvent<HTMLElement>) => {
     addAnchorEl(e.currentTarget)

@@ -1,31 +1,31 @@
 import React from 'react';
 import {styled} from '@mui/material/styles';
+import {ITag} from '@shared/interfaces';
+import {Typography} from '@mui/material';
 
 interface Props {
-    tags: string[]
+    tags: ITag[]
 }
 const TagLinks = ({tags}: Props) => {
   return (
     <>
       {
-        tags.map((tag) => <TagLink key={tag} link={tag}/>)
+        tags.map((tag) => <TagLink key={tag.name} tag={tag}/>)
       }
     </>
   );
 };
 
-const TagLink = ({link}: {link: string}) => {
-  return <CustomTagLink>
-    {link}
+const TagLink = ({tag}: {tag: ITag}) => {
+  return <CustomTagLink sx={{backgroundColor: tag.settings?.background, color: tag.settings?.textColor}}>
+    {tag.name}
   </CustomTagLink>
 }
 
-const CustomTagLink = styled('span')(({theme}) => ({
-  backgroundColor: theme.background.lightGrey,
+const CustomTagLink = styled(Typography)(() => ({
   fontSize: '16px',
   cursor: 'text',
   padding: '2px 14px',
-  color: 'rgb(0, 0, 0)',
   fontWeight: 400,
   lineHeight: '18px',
   borderRadius: '2em',

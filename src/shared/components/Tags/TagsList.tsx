@@ -1,10 +1,11 @@
 import React from 'react';
 import {Checkbox, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from '@mui/material';
 import TurnedInIcon from '@mui/icons-material/TurnedIn';
+import {ITag} from '@shared/interfaces';
 
 interface Props {
-    tags: string[],
-    todoCurrentTags: string[],
+    tags: ITag[],
+    todoCurrentTags: ITag[],
     onSelect: (newTag: string) => void
 }
 const TagsList = ({tags, todoCurrentTags, onSelect}: Props) => {
@@ -13,9 +14,9 @@ const TagsList = ({tags, todoCurrentTags, onSelect}: Props) => {
       {
         tags.length > 0 ?
            tags.map((tag) => <TagsItem tag={tag}
-             key={tag}
-             onSelect={() => onSelect(tag)}
-             checked={todoCurrentTags.includes(tag)}
+             key={tag.name}
+             onSelect={() => onSelect(tag.name)}
+             checked={!!todoCurrentTags.find((item) => item.name === tag.name)}
            />) :
            null
       }
@@ -24,7 +25,7 @@ const TagsList = ({tags, todoCurrentTags, onSelect}: Props) => {
 };
 
 interface TagsItemProps {
-    tag: string,
+    tag: ITag,
     checked: boolean,
     onSelect: () => void
 }
@@ -38,9 +39,9 @@ function TagsItem({tag, checked, onSelect}: TagsItemProps) {
       sx={{padding: '0 8px'}}
     >
       <IconButton>
-        <TurnedInIcon sx={{fontSize: '16px'}}/>
+        <TurnedInIcon sx={{fontSize: '16px', color: tag.settings?.background}}/>
       </IconButton>
-      <ListItemText primary={`${tag}`}
+      <ListItemText primary={`${tag.name}`}
         sx={(theme) => ({
           marginRight: '14px',
           color: theme.text.title})}/>
