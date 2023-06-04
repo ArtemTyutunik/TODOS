@@ -6,7 +6,6 @@ export const TodoContainerStyles = {
   'display': 'flex',
   'alignItems': 'center',
   'justifyContent': 'space-between',
-  'cursor': 'pointer',
   '&: hover': {
     '& .ActionsMenu': {
       opacity: 1,
@@ -25,6 +24,7 @@ export const TodoContainerStyles = {
 export const TodoFlexboxStyles = {
   display: 'flex',
   alignItems: 'center',
+  cursor: 'default',
 };
 
 export const TodoLabelStyles = {

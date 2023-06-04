@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {addNewTask, deleteTask, setPriority, toggleTaskComplete} from '../store/todo';
-import {EditTodoForm} from '@pages/todos/components';
+import {EditTodoForm} from '@features/CreateOrEditTodo';
 import {ITodo} from '@shared/interfaces';
 import TodoCard from './todoCard';
 import useVisable from '@shared/hooks/useVisable';
@@ -31,7 +31,7 @@ const Todo = ({todo}: Props) => {
   const onDuplicateAction = () => {
     const newTodo = ({...todo, id: Date.now()})
     dispatch(addNewTask(newTodo));
-    postNewTodo(newTodo, userId).then((response) => console.log(response))
+    postNewTodo(newTodo, userId)
   };
   const setPriorityAction = (priority: string) => {
     const data = {id, priority}

@@ -6,16 +6,14 @@ import TodayIcon from '@mui/icons-material/Today';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import {styled} from '@mui/material/styles';
 import useTodosCount from '@entities/drawer/hooks/useTodosCount';
-
-const inboxLink = 'inbox';
-const todayLink = 'today';
-const filtersAndLabelsLink = 'filters-and-labels';
+import {INBOX_LINK, TODAY_LINK, FILTERS_AND_TAGS_LINK} from '@shared/constants';
+import TodosCount from '@shared/components/TodosCount';
 
 
 const drawerLinks = [
-  {label: 'Inbox', linkTo: inboxLink, Icon: () => <InboxIcon sx={{color: '#246fe0'}}/>},
-  {label: 'Today', linkTo: todayLink, Icon: () => <TodayIcon sx={{color: '#058527'}}/>},
-  {label: 'Filters and labels', linkTo: filtersAndLabelsLink, Icon: () => <FilterListIcon sx={{color: '#eb8909'}}/>},
+  {label: 'Inbox', linkTo: INBOX_LINK, Icon: () => <InboxIcon sx={{color: '#246fe0'}}/>},
+  {label: 'Today', linkTo: TODAY_LINK, Icon: () => <TodayIcon sx={{color: '#058527'}}/>},
+  {label: 'Filters and Tags', linkTo: FILTERS_AND_TAGS_LINK, Icon: () => <FilterListIcon sx={{color: '#eb8909'}}/>},
 ];
 
 const CustomListText = styled(Typography)(({theme}) => ({
@@ -29,11 +27,11 @@ const CustomListText = styled(Typography)(({theme}) => ({
 
 const configureActiveLink = (): string => {
   const url = window.location.pathname;
-  if (url === '/') return todayLink;
+  if (url === '/') return TODAY_LINK;
 
-  if (url.includes(todayLink)) return todayLink;
-  else if (url.includes(inboxLink)) return inboxLink;
-  else if (url.includes(filtersAndLabelsLink)) return filtersAndLabelsLink;
+  if (url.includes(TODAY_LINK)) return TODAY_LINK;
+  else if (url.includes(INBOX_LINK)) return INBOX_LINK;
+  else if (url.includes(FILTERS_AND_TAGS_LINK)) return FILTERS_AND_TAGS_LINK;
 
   return '';
 };
@@ -67,11 +65,9 @@ const DrawerMenu = () => {
                 </CustomListText>
               </Box>
 
-              <Typography color={'#aaa'} fontSize={'13px'}>
-                {/*Fixme*/}
-                {/*@ts-ignore*/}
+              <TodosCount>
                 {todosCount[label]}
-              </Typography>
+              </TodosCount>
             </ListItemButton>
           </ListItem>;
         })

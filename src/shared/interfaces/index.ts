@@ -1,10 +1,12 @@
+import {colorType} from '@shared/constants/colors';
+
 export interface ITodo {
     label: string,
     id: number,
     description?: string,
     done?: boolean,
     priority: Priority,
-    tags?: string[],
+    tags?: ITag[],
     date?: IDate
 }
 
@@ -18,3 +20,10 @@ export interface IUser {
     todos: ITodo[],
     user_id: string
 }
+
+export type ITag = {
+    name: string,
+    settings: colorType
+}
+
+

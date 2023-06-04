@@ -1,8 +1,8 @@
 import React, {memo} from 'react';
 import {Box} from '@mui/material';
 import {IDate, ITodo} from '@shared/interfaces';
-import CreateTodoForm from './createTodoForm';
-import AddTaskButton from './AddTaskButton';
+import CreateTodoForm from '@features/CreateOrEditTodo/components/createTodoForm';
+import AddTaskButton from '@features/CreateOrEditTodo/components/AddTaskButton';
 import useVisable from '@shared/hooks/useVisable';
 import RenderedList from '@entities/todos/components/RenderedList';
 

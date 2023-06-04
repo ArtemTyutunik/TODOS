@@ -29,9 +29,10 @@ const TodoCard = ({
 ) => {
   const {label, description, date, id, tags} = todo;
   const navigate = useNavigate()
-
   return (
-    <Box mb={'25px'} onClick={() => navigate(`task/${id}`)}>
+    <Box sx={{mb: '25px', cursor: 'pointer'}}
+      onClick={() => navigate(`task/${id}`)}
+    >
       <Box sx = {TodoContainerStyles}>
         <Box maxWidth={{mobile: '100%'}}
           sx={TodoFlexboxStyles}>

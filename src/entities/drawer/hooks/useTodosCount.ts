@@ -2,7 +2,7 @@ import {useSelector} from 'react-redux';
 import {RootReducer} from '@app/store';
 import {TODAY} from '@shared/constants';
 
-const useTodosCount = () => {
+const useTodosCount = (): {[k: string]: number} => {
   const allTodos = useSelector((state: RootReducer) => state.todosReducer.todos);
   const todayTodos = allTodos.filter((todo) => todo.date === TODAY).length;
 

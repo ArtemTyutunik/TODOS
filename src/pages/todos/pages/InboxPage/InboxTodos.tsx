@@ -7,10 +7,11 @@ import {RootReducer} from '@app/store';
 import {overdueDate} from '@shared/constants';
 import {
   OverdueTodos,
-  CreateTodoForm,
   TodoList,
   PageTitle} from '../../components';
+
 import useVisable from '@shared/hooks/useVisable';
+import {CreateTodoForm} from '@features/CreateOrEditTodo';
 
 
 const InboxTodosPage = () => {

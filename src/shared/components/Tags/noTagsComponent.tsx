@@ -1,9 +1,10 @@
-import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Box, IconButton, List, ListItem, ListItemButton, Typography} from '@mui/material';
-import {addNewUserTag, userIdSelector} from '@pages/authorization/store/'
+import {userIdSelector} from '@pages/authorization/store/'
 import AddIcon from '@shared/components/AddIcon';
 import {createNewUserTag} from '@shared/api/services/todosService/fetchTodos';
+import {addNewUserTag} from '@entities/tag/store/tagStore';
+import {configureNewTag} from '@entities/tag/utils/configureInitialTag';
 
 interface Props {
     search: string
@@ -13,8 +14,10 @@ const NoTagsComponent = ({search}: Props) => {
   const userId = useSelector(userIdSelector)
 
   const onClickHandler = () => {
-    createNewUserTag(search, userId)
-        .then(() => dispatch(addNewUserTag(search)))
+    const configuredTag = configureNewTag(search)
+
+    createNewUserTag(configuredTag, userId)
+        .then(() => dispatch(addNewUserTag(configuredTag)))
   }
 
 
