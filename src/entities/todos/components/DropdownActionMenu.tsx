@@ -3,6 +3,7 @@ import {Box, Divider, IconButton, List, ListItemButton, Typography} from '@mui/m
 import {PrioritiesFlags} from '@shared/components/PrioritiesFlags';
 import QueueIcon from '@mui/icons-material/Queue';
 import DeleteIcon from '@mui/icons-material/Delete';
+import MoveTodo from './MoveTodo';
 
 interface DropdownActionMenuProps {
     onDelete: () => void,
@@ -14,6 +15,9 @@ const DropdownActionMenu = ({onDelete, onDuplicate, onSetPriority}: DropdownActi
   return (
     <Box padding={'0 10px'}>
       <Box m={'10px 0'}>
+        <MoveTodo isUp={true} text='Lift up todo'/>
+        <MoveTodo isUp={false} text='Lift down todo'/>
+        <Divider/>
         <Typography>Set priority</Typography>
         <Box display={'flex'}>
           {PrioritiesFlags.map((Priority) => <Box mr={'10px'} key={Priority.value}>
@@ -32,7 +36,6 @@ const DropdownActionMenu = ({onDelete, onDuplicate, onSetPriority}: DropdownActi
           </Typography>
         </ListItemButton>
       </List>
-
       <Divider/>
       <ListItemButton sx = {{padding: '10px 0', margin: '10px 0'}} onClick={onDelete}>
         <DeleteIcon sx={{color: 'grey'}}/>
