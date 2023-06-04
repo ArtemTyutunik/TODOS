@@ -2,13 +2,14 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useState} from 'react';
 import {addNewTodoTag, allTodosSelector, deleteTodoTag} from '@entities/todos/store/todo';
 import {ITag, ITodo} from '@shared/interfaces';
-import {configureNewTag} from '@entities/tag/utils/configureInitialTag';
+import {userTagsSelector} from '@entities/tag/store/tagStore';
 
 
 export const useTags = (formState: ITodo, firstCreation: boolean):
     [ITag[], (newTag: string) => void] => {
   const dispatch = useDispatch()
   const allTodos = useSelector(allTodosSelector)
+  const allUserTags = useSelector(userTagsSelector)
 
   const existingTodoTags: ITag[] = allTodos.find((todo) => todo.id === formState.id)?.tags || []
   const [todoWithoutIdTags, setTodoWithoutIdTags] = useState<ITag[]>([])
@@ -16,7 +17,7 @@ export const useTags = (formState: ITodo, firstCreation: boolean):
   const todoTags = firstCreation ? existingTodoTags: todoWithoutIdTags
 
   const onSelectTag = (newTag: string) => {
-    const configuredTag = configureNewTag(newTag)
+    const configuredTag = allUserTags.find((item) => item.name === newTag)!
     const payload = {tag: configuredTag, id: formState.id}
 
     const isIncludes = (arr: ITag[], newTag: string) => {
