@@ -1,7 +1,5 @@
-import React, {useState} from 'react';
 import {Box, MenuItem, Select, SelectChangeEvent, Typography} from '@mui/material';
 import {colors, colorType} from '@shared/constants/colors';
-
 
 const selectStyles = {
   'position': 'relative',
@@ -24,13 +22,17 @@ const MenuStyles = {
     marginTop: '10px',
   },
 }
-const ColorTagSelect = () => {
-  const [selectValue, setSelectValue] = useState(colors[0].name);
-  console.log(selectValue);
+
+interface Props {
+  settings: colorType,
+  onSelectChange: (e: SelectChangeEvent, color: colorType[]) => void
+}
+
+const ColorTagSelect = ({settings, onSelectChange}: Props) => {
   return (
     <Select className={'create-tag-input'}
-      value={selectValue}
-      onChange={(e: SelectChangeEvent) => setSelectValue(e.target.value as string)}
+      value={settings.name}
+      onChange={(event: SelectChangeEvent) => onSelectChange(event, colors)}
       sx={selectStyles}
       MenuProps={{sx: MenuStyles}}>
       {
@@ -47,7 +49,7 @@ const ColorTagSelect = () => {
 
 function SelectItem({color}: {color: colorType}) {
   return <>
-    <Box width={'10px'} height={'10px'} bgcolor={color.colorRGB} borderRadius={'50%'} marginRight={'10px'}></Box>
+    <Box width={'10px'} height={'10px'} bgcolor={color.background} borderRadius={'50%'} marginRight={'10px'}></Box>
     <Typography>
       {color.name}
     </Typography>

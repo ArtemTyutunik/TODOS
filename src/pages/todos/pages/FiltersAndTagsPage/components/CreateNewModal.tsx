@@ -1,13 +1,17 @@
-import React, {useState} from 'react';
 import BasicModal from '@shared/components/modal';
-import {Box, TextField, Typography} from '@mui/material';
+import {Box, SelectChangeEvent, TextField, Typography} from '@mui/material';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 import {createNewUserTag} from '@shared/api/services/todosService/fetchTodos';
 import {useDispatch, useSelector} from 'react-redux';
 import {userIdSelector} from '@pages/authorization/store';
 import ColorTagSelect from '@pages/todos/pages/FiltersAndTagsPage/components/ColorTagSelect';
 import {addNewUserTag} from '@entities/tag/store/tagStore';
-import {configureNewTag} from '@entities/tag/utils/configureInitialTag';
+import {
+  setTagNameAction,
+  setTagSettingsAction,
+  useTagModalReducer,
+} from '@pages/todos/pages/FiltersAndTagsPage/model/useTagModalReducer';
+import {colorType} from '@shared/constants/colors';
 
 interface Props {
     isOpen: boolean,
@@ -34,18 +38,22 @@ const inputSectionStyle = {
 }
 
 const CreateNewModal = ({isOpen, onClose}: Props) => {
-  const [tagName, setTagName] = useState('')
-  const userId = useSelector(userIdSelector)
-  const isValid = tagName.trim().length > 0;
   const dispatch = useDispatch()
+  const userId = useSelector(userIdSelector)
+  const [tagState, tagDispatcher] = useTagModalReducer()
 
   const onSubmit = () => {
-    const newTag = configureNewTag(tagName)
-    createNewUserTag(newTag, userId)
-    dispatch(addNewUserTag(newTag))
-    setTagName('')
+    createNewUserTag(tagState, userId)
+    dispatch(addNewUserTag(tagState))
+    tagDispatcher(setTagNameAction(''))
     onClose()
   }
+
+  const onSelectChange = (e: SelectChangeEvent, colors: colorType[]) => {
+    tagDispatcher(setTagSettingsAction(colors.find((item) => item.name === e.target.value)!))
+  }
+
+  const isValid = tagState.name.trim().length > 0;
 
   return (
     <BasicModal open={isOpen} onClose={onClose}>
@@ -60,8 +68,8 @@ const CreateNewModal = ({isOpen, onClose}: Props) => {
             <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
               Tag name
             </Typography>
-            <TextField onChange={(e) => setTagName(e.currentTarget.value)}
-              value={tagName}
+            <TextField onChange={(e) => tagDispatcher(setTagNameAction(e.currentTarget.value))}
+              value={tagState.name}
               variant={'outlined'}
               className={'create-tag-input'}
               inputProps={{autoFocus: true}}/>
@@ -70,7 +78,7 @@ const CreateNewModal = ({isOpen, onClose}: Props) => {
             <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
               Tag color
             </Typography>
-            <ColorTagSelect/>
+            <ColorTagSelect settings={tagState.settings} onSelectChange={onSelectChange}/>
           </Box>
         </Box>
         <Box margin={'10px 0'} paddingRight={'15px'}>
