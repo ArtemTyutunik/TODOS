@@ -1,4 +1,3 @@
-import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Box, IconButton, List, ListItem, ListItemButton, Typography} from '@mui/material';
 import {userIdSelector} from '@pages/authorization/store/'
@@ -7,8 +6,6 @@ import {createNewUserTag} from '@shared/api/services/todosService/fetchTodos';
 import {addNewUserTag} from '@entities/tag/store/tagStore';
 import {configureNewTag} from '@entities/tag/utils/configureInitialTag';
 
-
-//have to be string
 interface Props {
     search: string
 }

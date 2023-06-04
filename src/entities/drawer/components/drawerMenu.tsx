@@ -66,8 +66,6 @@ const DrawerMenu = () => {
               </Box>
 
               <TodosCount>
-                {/*Fixme*/}
-                {/*@ts-ignore*/}
                 {todosCount[label]}
               </TodosCount>
             </ListItemButton>

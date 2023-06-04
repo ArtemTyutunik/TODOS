@@ -5,16 +5,16 @@ import {ITag, ITodo} from '@shared/interfaces';
 import {userTagsSelector} from '@entities/tag/store/tagStore';
 
 
-export const useTags = (formState: ITodo, firstCreation: boolean):
+export const useTags = (formState: ITodo, doesTodoExist: boolean):
     [ITag[], (newTag: string) => void] => {
   const dispatch = useDispatch()
   const allTodos = useSelector(allTodosSelector)
   const allUserTags = useSelector(userTagsSelector)
 
   const existingTodoTags: ITag[] = allTodos.find((todo) => todo.id === formState.id)?.tags || []
-  const [todoWithoutIdTags, setTodoWithoutIdTags] = useState<ITag[]>([])
+  const [creatingTodoTags, setCreatingTodoTags] = useState<ITag[]>([])
 
-  const todoTags = firstCreation ? existingTodoTags: todoWithoutIdTags
+  const todoTags = doesTodoExist ? existingTodoTags: creatingTodoTags
 
   const onSelectTag = (newTag: string) => {
     const configuredTag = allUserTags.find((item) => item.name === newTag)!
@@ -26,11 +26,11 @@ export const useTags = (formState: ITodo, firstCreation: boolean):
     }
 
     if (!isIncludes(todoTags, newTag)) {
-            firstCreation ? dispatch(addNewTodoTag(payload)) :
-                setTodoWithoutIdTags((prev) => [...prev, configuredTag])
+            doesTodoExist ? dispatch(addNewTodoTag(payload)) :
+                setCreatingTodoTags((prev) => [...prev, configuredTag])
     } else {
-            firstCreation ? dispatch(deleteTodoTag(payload)):
-                setTodoWithoutIdTags((prev) => prev.filter((item) => item.name !== newTag))
+            doesTodoExist ? dispatch(deleteTodoTag(payload)):
+                setCreatingTodoTags((prev) => prev.filter((item) => item.name !== newTag))
     }
   }
   return [todoTags, onSelectTag]

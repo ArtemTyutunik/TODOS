@@ -2,7 +2,7 @@ import {Box, Divider, IconButton, Typography} from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AddIcon from '@shared/components/AddIcon';
 import {useState} from 'react';
-import TagsList from '@pages/todos/pages/FiltersAndTagsPage/components/tags/TagsList';
+import FilterPageTagsList from '@pages/todos/pages/FiltersAndTagsPage/components/tags/FilterPageTagsList';
 import CreateNewModal from '@pages/todos/pages/FiltersAndTagsPage/components/CreateNewModal';
 import useVisable from '@shared/hooks/useVisable';
 
@@ -40,7 +40,7 @@ const TagsSection = () => {
       </Box>
       <Divider/>
       {
-        (isListShown && <TagsList/>)
+        (isListShown && <FilterPageTagsList/>)
       }
       {/*  Modal to create new Tag*/}
       <CreateNewModal isOpen={isOpen} onClose={close}/>

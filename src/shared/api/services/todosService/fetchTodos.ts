@@ -1,6 +1,6 @@
 import {ITag, ITodo} from '@shared/interfaces';
 import {fetchRequest} from '@shared/api/services/constants';
-//Fixme
+
 export const getUserTodos = (userId: string) => new Promise((resolve, reject) => {
   fetchRequest(`get_all/${userId}`)
       // @ts-ignore

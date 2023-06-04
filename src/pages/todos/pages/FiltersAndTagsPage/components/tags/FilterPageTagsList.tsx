@@ -14,7 +14,7 @@ import {deleteTag, userTagsSelector} from '@entities/tag/store/tagStore';
 import {userIdSelector} from '@pages/authorization/store';
 import {ITag} from '@shared/interfaces';
 
-const TagsList = () => {
+const FilterPageTagsList = () => {
   const userTags = useSelector(userTagsSelector)
   const dispatch = useDispatch()
   const userId = useSelector(userIdSelector)
@@ -113,4 +113,4 @@ function TagItem({tag, onDelete}: TagItemProps) {
   </>
 }
 
-export default TagsList;
+export default FilterPageTagsList;
