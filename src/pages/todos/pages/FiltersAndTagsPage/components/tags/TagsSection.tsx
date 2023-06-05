@@ -3,7 +3,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AddIcon from '@shared/components/AddIcon';
 import {useState} from 'react';
 import FilterPageTagsList from '@pages/todos/pages/FiltersAndTagsPage/components/tags/FilterPageTagsList';
-import CreateNewModal from '@pages/todos/pages/FiltersAndTagsPage/components/CreateNewModal';
+import CreateNewModal from '@pages/todos/pages/FiltersAndTagsPage/components/tags/CreateNewModal';
 import {useVisable} from '@shared/hooks';
 
 const arrowIconStyles = () => ({

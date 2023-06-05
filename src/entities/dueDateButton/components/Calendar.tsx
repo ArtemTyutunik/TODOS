@@ -5,7 +5,7 @@ import {StaticDatePicker} from '@mui/x-date-pickers/StaticDatePicker';
 import {TextField} from '@mui/material';
 import {LocalizationProvider} from '@mui/x-date-pickers';
 
-import './calendar.css';
+import '@entities/dueDateButton/components/calendar.css';
 import {IDate} from '@shared/interfacesAndTypes';
 import {dateFormat} from '@shared/constants';
 

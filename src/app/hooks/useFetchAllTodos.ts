@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import {fetchTasks} from '@entities/todos/store/todo';
 import {fetchUserTags, getUserTodos} from '@shared/api/services/todosService/fetchTodos';
 import {ITodo} from '@shared/interfacesAndTypes';
-import {userIdSelector} from '@pages/authorization/store';
+import {userIdSelector} from '@entities/user/model/store';
 import {getUserTags} from '@entities/tag/store/tagStore';
 
 export const useFetchAllTodos = (): [boolean] => {

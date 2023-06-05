@@ -1,9 +1,9 @@
 import React from 'react';
 import {SelectChangeEvent} from '@mui/material';
 import {Priority} from '@shared/interfacesAndTypes';
-import PrioritySelect from '@shared/components/Priority/PrioritySelector';
+import PrioritySelect from '@entities/setPriorityButton/components/PrioritySelector';
 import ActionButton from '@shared/components/ActionButton';
-import './PriorityStyles.css'
+import '@entities/setPriorityButton/components/PriorityStyles.css'
 
 interface Props {
   initialPriority?: Priority | string,

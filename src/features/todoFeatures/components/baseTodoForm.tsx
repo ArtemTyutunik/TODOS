@@ -1,11 +1,11 @@
 import {useForm} from 'react-hook-form';
 import {Box, SelectChangeEvent} from '@mui/material';
-import {BaseFormInputs} from '../interfaces/interfaces';
-import {ITodo, Priority} from '../../interfacesAndTypes';
-import {useTags} from '@shared/components/Tags/useTags';
+import {BaseFormInputs} from '@shared/forms/interfaces/interfaces';
+import {ITodo, Priority} from '@shared/interfacesAndTypes';
+import {useTags} from '@entities/tag/utils/useTags';
 import {useTodoDate} from '@entities/todos/hooks';
 import TodoFormInputs from '@shared/forms/ui/Inputs';
-import FormActions from '@shared/forms/ui/setDataPanel';
+import FormActions from '@features/todoFeatures/components/setDataPanel';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 import BaseFormContext from '@shared/forms/hooks/UseBaseFormContext';
 import useBaseFormReducer from '@shared/forms/hooks/useBaseFormReducer';

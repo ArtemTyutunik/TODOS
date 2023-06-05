@@ -18,7 +18,7 @@ interface Props {
     onSetDate: (date: IDate) => void
 }
 
-const DueDateMenuList= ({onSetDate}: Props) => {
+const DueDateMenuList = ({onSetDate}: Props) => {
   const menuItems: menuItem[] = [
     {
       label: 'Today',

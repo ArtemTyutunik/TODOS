@@ -1,5 +1,5 @@
 import {Box, Typography, useTheme} from '@mui/material';
-import AddTaskButton from '@features/CreateOrEditTodo/components/AddTaskButton';
+import AddTaskButton from '@features/todoFeatures/CreateTodo/components/AddTaskButton';
 
 interface Props {
     onClick: () => void

@@ -1,15 +1,16 @@
-import React, {FC} from 'react';
+import React from 'react';
 import {useForm} from 'react-hook-form';
 import {Box, Container, CssBaseline, Typography} from '@mui/material';
 import {IFormInputs, IInputsProps} from '@shared/forms/interfaces/interfaces';
-import FormInputs from '@entities/signUpForm/FormInputs';
-import SubmitButton from '@shared/forms/authorization/SubmitButton';
-import FromLink from '@shared/forms/authorization/FormLink';
-import FormWrapper from '@shared/forms/authorization/FormWrapper';
 import ErrorMessage from '@shared/forms/authorization/ErrorMessage';
+import SubmitButton from '@shared/forms/authorization/SubmitButton';
+import FormLink from '@shared/forms/authorization/FormLink';
+import LoginInputs from '@features/logIn/components/FormInputs';
+import FormWrapper from '@shared/forms/authorization/FormWrapper';
+import '@features/logIn/components/AuthFormStyles.css'
 
-const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
-  const {handleSubmit, control} = useForm<IFormInputs>({mode: 'onChange'});
+function LoginForm({onSubmit}: IInputsProps) {
+  const {handleSubmit, control} = useForm<IFormInputs>();
 
   return (
     <Container component="main" maxWidth="laptop">
@@ -17,26 +18,27 @@ const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
       <FormWrapper>
         <>
           <Typography component="h1" variant="h5">
-            Sign up
+              Login
           </Typography>
-
           <Box component="form"
             className={'AuthForm'}
             onSubmit={handleSubmit(onSubmit)}
             noValidate sx={{mt: 1}}>
-            <FormInputs control={control}/>
+            <LoginInputs control={control}/>
             <ErrorMessage/>
+
             <SubmitButton control={control}>
-              Sign up
+                  Login
             </SubmitButton>
-            <FromLink to={'/'}>
-              Have account? Login
-            </FromLink>
+            <FormLink to='/sign-up'>
+              {'Don`t have an account? Sign Up'}
+            </FormLink>
           </Box>
         </>
       </FormWrapper>
     </Container>
-  );
-};
 
-export default SignUpForm;
+  );
+}
+
+export default LoginForm;

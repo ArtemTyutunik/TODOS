@@ -1,3 +1,4 @@
+import {RootReducer} from '@app/store';
 
 export interface ITodo {
     label: string,
@@ -29,6 +30,10 @@ export type colorType = {
     name: string,
     background: string,
     textColor: string,
+}
+
+export type {
+  RootReducer,
 }
 
 

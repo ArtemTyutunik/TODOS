@@ -11,7 +11,7 @@ import {
   PageTitle} from '../../components';
 
 import {useVisable} from '@shared/hooks';
-import {CreateTodoForm} from '@features/CreateOrEditTodo';
+import {CreateTodoForm} from '@features/todoFeatures/CreateTodo';
 
 
 const InboxTodosPage = () => {

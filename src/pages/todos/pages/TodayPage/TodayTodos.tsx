@@ -2,7 +2,7 @@ import {useSelector} from 'react-redux';
 import {Box} from '@mui/material';
 
 import {RootReducer} from '@shared/interfacesAndTypes';
-import {CreateTodoForm} from '@features/CreateOrEditTodo';
+import {CreateTodoForm} from '@features/todoFeatures/CreateTodo';
 import NoTodayTodos from './NoTodayTodos';
 import {TodoList} from '../../components';
 import {TODAY} from '@shared/constants';

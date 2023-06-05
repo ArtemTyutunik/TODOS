@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootReducer} from '@shared/interfacesAndTypes';
 import {useParams} from 'react-router-dom';
 import BasicModal from '@shared/components/modal';
-import DetailsCard from './DetailsCard';
+import DetailsCard from './components/DetailsCard';
 import {toggleTaskComplete} from '@entities/todos/store/todo';
 
 const TodoDetailPage = () => {

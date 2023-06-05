@@ -1,16 +1,15 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {useForm} from 'react-hook-form';
 import {Box, Container, CssBaseline, Typography} from '@mui/material';
 import {IFormInputs, IInputsProps} from '@shared/forms/interfaces/interfaces';
-import ErrorMessage from '@shared/forms/authorization/ErrorMessage';
+import FormInputs from '@features/signUp/components/FormInputs';
 import SubmitButton from '@shared/forms/authorization/SubmitButton';
-import FormLink from '@shared/forms/authorization/FormLink';
-import LoginInputs from '@entities/loginForm/ui/FormInputs';
+import FromLink from '@shared/forms/authorization/FormLink';
 import FormWrapper from '@shared/forms/authorization/FormWrapper';
-import './ui/AuthFormStyles.css'
+import ErrorMessage from '@shared/forms/authorization/ErrorMessage';
 
-function LoginForm({onSubmit}: IInputsProps) {
-  const {handleSubmit, control} = useForm<IFormInputs>();
+const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
+  const {handleSubmit, control} = useForm<IFormInputs>({mode: 'onChange'});
 
   return (
     <Container component="main" maxWidth="laptop">
@@ -18,27 +17,26 @@ function LoginForm({onSubmit}: IInputsProps) {
       <FormWrapper>
         <>
           <Typography component="h1" variant="h5">
-              Login
+            Sign up
           </Typography>
+
           <Box component="form"
             className={'AuthForm'}
             onSubmit={handleSubmit(onSubmit)}
             noValidate sx={{mt: 1}}>
-            <LoginInputs control={control}/>
+            <FormInputs control={control}/>
             <ErrorMessage/>
-
             <SubmitButton control={control}>
-                  Login
+              Sign up
             </SubmitButton>
-            <FormLink to='/sign-up'>
-              {'Don`t have an account? Sign Up'}
-            </FormLink>
+            <FromLink to={'/'}>
+              Have account? Login
+            </FromLink>
           </Box>
         </>
       </FormWrapper>
     </Container>
-
   );
-}
+};
 
-export default LoginForm;
+export default SignUpForm;

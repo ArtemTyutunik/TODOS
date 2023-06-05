@@ -5,10 +5,10 @@ import {userTagsSelector} from '@entities/tag/store/tagStore';
 import ActionButton from '@shared/components/ActionButton';
 import {useAnchorElement} from '@shared/hooks';
 import DropdownMenu from '@shared/components/dropdownMenu';
-import TagsList from '@shared/components/Tags/TagsList';
-import NoTagsComponent from '@shared/components/Tags/noTagsComponent';
+import TagsList from '@entities/tag/components/TagsList';
+import NoTagsComponent from '@entities/tag/components/noTagsComponent';
 
-import './TagsStyles.css'
+import '@entities/tag/components/TagsStyles.css'
 import {ITag} from '@shared/interfacesAndTypes';
 
 interface Props {

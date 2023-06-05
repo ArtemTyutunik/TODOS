@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, Divider, IconButton, List, ListItemButton, Typography} from '@mui/material';
-import {PrioritiesFlags} from '@shared/components/PrioritiesFlags';
+import {PrioritiesFlags} from '@shared/constants/PrioritiesFlags';
 import QueueIcon from '@mui/icons-material/Queue';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoveTodo from './MoveTodo';

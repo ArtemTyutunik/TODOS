@@ -2,15 +2,15 @@ import React from 'react';
 import {Box, SelectChangeEvent, useTheme} from '@mui/material';
 import {IDate, ITodo, Priority} from '@shared/interfacesAndTypes';
 import DetailActionPanelItem from '@pages/todos/pages/TodoDetailPage/components/DetailsActionsPanelItem';
-import DueDateButton from '@shared/components/DueDateComponents';
+import DueDateButton from '@entities/dueDateButton';
 import {useTodoDate} from '@entities/todos/hooks';
-import PriorityButton from '@shared/components/Priority/PriorityButton';
+import PriorityButton from '@entities/setPriorityButton/components/PriorityButton';
 import useSelectPriority from '@shared/hooks/useSelectPriority';
 import {useDispatch, useSelector} from 'react-redux';
 import {setPriority} from '@entities/todos/store/todo';
 import {sendUpdatedTodo} from '@shared/api/services/todosService/fetchTodos';
 import InfoCard from '@pages/todos/pages/TodoDetailPage/components/InfoCard';
-import {userIdSelector} from '@pages/authorization/store';
+import {userIdSelector} from '@entities/user/model/store';
 
 interface Props {
   todo: ITodo,

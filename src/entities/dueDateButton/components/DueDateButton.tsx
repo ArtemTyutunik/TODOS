@@ -1,8 +1,8 @@
 import React from 'react';
 import DropdownMenu from '@shared/components/dropdownMenu';
 import {Box, Divider, Typography} from '@mui/material';
-import Calendar from './Calendar';
-import DueDateMenuList from './DueDateMenu';
+import Calendar from '@entities/dueDateButton/components/Calendar';
+import DueDateMenuList from '@entities/dueDateButton/components/DueDateMenu';
 import {IDate} from '@shared/interfacesAndTypes';
 import {todoDescriptionStyles, TodoFlexboxStyles} from '@entities/todos/styles';
 import EventIcon from '@mui/icons-material/Event';

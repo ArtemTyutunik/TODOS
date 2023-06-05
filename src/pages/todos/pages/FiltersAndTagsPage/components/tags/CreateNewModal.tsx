@@ -3,8 +3,8 @@ import {Box, SelectChangeEvent, TextField, Typography} from '@mui/material';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 import {createNewUserTag} from '@shared/api/services/todosService/fetchTodos';
 import {useDispatch, useSelector} from 'react-redux';
-import {userIdSelector} from '@pages/authorization/store';
-import ColorTagSelect from '@pages/todos/pages/FiltersAndTagsPage/components/ColorTagSelect';
+import {userIdSelector} from '@entities/user/model/store';
+import ColorTagSelect from '@pages/todos/pages/FiltersAndTagsPage/components/tags/ColorTagSelect';
 import {addNewUserTag} from '@entities/tag/store/tagStore';
 import {
   setTagNameAction,
