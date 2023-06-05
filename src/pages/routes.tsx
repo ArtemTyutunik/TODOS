@@ -2,7 +2,7 @@ import {Route, Routes, Navigate} from 'react-router-dom';
 import {lazy} from 'react';
 import {Suspense} from 'react';
 import {useSelector} from 'react-redux';
-import {RootReducer} from '@app/store';
+import {RootReducer} from '@shared/interfacesAndTypes';
 import SpinnerComponent from '@shared/components/SpinnerComponent/SpinnerComponent';
 import {TODAY_LINK, INBOX_LINK, FILTERS_AND_TAGS_LINK} from '@shared/constants';
 

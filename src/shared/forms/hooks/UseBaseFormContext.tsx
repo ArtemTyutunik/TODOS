@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {IDate, ITag, Priority} from '@shared/interfaces';
+import {IDate, ITag, Priority} from '@shared/interfacesAndTypes';
 import {SelectChangeEvent} from '@mui/material';
 
 export interface IFormContext {

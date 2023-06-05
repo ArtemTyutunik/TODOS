@@ -1,10 +1,10 @@
 import React from 'react';
 import CheckboxComponent from '@entities/todos/components/Checkbox';
 import {Box} from '@mui/material';
-import {EditTodoForm} from '@features//CreateOrEditTodo';
+import {EditTodoForm} from '@features/todoFeatures/EditTodo';
 import TaskOverview from '@pages/todos/pages/TodoDetailPage/components/TaskOverview';
-import {ITodo} from '@shared/interfaces';
-import useVisable from '@shared/hooks/useVisable';
+import {ITodo} from '@shared/interfacesAndTypes';
+import {useVisable} from '@shared/hooks';
 
 interface Props {
   todo: ITodo,

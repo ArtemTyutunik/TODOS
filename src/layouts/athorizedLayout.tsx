@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {Box} from '@mui/material';
 
 import Routing from '@pages/routes';
-import {RootReducer} from '@app/store';
+import {RootReducer} from '@shared/interfacesAndTypes';
 import {LaptopDrawer, MobileDrawer} from '@entities/drawer';
 import {useFetchAllTodos} from '@app/hooks/useFetchAllTodos';
 import SpinnerComponent from '@app/../shared/components/SpinnerComponent/SpinnerComponent';

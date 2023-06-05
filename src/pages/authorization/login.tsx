@@ -1,10 +1,10 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
-import {authUser, authWithError} from './store';
+import {authUser, authWithError} from '@entities/user/model/store';
 import {IFormInputs} from '@shared/forms/interfaces/interfaces';
-import LoginForm from '@entities/loginForm/loginForm';
-import useLocalStorage from '@shared/hooks/useLocalStorage';
+import LoginForm from '@features/logIn/components/loginForm';
+import {useLocalStorage} from '@shared/hooks';
 import {loginWithLoginAndPassword} from '@shared/api/services/authorizationService';
 
 function Login() {

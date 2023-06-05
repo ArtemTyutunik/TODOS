@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 import AppLayout from './ui/appLayout';
 import theme from '@app/theme';
 import {withStore} from './providers/withStore';
-import {RootReducer} from '@app/store';
+import {RootReducer} from '@shared/interfacesAndTypes';
 
 
 const App = () => {

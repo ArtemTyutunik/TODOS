@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {ITag} from '@shared/interfaces';
-import {RootReducer} from '@app/store';
+import {ITag} from '@shared/interfacesAndTypes';
+import {RootReducer} from '@shared/interfacesAndTypes';
 
 interface IInitialTagStore {
     tags: ITag[]

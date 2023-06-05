@@ -1,4 +1,4 @@
-import {ITag, ITodo} from '@shared/interfaces';
+import {ITag, ITodo} from '@shared/interfacesAndTypes';
 import {fetchRequest} from '@shared/api/services/constants';
 
 export const getUserTodos = (userId: string) => new Promise((resolve, reject) => {

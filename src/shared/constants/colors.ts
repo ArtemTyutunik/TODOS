@@ -1,3 +1,5 @@
+import {colorType} from '@shared/interfacesAndTypes';
+
 export const colors: colorType[] = [
   {
     name: 'Charcoal',
@@ -90,9 +92,3 @@ export const colors: colorType[] = [
     textColor: '#ffffff',
   },
 ]
-
-export type colorType = {
-    name: string,
-    background: string,
-    textColor: string,
-}

@@ -1,4 +1,4 @@
-import {ITag} from '@shared/interfaces';
+import {ITag} from '@shared/interfacesAndTypes';
 
 export const configureNewTag = (name: string): ITag => ( {
   name: name,

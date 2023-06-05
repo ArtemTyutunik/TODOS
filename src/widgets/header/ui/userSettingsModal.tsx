@@ -15,14 +15,13 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-//import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import {RootReducer} from '@app/store';
-import {logOutUser} from '@pages/authorization/store';
+import {RootReducer} from '@shared/interfacesAndTypes';
+import {logOutUser} from '@entities/user/model/store';
 import DropdownMenu from '@shared/components/dropdownMenu';
-import useAnchorElement from '@shared/hooks/useAnchorElement';
+import {useAnchorElement} from '@shared/hooks';
 
 type menuItem = {
     label: string,
@@ -52,7 +51,6 @@ export default function UserSettingsMenu() {
       label: 'logout',
       Icon: () => <LogoutIcon/>,
       onClick: () => {
-        // @ts-ignore
         dispatch(logOutUser());
         localStorage.removeItem('user');
         navigate('/');

@@ -1,12 +1,12 @@
 import {useSelector} from 'react-redux';
 import {Box} from '@mui/material';
 
-import {RootReducer} from '@app/store';
-import {CreateTodoForm} from '@features/CreateOrEditTodo';
+import {RootReducer} from '@shared/interfacesAndTypes';
+import {CreateTodoForm} from '@features/todoFeatures/CreateTodo';
 import NoTodayTodos from './NoTodayTodos';
 import {TodoList} from '../../components';
 import {TODAY} from '@shared/constants';
-import useVisable from '@shared/hooks/useVisable';
+import {useVisable} from '@shared/hooks';
 
 
 const TodayTodosPage = () => {

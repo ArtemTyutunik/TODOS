@@ -1,5 +1,5 @@
 import React from 'react';
-import {ITodo} from '@shared/interfaces';
+import {ITodo} from '@shared/interfacesAndTypes';
 import {Box, Typography, useTheme} from '@mui/material';
 import RenderedList from '@entities/todos/components/RenderedList';
 

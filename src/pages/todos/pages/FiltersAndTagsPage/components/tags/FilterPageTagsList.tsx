@@ -6,13 +6,13 @@ import TodosCount from '@shared/components/TodosCount';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import CustomIconButton from '@pages/todos/pages/FiltersAndTagsPage/components/CustomIconButton';
+import CustomIconButton from '@shared/components/CustomIconButton';
 import {deleteUserTag} from '@shared/api/services/todosService/fetchTodos';
 import ConfirmDeleteModal from '@shared/components/ConfirmDeletion';
-import useVisable from '@shared/hooks/useVisable';
+import {useVisable} from '@shared/hooks';
 import {deleteTag, userTagsSelector} from '@entities/tag/store/tagStore';
-import {userIdSelector} from '@pages/authorization/store';
-import {ITag} from '@shared/interfaces';
+import {userIdSelector} from '@entities/user/model/store';
+import {ITag} from '@shared/interfacesAndTypes';
 
 const FilterPageTagsList = () => {
   const userTags = useSelector(userTagsSelector)

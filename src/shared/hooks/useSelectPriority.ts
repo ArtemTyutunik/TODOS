@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Priority} from '@shared/interfaces';
+import {Priority} from '@shared/interfacesAndTypes';
 import {SelectChangeEvent} from '@mui/material';
 
 
