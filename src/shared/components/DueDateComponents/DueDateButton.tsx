@@ -8,7 +8,7 @@ import {todoDescriptionStyles, TodoFlexboxStyles} from '@entities/todos/styles';
 import EventIcon from '@mui/icons-material/Event';
 import {overdueDate} from '@shared/constants';
 import ActionButton from '@shared/components/ActionButton';
-import useAnchorElement from '@shared/hooks/useAnchorElement';
+import {useAnchorElement} from '@shared/hooks';
 
 type DueDateButtonType = 'Standard' | 'Outline';
 

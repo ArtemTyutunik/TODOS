@@ -8,7 +8,7 @@ import {UserSettingsMenu} from './ui';
 import BasicModal from '@shared/components/modal';
 import {CreateTodoForm} from '@features/CreateOrEditTodo';
 import AddButtonIcon from '@shared/components/AddIcon';
-import useVisable from '@shared/hooks/useVisable';
+import {useVisable} from '@shared/hooks';
 import useToggleDrawer from '@entities/drawer/hooks/useToggleDrawer';
 import ProgressComponent from './ui/ProgresComponent';
 

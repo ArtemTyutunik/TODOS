@@ -10,7 +10,7 @@ import {
   TodoList,
   PageTitle} from '../../components';
 
-import useVisable from '@shared/hooks/useVisable';
+import {useVisable} from '@shared/hooks';
 import {CreateTodoForm} from '@features/CreateOrEditTodo';
 
 

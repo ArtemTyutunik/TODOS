@@ -9,7 +9,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CustomIconButton from '@pages/todos/pages/FiltersAndTagsPage/components/CustomIconButton';
 import {deleteUserTag} from '@shared/api/services/todosService/fetchTodos';
 import ConfirmDeleteModal from '@shared/components/ConfirmDeletion';
-import useVisable from '@shared/hooks/useVisable';
+import {useVisable} from '@shared/hooks';
 import {deleteTag, userTagsSelector} from '@entities/tag/store/tagStore';
 import {userIdSelector} from '@pages/authorization/store';
 import {ITag} from '@shared/interfaces';

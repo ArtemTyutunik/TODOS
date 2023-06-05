@@ -6,7 +6,7 @@ import {CreateTodoForm} from '@features/CreateOrEditTodo';
 import NoTodayTodos from './NoTodayTodos';
 import {TodoList} from '../../components';
 import {TODAY} from '@shared/constants';
-import useVisable from '@shared/hooks/useVisable';
+import {useVisable} from '@shared/hooks';
 
 
 const TodayTodosPage = () => {

@@ -3,7 +3,7 @@ import {Box} from '@mui/material';
 import {IDate, ITodo} from '@shared/interfaces';
 import CreateTodoForm from '@features/CreateOrEditTodo/components/createTodoForm';
 import AddTaskButton from '@features/CreateOrEditTodo/components/AddTaskButton';
-import useVisable from '@shared/hooks/useVisable';
+import {useVisable} from '@shared/hooks';
 import RenderedList from '@entities/todos/components/RenderedList';
 
 interface Props {

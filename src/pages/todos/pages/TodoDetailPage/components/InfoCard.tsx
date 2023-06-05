@@ -4,7 +4,7 @@ import {Box} from '@mui/material';
 import {EditTodoForm} from '@features//CreateOrEditTodo';
 import TaskOverview from '@pages/todos/pages/TodoDetailPage/components/TaskOverview';
 import {ITodo} from '@shared/interfaces';
-import useVisable from '@shared/hooks/useVisable';
+import {useVisable} from '@shared/hooks';
 
 interface Props {
   todo: ITodo,

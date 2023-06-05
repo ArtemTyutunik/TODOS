@@ -1,4 +1,3 @@
-import {colorType} from '@shared/constants/colors';
 
 export interface ITodo {
     label: string,
@@ -24,6 +23,12 @@ export interface IUser {
 export type ITag = {
     name: string,
     settings: colorType
+}
+
+export type colorType = {
+    name: string,
+    background: string,
+    textColor: string,
 }
 
 

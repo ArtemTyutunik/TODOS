@@ -5,7 +5,7 @@ import {addNewTask, deleteTask, setPriority, toggleTaskComplete} from '../store/
 import {EditTodoForm} from '@features/CreateOrEditTodo';
 import {ITodo} from '@shared/interfaces';
 import TodoCard from './todoCard';
-import useVisable from '@shared/hooks/useVisable';
+import {useVisable} from '@shared/hooks';
 import {deleteTodoById, postNewTodo, sendUpdatedTodo} from '@shared/api/services/todosService/fetchTodos';
 import {userIdSelector} from '@pages/authorization/store';
 

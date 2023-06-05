@@ -11,7 +11,7 @@ import {
   setTagSettingsAction,
   useTagModalReducer,
 } from '@pages/todos/pages/FiltersAndTagsPage/model/useTagModalReducer';
-import {colorType} from '@shared/constants/colors';
+import {colorType} from '@shared/interfaces';
 
 interface Props {
     isOpen: boolean,

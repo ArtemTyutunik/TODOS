@@ -4,7 +4,7 @@ import AddIcon from '@shared/components/AddIcon';
 import {useState} from 'react';
 import FilterPageTagsList from '@pages/todos/pages/FiltersAndTagsPage/components/tags/FilterPageTagsList';
 import CreateNewModal from '@pages/todos/pages/FiltersAndTagsPage/components/CreateNewModal';
-import useVisable from '@shared/hooks/useVisable';
+import {useVisable} from '@shared/hooks';
 
 const arrowIconStyles = () => ({
   'fontSize': '14px',
