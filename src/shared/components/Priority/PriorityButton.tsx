@@ -1,6 +1,6 @@
 import React from 'react';
 import {SelectChangeEvent} from '@mui/material';
-import {Priority} from '@shared/interfaces';
+import {Priority} from '@shared/interfacesAndTypes';
 import PrioritySelect from '@shared/components/Priority/PrioritySelector';
 import ActionButton from '@shared/components/ActionButton';
 import './PriorityStyles.css'

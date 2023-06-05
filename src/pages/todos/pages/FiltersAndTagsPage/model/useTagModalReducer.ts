@@ -1,6 +1,6 @@
 import React from 'react';
 import {useReducer} from 'react';
-import {ITag} from '@shared/interfaces';
+import {ITag} from '@shared/interfacesAndTypes';
 
 const initialState: ITag= {
   name: '',

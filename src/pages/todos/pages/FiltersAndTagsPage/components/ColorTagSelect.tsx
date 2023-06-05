@@ -1,6 +1,6 @@
 import {Box, MenuItem, Select, SelectChangeEvent, Typography} from '@mui/material';
 import {colors} from '@shared/constants/colors';
-import {colorType} from '@shared/interfaces';
+import {colorType} from '@shared/interfacesAndTypes';
 
 const selectStyles = {
   'position': 'relative',

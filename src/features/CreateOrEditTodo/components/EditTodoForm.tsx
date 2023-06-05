@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import BaseTodoForm from '@shared/forms/ui/baseTodoForm';
 import {editTask} from '@entities/todos/store/todo';
-import {ITodo} from '@shared/interfaces';
+import {ITodo} from '@shared/interfacesAndTypes';
 import {sendUpdatedTodo} from '@shared/api/services/todosService/fetchTodos';
 import {userIdSelector} from '@pages/authorization/store';
 import {toast} from 'react-toastify';

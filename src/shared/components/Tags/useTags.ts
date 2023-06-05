@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {useState} from 'react';
 import {addNewTodoTag, allTodosSelector, deleteTodoTag} from '@entities/todos/store/todo';
-import {ITag, ITodo} from '@shared/interfaces';
+import {ITag, ITodo} from '@shared/interfacesAndTypes';
 import {userTagsSelector} from '@entities/tag/store/tagStore';
 
 

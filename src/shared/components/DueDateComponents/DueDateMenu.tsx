@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
 import {List, ListItem, ListItemButton, ListItemIcon, Typography} from '@mui/material';
-import {IDate} from '@shared/interfaces';
+import {IDate} from '@shared/interfacesAndTypes';
 import {dateFormat} from '@shared/constants';
 
 

@@ -1,5 +1,5 @@
 import {useSelector} from 'react-redux';
-import {RootReducer} from '@app/store';
+import {RootReducer} from '@shared/interfacesAndTypes';
 import {TODAY} from '@shared/constants';
 
 const useTodosCount = (): {[k: string]: number} => {

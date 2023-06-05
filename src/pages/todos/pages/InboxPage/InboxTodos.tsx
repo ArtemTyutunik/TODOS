@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import {Box} from '@mui/material';
 
 import NoInboxTodos from './NoInboxTodos';
-import {RootReducer} from '@app/store';
+import {RootReducer} from '@shared/interfacesAndTypes';
 import {overdueDate} from '@shared/constants';
 import {
   OverdueTodos,

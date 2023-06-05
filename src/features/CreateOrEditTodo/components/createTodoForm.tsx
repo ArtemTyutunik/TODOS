@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 
 import BaseTodoForm from '@shared/forms/ui/baseTodoForm';
 import {addNewTask} from '@entities/todos/store/todo';
-import {ITodo} from '@shared/interfaces';
+import {ITodo} from '@shared/interfacesAndTypes';
 import {postNewTodo} from '@shared/api/services/todosService/fetchTodos';
 import {userIdSelector} from '@pages/authorization/store';
 import TodoCreatedNotification from '@shared/components/Notification/TodoCreated';

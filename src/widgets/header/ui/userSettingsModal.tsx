@@ -18,7 +18,7 @@ import {
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import {RootReducer} from '@app/store';
+import {RootReducer} from '@shared/interfacesAndTypes';
 import {logOutUser} from '@pages/authorization/store';
 import DropdownMenu from '@shared/components/dropdownMenu';
 import {useAnchorElement} from '@shared/hooks';

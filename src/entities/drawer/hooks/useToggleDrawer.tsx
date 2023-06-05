@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {RootReducer} from '@app/store';
+import {RootReducer} from '@shared/interfacesAndTypes';
 import {toggleDrawerOpen} from '@entities/drawer/store';
 
 const useToggleDrawer = (): [boolean, () => void] => {

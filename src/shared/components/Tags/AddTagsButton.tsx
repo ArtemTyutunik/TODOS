@@ -9,7 +9,7 @@ import TagsList from '@shared/components/Tags/TagsList';
 import NoTagsComponent from '@shared/components/Tags/noTagsComponent';
 
 import './TagsStyles.css'
-import {ITag} from '@shared/interfaces';
+import {ITag} from '@shared/interfacesAndTypes';
 
 interface Props {
   todoTags: ITag[],

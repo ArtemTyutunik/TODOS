@@ -1,6 +1,6 @@
 import React from 'react';
 import {Menu} from '@mui/material';
-import {Anchor} from '@shared/interfaces';
+import {Anchor} from '@shared/interfacesAndTypes';
 
 interface dropdownMenuProps{
     anchorEl: Anchor,

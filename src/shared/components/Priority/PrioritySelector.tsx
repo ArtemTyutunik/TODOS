@@ -1,5 +1,5 @@
 import {Box, FormControl, MenuItem, Select, SelectChangeEvent, Theme, Typography, useTheme} from '@mui/material';
-import {Priority} from '@shared/interfaces';
+import {Priority} from '@shared/interfacesAndTypes';
 import {PrioritiesFlags} from '@shared/components/PrioritiesFlags';
 
 const FormStyles = (theme: Theme) => ({

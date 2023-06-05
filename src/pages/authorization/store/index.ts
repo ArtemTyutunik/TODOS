@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {RootReducer} from '@app/store';
+import {RootReducer} from '@shared/interfacesAndTypes';
 
 const configureInitialState = () => {
   const storageRes = localStorage.getItem('user');

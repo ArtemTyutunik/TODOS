@@ -6,7 +6,7 @@ import {TextField} from '@mui/material';
 import {LocalizationProvider} from '@mui/x-date-pickers';
 
 import './calendar.css';
-import {IDate} from '@shared/interfaces';
+import {IDate} from '@shared/interfacesAndTypes';
 import {dateFormat} from '@shared/constants';
 
 interface Props {

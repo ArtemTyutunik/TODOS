@@ -12,7 +12,7 @@ import ConfirmDeleteModal from '@shared/components/ConfirmDeletion';
 import {useVisable} from '@shared/hooks';
 import {deleteTag, userTagsSelector} from '@entities/tag/store/tagStore';
 import {userIdSelector} from '@pages/authorization/store';
-import {ITag} from '@shared/interfaces';
+import {ITag} from '@shared/interfacesAndTypes';
 
 const FilterPageTagsList = () => {
   const userTags = useSelector(userTagsSelector)

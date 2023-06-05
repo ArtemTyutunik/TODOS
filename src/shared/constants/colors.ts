@@ -1,4 +1,4 @@
-import {colorType} from '@shared/interfaces';
+import {colorType} from '@shared/interfacesAndTypes';
 
 export const colors: colorType[] = [
   {

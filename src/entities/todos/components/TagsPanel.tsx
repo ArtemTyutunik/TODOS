@@ -1,6 +1,6 @@
 import React from 'react';
 import {styled} from '@mui/material/styles';
-import {ITag} from '@shared/interfaces';
+import {ITag} from '@shared/interfacesAndTypes';
 import {Typography} from '@mui/material';
 
 interface Props {

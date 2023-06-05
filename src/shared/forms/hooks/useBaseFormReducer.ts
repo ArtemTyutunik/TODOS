@@ -1,5 +1,5 @@
 import React from 'react';
-import {ITodo} from '@shared/interfaces';
+import {ITodo} from '@shared/interfacesAndTypes';
 import {useReducer} from 'react';
 
 const initialStateFunction = (todo?: ITodo) => ({

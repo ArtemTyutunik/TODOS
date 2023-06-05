@@ -1,7 +1,7 @@
 import {useSelector} from 'react-redux';
 import {Box} from '@mui/material';
 
-import {RootReducer} from '@app/store';
+import {RootReducer} from '@shared/interfacesAndTypes';
 import {CreateTodoForm} from '@features/CreateOrEditTodo';
 import NoTodayTodos from './NoTodayTodos';
 import {TodoList} from '../../components';

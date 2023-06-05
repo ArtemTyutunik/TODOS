@@ -2,7 +2,7 @@ import React from 'react';
 import {Box, Tooltip, Typography} from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import {useSelector} from 'react-redux';
-import {RootReducer} from '@app/store';
+import {RootReducer} from '@shared/interfacesAndTypes';
 
 const ProgressComponent = () => {
   const todos = useSelector((state: RootReducer) => state.todosReducer.todos);

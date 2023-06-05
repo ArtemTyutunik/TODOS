@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useState} from 'react';
 import {fetchTasks} from '@entities/todos/store/todo';
 import {fetchUserTags, getUserTodos} from '@shared/api/services/todosService/fetchTodos';
-import {ITodo} from '@shared/interfaces';
+import {ITodo} from '@shared/interfacesAndTypes';
 import {userIdSelector} from '@pages/authorization/store';
 import {getUserTags} from '@entities/tag/store/tagStore';
 

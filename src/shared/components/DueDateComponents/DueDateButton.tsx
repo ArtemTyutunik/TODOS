@@ -3,7 +3,7 @@ import DropdownMenu from '@shared/components/dropdownMenu';
 import {Box, Divider, Typography} from '@mui/material';
 import Calendar from './Calendar';
 import DueDateMenuList from './DueDateMenu';
-import {IDate} from '@shared/interfaces';
+import {IDate} from '@shared/interfacesAndTypes';
 import {todoDescriptionStyles, TodoFlexboxStyles} from '@entities/todos/styles';
 import EventIcon from '@mui/icons-material/Event';
 import {overdueDate} from '@shared/constants';

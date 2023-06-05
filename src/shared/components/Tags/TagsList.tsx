@@ -1,7 +1,7 @@
 import React from 'react';
 import {Checkbox, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from '@mui/material';
 import TurnedInIcon from '@mui/icons-material/TurnedIn';
-import {ITag} from '@shared/interfaces';
+import {ITag} from '@shared/interfacesAndTypes';
 
 interface Props {
     tags: ITag[],

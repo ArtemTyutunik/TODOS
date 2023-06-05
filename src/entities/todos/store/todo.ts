@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {ITodo} from '@shared/interfaces';
-import {RootReducer} from '@app/store';
+import {ITodo} from '@shared/interfacesAndTypes';
+import {RootReducer} from '@shared/interfacesAndTypes';
 
 interface IInitialState {
   todos: ITodo[],

@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import {addNewTask, deleteTask, setPriority, toggleTaskComplete} from '../store/todo';
 import {EditTodoForm} from '@features/CreateOrEditTodo';
-import {ITodo} from '@shared/interfaces';
+import {ITodo} from '@shared/interfacesAndTypes';
 import TodoCard from './todoCard';
 import {useVisable} from '@shared/hooks';
 import {deleteTodoById, postNewTodo, sendUpdatedTodo} from '@shared/api/services/todosService/fetchTodos';
