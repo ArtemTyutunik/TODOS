@@ -1,7 +1,7 @@
 import BasicModal from '@shared/components/modal';
 import {Box, SelectChangeEvent, TextField, Typography} from '@mui/material';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
-import {createNewUserTag} from '@shared/api/services/todosService/fetchTodos';
+import {createNewUserTag, editUserTag} from '@shared/api/services/todosService/fetchTodos';
 import {useDispatch, useSelector} from 'react-redux';
 import {userIdSelector} from '@entities/user/model/store';
 import ColorTagSelect from '@pages/todos/pages/FiltersAndTagsPage/components/tags/ColorTagSelect';
@@ -54,6 +54,7 @@ const CreateNewModal = ({isOpen, onClose, editMode, tag}: Props) => {
 
   const onEditTag = () => {
     if (tag) {
+      editUserTag(tagState, userId)
       tagDispatcher(resetTagModalAction(tagState))
       dispatch(resetTag(tagState))
       onClose()
