@@ -22,6 +22,7 @@ export interface IUser {
 }
 
 export type ITag = {
+    id: string,
     name: string,
     settings: colorType
 }

@@ -56,7 +56,7 @@ export const fetchUserTags = (userId: string) => new Promise((resolve, reject) =
         //@ts-ignore
         return response.json()
       })
-      .then( (result) => resolve(result))
+      .then( (result) => resolve(result.map((tag: ITag) => ({...tag, id: Date.now() + ''}))))
       .catch((error) => reject(error))
 })
 
