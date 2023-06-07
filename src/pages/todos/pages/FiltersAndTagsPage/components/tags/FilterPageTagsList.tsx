@@ -13,6 +13,7 @@ import {useVisable} from '@shared/hooks';
 import {deleteTag, userTagsSelector} from '@entities/tag/store/tagStore';
 import {userIdSelector} from '@entities/user/model/store';
 import {ITag} from '@shared/interfacesAndTypes';
+import CreateNewModal from '@pages/todos/pages/FiltersAndTagsPage/components/tags/CreateNewModal';
 
 const FilterPageTagsList = () => {
   const userTags = useSelector(userTagsSelector)
@@ -82,6 +83,7 @@ interface TagItemProps {
 
 function TagItem({tag, onDelete}: TagItemProps) {
   const [isConfirmDeleteModalVisable, openConfirmDeleteModal, onCloseConfirmDeleteModal] = useVisable(false)
+  const [isEditModalVisable, openEditModal, onCloseEditModal] = useVisable(false)
 
   return <>
     <Box sx={tagItemContainer}>
@@ -97,14 +99,21 @@ function TagItem({tag, onDelete}: TagItemProps) {
           <FavoriteBorderIcon sx={iconStyles}/>
         </CustomIconButton>
 
-        <CustomIconButton>
+        {/*edit action*/}
+        <CustomIconButton onClick={openEditModal}>
           <DriveFileRenameOutlineIcon sx={iconStyles}/>
         </CustomIconButton>
 
+        <CreateNewModal editMode
+          isOpen={isEditModalVisable}
+          onClose={onCloseEditModal}
+          tag={tag} />
+
+        {/*delete action*/}
         <CustomIconButton onClick={openConfirmDeleteModal}>
           <DeleteOutlineIcon sx={iconStyles}/>
         </CustomIconButton>
-        {/*delete confirmation modal*/}
+
         <ConfirmDeleteModal isOpen={isConfirmDeleteModalVisable}
           onClose={onCloseConfirmDeleteModal}
           onSubmit={() => onDelete(tag.name)}/>

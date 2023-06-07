@@ -5,18 +5,14 @@ import {createNewUserTag} from '@shared/api/services/todosService/fetchTodos';
 import {useDispatch, useSelector} from 'react-redux';
 import {userIdSelector} from '@entities/user/model/store';
 import ColorTagSelect from '@pages/todos/pages/FiltersAndTagsPage/components/tags/ColorTagSelect';
-import {addNewUserTag} from '@entities/tag/store/tagStore';
+import {addNewUserTag, resetTag} from '@entities/tag/store/tagStore';
 import {
+  resetTagModalAction,
   setTagNameAction,
   setTagSettingsAction,
   useTagModalReducer,
 } from '@pages/todos/pages/FiltersAndTagsPage/model/useTagModalReducer';
-import {colorType} from '@shared/interfacesAndTypes';
-
-interface Props {
-    isOpen: boolean,
-    onClose: () => void
-}
+import {colorType, ITag} from '@shared/interfacesAndTypes';
 
 const inputSectionStyle = {
   'display': 'flex',
@@ -37,16 +33,31 @@ const inputSectionStyle = {
   },
 }
 
-const CreateNewModal = ({isOpen, onClose}: Props) => {
+interface Props {
+  isOpen: boolean,
+  onClose: () => void,
+  editMode?: boolean,
+  tag?: ITag
+}
+
+const CreateNewModal = ({isOpen, onClose, editMode, tag}: Props) => {
   const dispatch = useDispatch()
   const userId = useSelector(userIdSelector)
-  const [tagState, tagDispatcher] = useTagModalReducer()
+  const [tagState, tagDispatcher] = useTagModalReducer(tag)
 
-  const onSubmit = () => {
+  const onCreateTag = () => {
     createNewUserTag(tagState, userId)
     dispatch(addNewUserTag(tagState))
     tagDispatcher(setTagNameAction(''))
     onClose()
+  }
+
+  const onEditTag = () => {
+    if (tag) {
+      tagDispatcher(resetTagModalAction(tagState))
+      dispatch(resetTag(tagState))
+      onClose()
+    }
   }
 
   const onSelectChange = (e: SelectChangeEvent, colors: colorType[]) => {
@@ -82,7 +93,9 @@ const CreateNewModal = ({isOpen, onClose}: Props) => {
           </Box>
         </Box>
         <Box margin={'10px 0'} paddingRight={'15px'}>
-          <FormSubmissionButtons onClose={onClose} isValid={isValid} onSubmit={onSubmit}/>
+          <FormSubmissionButtons onClose={onClose}
+            isValid={isValid}
+            onSubmit={editMode ? onEditTag : onCreateTag}/>
         </Box>
       </Box>
     </BasicModal>
