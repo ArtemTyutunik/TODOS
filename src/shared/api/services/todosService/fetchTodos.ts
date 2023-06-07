@@ -69,7 +69,7 @@ export const createNewUserTag = async (newTag: ITag, userId: string) => {
     body: JSON.stringify(newTag.settings),
   }
 
-  fetchRequest(`/add_tag?user_id=${userId}&tag=${newTag.name}`, options)
+  fetchRequest(`/add_tag?user_id=${userId}&tag=${newTag.name}&id=${newTag.id}`, options)
 }
 
 export const deleteUserTag = async (tag: string, userId: string) => {
