@@ -23,11 +23,22 @@ const tagSlice = createSlice({
     deleteTag: (state, action) => {
       return {...state, tags: [...state.tags.filter((tag) => tag.name !== action.payload)]}
     },
+    resetTag: (state, action) => {
+      const tagIndex = state.tags.findIndex((tag) => {
+        return tag.id === action.payload.id
+      })
+      if (tagIndex !== -1) {
+        return {...state,
+          tags: [...state.tags.slice(0, tagIndex), {...action.payload}, ...state.tags.slice(tagIndex + 1)]}
+      } else {
+        return {...state}
+      }
+    },
   },
 })
 
 export const tagReducer = tagSlice.reducer;
 
-export const {getUserTags, addNewUserTag, deleteTag} = tagSlice.actions
+export const {getUserTags, addNewUserTag, deleteTag, resetTag} = tagSlice.actions
 
 export const userTagsSelector = (state: RootReducer) => state.tagReducer.tags

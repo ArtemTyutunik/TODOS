@@ -1,6 +1,7 @@
 import {ITag} from '@shared/interfacesAndTypes';
 
 export const configureNewTag = (name: string): ITag => ( {
+  id: Date.now() + '',
   name: name,
   settings: {
     name: 'Charcoal',
