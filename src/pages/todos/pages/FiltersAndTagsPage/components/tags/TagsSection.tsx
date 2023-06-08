@@ -8,10 +8,12 @@ import {useVisable} from '@shared/hooks';
 import {useSelector} from 'react-redux';
 import {userTagsSelector} from '@entities/tag/store/tagStore';
 import {arrowIconStyles} from './componentsStyles';
+import useToggleTag from '@pages/todos/pages/FiltersAndTagsPage/components/tags/hooks/useToggleTags';
 
 
 const TagsSection = () => {
-  const [isListShown, setIsListShown] = useState(false)
+  const [isOpenTagList, toggleTagList] = useToggleTag();
+
   const [isOpen, open, close] = useVisable(false)
   const userTags = useSelector(userTagsSelector)
 
@@ -20,8 +22,8 @@ const TagsSection = () => {
       <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} mt={'20px'} mb={'5px'}>
         <Box display={'flex'} alignItems={'center'} position={'relative'}>
           <IconButton sx={arrowIconStyles()}
-            className={isListShown ? 'rotated': ''}
-            onClick={() => setIsListShown((prevState) => !prevState)}>
+            className={isOpenTagList ? 'rotated': ''}
+            onClick={toggleTagList}>
             <ArrowForwardIosIcon sx={{fontSize: 'inherit', color: 'grey'}}/>
           </IconButton>
           <Typography fontWeight={600} fontSize={'15px'}>
@@ -34,12 +36,11 @@ const TagsSection = () => {
       </Box>
       <Divider/>
       {
-        (isListShown && <FilterPageTagsList userTags={userTags}/>)
+        (isOpenTagList && <FilterPageTagsList userTags={userTags}/>)
       }
       {/*  Modal to create new Tag*/}
       <CreateNewModal isOpen={isOpen} onClose={close} allTags={userTags}/>
     </>
-
   );
 };
 
