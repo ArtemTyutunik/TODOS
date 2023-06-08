@@ -26,7 +26,7 @@ const AuthorizedLayout= () => {
   const [isFetching] = useFetchAllTodos()
   return (
       isFetching ?
-          <SpinnerComponent/> :
+          <SpinnerComponent size={'large'}/> :
     <>
       <Header/>
       <Box sx={{marginTop: 0}} height={'calc(100vh - 56px)'}>

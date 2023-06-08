@@ -1,5 +1,6 @@
 import React from 'react';
 import {Box, Button, Theme} from '@mui/material';
+import SpinnerComponent from '@shared/components/SpinnerComponent/SpinnerComponent';
 
 const CancelButtonStyles = (theme: Theme) => ({
   marginRight: '15px',
@@ -14,9 +15,10 @@ const CancelButtonStyles = (theme: Theme) => ({
 interface Props {
     isValid: boolean,
     onClose: () => void
-    onSubmit?: (e: React.SyntheticEvent) => void
+    onSubmit?: (e: React.SyntheticEvent) => void,
+    withLoading?: boolean
 }
-const FormSubmissionButtons = ({isValid, onClose, onSubmit}: Props) => {
+const FormSubmissionButtons = ({isValid, onClose, onSubmit, withLoading}: Props) => {
   return (
     <Box display={'flex'} marginTop={'5px'} justifyContent={'flex-end'}>
       <Button variant="contained" color={'inherit'}
@@ -28,8 +30,9 @@ const FormSubmissionButtons = ({isValid, onClose, onSubmit}: Props) => {
         type={'submit'}
         onClick={onSubmit}
         disabled={!isValid}
-        sx={{textTransform: 'initial'}}>
-          Submit
+        sx={{textTransform: 'initial', display: 'flex'}}>
+        {withLoading && <SpinnerComponent size={'small'}/>}
+        Submit
       </Button>
     </Box>
   );

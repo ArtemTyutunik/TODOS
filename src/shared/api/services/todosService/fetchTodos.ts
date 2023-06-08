@@ -25,7 +25,6 @@ export const deleteTodoById = (id: number, userId: string) => new Promise(() => 
   }
 
   fetchRequest(url, options)
-      .then((result) => console.log(result))
       .catch((error) => console.log(error))
 })
 
