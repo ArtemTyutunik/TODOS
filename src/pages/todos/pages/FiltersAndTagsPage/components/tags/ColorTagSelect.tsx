@@ -7,7 +7,6 @@ interface Props {
   settings: colorType,
   onSelectChange: (e: SelectChangeEvent, color: colorType[]) => void
 }
-
 const ColorTagSelect = ({settings, onSelectChange}: Props) => {
   return (
     <Select className={'create-tag-input'}
