@@ -13,7 +13,13 @@ import {useVisable} from '@shared/hooks';
 import {deleteTag, userTagsSelector} from '@entities/tag/store/tagStore';
 import {userIdSelector} from '@entities/user/model/store';
 import {ITag} from '@shared/interfacesAndTypes';
-import CreateNewModal from '@pages/todos/pages/FiltersAndTagsPage/components/tags/CreateNewModal';
+import CreateNewModal from './CreateNewModal';
+import {
+  iconStyles,
+  tagActionStyles,
+  tagItemContainer,
+  tagNameStyle,
+} from './componentsStyles';
 
 const FilterPageTagsList = () => {
   const userTags = useSelector(userTagsSelector)
@@ -39,42 +45,6 @@ const FilterPageTagsList = () => {
     </Box>
   );
 };
-
-const tagNameStyle = (color: string) => ( {
-  fontSize: '15px',
-  color: color,
-  fontFamily: '-apple-system',
-})
-
-const tagItemContainer = {
-  'display': 'flex',
-  'position': 'relative',
-  'alignItems': 'center',
-  'justifyContent': 'space-between',
-  'padding': '8px 0',
-  'mt': '5px',
-  'cursor': 'pointer',
-  'borderBottom': '1px solid rgba(0, 0, 0, 0.12)',
-  '&:hover': {
-    '.tag_actions': {
-      opacity: 1,
-    },
-  },
-}
-
-const tagActionStyles = {
-  position: 'absolute',
-  backgroundColor: '#fff',
-  opacity: 0,
-  zIndex: 9,
-  top: 0,
-  right: 0,
-}
-
-const iconStyles = {
-  color: '#a09f9f',
-  fontSize: '20px',
-}
 
 interface TagItemProps {
   tag: ITag,

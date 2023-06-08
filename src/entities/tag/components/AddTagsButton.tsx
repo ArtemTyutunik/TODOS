@@ -43,6 +43,7 @@ const AddTagsButton = ({todoTags, onAddNewLabel}: Props) => {
           <TextField
             sx={{padding: '0px'}}
             placeholder={'Search tag'}
+            className={'tag-selector-input'}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             id={'tagsInputInner'}

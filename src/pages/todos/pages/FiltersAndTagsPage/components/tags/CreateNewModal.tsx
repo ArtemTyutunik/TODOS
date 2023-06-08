@@ -13,25 +13,8 @@ import {
   useTagModalReducer,
 } from '@pages/todos/pages/FiltersAndTagsPage/model/useTagModalReducer';
 import {colorType, ITag} from '@shared/interfacesAndTypes';
+import {inputSectionStyle} from './componentsStyles';
 
-const inputSectionStyle = {
-  'display': 'flex',
-  'flexDirection': 'column',
-  'justifyContent': 'flex-start',
-  'padding': '10px 15px',
-  'border': '1px solid #f5f5f5',
-  'borderLeft': 0,
-  'borderRight': 0,
-  'marginBottom': '10px',
-  '& .create-tag-input .MuiInputBase-root': {
-    '& fieldset': {
-      'border': '1px solid #ddd !important',
-    },
-  },
-  '& .create-tag-input': {
-    width: '100%',
-  },
-}
 
 interface Props {
   isOpen: boolean,
@@ -75,7 +58,7 @@ const CreateNewModal = ({isOpen, onClose, editMode, tag}: Props) => {
               Add tag
           </Typography>
         </Box>
-        <Box sx={inputSectionStyle}>
+        <Box sx={inputSectionStyle(isError)}>
           <Box mb={'15px'}>
             <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
               Tag name

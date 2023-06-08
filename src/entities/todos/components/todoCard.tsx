@@ -32,7 +32,6 @@ const TodoCard = ({
   const {label, description, date, id, tags} = todo;
   const userTags = useSelector(userTagsSelector)
   const navigate = useNavigate()
-  console.log(todo)
 
   const todoFilteredTags = userTags.filter((userTag) => tags?.includes(userTag.id))
   return (

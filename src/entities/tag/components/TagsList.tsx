@@ -34,7 +34,6 @@ function TagsItem({tag, checked, onSelect}: TagsItemProps) {
   return <ListItem sx={{padding: '0'}}>
     <ListItemButton
       onClick={onSelect}
-      role={undefined}
       dense
       sx={{padding: '0 8px'}}
     >
