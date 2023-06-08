@@ -6,7 +6,7 @@ export interface ITodo {
     description?: string,
     done?: boolean,
     priority: Priority,
-    tags?: ITag[],
+    tags?: tagIdType[],
     date?: IDate
 }
 
@@ -22,7 +22,7 @@ export interface IUser {
 }
 
 export type ITag = {
-    id: string,
+    id: tagIdType,
     name: string,
     settings: colorType
 }
@@ -37,4 +37,5 @@ export type {
   RootReducer,
 }
 
+export type tagIdType = string;
 
