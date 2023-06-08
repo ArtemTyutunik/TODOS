@@ -57,7 +57,7 @@ export const sendUpdatedTodo = (updatedData: any, userId: string) => new Promise
 })
 
 export const fetchUserTags = (userId: string) => new Promise((resolve, reject) => {
-  const url = `/get_tags?user_id=${userId}`;
+  const url = `get_tags?user_id=${userId}`;
 
   fetchRequest(url)
       .then((response) => {
@@ -83,11 +83,11 @@ export const createNewUserTag = async (newTag: ITag, userId: string) => {
   fetchRequest(`/add_tag?user_id=${userId}&tag=${newTag.name}&id=${newTag.id}`, options)
 }
 
-export const deleteUserTag = async (tagMame: string, userId: string) => {
+export const deleteUserTag = async (tagId: string, userId: string) => {
   const options = {
     method: 'DELETE',
   }
-  fetchRequest(`/delete_tag?user_id=${userId}&tag=${tagMame}`, options)
+  fetchRequest(`delete_tag?user_id=${userId}&id=${tagId}`, options)
 }
 
 export const editUserTag = async (tag: ITag, userId: string) => {
