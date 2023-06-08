@@ -10,7 +10,7 @@ import CustomIconButton from '@shared/components/CustomIconButton';
 import {deleteUserTag} from '@shared/api/services/todosService/fetchTodos';
 import ConfirmDeleteModal from '@shared/components/ConfirmDeletion';
 import {useVisable} from '@shared/hooks';
-import {deleteTag, userTagsSelector} from '@entities/tag/store/tagStore';
+import {deleteTag} from '@entities/tag/store/tagStore';
 import {userIdSelector} from '@entities/user/model/store';
 import {ITag} from '@shared/interfacesAndTypes';
 import CreateNewModal from './CreateNewModal';
@@ -21,8 +21,7 @@ import {
   tagNameStyle,
 } from './componentsStyles';
 
-const FilterPageTagsList = () => {
-  const userTags = useSelector(userTagsSelector)
+const FilterPageTagsList = ({userTags}: {userTags: ITag[]}) => {
   const dispatch = useDispatch()
   const userId = useSelector(userIdSelector)
 
@@ -37,6 +36,7 @@ const FilterPageTagsList = () => {
         userTags.length > 0 ?
             userTags.map((tag) => <TagItem key={tag.name}
               tag={tag}
+              allTags={userTags}
               onDelete={onDeleteTag}/>) :
             <Box sx={{padding: '16px 0', fontSize: '16px', color: 'grey'}}>
               A place for your tags.
@@ -48,10 +48,11 @@ const FilterPageTagsList = () => {
 
 interface TagItemProps {
   tag: ITag,
+  allTags: ITag[],
   onDelete: (tag: string) => void
 }
 
-function TagItem({tag, onDelete}: TagItemProps) {
+function TagItem({tag, onDelete, allTags}: TagItemProps) {
   const [isConfirmDeleteModalVisable, openConfirmDeleteModal, onCloseConfirmDeleteModal] = useVisable(false)
   const [isEditModalVisable, openEditModal, onCloseEditModal] = useVisable(false)
 
@@ -75,9 +76,10 @@ function TagItem({tag, onDelete}: TagItemProps) {
         </CustomIconButton>
 
         <CreateNewModal editMode
+          allTags={allTags}
           isOpen={isEditModalVisable}
           onClose={onCloseEditModal}
-          tag={tag} />
+          tag={tag}/>
 
         {/*delete action*/}
         <CustomIconButton onClick={openConfirmDeleteModal}>

@@ -9,21 +9,12 @@ import {useSelector} from 'react-redux';
 import {userTagsSelector} from '@entities/tag/store/tagStore';
 import {arrowIconStyles} from './componentsStyles';
 
-const arrowIconStyles = () => ({
-  'fontSize': '14px',
-  'position': 'absolute',
-  'left': '-25px',
-  'padding': '4px',
-  'borderRadius': '4px',
-
-  '&.rotated': {
-    transform: 'rotate(90deg)',
-  },
-})
 
 const TagsSection = () => {
   const [isListShown, setIsListShown] = useState(false)
   const [isOpen, open, close] = useVisable(false)
+  const userTags = useSelector(userTagsSelector)
+
   return (
     <>
       <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} mt={'20px'} mb={'5px'}>
@@ -43,10 +34,10 @@ const TagsSection = () => {
       </Box>
       <Divider/>
       {
-        (isListShown && <FilterPageTagsList/>)
+        (isListShown && <FilterPageTagsList userTags={userTags}/>)
       }
       {/*  Modal to create new Tag*/}
-      <CreateNewModal isOpen={isOpen} onClose={close}/>
+      <CreateNewModal isOpen={isOpen} onClose={close} allTags={userTags}/>
     </>
 
   );
