@@ -2,10 +2,19 @@ import {ITag, ITodo} from '@shared/interfacesAndTypes';
 import {fetchRequest} from '@shared/api/services/constants';
 
 export const getUserTodos = (userId: string) => new Promise((resolve, reject) => {
+  const transformTodo = (todo: ITodo) => {
+    const {tags} = todo
+    const transformedTags = tags?.map((tag: string | ITag) => {
+      return typeof tag !== 'string' ? tag?.id : tag
+    })
+
+    return {...todo, tags: transformedTags}
+  }
+
   fetchRequest(`get_all/${userId}`)
       // @ts-ignore
       .then((result) => result.json())
-      .then((result) => resolve(result))
+      .then((result) => resolve(result.map(transformTodo)))
       .catch((error) => reject(error))
 })
 

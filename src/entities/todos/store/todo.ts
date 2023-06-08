@@ -53,14 +53,14 @@ const todosSlice = createSlice({
     addNewTodoTag: (state, action) => {
       const task = findTaskById(state, action.payload.id);
       if (task) {
-        return updateTodoInState(state, {...task, tags: [...task.tags || [], action.payload.tag]})
+        return updateTodoInState(state, {...task, tags: [...task.tags || [], action.payload.tagId]})
       }
     },
     deleteTodoTag: (state, action) => {
       const task = findTaskById(state, action.payload.id);
       if (task) {
         const {tags} = task
-        const index = tags?.map((tag) => tag.name).indexOf(action.payload.tag.name)
+        const index = tags?.indexOf(action.payload.tagId)
         return updateTodoInState(state, {...task,
           tags: [...tags!.slice(0, index), ...tags!.slice(index!+1)],
         })

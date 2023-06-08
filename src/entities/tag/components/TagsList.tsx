@@ -1,11 +1,11 @@
 import React from 'react';
 import {Checkbox, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from '@mui/material';
 import TurnedInIcon from '@mui/icons-material/TurnedIn';
-import {ITag} from '@shared/interfacesAndTypes';
+import {ITag, tagIdType} from '@shared/interfacesAndTypes';
 
 interface Props {
     tags: ITag[],
-    todoCurrentTags: ITag[],
+    todoCurrentTags: tagIdType[],
     onSelect: (newTag: string) => void
 }
 const TagsList = ({tags, todoCurrentTags, onSelect}: Props) => {
@@ -15,8 +15,8 @@ const TagsList = ({tags, todoCurrentTags, onSelect}: Props) => {
         tags.length > 0 ?
            tags.map((tag) => <TagsItem tag={tag}
              key={tag.name}
-             onSelect={() => onSelect(tag.name)}
-             checked={!!todoCurrentTags.find((item) => item.name === tag.name)}
+             onSelect={() => onSelect(tag.id)}
+             checked={!!todoCurrentTags.find((item) => item === tag.id)}
            />) :
            null
       }

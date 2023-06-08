@@ -9,10 +9,10 @@ import TagsList from '@entities/tag/components/TagsList';
 import NoTagsComponent from '@entities/tag/components/noTagsComponent';
 
 import '@entities/tag/components/TagsStyles.css'
-import {ITag} from '@shared/interfacesAndTypes';
+import {ITag, tagIdType} from '@shared/interfacesAndTypes';
 
 interface Props {
-  todoTags: ITag[],
+  todoTags: tagIdType[],
   onAddNewLabel: (newLabel: string) => void
 }
 

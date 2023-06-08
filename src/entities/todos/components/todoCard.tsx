@@ -9,6 +9,8 @@ import {TodoContainerStyles, todoDescriptionStyles, TodoFlexboxStyles, TodoLabel
 import CheckboxComponent from './Checkbox';
 import DueDateButton from '@entities/dueDateButton';
 import TagLinks from '@entities/todos/components/TagsPanel';
+import {useSelector} from 'react-redux';
+import {userTagsSelector} from '@entities/tag/store/tagStore';
 
 interface TodoCardProps {
     todo: ITodo,
@@ -28,7 +30,11 @@ const TodoCard = ({
   setPriorityAction}: TodoCardProps,
 ) => {
   const {label, description, date, id, tags} = todo;
+  const userTags = useSelector(userTagsSelector)
   const navigate = useNavigate()
+  console.log(todo)
+
+  const todoFilteredTags = userTags.filter((userTag) => tags?.includes(userTag.id))
   return (
     <Box sx={{mb: '25px', cursor: 'pointer'}}
       onClick={() => navigate(`task/${id}`)}
@@ -43,7 +49,7 @@ const TodoCard = ({
                 {label}
               </Typography>
               {
-                tags && <TagLinks tags={tags}/>
+                tags && <TagLinks tags={todoFilteredTags}/>
               }
             </Box>
             <Typography noWrap sx={todoDescriptionStyles}>
