@@ -20,7 +20,8 @@ import {
   tagItemContainer,
   tagNameStyle,
 } from './componentsStyles';
-import useTodosByQuery from '@pages/todos/pages/FiltersAndTagsPage/hooks/useTodoCountByQuery';
+import useTodosByQuery from '@pages/todos/hooks/useTodoCountByQuery';
+import {useNavigate} from 'react-router-dom';
 
 const FilterPageTagsList = ({userTags}: {userTags: ITag[]}) => {
   const dispatch = useDispatch()
@@ -55,17 +56,18 @@ function TagItem({tag, onDelete}: TagItemProps) {
   const [isConfirmDeleteModalVisable, openConfirmDeleteModal, onCloseConfirmDeleteModal] = useVisable(false)
   const [isEditModalVisable, openEditModal, onCloseEditModal] = useVisable(false)
   const todoWithThisTagCount = useTodosByQuery('tags', tag.id).length
+  const navigate = useNavigate()
 
   return <>
-    <Box sx={tagItemContainer}>
+    <Box sx={tagItemContainer} onClick={() => navigate(`/tags/${tag.id}`)}>
       <Box display={'flex'} alignItems={'center'}>
         <LabelIcon sx={tagNameStyle(tag.settings!.background)}/>
         <Typography marginLeft={'10px'} color={'#333333'}>{tag.name}</Typography>
       </Box>
       <TodosCount>
-        {todoWithThisTagCount}
+        {todoWithThisTagCount !== 0 && todoWithThisTagCount}
       </TodosCount>
-      <Box className='tag_actions' sx={tagActionStyles}>
+      <Box className='tag_actions' sx={tagActionStyles} onClick={(e) => e.stopPropagation()}>
         <CustomIconButton>
           <FavoriteBorderIcon sx={iconStyles}/>
         </CustomIconButton>
