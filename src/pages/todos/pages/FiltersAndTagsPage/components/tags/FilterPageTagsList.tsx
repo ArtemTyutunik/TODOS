@@ -88,7 +88,10 @@ function TagItem({tag, onDelete, allTags}: TagItemProps) {
 
         <ConfirmDeleteModal isOpen={isConfirmDeleteModalVisable}
           onClose={onCloseConfirmDeleteModal}
-          onSubmit={() => onDelete(tag.id)}/>
+          onSubmit={() => {
+            onCloseConfirmDeleteModal()
+            onDelete(tag.id)
+          }}/>
       </Box>
     </Box>
   </>

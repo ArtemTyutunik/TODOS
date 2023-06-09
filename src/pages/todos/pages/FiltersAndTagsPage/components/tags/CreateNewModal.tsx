@@ -53,7 +53,7 @@ const CreateNewModal = ({isOpen, onClose, editMode, tag, allTags}: Props) => {
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
-    if (allTags.find((tag) => tag.name === value && tag.id !== tagState.id)) {
+    if (allTags.find((tag) => tag.name.trim() === value.trim() && tag.id !== tagState.id)) {
       setIsError(true)
     } else {
       setIsError(false)
