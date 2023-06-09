@@ -21,7 +21,7 @@ const tagSlice = createSlice({
       return {...state, tags: [...state.tags, action.payload]}
     },
     deleteTag: (state, action) => {
-      return {...state, tags: [...state.tags.filter((tag) => tag.name !== action.payload)]}
+      return {...state, tags: [...state.tags.filter((tag) => tag.id !== action.payload)]}
     },
     resetTag: (state, action) => {
       const tagIndex = state.tags.findIndex((tag) => {
