@@ -5,7 +5,7 @@ import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 import {createNewUserTag, editUserTag} from '@shared/api/services/todosService/fetchTodos';
 import {userIdSelector} from '@entities/user/model/store';
 import ColorTagSelect from '@pages/todos/pages/FiltersAndTagsPage/components/tags/ColorTagSelect';
-import {addNewUserTag, resetTag} from '@entities/tag/store/tagStore';
+import {addNewUserTag, resetTag, userTagsSelector} from '@entities/tag/store/tagStore';
 import BasicModal from '@shared/components/modal';
 import {
   resetTagModalAction,
@@ -19,14 +19,14 @@ import {inputSectionStyle} from './componentsStyles';
 
 interface Props {
   isOpen: boolean,
-  allTags: ITag[],
   onClose: () => void,
   editMode?: boolean,
   tag?: ITag
 }
 
-const CreateNewModal = ({isOpen, onClose, editMode, tag, allTags}: Props) => {
+const CreateNewModal = ({isOpen, onClose, editMode, tag}: Props) => {
   const dispatch = useDispatch()
+  const userTags = useSelector(userTagsSelector)
   const userId = useSelector(userIdSelector)
   const [tagState, tagDispatcher] = useTagModalReducer(tag)
   const [isError, setIsError] = useState(false)
@@ -53,7 +53,7 @@ const CreateNewModal = ({isOpen, onClose, editMode, tag, allTags}: Props) => {
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
-    if (allTags.find((tag) => tag.name.trim() === value.trim() && tag.id !== tagState.id)) {
+    if (userTags.find((tag) => tag.name.trim() === value.trim() && tag.id !== tagState.id)) {
       setIsError(true)
     } else {
       setIsError(false)

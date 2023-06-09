@@ -20,6 +20,7 @@ import {
   tagItemContainer,
   tagNameStyle,
 } from './componentsStyles';
+import useTodosByQuery from '@pages/todos/pages/FiltersAndTagsPage/hooks/useTodoCountByQuery';
 
 const FilterPageTagsList = ({userTags}: {userTags: ITag[]}) => {
   const dispatch = useDispatch()
@@ -36,7 +37,6 @@ const FilterPageTagsList = ({userTags}: {userTags: ITag[]}) => {
         userTags.length > 0 ?
             userTags.map((tag) => <TagItem key={tag.name}
               tag={tag}
-              allTags={userTags}
               onDelete={onDeleteTag}/>) :
             <Box sx={{padding: '16px 0', fontSize: '16px', color: 'grey'}}>
               A place for your tags.
@@ -48,13 +48,13 @@ const FilterPageTagsList = ({userTags}: {userTags: ITag[]}) => {
 
 interface TagItemProps {
   tag: ITag,
-  allTags: ITag[],
   onDelete: (tag: string) => void
 }
 
-function TagItem({tag, onDelete, allTags}: TagItemProps) {
+function TagItem({tag, onDelete}: TagItemProps) {
   const [isConfirmDeleteModalVisable, openConfirmDeleteModal, onCloseConfirmDeleteModal] = useVisable(false)
   const [isEditModalVisable, openEditModal, onCloseEditModal] = useVisable(false)
+  const todoWithThisTagCount = useTodosByQuery('tags', tag.id).length
 
   return <>
     <Box sx={tagItemContainer}>
@@ -63,7 +63,7 @@ function TagItem({tag, onDelete, allTags}: TagItemProps) {
         <Typography marginLeft={'10px'} color={'#333333'}>{tag.name}</Typography>
       </Box>
       <TodosCount>
-        1
+        {todoWithThisTagCount}
       </TodosCount>
       <Box className='tag_actions' sx={tagActionStyles}>
         <CustomIconButton>
@@ -76,7 +76,6 @@ function TagItem({tag, onDelete, allTags}: TagItemProps) {
         </CustomIconButton>
 
         <CreateNewModal editMode
-          allTags={allTags}
           isOpen={isEditModalVisable}
           onClose={onCloseEditModal}
           tag={tag}/>
