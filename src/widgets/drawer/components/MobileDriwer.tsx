@@ -1,7 +1,7 @@
 import {Box, Drawer, Typography} from '@mui/material';
 
-import DrawerMenu from '@entities/drawer/components/drawerMenu';
-import useToggleDrawer from '@entities/drawer/hooks/useToggleDrawer';
+import DrawerMenu from './drawerMenu';
+import useToggleDrawer from '../hooks/useToggleDrawer';
 
 const MobileDrawerStyles = {
   'display': {largeMobile: 'block', tablet: 'none'},

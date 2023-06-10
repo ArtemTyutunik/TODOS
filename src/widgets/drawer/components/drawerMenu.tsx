@@ -5,7 +5,7 @@ import InboxIcon from '@mui/icons-material/Inbox';
 import TodayIcon from '@mui/icons-material/Today';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import {styled} from '@mui/material/styles';
-import useTodosCount from '@entities/drawer/hooks/useTodosCount';
+import useTodosCount from '../hooks/useTodosCount';
 import {INBOX_LINK, TODAY_LINK, FILTERS_AND_TAGS_LINK} from '@shared/constants';
 import TodosCount from '@shared/components/TodosCount';
 

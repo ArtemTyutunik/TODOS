@@ -5,7 +5,7 @@ import {Box} from '@mui/material';
 
 import Routing from '@pages/routes';
 import {RootReducer} from '@shared/interfacesAndTypes';
-import {LaptopDrawer, MobileDrawer} from '@entities/drawer';
+import {LaptopDrawer, MobileDrawer} from '../widgets/drawer';
 import {useFetchAllTodos} from '@app/hooks/useFetchAllTodos';
 import SpinnerComponent from '@app/../shared/components/SpinnerComponent/SpinnerComponent';
 import Header from '../widgets/header/header';

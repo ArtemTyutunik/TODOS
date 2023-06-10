@@ -1,6 +1,6 @@
 import {Box, Drawer, Theme} from '@mui/material';
 import {styled} from '@mui/material/styles';
-import DrawerMenu from '@entities/drawer/components/drawerMenu';
+import DrawerMenu from './drawerMenu';
 import '../active.css';
 
 
