@@ -8,7 +8,6 @@ const FilterAndTagsPage = () => {
     <PageTitle>
       Filters and Tags
     </PageTitle>
-
     <TagsSection/>
   </Box>
 };

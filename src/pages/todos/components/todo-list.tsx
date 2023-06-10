@@ -8,11 +8,12 @@ import RenderedList from '@entities/todos/components/RenderedList';
 
 interface Props {
     todos: ITodo[],
-    initialDate?: IDate
+    initialDate?: IDate,
+    noAddButton?:boolean
 }
 
 // eslint-disable-next-line react/display-name
-const TodoList = memo(({todos, initialDate}: Props) => {
+const TodoList = memo(({todos, initialDate, noAddButton}: Props) => {
   const [isOpenForm, openForm, closeForm] = useVisable(false);
 
   const form = isOpenForm ? (
@@ -20,7 +21,16 @@ const TodoList = memo(({todos, initialDate}: Props) => {
             <CreateTodoForm onClose={closeForm} initialDate={initialDate}/>
           </Box>
       ) : (
-        <AddTaskButton onCreate={openForm}/>
+         !todos.length ? (
+             <Box display={'flex'}
+               flexDirection={'column'}
+               margin={'0 auto'}
+               alignItems={'center'}
+               textAlign={'center'}>
+               <img style={{alignSelf: 'center'}} src="https://todoist.b-cdn.net/assets/images/5912cb674b44ab3d789ea98c95d1cfe3.jpg" alt=""/>
+             </Box>
+         ) : (
+             noAddButton ? <></> : <AddTaskButton onCreate={openForm}/>)
       )
 
   return (
