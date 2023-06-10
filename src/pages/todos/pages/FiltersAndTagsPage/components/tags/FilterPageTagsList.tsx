@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Box, Typography} from '@mui/material';
 import {default as LabelIcon} from '@mui/icons-material/LocalOffer';
@@ -23,7 +23,7 @@ import {
 import useTodosByQuery from '@pages/todos/hooks/useTodoCountByQuery';
 import {useNavigate} from 'react-router-dom';
 
-const FilterPageTagsList = ({userTags}: {userTags: ITag[]}) => {
+const FilterPageTagsList = memo(({userTags}: {userTags: ITag[]}) => {
   const dispatch = useDispatch()
   const userId = useSelector(userIdSelector)
 
@@ -45,14 +45,13 @@ const FilterPageTagsList = ({userTags}: {userTags: ITag[]}) => {
       }
     </Box>
   );
-};
+});
 
 interface TagItemProps {
   tag: ITag,
   onDelete: (tag: string) => void
 }
-
-function TagItem({tag, onDelete}: TagItemProps) {
+const TagItem = function({tag, onDelete}: TagItemProps) {
   const [isConfirmDeleteModalVisable, openConfirmDeleteModal, onCloseConfirmDeleteModal] = useVisable(false)
   const [isEditModalVisable, openEditModal, onCloseEditModal] = useVisable(false)
   const todoWithThisTagCount = useTodosByQuery('tags', tag.id).length
@@ -77,10 +76,12 @@ function TagItem({tag, onDelete}: TagItemProps) {
           <DriveFileRenameOutlineIcon sx={iconStyles}/>
         </CustomIconButton>
 
-        <CreateNewModal editMode
-          isOpen={isEditModalVisable}
-          onClose={onCloseEditModal}
-          tag={tag}/>
+        {
+          isEditModalVisable && <CreateNewModal editMode
+            isOpen={isEditModalVisable}
+            onClose={onCloseEditModal}
+            tag={tag}/>
+        }
 
         {/*delete action*/}
         <CustomIconButton onClick={openConfirmDeleteModal}>

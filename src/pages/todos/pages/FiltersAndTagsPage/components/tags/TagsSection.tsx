@@ -38,7 +38,9 @@ const TagsSection = () => {
         (isOpenTagList && <FilterPageTagsList userTags={userTags}/>)
       }
       {/*  Modal to create new Tag*/}
-      <CreateNewModal isOpen={isOpen} onClose={close}/>
+      {
+        isOpen && <CreateNewModal isOpen={isOpen} onClose={close}/>
+      }
     </>
   );
 };

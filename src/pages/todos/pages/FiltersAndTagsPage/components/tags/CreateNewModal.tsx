@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import {Box, SelectChangeEvent, TextField, Typography} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
@@ -24,7 +24,7 @@ interface Props {
   tag?: ITag
 }
 
-const CreateNewModal = ({isOpen, onClose, editMode, tag}: Props) => {
+const CreateNewModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
   const dispatch = useDispatch()
   const userTags = useSelector(userTagsSelector)
   const userId = useSelector(userIdSelector)
@@ -64,6 +64,7 @@ const CreateNewModal = ({isOpen, onClose, editMode, tag}: Props) => {
 
   const isValid = tagState.name.trim().length > 0;
 
+  console.log('render', tagState)
   return (
     <BasicModal open={isOpen} onClose={onClose}>
       <Box minWidth={{laptop: '500px', largeMobile: '300px'}} sx={(theme) => ({color: theme.text.title})}>
@@ -100,6 +101,6 @@ const CreateNewModal = ({isOpen, onClose, editMode, tag}: Props) => {
       </Box>
     </BasicModal>
   );
-};
+});
 
 export default CreateNewModal;
