@@ -6,7 +6,7 @@ import ActionButton from '@shared/components/ActionButton';
 import {useAnchorElement} from '@shared/hooks';
 import DropdownMenu from '@shared/components/dropdownMenu';
 import TagsList from '@entities/tag/components/TagsList';
-import NoTagsComponent from '@entities/tag/components/noTagsComponent';
+import {NoTagsComponent} from '@entities/tag';
 
 import '@entities/tag/components/TagsStyles.css'
 import {ITag, tagIdType} from '@shared/interfacesAndTypes';
