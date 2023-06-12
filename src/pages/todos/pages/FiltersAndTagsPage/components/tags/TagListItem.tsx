@@ -1,8 +1,9 @@
 import {useNavigate} from 'react-router-dom';
 import {Box, Typography} from '@mui/material';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import {iconStyles, tagActionStyles, tagItemContainer} from './componentsStyles';
 import {ITag} from '@shared/interfacesAndTypes';
@@ -13,18 +14,19 @@ import CustomIconButton from '@shared/components/CustomIconButton';
 import CreateNewModal from '@pages/todos/pages/FiltersAndTagsPage/components/tags/CreateNewModal';
 import ConfirmDeleteModal from '@shared/components/ConfirmDeletion';
 import TagIcon from '@shared/tagIcon';
+import {useToggleFavorite} from '@features/addToFavorites';
 
 interface TagItemProps {
     tag: ITag,
     onDelete: (tag: string) => void,
-    addToFavorite: (tagId: string) => void
 }
 
-export default function TagItem({tag, onDelete, addToFavorite}: TagItemProps) {
+export default function TagItem({tag, onDelete}: TagItemProps) {
   const [isConfirmDeleteModalVisable, openConfirmDeleteModal, onCloseConfirmDeleteModal] = useVisable(false)
   const [isEditModalVisable, openEditModal, onCloseEditModal] = useVisable(false)
   const todoWithThisTagCount = useTodosByQuery('tags', tag.id).length
   const navigate = useNavigate()
+  const [isFavorite, toggleFavorite] = useToggleFavorite(tag.id)
 
   return <>
     <Box sx={tagItemContainer} onClick={() => navigate(`/tags/${tag.id}`)}>
@@ -36,8 +38,11 @@ export default function TagItem({tag, onDelete, addToFavorite}: TagItemProps) {
         {todoWithThisTagCount !== 0 && todoWithThisTagCount}
       </TodosCount>
       <Box className='tag_actions' sx={tagActionStyles} onClick={(e) => e.stopPropagation()}>
-        <CustomIconButton onClick={() => addToFavorite(tag.id)}>
-          <FavoriteBorderIcon sx={iconStyles}/>
+        <CustomIconButton onClick={toggleFavorite}>
+          {
+            isFavorite ? <FavoriteIcon sx={{...iconStyles, color: 'red'}}/> :
+              <FavoriteBorderIcon sx={iconStyles}/>
+          }
         </CustomIconButton>
 
         {/*edit action*/}

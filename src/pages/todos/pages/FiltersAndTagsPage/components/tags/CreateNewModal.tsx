@@ -32,7 +32,7 @@ const CreateNewModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
   const userId = useSelector(userIdSelector)
   const [tagState, tagDispatcher] = useTagModalReducer(tag)
   const [isError, setIsError] = useState(false)
-  const [dispatchToFavorites, setDispatchToFavorites] = useState(true)
+  const [dispatchToFavorites, setDispatchToFavorites] = useState<boolean>(true)
 
   const onCreateTag = () => {
     createNewUserTag(tagState, userId)
