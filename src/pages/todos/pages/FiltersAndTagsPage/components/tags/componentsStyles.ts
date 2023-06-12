@@ -25,12 +25,6 @@ export const arrowIconStyles = () => ({
   'left': '-25px',
 })
 
-export const tagNameStyle = (color: string) => ( {
-  fontSize: '15px',
-  color: color,
-  fontFamily: '-apple-system',
-})
-
 export const tagItemContainer = {
   'display': 'flex',
   'position': 'relative',
