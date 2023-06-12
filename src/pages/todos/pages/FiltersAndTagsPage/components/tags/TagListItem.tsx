@@ -26,7 +26,6 @@ export default function TagItem({tag, onDelete, addToFavorite}: TagItemProps) {
   const todoWithThisTagCount = useTodosByQuery('tags', tag.id).length
   const navigate = useNavigate()
 
-  console.log(tagNameStyle(tag.settings!.background))
   return <>
     <Box sx={tagItemContainer} onClick={() => navigate(`/tags/${tag.id}`)}>
       <Box display={'flex'} alignItems={'center'}>

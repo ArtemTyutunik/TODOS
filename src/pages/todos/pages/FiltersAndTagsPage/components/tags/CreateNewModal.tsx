@@ -1,5 +1,5 @@
 import React, {memo, useState} from 'react';
-import {Box, SelectChangeEvent, TextField, Typography} from '@mui/material';
+import {Box, FormControlLabel, SelectChangeEvent, TextField, Typography} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 import {createNewUserTag, editUserTag} from '@shared/api/services/todosService/fetchTodos';
@@ -7,6 +7,8 @@ import {userIdSelector} from '@entities/user/model/store';
 import ColorTagSelect from '@pages/todos/pages/FiltersAndTagsPage/components/tags/ColorTagSelect';
 import {addNewUserTag, resetTag, userTagsSelector} from '@entities/tag/store/tagStore';
 import BasicModal from '@shared/components/modal';
+import {SwitchComponent} from '@shared/components/SwitchComponent'
+
 import {
   resetTagModalAction,
   setTagNameAction,
@@ -30,6 +32,7 @@ const CreateNewModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
   const userId = useSelector(userIdSelector)
   const [tagState, tagDispatcher] = useTagModalReducer(tag)
   const [isError, setIsError] = useState(false)
+  const [dispatchToFavorites, setDispatchToFavorites] = useState(true)
 
   const onCreateTag = () => {
     createNewUserTag(tagState, userId)
@@ -64,7 +67,6 @@ const CreateNewModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
 
   const isValid = tagState.name.trim().length > 0;
 
-  console.log('render', tagState)
   return (
     <BasicModal open={isOpen} onClose={onClose}>
       <Box minWidth={{laptop: '500px', largeMobile: '300px'}} sx={(theme) => ({color: theme.text.title})}>
@@ -86,12 +88,16 @@ const CreateNewModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
               className={'create-tag-input'}
               inputProps={{autoFocus: true}}/>
           </Box>
-          <Box>
+          <Box marginBottom={'15px'}>
             <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
               Tag color
             </Typography>
             <ColorTagSelect settings={tagState.settings} onSelectChange={onSelectChange}/>
           </Box>
+          <FormControlLabel control={<SwitchComponent checked={dispatchToFavorites}
+            onChange={() => setDispatchToFavorites((prevState) => !prevState)}/>}
+          label={'Add to favorites'}
+          sx={{color: '#202020', fontSize: '14px', width: 'fit-content', margin: '0'}}/>
         </Box>
         <Box margin={'10px 0'} paddingRight={'15px'}>
           <FormSubmissionButtons onClose={onClose}

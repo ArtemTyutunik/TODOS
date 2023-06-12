@@ -20,7 +20,7 @@ const NoTodayTodos = ({onClick}: Props) => {
       >
         <img src={imgUrl} alt={'image'}/>
         <Typography fontWeight={500} color={theme.description} fontSize={{mobile: '16px', largeMobile: '20px'}}>
-                            You`re all done for today! Enjoy the rest of your day
+            You`re all done for today! Enjoy the rest of your day
         </Typography>
         <AddTaskButton onCreate={onClick}/>
       </Box>
