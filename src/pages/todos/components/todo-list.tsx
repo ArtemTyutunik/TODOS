@@ -13,14 +13,14 @@ interface Props {
 }
 
 // eslint-disable-next-line react/display-name
-const TodoList = memo(({todos, initialDate, noAddButton}: Props) => {
+const TodoList = memo(({todos, initialDate, noAddButton = false}: Props) => {
   const [isOpenForm, openForm, closeForm] = useVisable(false);
 
   const form = isOpenForm ? (
           <Box mt={'20px'}>
             <CreateTodoForm onClose={closeForm} initialDate={initialDate}/>
           </Box>
-      ) : noAddButton && <AddTaskButton onCreate={openForm}/>
+      ) : !noAddButton && <AddTaskButton onCreate={openForm}/>
 
   return (
     <Box mt={'20px'} paddingBottom={'20px'}>

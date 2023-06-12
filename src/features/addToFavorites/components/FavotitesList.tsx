@@ -1,9 +1,8 @@
-import React from 'react';
-import {IFavorite} from '@shared/interfacesAndTypes';
-import useTagById from '@pages/todos/pages/FilteredByTagTodosPage/hooks/useTagById';
-import {Box, ListItemButton, Typography} from '@mui/material';
-import TagIcon from '@shared/tagIcon';
 import {useNavigate} from 'react-router-dom';
+import {Box, ListItemButton, Typography} from '@mui/material';
+import {IFavorite} from '@shared/interfacesAndTypes';
+import {useTagById} from '@entities/tag';
+import TagIcon from '@shared/tagIcon';
 
 const FavoritesList = ({favorites}: {favorites: IFavorite[]}) => {
   return (
