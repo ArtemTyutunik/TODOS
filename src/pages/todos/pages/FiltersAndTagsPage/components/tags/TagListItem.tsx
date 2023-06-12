@@ -1,11 +1,10 @@
 import {useNavigate} from 'react-router-dom';
 import {Box, Typography} from '@mui/material';
-import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
-import {iconStyles, tagActionStyles, tagItemContainer, tagNameStyle} from './componentsStyles';
+import {iconStyles, tagActionStyles, tagItemContainer} from './componentsStyles';
 import {ITag} from '@shared/interfacesAndTypes';
 import {useVisable} from '@shared/hooks';
 import {useTodosByQuery} from '@pages/todos/hooks';
@@ -13,6 +12,7 @@ import TodosCount from '@shared/components/TodosCount';
 import CustomIconButton from '@shared/components/CustomIconButton';
 import CreateNewModal from '@pages/todos/pages/FiltersAndTagsPage/components/tags/CreateNewModal';
 import ConfirmDeleteModal from '@shared/components/ConfirmDeletion';
+import TagIcon from '@shared/tagIcon';
 
 interface TagItemProps {
     tag: ITag,
@@ -29,7 +29,7 @@ export default function TagItem({tag, onDelete, addToFavorite}: TagItemProps) {
   return <>
     <Box sx={tagItemContainer} onClick={() => navigate(`/tags/${tag.id}`)}>
       <Box display={'flex'} alignItems={'center'}>
-        <LocalOfferIcon sx={tagNameStyle(tag.settings!.background)}/>
+        <TagIcon background={tag?.settings.background}/>
         <Typography marginLeft={'10px'} color={'#333333'}>{tag.name}</Typography>
       </Box>
       <TodosCount>

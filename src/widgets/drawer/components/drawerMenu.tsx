@@ -52,6 +52,7 @@ const DrawerMenu = () => {
               <ListItemButton sx={{padding: '8px',
                 margin: '0 10px',
                 display: 'flex',
+                borderRadius: '4px',
                 justifyContent: 'space-between'}}
               className={activeLink === linkTo ? 'active' : ''}
               onClick={() => {

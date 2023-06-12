@@ -3,6 +3,7 @@ import {Box, Typography} from '@mui/material';
 import ToggleArrowIcon from '@shared/components/toggleArrowIcon';
 import {useSelector} from 'react-redux';
 import {getAllFavorites} from '@features/addToFavorites/model/store';
+import FavoritesList from '@features/addToFavorites/components/FavotitesList';
 
 const favoritesWrapper = {
   display: 'flex',
@@ -10,6 +11,7 @@ const favoritesWrapper = {
   justifyContent: 'space-between',
   padding: '0 10px',
   marginTop: '25px',
+  marginBottom: '10px',
 }
 
 const Favorites = () => {
@@ -26,6 +28,7 @@ const Favorites = () => {
           onClick={() => setIsExpanded((prev) => !prev)}
           sx={{transform: 'rotate(180deg)'}}/>
       </Box>
+      {isExpanded && <FavoritesList favorites={favorites}/>}
     </>
   ) : null
 };
