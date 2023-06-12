@@ -1,12 +1,10 @@
 import {Box, Divider, IconButton, Typography} from '@mui/material';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AddIcon from '@shared/components/AddIcon';
 import FilterPageTagsList from '@pages/todos/pages/FiltersAndTagsPage/components/tags/FilterPageTagsList';
 import CreateNewModal from '@pages/todos/pages/FiltersAndTagsPage/components/tags/CreateNewModal';
 import {useVisable} from '@shared/hooks';
 import {useSelector} from 'react-redux';
 import {userTagsSelector} from '@entities/tag/store/tagStore';
-import {arrowIconStyles} from './componentsStyles';
 import useToggleTag from '@pages/todos/pages/FiltersAndTagsPage/components/tags/hooks/useToggleTags';
 import ToggleArrowIcon from '@shared/components/toggleArrowIcon';
 import {arrowIconStyles} from '@pages/todos/pages/FiltersAndTagsPage/components/tags/componentsStyles';

@@ -8,7 +8,8 @@ import {styled} from '@mui/material/styles';
 import useTodosCount from '../hooks/useTodosCount';
 import {INBOX_LINK, TODAY_LINK, FILTERS_AND_TAGS_LINK} from '@shared/constants';
 import TodosCount from '@shared/components/TodosCount';
-
+import {Favorites} from '@features/addToFavorites';
+import '../active.css'
 
 const drawerLinks = [
   {label: 'Inbox', linkTo: INBOX_LINK, Icon: () => <InboxIcon sx={{color: '#246fe0'}}/>},
@@ -41,38 +42,41 @@ const DrawerMenu = () => {
   const todosCount = useTodosCount();
   const navigate = useNavigate();
   return (
-    <List sx={{width: '100%', backgroundColor: 'transparent'}}>
-      {
-        drawerLinks.map((link) => {
-          const {label, linkTo, Icon} = link;
+    <>
+      <List sx={{width: '100%', backgroundColor: 'transparent'}}>
+        {
+          drawerLinks.map((link) => {
+            const {label, linkTo, Icon} = link;
 
-          return <ListItem disablePadding key={label} sx={{marginTop: '15px'}}>
-            <ListItemButton sx={{padding: '8px',
-              margin: '0 10px',
-              display: 'flex',
-              justifyContent: 'space-between'}}
-            className={activeLink === linkTo ? 'active' : ''}
-            onClick={() => {
-              setActiveLink(label);
-              navigate(linkTo);
-            }}>
-              <Box display={'flex'}>
-                <ListItemIcon>
-                  <Icon/>
-                </ListItemIcon>
-                <CustomListText>
-                  {label}
-                </CustomListText>
-              </Box>
+            return <ListItem disablePadding key={label} sx={{marginTop: '15px'}}>
+              <ListItemButton sx={{padding: '8px',
+                margin: '0 10px',
+                display: 'flex',
+                justifyContent: 'space-between'}}
+              className={activeLink === linkTo ? 'active' : ''}
+              onClick={() => {
+                setActiveLink(linkTo);
+                navigate(linkTo);
+              }}>
+                <Box display={'flex'}>
+                  <ListItemIcon>
+                    <Icon/>
+                  </ListItemIcon>
+                  <CustomListText>
+                    {label}
+                  </CustomListText>
+                </Box>
 
-              <TodosCount>
-                {todosCount[label]}
-              </TodosCount>
-            </ListItemButton>
-          </ListItem>;
-        })
-      }
-    </List>
+                <TodosCount>
+                  {todosCount[label]}
+                </TodosCount>
+              </ListItemButton>
+            </ListItem>;
+          })
+        }
+      </List>
+      <Favorites/>
+    </>
   );
 };
 
