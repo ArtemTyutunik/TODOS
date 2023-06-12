@@ -11,7 +11,7 @@ import {useVisable} from '@shared/hooks';
 import {useTodosByQuery} from '@pages/todos/hooks';
 import TodosCount from '@shared/components/TodosCount';
 import CustomIconButton from '@shared/components/CustomIconButton';
-import CreateNewModal from '@pages/todos/pages/FiltersAndTagsPage/components/tags/CreateNewModal';
+import TagInfoModal from '@pages/todos/pages/FiltersAndTagsPage/components/tags/TagInfoModal';
 import ConfirmDeleteModal from '@shared/components/ConfirmDeletion';
 import TagIcon from '@shared/tagIcon';
 import {useToggleFavorite} from '@features/addToFavorites';
@@ -51,7 +51,7 @@ export default function TagItem({tag, onDelete}: TagItemProps) {
         </CustomIconButton>
 
         {
-          isEditModalVisable && <CreateNewModal editMode
+          isEditModalVisable && <TagInfoModal editMode
             isOpen={isEditModalVisable}
             onClose={onCloseEditModal}
             tag={tag}/>

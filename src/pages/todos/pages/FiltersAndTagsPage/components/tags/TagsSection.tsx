@@ -1,7 +1,7 @@
 import {Box, Divider, IconButton, Typography} from '@mui/material';
 import AddIcon from '@shared/components/AddIcon';
 import FilterPageTagsList from '@pages/todos/pages/FiltersAndTagsPage/components/tags/FilterPageTagsList';
-import CreateNewModal from '@pages/todos/pages/FiltersAndTagsPage/components/tags/CreateNewModal';
+import TagInfoModal from '@pages/todos/pages/FiltersAndTagsPage/components/tags/TagInfoModal';
 import {useVisable} from '@shared/hooks';
 import {useSelector} from 'react-redux';
 import {userTagsSelector} from '@entities/tag/store/tagStore';
@@ -36,7 +36,7 @@ const TagsSection = () => {
       }
       {/*  Modal to create new Tag*/}
       {
-        isOpen && <CreateNewModal isOpen={isOpen} onClose={close}/>
+        isOpen && <TagInfoModal isOpen={isOpen} onClose={close}/>
       }
     </>
   );
