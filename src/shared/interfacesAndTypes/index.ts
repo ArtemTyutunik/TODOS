@@ -36,7 +36,6 @@ export type colorType = {
 export type IFavorite = {
     type: 'tag' | 'filter',
     itemId: string,
-    favoriteId: string
 }
 
 export type {

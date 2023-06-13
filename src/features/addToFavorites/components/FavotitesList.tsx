@@ -9,7 +9,7 @@ const FavoritesList = ({favorites}: {favorites: IFavorite[]}) => {
     <div>
       {
         favorites.map((favorite) => <FavoriteItem favorite={favorite}
-          key={favorite.favoriteId}/>)
+          key={favorite.itemId}/>)
       }
     </div>
   );

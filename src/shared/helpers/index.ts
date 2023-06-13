@@ -8,10 +8,8 @@ export const getBoolValueFromLocalStorage = (key: string) => {
 }
 
 export const configureFavoriteItem = (type: 'tag' | 'filter', itemId: string): IFavorite => {
-  const favoriteId = Date.now() + ''
   return {
     type: type,
     itemId: itemId,
-    favoriteId: favoriteId,
   }
 }
