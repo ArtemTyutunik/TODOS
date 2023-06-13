@@ -14,6 +14,7 @@ import {
 } from '@pages/todos/pages/FiltersAndTagsPage/model/useTagModalReducer';
 import {colorType, ITag} from '@shared/interfacesAndTypes';
 import TagInfoModalForm from '@pages/todos/pages/FiltersAndTagsPage/components/tags/TagInfoModalForm';
+import {useToggleFavorite} from '@features/addToFavorites';
 
 
 interface Props {
@@ -25,10 +26,11 @@ interface Props {
 
 const TagInfoModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
   const dispatch = useDispatch()
+  const [isError, setIsError] = useState(false)
   const userTags = useSelector(userTagsSelector)
   const userId = useSelector(userIdSelector)
   const [tagState, tagDispatcher] = useTagModalReducer(tag)
-  const [isError, setIsError] = useState(false)
+  const [isFavorite, toggleIsFavorite] = useToggleFavorite(tagState?.id)
 
   const onCreateTag = () => {
     createNewUserTag(tagState, userId)
@@ -61,6 +63,11 @@ const TagInfoModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
     tagDispatcher(setTagNameAction(value))
   }
 
+  const onSubmitModal = () => {
+    editMode ? onEditTag() :
+        onCreateTag()
+  }
+
   const isValid = tagState.name.trim().length > 0;
 
   return (
@@ -70,11 +77,13 @@ const TagInfoModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
           isError={isError}
           onSelectChange={onSelectChange}
           onInputChange={onInputChange}
+          isFavorite={isFavorite}
+          toggleIsFavorite={toggleIsFavorite}
         />
         <Box margin={'10px 0'} paddingRight={'15px'}>
           <FormSubmissionButtons onClose={onClose}
             isValid={isValid && !isError}
-            onSubmit={editMode ? onEditTag : onCreateTag}/>
+            onSubmit={onSubmitModal}/>
         </Box>
       </>
     </BasicModal>
