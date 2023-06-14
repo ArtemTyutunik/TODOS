@@ -1,8 +1,8 @@
-import React, {memo, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import {Box, SelectChangeEvent} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
-import {createNewUserTag, editUserTag} from '@shared/api/services/todosService/fetchTodos';
+import {createNewUserTag, editUserTag} from '@shared/api/services/tags';
 import {userIdSelector} from '@entities/user/model/store';
 import {addNewUserTag, resetTag, userTagsSelector} from '@entities/tag/store/tagStore';
 import BasicModal from '@shared/components/modal';
@@ -30,7 +30,13 @@ const TagInfoModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
   const userTags = useSelector(userTagsSelector)
   const userId = useSelector(userIdSelector)
   const [tagState, tagDispatcher] = useTagModalReducer(tag)
-  const [isFavorite, toggleIsFavorite] = useToggleFavorite(tagState?.id)
+  const {isFavorite, deleteFromFavorites, addNewFavorite} = useToggleFavorite(tagState?.id)
+
+  const [chosenAsFavorite, setChosenAsFavorite] = useState<boolean>(isFavorite)
+
+  useEffect(() => {
+    setChosenAsFavorite(isFavorite)
+  }, [isFavorite])
 
   const onCreateTag = () => {
     createNewUserTag(tagState, userId)
@@ -64,8 +70,12 @@ const TagInfoModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
   }
 
   const onSubmitModal = () => {
-    editMode ? onEditTag() :
-        onCreateTag()
+    editMode ? onEditTag() : onCreateTag()
+    chosenAsFavorite ? addNewFavorite() : deleteFromFavorites()
+  }
+
+  const toggleIsFavorite = () => {
+    setChosenAsFavorite((prevState) => !prevState)
   }
 
   const isValid = tagState.name.trim().length > 0;
@@ -75,9 +85,9 @@ const TagInfoModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
       <>
         <TagInfoModalForm tagState={tagState}
           isError={isError}
+          isChecked={chosenAsFavorite}
           onSelectChange={onSelectChange}
           onInputChange={onInputChange}
-          isFavorite={isFavorite}
           toggleIsFavorite={toggleIsFavorite}
         />
         <Box margin={'10px 0'} paddingRight={'15px'}>

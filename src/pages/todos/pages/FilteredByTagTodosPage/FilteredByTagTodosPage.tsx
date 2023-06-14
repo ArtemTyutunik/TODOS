@@ -21,7 +21,7 @@ const FilteredByTagTodosPage = () => {
           <CustomIconButton sx={{mr: '10px'}} onClick={() => navigate('/' + FILTERS_AND_TAGS_LINK)}>
             <ArrowBackIcon sx={{fontSize: '18px'}}/>
           </CustomIconButton>
-          {tag.name}
+          {tag?.name}
         </Box>
       </PageTitle>
       {

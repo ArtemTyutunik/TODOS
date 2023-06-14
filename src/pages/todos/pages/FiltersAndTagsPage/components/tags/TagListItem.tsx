@@ -26,7 +26,7 @@ export default function TagItem({tag, onDelete}: TagItemProps) {
   const [isEditModalVisable, openEditModal, onCloseEditModal] = useVisable(false)
   const todoWithThisTagCount = useTodosByQuery('tags', tag.id).length
   const navigate = useNavigate()
-  const [isFavorite, toggleFavorite] = useToggleFavorite(tag.id)
+  const {isFavorite, toggleFavorite} = useToggleFavorite(tag.id)
 
   return <>
     <Box sx={tagItemContainer} onClick={() => navigate(`/tags/${tag.id}`)}>
