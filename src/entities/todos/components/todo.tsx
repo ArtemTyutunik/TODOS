@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import {addNewTask, deleteTask, setPriority, toggleTaskComplete} from '../store/todo';
 import {EditTodoForm} from '@features/todoFeatures/EditTodo';
-import {ITodo} from '@shared/interfacesAndTypes';
+import {ITodo, Priority} from '@shared/interfacesAndTypes';
 import TodoCard from './todoCard';
 import {useVisable} from '@shared/hooks';
 import {deleteTodoById, postNewTodo, sendUpdatedTodo} from '@shared/api/services/todos';
@@ -33,7 +33,7 @@ const Todo = ({todo}: Props) => {
     dispatch(addNewTask(newTodo));
     postNewTodo(newTodo, userId)
   };
-  const setPriorityAction = (priority: string) => {
+  const setPriorityAction = (priority: Priority) => {
     const data = {id, priority}
     sendUpdatedTodo(data, userId)
     dispatch(setPriority(data));

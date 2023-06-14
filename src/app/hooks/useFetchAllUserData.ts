@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useState} from 'react';
 import {fetchTasks} from '@entities/todos/store/todo'
 import {fetchUserTags} from '@shared/api/services/tags';
-import {ITodo} from '@shared/interfacesAndTypes';
+import {ITag, ITodo} from '@shared/interfacesAndTypes';
 import {userIdSelector} from '@entities/user/model/store';
 import {getUserTags} from '@entities/tag/store/tagStore';
 import {getUserTodos} from '@shared/api/services/todos';
@@ -26,7 +26,7 @@ export const useFetchAllUserData = (): [boolean] => {
   }
 
   const getTags = () => {
-    const onFulfilledTagsRequest = (result: string[]) => {
+    const onFulfilledTagsRequest = (result: ITag[]) => {
       dispatch(getUserTags(result))
     }
 

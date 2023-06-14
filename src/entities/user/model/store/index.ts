@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {RootReducer} from '@shared/interfacesAndTypes';
 
-const configureInitialState = () => {
+const configureInitialState= () => {
   const storageRes = localStorage.getItem('user');
   return storageRes? {
     user: JSON.parse(storageRes),

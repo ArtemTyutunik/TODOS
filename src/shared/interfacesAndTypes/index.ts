@@ -2,7 +2,7 @@ import {RootReducer} from '@app/store';
 
 export interface ITodo {
     label: string,
-    id: number,
+    id: TodoId,
     description?: string,
     done?: boolean,
     priority: Priority,
@@ -10,16 +10,18 @@ export interface ITodo {
     date?: IDate
 }
 
+export type TodoId = number
+
 export type Priority = '1' | '2' | '3'| '4'
 export type IDate = string | undefined
 export type Anchor = null | HTMLElement
 
-export interface IUser {
+export type IUser = {
     accessToken: string,
     login: string,
     todos: ITodo[],
     user_id: string
-}
+} | object
 
 export type ITag = {
     id: tagIdType,

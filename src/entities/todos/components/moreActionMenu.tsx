@@ -5,11 +5,12 @@ import DropdownMenu from '@shared/components/dropdownMenu';
 import DropdownActionMenu from '@entities/todos/components/DropdownActionMenu';
 import {useAnchorElement, useVisable} from '@shared/hooks';
 import ConfirmDeleteModal from '@shared/components/ConfirmDeletion';
+import {Priority} from '@shared/interfacesAndTypes';
 
 interface MoreActionsMenuProps {
     onDelete: () => void,
     onDuplicate: () => void,
-    onSetPriority: (priority: string) => void
+    onSetPriority: (priority: Priority) => void
 }
 
 
@@ -30,6 +31,7 @@ const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenu
       </Tooltip>
 
       <DropdownMenu anchorEl={anchorEl} handleClose={removeAnchorEl}>
+        {/*//@ts-ignore*/}
         <DropdownActionMenu onDelete={openDeleteModalOpen} onDuplicate={onDuplicate} onSetPriority={onSetPriority}/>
       </DropdownMenu>
       {
