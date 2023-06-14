@@ -1,11 +1,17 @@
 import React from 'react';
 import {Box} from '@mui/material';
 
-const SpinnerComponent = () => {
+interface Props {
+    size?: 'small' | 'large'
+}
+const SpinnerComponent = ({size = 'large'}: Props) => {
   return (
-    <Box height={'100vh'} display={'flex'} justifyContent={'center'} alignItems={'center'}>
+    <Box height={ size === 'large' && '100vh' || 'auto'}
+      display={'flex'}
+      justifyContent={'center'}
+      alignItems={'center'}>
       <Box display={'flex'} alignItems={'center'} flexDirection={'column'}>
-        <div className="custom-loader"></div>
+        <div className={`custom-loader  ${size === 'large'? 'custom-loader-large': 'custom-loader-small'}`}></div>
       </Box>
     </Box>
   );

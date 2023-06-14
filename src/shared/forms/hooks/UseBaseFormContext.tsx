@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {IDate, ITag, Priority} from '@shared/interfacesAndTypes';
+import {IDate, Priority, tagIdType} from '@shared/interfacesAndTypes';
 import {SelectChangeEvent} from '@mui/material';
 
 export interface IFormContext {
@@ -7,7 +7,7 @@ export interface IFormContext {
     setTodoDate: (newDate: IDate) => void,
     priority: Priority | undefined,
     setPriority: (event: SelectChangeEvent<Priority>) => void,
-    todoTags: ITag[],
+    todoTags: tagIdType[],
     onSelectTag: (newTag: string) => void
 }
 

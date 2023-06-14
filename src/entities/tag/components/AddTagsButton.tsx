@@ -6,13 +6,13 @@ import ActionButton from '@shared/components/ActionButton';
 import {useAnchorElement} from '@shared/hooks';
 import DropdownMenu from '@shared/components/dropdownMenu';
 import TagsList from '@entities/tag/components/TagsList';
-import NoTagsComponent from '@entities/tag/components/noTagsComponent';
+import {NoTagsComponent} from '@entities/tag';
 
 import '@entities/tag/components/TagsStyles.css'
-import {ITag} from '@shared/interfacesAndTypes';
+import {ITag, tagIdType} from '@shared/interfacesAndTypes';
 
 interface Props {
-  todoTags: ITag[],
+  todoTags: tagIdType[],
   onAddNewLabel: (newLabel: string) => void
 }
 
@@ -43,6 +43,7 @@ const AddTagsButton = ({todoTags, onAddNewLabel}: Props) => {
           <TextField
             sx={{padding: '0px'}}
             placeholder={'Search tag'}
+            className={'tag-selector-input'}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             id={'tagsInputInner'}

@@ -1,7 +1,7 @@
 import {Box, Divider} from '@mui/material';
 import DueDateButton from '@entities/dueDateButton';
 import PriorityButton from '@entities/setPriorityButton/components/PriorityButton';
-import AddTagsButton from '@entities/tag/components/AddTagsButton';
+import {AddTagsButton} from '@entities/tag';
 import {useFormContext} from '@shared/forms/hooks/UseBaseFormContext';
 
 interface Props {

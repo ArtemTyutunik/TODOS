@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import BaseTodoForm from '@features/todoFeatures/components/baseTodoForm';
 import {editTask} from '@entities/todos/store/todo';
 import {ITodo} from '@shared/interfacesAndTypes';
-import {sendUpdatedTodo} from '@shared/api/services/todosService/fetchTodos';
+import {sendUpdatedTodo} from '@shared/api/services/todos';
 import {userIdSelector} from '@entities/user/model/store';
 import {toast} from 'react-toastify';
 import {options} from '@shared/components/Notification/constants';

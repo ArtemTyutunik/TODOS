@@ -9,6 +9,7 @@ import FormActions from '@features/todoFeatures/components/setDataPanel';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 import BaseFormContext from '@shared/forms/hooks/UseBaseFormContext';
 import useBaseFormReducer from '@shared/forms/hooks/useBaseFormReducer';
+import {useState} from 'react';
 
 const formStyles = {
   border: '1px solid #eee',
@@ -39,6 +40,8 @@ const BaseTodoForm = ({
   const [formState, formDispatch] = useBaseFormReducer(todo)
   const [todoDate, setTodoDate] = useTodoDate(initialDate || formState?.date, formState?.id);
   const [todoTags, onSelectTag] = useTags(formState, !!todo);
+  const [isDisabledAfterSubmit, setIsDisabledAfterSubmit] = useState(false)
+
 
   const setPriority = (event: SelectChangeEvent<Priority>) => {
     formDispatch({type: 'CHANGE_PRIORITY', payload: event.target.value})
@@ -55,6 +58,7 @@ const BaseTodoForm = ({
 
   return <Box component='form'
     onSubmit={handleSubmit((data) => {
+      setIsDisabledAfterSubmit(true)
       const newTodo = {...formState, ...data, date: todoDate, tags: todoTags}
       onSubmit(newTodo)
     })}
@@ -67,7 +71,10 @@ const BaseTodoForm = ({
         <FormActions hideActions={hideActions}/>
       </BaseFormContext>
 
-      <FormSubmissionButtons isValid={isValid} onClose={onClose}/>
+      <FormSubmissionButtons isValid={!isDisabledAfterSubmit && isValid}
+        onClose={onClose}
+        withLoading={isDisabledAfterSubmit}
+      />
     </Box>
 
   </Box>;

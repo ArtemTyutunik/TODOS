@@ -5,7 +5,7 @@ import {authUser, authWithError} from '@entities/user/model/store';
 import {IFormInputs} from '@shared/forms/interfaces/interfaces';
 import LoginForm from '@features/logIn/components/loginForm';
 import {useLocalStorage} from '@shared/hooks';
-import {loginWithLoginAndPassword} from '@shared/api/services/authorizationService';
+import {loginWithLoginAndPassword} from '@shared/api/services/authorization';
 
 function Login() {
   const onSubmit= (data: IFormInputs) => loginHandler(data.login, data.password);

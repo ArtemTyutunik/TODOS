@@ -1,34 +1,12 @@
 import {Box, MenuItem, Select, SelectChangeEvent, Typography} from '@mui/material';
 import {colors} from '@shared/constants/colors';
 import {colorType} from '@shared/interfacesAndTypes';
-
-const selectStyles = {
-  'position': 'relative',
-  'zIndex': 1,
-  'maxHeight': '250px',
-
-  '& fieldset': {
-    border: '1px solid #ddd !important',
-  },
-  '& .MuiSelect-select': {
-    padding: '8px 10px',
-    display: 'flex',
-    alignItems: 'center',
-  },
-}
-
-const MenuStyles = {
-  '& .MuiPopover-paper': {
-    maxHeight: '250px',
-    marginTop: '10px',
-  },
-}
+import {MenuStyles, selectStyles} from './componentsStyles';
 
 interface Props {
   settings: colorType,
   onSelectChange: (e: SelectChangeEvent, color: colorType[]) => void
 }
-
 const ColorTagSelect = ({settings, onSelectChange}: Props) => {
   return (
     <Select className={'create-tag-input'}

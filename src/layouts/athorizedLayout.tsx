@@ -5,8 +5,8 @@ import {Box} from '@mui/material';
 
 import Routing from '@pages/routes';
 import {RootReducer} from '@shared/interfacesAndTypes';
-import {LaptopDrawer, MobileDrawer} from '@entities/drawer';
-import {useFetchAllTodos} from '@app/hooks/useFetchAllTodos';
+import {LaptopDrawer, MobileDrawer} from '../widgets/drawer';
+import {useFetchAllUserData} from '@app/hooks/useFetchAllUserData';
 import SpinnerComponent from '@app/../shared/components/SpinnerComponent/SpinnerComponent';
 import Header from '../widgets/header/header';
 
@@ -23,10 +23,10 @@ const routesStyles = (isDrawerOpen: boolean) => ({
 
 const AuthorizedLayout= () => {
   const {isOpenDrawer} = useSelector((state: RootReducer) => state.drawerReducer);
-  const [isFetching] = useFetchAllTodos()
+  const [isFetching] = useFetchAllUserData()
   return (
       isFetching ?
-          <SpinnerComponent/> :
+          <SpinnerComponent size={'large'}/> :
     <>
       <Header/>
       <Box sx={{marginTop: 0}} height={'calc(100vh - 56px)'}>

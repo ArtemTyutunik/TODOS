@@ -9,7 +9,7 @@ import BasicModal from '@shared/components/modal';
 import {CreateTodoForm} from '@features/todoFeatures/CreateTodo';
 import AddButtonIcon from '@shared/components/AddIcon';
 import {useVisable} from '@shared/hooks';
-import useToggleDrawer from '@entities/drawer/hooks/useToggleDrawer';
+import useToggleDrawer from '../drawer/hooks/useToggleDrawer';
 import ProgressComponent from './ui/ProgresComponent';
 
 
