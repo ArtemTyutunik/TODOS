@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Box} from '@mui/material';
-import {deleteUserTag} from '@shared/api/services/todosService/fetchTodos';
+import {deleteUserTag} from '@shared/api/services/tags';
 import {deleteTag} from '@entities/tag/store/tagStore';
 import {userIdSelector} from '@entities/user/model/store';
 import {ITag} from '@shared/interfacesAndTypes';
