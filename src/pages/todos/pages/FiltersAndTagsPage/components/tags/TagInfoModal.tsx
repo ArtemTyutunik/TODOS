@@ -1,10 +1,9 @@
-import React, {memo, useState} from 'react';
-import {Box, SelectChangeEvent, TextField, Typography} from '@mui/material';
+import React, {memo, useEffect, useState} from 'react';
+import {Box, SelectChangeEvent} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
-import {createNewUserTag, editUserTag} from '@shared/api/services/todosService/fetchTodos';
+import {createNewUserTag, editUserTag} from '@shared/api/services/tags';
 import {userIdSelector} from '@entities/user/model/store';
-import ColorTagSelect from '@pages/todos/pages/FiltersAndTagsPage/components/tags/ColorTagSelect';
 import {addNewUserTag, resetTag, userTagsSelector} from '@entities/tag/store/tagStore';
 import BasicModal from '@shared/components/modal';
 import {
@@ -14,7 +13,8 @@ import {
   useTagModalReducer,
 } from '@pages/todos/pages/FiltersAndTagsPage/model/useTagModalReducer';
 import {colorType, ITag} from '@shared/interfacesAndTypes';
-import {inputSectionStyle} from './componentsStyles';
+import TagInfoModalForm from '@pages/todos/pages/FiltersAndTagsPage/components/tags/TagInfoModalForm';
+import {useToggleFavorite} from '@features/addToFavorites';
 
 
 interface Props {
@@ -24,12 +24,19 @@ interface Props {
   tag?: ITag
 }
 
-const CreateNewModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
+const TagInfoModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
   const dispatch = useDispatch()
+  const [isError, setIsError] = useState(false)
   const userTags = useSelector(userTagsSelector)
   const userId = useSelector(userIdSelector)
   const [tagState, tagDispatcher] = useTagModalReducer(tag)
-  const [isError, setIsError] = useState(false)
+  const {isFavorite, deleteFromFavorites, addNewFavorite} = useToggleFavorite(tagState?.id)
+
+  const [chosenAsFavorite, setChosenAsFavorite] = useState<boolean>(isFavorite)
+
+  useEffect(() => {
+    setChosenAsFavorite(isFavorite)
+  }, [isFavorite])
 
   const onCreateTag = () => {
     createNewUserTag(tagState, userId)
@@ -62,45 +69,35 @@ const CreateNewModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
     tagDispatcher(setTagNameAction(value))
   }
 
+  const onSubmitModal = () => {
+    editMode ? onEditTag() : onCreateTag()
+    chosenAsFavorite ? addNewFavorite() : deleteFromFavorites()
+  }
+
+  const toggleIsFavorite = () => {
+    setChosenAsFavorite((prevState) => !prevState)
+  }
+
   const isValid = tagState.name.trim().length > 0;
 
-  console.log('render', tagState)
   return (
     <BasicModal open={isOpen} onClose={onClose}>
-      <Box minWidth={{laptop: '500px', largeMobile: '300px'}} sx={(theme) => ({color: theme.text.title})}>
-        <Box padding={'10px 15px'}>
-          <Typography fontSize={'19px'} fontWeight={600}>
-              Add tag
-          </Typography>
-        </Box>
-        <Box sx={inputSectionStyle(isError)}>
-          <Box mb={'15px'}>
-            <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
-              Tag name
-            </Typography>
-            <TextField onChange={onInputChange}
-              value={tagState.name}
-              error={isError}
-              helperText={'Tag with the same name already exists'}
-              variant={'outlined'}
-              className={'create-tag-input'}
-              inputProps={{autoFocus: true}}/>
-          </Box>
-          <Box>
-            <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
-              Tag color
-            </Typography>
-            <ColorTagSelect settings={tagState.settings} onSelectChange={onSelectChange}/>
-          </Box>
-        </Box>
+      <>
+        <TagInfoModalForm tagState={tagState}
+          isError={isError}
+          isChecked={chosenAsFavorite}
+          onSelectChange={onSelectChange}
+          onInputChange={onInputChange}
+          toggleIsFavorite={toggleIsFavorite}
+        />
         <Box margin={'10px 0'} paddingRight={'15px'}>
           <FormSubmissionButtons onClose={onClose}
             isValid={isValid && !isError}
-            onSubmit={editMode ? onEditTag : onCreateTag}/>
+            onSubmit={onSubmitModal}/>
         </Box>
-      </Box>
+      </>
     </BasicModal>
   );
 });
 
-export default CreateNewModal;
+export default TagInfoModal;

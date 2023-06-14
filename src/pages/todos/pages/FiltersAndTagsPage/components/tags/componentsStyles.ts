@@ -21,21 +21,8 @@ export const inputSectionStyle = (isError: boolean) => ({
 })
 
 export const arrowIconStyles = () => ({
-  'fontSize': '14px',
   'position': 'absolute',
   'left': '-25px',
-  'padding': '4px',
-  'borderRadius': '4px',
-
-  '&.rotated': {
-    transform: 'rotate(90deg)',
-  },
-})
-
-export const tagNameStyle = (color: string) => ( {
-  fontSize: '15px',
-  color: color,
-  fontFamily: '-apple-system',
 })
 
 export const tagItemContainer = {

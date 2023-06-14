@@ -36,7 +36,7 @@ const TodoCard = ({
   const todoFilteredTags = userTags.filter((userTag) => tags?.includes(userTag.id))
   return (
     <Box sx={{mb: '25px', cursor: 'pointer'}}
-      onClick={() => navigate(`task/${id}`)}
+      onClick={() => navigate(`/inbox/task/${id}`)}
     >
       <Box sx = {TodoContainerStyles}>
         <Box maxWidth={{mobile: '100%'}}

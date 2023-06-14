@@ -33,6 +33,11 @@ export type colorType = {
     textColor: string,
 }
 
+export type IFavorite = {
+    type: 'tag' | 'filter',
+    itemId: string,
+}
+
 export type {
   RootReducer,
 }

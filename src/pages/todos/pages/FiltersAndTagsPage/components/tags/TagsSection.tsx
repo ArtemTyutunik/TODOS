@@ -1,14 +1,13 @@
 import {Box, Divider, IconButton, Typography} from '@mui/material';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AddIcon from '@shared/components/AddIcon';
 import FilterPageTagsList from '@pages/todos/pages/FiltersAndTagsPage/components/tags/FilterPageTagsList';
-import CreateNewModal from '@pages/todos/pages/FiltersAndTagsPage/components/tags/CreateNewModal';
+import TagInfoModal from '@pages/todos/pages/FiltersAndTagsPage/components/tags/TagInfoModal';
 import {useVisable} from '@shared/hooks';
 import {useSelector} from 'react-redux';
 import {userTagsSelector} from '@entities/tag/store/tagStore';
-import {arrowIconStyles} from './componentsStyles';
 import useToggleTag from '@pages/todos/pages/FiltersAndTagsPage/components/tags/hooks/useToggleTags';
-
+import ToggleArrowIcon from '@shared/components/toggleArrowIcon';
+import {arrowIconStyles} from '@pages/todos/pages/FiltersAndTagsPage/components/tags/componentsStyles';
 
 const TagsSection = () => {
   const [isOpenTagList, toggleTagList] = useToggleTag();
@@ -20,11 +19,9 @@ const TagsSection = () => {
     <>
       <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} mt={'20px'} mb={'5px'}>
         <Box display={'flex'} alignItems={'center'} position={'relative'}>
-          <IconButton sx={arrowIconStyles()}
-            className={isOpenTagList ? 'rotated': ''}
-            onClick={toggleTagList}>
-            <ArrowForwardIosIcon sx={{fontSize: 'inherit', color: 'grey'}}/>
-          </IconButton>
+          <ToggleArrowIcon isExpanded={isOpenTagList}
+            onClick={toggleTagList}
+            sx={arrowIconStyles}/>
           <Typography fontWeight={600} fontSize={'15px'}>
              Tags
           </Typography>
@@ -39,7 +36,7 @@ const TagsSection = () => {
       }
       {/*  Modal to create new Tag*/}
       {
-        isOpen && <CreateNewModal isOpen={isOpen} onClose={close}/>
+        isOpen && <TagInfoModal isOpen={isOpen} onClose={close}/>
       }
     </>
   );
