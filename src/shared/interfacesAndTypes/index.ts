@@ -21,7 +21,7 @@ export type IUser = {
     login: string,
     todos: ITodo[],
     user_id: string
-} | object
+}
 
 export type ITag = {
     id: tagIdType,

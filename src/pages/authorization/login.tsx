@@ -16,6 +16,7 @@ function Login() {
   const loginHandler = (login: string, password: string) => {
     loginWithLoginAndPassword(login, password)
         .then((response) => {
+          //@ts-ignore
           dispatch(authUser(response));
           setValueLocalStorage(response)
           navigate('/today')

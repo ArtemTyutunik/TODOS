@@ -25,19 +25,24 @@ const useToggleFavorite = (id: string): ReturnInterface => {
 
   const deleteFromFavorites = () => {
     if (allFavorites.find((item) => item.itemId === id)) {
-      deleteUserFavorite(userId, id)
-          .then(() => {
-            dispatch(deleteFromFavoritesAction(id))
-          })
+      try {
+        deleteUserFavorite(userId, id)
+        dispatch(deleteFromFavoritesAction(id))
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 
   const addNewFavorite = () => {
     if (!allFavorites.find((item) => item.itemId === id)) {
       const favoriteItem = configureFavoriteItem('tag', id)
-      addUserFavorite(userId, favoriteItem)
-          .then(() => dispatch(addToFavorites(favoriteItem)),
-          )
+      try {
+        addUserFavorite(userId, favoriteItem)
+        dispatch(addToFavorites(favoriteItem))
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 

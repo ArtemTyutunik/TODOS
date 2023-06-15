@@ -6,8 +6,7 @@ import {ITag, ITodo} from '@shared/interfacesAndTypes';
 import {userIdSelector} from '@entities/user/model/store';
 import {getUserTags} from '@entities/tag/store/tagStore';
 import {getUserTodos} from '@shared/api/services/todos';
-import {fetchUserFavorites} from '@shared/api/services/favorites';
-import {getAllFavoritesAction} from '@features/addToFavorites/model/store';
+import {fetchAllFavoritesThunkCreator} from '@features/addToFavorites/model/thunks';
 
 export const useFetchAllUserData = (): [boolean] => {
   const dispatch = useDispatch();
@@ -36,8 +35,12 @@ export const useFetchAllUserData = (): [boolean] => {
   }
 
   const getFavorites = () => {
-    fetchUserFavorites(userId)
-        .then((result) => dispatch(getAllFavoritesAction(result)))
+    try {
+      //@ts-ignore
+      dispatch(fetchAllFavoritesThunkCreator(userId))
+    } catch (e) {
+      console.log(e)
+    }
   }
 
 

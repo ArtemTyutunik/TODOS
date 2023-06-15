@@ -16,6 +16,7 @@ function SignUp() {
   function signUpHandler(login: string, password: string) {
     signUpWithLoginAndPassword(login, password)
         .then((response)=> {
+          // @ts-ignore
           dispatch(signUpUser(response));
           navigate('/today')
           setValueLocalStorage(response);
