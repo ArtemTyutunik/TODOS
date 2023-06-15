@@ -20,23 +20,39 @@ const Todo = ({todo}: Props) => {
   const [isEditing, openEditing, closeEditing] = useVisable(false);
 
   const onComplete = () => {
-    sendUpdatedTodo({id, done: !todo.done}, userId)
-    dispatch(toggleTaskComplete(Number(id)));
+    try {
+      sendUpdatedTodo({id, done: !todo.done}, userId)
+      dispatch(toggleTaskComplete(Number(id)));
+    } catch (e) {
+      console.log(e)
+    }
   };
 
   const onDeleteAction = () => {
     dispatch(deleteTask(id));
-    deleteTodoById(id, userId)
+    try {
+      deleteTodoById(id, userId)
+    } catch (e) {
+      console.log(e)
+    }
   };
   const onDuplicateAction = () => {
     const newTodo = ({...todo, id: Date.now()})
     dispatch(addNewTask(newTodo));
-    postNewTodo(newTodo, userId)
+    try {
+      postNewTodo(newTodo, userId)
+    } catch (e) {
+      console.log(e)
+    }
   };
   const setPriorityAction = (priority: Priority) => {
-    const data = {id, priority}
-    sendUpdatedTodo(data, userId)
-    dispatch(setPriority(data));
+    try {
+      const data = {id, priority}
+      sendUpdatedTodo(data, userId)
+      dispatch(setPriority(data));
+    } catch (e) {
+      console.log(e)
+    }
   };
 
   if (isEditing) return <EditTodoForm onClose={closeEditing} todo={todo}/>;

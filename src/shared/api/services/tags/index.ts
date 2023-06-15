@@ -1,20 +1,12 @@
 import {fetchRequest} from '@shared/api/services/constants';
 import {ITag} from '@shared/interfacesAndTypes';
 
-export const fetchUserTags = (userId: string) => new Promise((resolve, reject) => {
+export const fetchUserTags = async <T>(userId: string): Promise<T> => {
   const url = `get_tags?user_id=${userId}`;
 
-  fetchRequest(url)
-      .then((response) => {
-        //@ts-ignore
-        return response.json()
-      })
-      .then( (result) => resolve(result.map((tag: ITag) => {
-        const id = tag?.id || Date.now() + ''
-        return {...tag, id}
-      })))
-      .catch((error) => reject(error))
-})
+  const response = await fetchRequest(url)
+  return await response.json();
+}
 
 export const createNewUserTag = async (newTag: ITag, userId: string) => {
   const options = {

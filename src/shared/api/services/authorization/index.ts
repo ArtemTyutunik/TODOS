@@ -1,19 +1,19 @@
 import {fetchRequest} from '@shared/api/services/constants';
 
-//@ts-ignore
-const processRequest = async (response) => {
+
+const processRequest = async (response: Response) => {
   if (!response.ok) {
     const data = await response.text()
     if (response.status == 500) {
       throw new Error('Sorry unexpected error. Try later.')
     }
-    throw new Error(data)
+    throw data
   } else {
-    return response.json()
+    return await response.json()
   }
 }
 
-export const loginWithLoginAndPassword = (login: string, password: string ) => new Promise((resolve, reject) => {
+export const loginWithLoginAndPassword = async (login: string, password: string ) => {
   const options = {
     method: 'POST',
     headers: {
@@ -22,16 +22,12 @@ export const loginWithLoginAndPassword = (login: string, password: string ) => n
     body: JSON.stringify({login, password}),
   }
 
-  fetchRequest('auth', options)
-      // @ts-ignore
-      .then(processRequest)
-      .then((refactor) => {
-        resolve(refactor)
-      })
-      .catch((error) => reject(error.message))
-})
+  const response = await fetchRequest('auth', options)
 
-export const signUpWithLoginAndPassword = (login: string, password: string ) => new Promise( (resolve, reject) => {
+  return await processRequest(response)
+}
+
+export const signUpWithLoginAndPassword = async (login: string, password: string ) => {
   const options = {
     method: 'POST',
     headers: {
@@ -40,12 +36,7 @@ export const signUpWithLoginAndPassword = (login: string, password: string ) => 
     body: JSON.stringify({login, password}),
   }
 
-  fetchRequest('sign_up', options)
-      .then(processRequest)
-      .then((result) => {
-        resolve(result)
-      })
-      .catch((error) => {
-        reject(error.message)
-      })
-})
+  const response = await fetchRequest('sign_up', options)
+
+  return await processRequest(response)
+}

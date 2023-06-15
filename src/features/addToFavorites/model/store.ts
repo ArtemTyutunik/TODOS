@@ -14,9 +14,6 @@ const favoriteSlice = createSlice({
   name: 'favorites',
   initialState: initialState,
   reducers: {
-    getAllFavoritesAction: (state, {payload}: PayloadAction<IFavorite[]>)=> {
-      return {...state, favorites: [...payload]}
-    },
     addToFavorites: (state, {payload}: PayloadAction<IFavorite>) => {
       return {...state, favorites: [...state.favorites, payload]}
     },
@@ -34,6 +31,6 @@ const favoriteSlice = createSlice({
 
 export const favoriteReducer = favoriteSlice.reducer
 
-export const {getAllFavoritesAction, addToFavorites, deleteFromFavoritesAction} = favoriteSlice.actions
+export const {addToFavorites, deleteFromFavoritesAction} = favoriteSlice.actions
 
 export const getAllFavorites = (state: RootReducer) => state.favoriteReducer.favorites

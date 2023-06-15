@@ -13,18 +13,20 @@ export const useFetchAllUserData = (): [boolean] => {
   const [isFetching, setIsFetching] = useState(true)
   const userId = useSelector(userIdSelector)
 
-  const getTodos = () => {
+  const getTodos = async () => {
     const onFulfilledTodosRequest = (result: ITodo[]) => {
       dispatch(fetchTasks(result))
     }
 
-    getUserTodos(userId)
-        //@ts-ignore
-        .then(onFulfilledTodosRequest)
-        .catch((error) => console.log(error))
+    try {
+      const todos = await getUserTodos<ITodo[]>(userId)
+      onFulfilledTodosRequest(todos)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
-  const getTags = () => {
+  const getTags = async () => {
     const onFulfilledTagsRequest = (result: ITag[]) => {
       dispatch(getUserTags(result))
     }
@@ -34,7 +36,7 @@ export const useFetchAllUserData = (): [boolean] => {
         .then(onFulfilledTagsRequest)
   }
 
-  const getFavorites = () => {
+  const getFavorites = async () => {
     try {
       //@ts-ignore
       dispatch(fetchAllFavoritesThunkCreator(userId))
