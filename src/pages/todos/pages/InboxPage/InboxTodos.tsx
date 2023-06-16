@@ -24,8 +24,9 @@ const InboxTodosPage = () => {
     </Box>;
   }
 
-  const overdueTodos = todos.filter((todo) => overdueDate(todo.date!));
-  const inboxTodos = todos.filter((todo) => !overdueDate(todo.date!));
+
+  const overdueTodos = todos.filter((todo) => overdueDate(todo.date!) && !todo.done);
+  const inboxTodos = todos.filter((todo) => !overdueDate(todo.date!) || todo.done);
 
   return (
     <Box paddingTop={'30px'} height={'100%'}>
