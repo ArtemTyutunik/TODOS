@@ -1,7 +1,7 @@
 import {ITag, ITodo} from '@shared/interfacesAndTypes';
 import {fetchRequest} from '@shared/api/services/constants';
 
-export const getUserTodos = (userId: string) => new Promise((resolve, reject) => {
+export const getUserTodos = async <T>(userId: string): Promise<T> => {
   const transformTodo = (todo: ITodo) => {
     const {tags} = todo
     const transformedTags = tags?.map((tag: string | ITag) => {
@@ -11,24 +11,22 @@ export const getUserTodos = (userId: string) => new Promise((resolve, reject) =>
     return {...todo, tags: transformedTags}
   }
 
-  fetchRequest(`get_all/${userId}`)
-      // @ts-ignore
-      .then((result) => result.json())
-      .then((result) => resolve(result.map(transformTodo)))
-      .catch((error) => reject(error))
-})
+  const response = await fetchRequest(`get_all/${userId}`)
+  const data = await response.json()
 
-export const deleteTodoById = (id: number, userId: string) => new Promise(() => {
+  return data.map(transformTodo)
+}
+
+export const deleteTodoById = async (id: number, userId: string) => {
   const url = `delete?user_id=${userId}&todo_id=${id}`
   const options = {
     method: 'DELETE',
   }
 
-  fetchRequest(url, options)
-      .catch((error) => console.log(error))
-})
+  return await fetchRequest(url, options)
+}
 
-export const postNewTodo = (data: ITodo, userId: string) => new Promise((resolve, reject) => {
+export const postNewTodo = async (data: ITodo, userId: string) => {
   const url = `create_todo?user_id=${userId}`
   const options = {
     method: 'POST',
@@ -38,12 +36,10 @@ export const postNewTodo = (data: ITodo, userId: string) => new Promise((resolve
     body: JSON.stringify(data),
   }
 
-  fetchRequest(url, options)
-      .then((result) => resolve(result))
-      .catch((error) => reject(error))
-})
+  return await fetchRequest(url, options)
+}
 
-export const sendUpdatedTodo = (updatedData: any, userId: string) => new Promise((resolve) => {
+export const sendUpdatedTodo = async (updatedData: unknown, userId: string) => {
   const url = `update?user_id=${userId}`
   const options = {
     method: 'PUT',
@@ -52,6 +48,5 @@ export const sendUpdatedTodo = (updatedData: any, userId: string) => new Promise
     },
     body: JSON.stringify(updatedData, (key, value) => value === undefined ? null : value),
   }
-  fetchRequest(url, options)
-      .then((response) => resolve(response))
-})
+  return await fetchRequest(url, options)
+}

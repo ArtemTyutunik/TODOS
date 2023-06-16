@@ -26,7 +26,8 @@ const DetailsCard = ({todo, onComplete}: Props) => {
   const [priority, onSelected] = useSelectPriority(todo.priority)
 
   const onPriorityHandler = (event: SelectChangeEvent<Priority>) => {
-    const priority = event.target.value
+    //@ts-ignore
+    const priority: Priority = event.target.value
     const data = {id, priority}
     onSelected(event)
     sendUpdatedTodo(data, userId)

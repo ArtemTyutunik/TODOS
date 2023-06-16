@@ -4,7 +4,7 @@ import {Box, Divider, IconButton, Tooltip, Typography} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 
 import MoreActionsMenu from './moreActionMenu';
-import {ITodo} from '@shared/interfacesAndTypes';
+import {ITodo, Priority} from '@shared/interfacesAndTypes';
 import {TodoContainerStyles, todoDescriptionStyles, TodoFlexboxStyles, TodoLabelStyles} from '../styles';
 import CheckboxComponent from './Checkbox';
 import DueDateButton from '@entities/dueDateButton';
@@ -18,7 +18,7 @@ interface TodoCardProps {
     onEdit: () => void,
     onDeleteAction: () => void,
     onDuplicateAction: () => void,
-    setPriorityAction: (priority: string) => void
+    setPriorityAction: (priority: Priority) => void
 }
 
 const TodoCard = ({

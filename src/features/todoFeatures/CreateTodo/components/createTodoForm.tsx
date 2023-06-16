@@ -29,12 +29,14 @@ const CreateTodoForm = ({onClose, initialDate}: Props) => {
   }
 
   const onSubmit = (newTodo: ITodo ) => {
-    postNewTodo(newTodo, userId)
-        .then(() => {
-          dispatch(addNewTask(newTodo));
-          notify(newTodo.id)
-          onClose();
-        })
+    try {
+      postNewTodo(newTodo, userId)
+      dispatch(addNewTask(newTodo));
+      notify(newTodo.id)
+      onClose();
+    } catch (e) {
+      console.log(e)
+    }
   };
 
   return <BaseTodoForm onClose={onClose} onSubmit={onSubmit} initialDate={initialDate}/>

@@ -1,20 +1,16 @@
 import {fetchRequest} from '@shared/api/services/constants';
 import {IFavorite} from '@shared/interfacesAndTypes';
 
-export const fetchUserFavorites = (userId: string) => new Promise((resolve, reject) => {
+export const fetchUserFavorites = async <T>(userId: string): Promise<T> => {
   const url = `get_favorites?user_id=${userId}`;
 
-  fetchRequest(url)
-      .then((response) => {
-        //@ts-ignore
-        return response.json()
-      })
-      .then((result) => resolve(result))
-      .catch((error) => reject(error))
-})
+  const response = await fetchRequest(url);
+
+  return await response.json();
+}
 
 
-export const addUserFavorite = (userId: string, newFavorite: IFavorite) => new Promise((resolve, reject) => {
+export const addUserFavorite = async (userId: string, newFavorite: IFavorite) => {
   const url = `add_favorite?user_id=${userId}`;
   const options = {
     method: 'POST',
@@ -23,18 +19,15 @@ export const addUserFavorite = (userId: string, newFavorite: IFavorite) => new P
     },
     body: JSON.stringify(newFavorite),
   }
-  fetchRequest(url, options)
-      .then((result) => resolve(result))
-      .catch((error) => reject(error))
-})
 
-export const deleteUserFavorite = (userId: string, itemId: string) => new Promise((resolve, reject) => {
+  return await fetchRequest(url, options)
+}
+
+export const deleteUserFavorite = async (userId: string, itemId: string) => {
   const options = {
     method: 'DELETE',
   }
   const url = `delete_favorite?user_id=${userId}&itemId=${itemId}`;
 
-  fetchRequest(url, options)
-      .then((result) => resolve(result))
-      .catch((error) => reject(error))
-})
+  return await fetchRequest(url, options)
+}

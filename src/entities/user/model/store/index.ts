@@ -1,42 +1,51 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {RootReducer} from '@shared/interfacesAndTypes';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {IUser, RootReducer} from '@shared/interfacesAndTypes';
 
-const configureInitialState = () => {
+interface initialState {
+  user: IUser | null,
+  isAuth: boolean,
+  errorMessage: string | null,
+  isError: boolean,
+}
+
+const configureInitialState = (): initialState => {
   const storageRes = localStorage.getItem('user');
   return storageRes? {
     user: JSON.parse(storageRes),
     isAuth: true,
+    isError: false,
+    errorMessage: null,
   } : {
-    user: {},
+    user: null,
     isAuth: false,
+    isError: false,
+    errorMessage: null,
   };
 };
 
 const userSlice = createSlice({
   name: 'authorization',
-  initialState: {...configureInitialState(),
-    isError: false,
-    errorMessage: null,
-  },
+  initialState: {...configureInitialState()},
   reducers: {
-    authUser: (state, action) => {
-      return {...state, isAuth: true, user: {...action.payload}};
+    authUser: (state, {payload}: PayloadAction<IUser>) => {
+      return {...state, isAuth: true, user: {...payload}};
     },
-    signUpUser: (state, action) => {
-      return {...state, isAuth: true, user: {...action.payload}};
+    signUpUser: (state, {payload}: PayloadAction<IUser>) => {
+      return {...state, isAuth: true, user: {...payload}};
     },
     logOutUser: (state) => {
       state.isAuth = false;
-      state.user = {};
+      state.user = null;
     },
-    authWithError: ( state, action) => {
+    authWithError: ( state, {payload}: PayloadAction<string>) => {
       state.isError = true;
-      state.errorMessage = action.payload;
+      state.errorMessage = payload;
     },
   },
 });
 
 export const userReducer = userSlice.reducer;
+//@ts-ignore
 export const userIdSelector = (state: RootReducer) => state.userReducer.user.user_id
 
 export const {authUser, logOutUser, authWithError, signUpUser} = userSlice.actions;

@@ -38,14 +38,14 @@ const FavoriteItemStyles = {
 const FavoriteItem = ({favorite}: {favorite: IFavorite}) => {
   const item = useTagById(favorite.itemId)
   const navigate = useNavigate()
-  const {deleteFromFavorites} = useToggleFavorite(item.id)
+  const {deleteFromFavorites} = useToggleFavorite(item?.id)
 
   const onDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
     deleteFromFavorites()
   }
 
-  return <ListItemButton sx={FavoriteItemStyles}
+  return item ? (<ListItemButton sx={FavoriteItemStyles}
     onClick={() => navigate('/tags/' + item?.id)}>
     <Box sx={{display: 'flex', alignItems: 'center'}}>
       <TagIcon background={item?.settings.background}/>
@@ -57,7 +57,7 @@ const FavoriteItem = ({favorite}: {favorite: IFavorite}) => {
       onClick={onDelete}>
       <DeleteOutlineIcon sx={{color: '#808080', fontSize: '18px'}}/>
     </CustomIconButton>
-  </ListItemButton>
+  </ListItemButton> ) : null
 }
 
 export default FavoritesList;

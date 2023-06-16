@@ -91,7 +91,7 @@ export default function UserSettingsMenu() {
               </Avatar>
               <Box>
                 <Typography fontWeight={'bold'}>
-                  {user?.login}
+                  {user?.login }
                 </Typography>
                 <Typography>
                   {user?.login.replace('@gmail.com', '')}
