@@ -1,28 +1,33 @@
 import React from 'react';
 import {styled} from '@mui/material/styles';
 import {ITag} from '@shared/interfacesAndTypes';
-import {Typography} from '@mui/material';
+import {Box, Typography} from '@mui/material';
+import {Link} from 'react-router-dom';
 
 interface Props {
-    tags: ITag[]
+    tags: ITag[] | undefined;
 }
 const TagLinks = ({tags}: Props) => {
   return (
-    <>
+    <Box display={'flex'} flexWrap={'wrap'}>
       {
-        tags.map((tag) => <TagLink key={tag.name} tag={tag}/>)
+        tags?.map((tag) => tag && <TagLink key={tag.name} tag={tag}/>)
       }
-    </>
+    </Box>
   );
 };
 
 const TagLink = ({tag}: {tag: ITag}) => {
   return <CustomTagLink sx={{backgroundColor: tag.settings?.background, color: tag.settings?.textColor}}>
-    {tag.name}
+    <Link to={`/tags/${tag.id}`}>
+      {tag.name}
+    </Link>
   </CustomTagLink>
 }
 
 const CustomTagLink = styled(Typography)(() => ({
+  width: 'fit-content',
+  marginTop: '8px',
   fontSize: '16px',
   cursor: 'text',
   padding: '2px 14px',

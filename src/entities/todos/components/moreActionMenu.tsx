@@ -1,20 +1,25 @@
 import React from 'react';
-import {IconButton, Tooltip} from '@mui/material';
+import {Box, Divider, IconButton, List, ListItemButton, Tooltip, Typography} from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import InfoIcon from '@mui/icons-material/Info';
 import DropdownMenu from '@shared/components/dropdownMenu';
-import DropdownActionMenu from '@entities/todos/components/DropdownActionMenu';
 import {useAnchorElement, useVisable} from '@shared/hooks';
 import ConfirmDeleteModal from '@shared/components/ConfirmDeletion';
-import {Priority} from '@shared/interfacesAndTypes';
+import MoveTodo from '@entities/todos/components/MoveTodo';
+import {PrioritiesFlags} from '@shared/constants/PrioritiesFlags';
+import QueueIcon from '@mui/icons-material/Queue';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface MoreActionsMenuProps {
     onDelete: () => void,
     onDuplicate: () => void,
-    onSetPriority: (priority: Priority) => void
+    onSetPriority: (priority: string) => void,
+    onOpenTodoDetails: () => void
 }
 
 
-const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenuProps) => {
+const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority, onOpenTodoDetails}:
+                             MoreActionsMenuProps) => {
   const [anchorEl, addAnchorEl, removeAnchorEl] = useAnchorElement(null);
   const [isDeleteModalOpen, openDeleteModalOpen, closeDeleteModalOpen] = useVisable(false)
 
@@ -32,7 +37,47 @@ const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority}: MoreActionsMenu
 
       <DropdownMenu anchorEl={anchorEl} handleClose={removeAnchorEl}>
         {/*//@ts-ignore*/}
-        <DropdownActionMenu onDelete={openDeleteModalOpen} onDuplicate={onDuplicate} onSetPriority={onSetPriority}/>
+        <Box padding={'0 10px'}>
+          <List>
+            <ListItemButton sx = {{padding: '10px 0'}} onClick={onOpenTodoDetails}>
+              <InfoIcon sx={{color: 'grey'}}/>
+              <Typography ml={'15px'}>
+                      Info
+              </Typography>
+            </ListItemButton>
+            <Divider/>
+            <Box mt={'10px'}>
+              <MoveTodo isUp text='Lift up todo'/>
+              <MoveTodo isUp={false} text='Lift down todo'/>
+              <Divider/>
+            </Box>
+            <Box m={'10px 0'}>
+              <Typography>Set priority</Typography>
+              <Box display={'flex'}>
+                {PrioritiesFlags.map((Priority) => <Box mr={'10px'} key={Priority.value}>
+                  <IconButton onClick={() => onSetPriority(Priority.value)}>
+                    <Priority.Icon/>
+                  </IconButton>
+                </Box>,
+                )}
+              </Box>
+            </Box>
+
+            <ListItemButton sx = {{padding: '10px 0', marginBottom: '10px'}} onClick={onDuplicate}>
+              <QueueIcon sx={{color: 'grey'}}/>
+              <Typography ml={'15px'}>
+                          Duplicate
+              </Typography>
+            </ListItemButton>
+          </List>
+          <Divider/>
+          <ListItemButton sx = {{padding: '10px 0', margin: '10px 0'}} onClick={openDeleteModalOpen}>
+            <DeleteIcon sx={{color: 'grey'}}/>
+            <Typography ml={'15px'}>
+                      Delete
+            </Typography>
+          </ListItemButton>
+        </Box>
       </DropdownMenu>
       {
         isDeleteModalOpen && <ConfirmDeleteModal isOpen

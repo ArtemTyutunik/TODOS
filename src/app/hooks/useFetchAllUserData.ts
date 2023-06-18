@@ -12,7 +12,7 @@ export const useFetchAllUserData = (): [boolean] => {
   const dispatch = useDispatch();
   const [isFetching, setIsFetching] = useState(true)
   const userId = useSelector(userIdSelector)
-
+  const [isMinimumTimeEnd, setIsMinimumTimeEnd] = useState(false)
   const getTodos = async () => {
     const onFulfilledTodosRequest = (result: ITodo[]) => {
       dispatch(fetchTasks(result))
@@ -45,15 +45,24 @@ export const useFetchAllUserData = (): [boolean] => {
     }
   }
 
-
   useEffect(() => {
     const pageLoader = document.querySelector('.loader-container')
+
+    const timeoutId = setTimeout(() => {
+      setIsMinimumTimeEnd(true)
+      isFetching && pageLoader?.remove()
+    }, 700)
+
+
     Promise.all([getTodos(), getTags(), getFavorites()])
         .then(() => {
           setIsFetching(false)
-          pageLoader?.remove()
+          isMinimumTimeEnd && pageLoader?.remove()
         })
+
+
+    return () => clearTimeout(timeoutId)
   }, [])
 
-  return [isFetching]
+  return [isFetching && isMinimumTimeEnd]
 }

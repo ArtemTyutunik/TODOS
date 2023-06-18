@@ -8,7 +8,6 @@ import {TODAY_LINK, INBOX_LINK, FILTERS_AND_TAGS_LINK} from '@shared/constants';
 
 const TodayTodosPage = lazy(() => import('./todos/pages/TodayPage/TodayTodos'))
 const InboxTodosPage = lazy(() => import('./todos/pages/InboxPage/InboxTodos'))
-const TodoDetailPage = lazy(() => import('./todos/pages/TodoDetailPage/TodoDetailPage'))
 const FilterAndTagsPage = lazy(() => import('./todos/pages/FiltersAndTagsPage/FiltersAndTagsPage'))
 const FilteredByTagTodosPage = lazy(() => import('./todos/pages/FilteredByTagTodosPage/FilteredByTagTodosPage'))
 
@@ -29,9 +28,6 @@ const Routing = () => {
           </Suspense>}/>
           <Route path={FILTERS_AND_TAGS_LINK} element={<Suspense fallback={null}>
             <FilterAndTagsPage/>
-          </Suspense>}/>
-          <Route path={'/:day?/task/:id'} element={<Suspense fallback={null}>
-            <TodoDetailPage/>
           </Suspense>}/>
           <Route path={'/tags/:id'} element={<Suspense fallback={null}>
             <FilteredByTagTodosPage/>

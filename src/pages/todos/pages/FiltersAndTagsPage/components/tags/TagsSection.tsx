@@ -18,7 +18,8 @@ const TagsSection = () => {
   return (
     <>
       <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} mt={'20px'} mb={'5px'}>
-        <Box display={'flex'} alignItems={'center'} position={'relative'}>
+        <Box display={'flex'} alignItems={'center'} position={'relative'}
+          ml={{mobile: '25px', tablet: '0px'}}>
           <ToggleArrowIcon isExpanded={isOpenTagList}
             onClick={toggleTagList}
             sx={arrowIconStyles}/>
