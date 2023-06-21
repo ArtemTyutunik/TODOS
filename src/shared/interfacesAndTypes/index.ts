@@ -3,13 +3,15 @@ import {RootReducer} from '@app/store';
 export interface ITodo {
     label: string,
     id: TodoId,
-    description?: string,
-    done?: boolean,
+    description: string,
+    done: boolean,
     priority: Priority,
-    tags?: tagIdType[],
+    tags: tagIdType[],
     date?: IDate
+    projectId?: todoProjectId | null
 }
 
+export type todoProjectId = string
 export type TodoId = number
 
 export type Priority = '1' | '2' | '3'| '4'
