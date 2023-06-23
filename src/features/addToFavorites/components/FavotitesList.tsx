@@ -1,12 +1,13 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
-import {Box, ListItemButton, Typography} from '@mui/material';
+import {Box, Typography} from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {IFavorite} from '@shared/interfacesAndTypes';
 import {useTagById} from '@entities/tag';
 import TagIcon from '@shared/tagIcon';
 import CustomIconButton from '@shared/components/CustomIconButton';
 import {useToggleFavorite} from '@features/addToFavorites';
+import DrawerListItem from '@shared/components/DrawerListItem';
 
 const FavoritesList = ({favorites}: {favorites: IFavorite[]}) => {
   return (
