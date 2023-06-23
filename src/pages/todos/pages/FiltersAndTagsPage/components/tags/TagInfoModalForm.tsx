@@ -1,10 +1,9 @@
 import React from 'react';
-import {Box, FormControlLabel, SelectChangeEvent, TextField, Typography} from '@mui/material';
-import {inputSectionStyle} from '@pages/todos/pages/FiltersAndTagsPage/components/tags/componentsStyles';
-import ColorTagSelect from '@pages/todos/pages/FiltersAndTagsPage/components/tags/ColorTagSelect';
+import {Box, FormControlLabel, SelectChangeEvent, Typography} from '@mui/material';
+import ColorTagSelect from '@shared/components/SettingModal/ColorTagSelect';
 import {SwitchComponent} from '@shared/components/SwitchComponent';
 import {colorType, ITag} from '@shared/interfacesAndTypes';
-
+import {ModalWrapper, NameInput, InputsSection} from '@shared/components/SettingModal';
 
 interface Props {
     onSelectChange(e: SelectChangeEvent, colors: colorType[]): void,
@@ -23,28 +22,17 @@ const TagInfoModalForm = ({
   toggleIsFavorite,
   isChecked}: Props) => {
   return (
-    <Box minWidth={{laptop: '500px', largeMobile: '300px'}} sx={(theme) => ({color: theme.text.title})}>
+    <ModalWrapper>
       <Box padding={'10px 15px'}>
         <Typography fontSize={'19px'} fontWeight={600}>
-                    Add tag
+           Add tag
         </Typography>
       </Box>
-      <Box sx={inputSectionStyle(isError)}>
-        <Box mb={'15px'}>
-          <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
-                        Tag name
-          </Typography>
-          <TextField onChange={onInputChange}
-            value={tagState.name}
-            error={isError}
-            helperText={'Tag with the same name already exists'}
-            variant={'outlined'}
-            className={'create-tag-input'}
-            inputProps={{autoFocus: true}}/>
-        </Box>
+      <InputsSection isError={isError}>
+        <NameInput isError={isError} onChange={onInputChange} inputValue={tagState.name}/>
         <Box marginBottom={'15px'}>
           <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
-                        Tag color
+               Tag color
           </Typography>
           <ColorTagSelect settings={tagState.settings} onSelectChange={onSelectChange}/>
         </Box>
@@ -52,8 +40,8 @@ const TagInfoModalForm = ({
           onChange={toggleIsFavorite}/>}
         label={'Add to favorites'}
         sx={{color: '#202020', fontSize: '14px', width: 'fit-content', margin: '0'}}/>
-      </Box>
-    </Box>
+      </InputsSection>
+    </ModalWrapper>
 
   );
 };

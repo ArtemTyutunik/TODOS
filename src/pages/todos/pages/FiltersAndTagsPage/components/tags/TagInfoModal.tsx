@@ -15,6 +15,7 @@ import {
 import {colorType, ITag} from '@shared/interfacesAndTypes';
 import TagInfoModalForm from '@pages/todos/pages/FiltersAndTagsPage/components/tags/TagInfoModalForm';
 import {useToggleFavorite} from '@features/addToFavorites';
+import {itemAlreadyExist} from '@shared/helpers';
 
 
 interface Props {
@@ -60,11 +61,8 @@ const TagInfoModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
-    if (userTags.find((tag) => tag.name.trim() === value.trim() && tag.id !== tagState.id)) {
-      setIsError(true)
-    } else {
-      setIsError(false)
-    }
+
+    setIsError(itemAlreadyExist<ITag>(userTags, value, tagState))
 
     tagDispatcher(setTagNameAction(value))
   }

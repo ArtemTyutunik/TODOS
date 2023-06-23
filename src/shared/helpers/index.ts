@@ -13,3 +13,12 @@ export const configureFavoriteItem = (type: 'tag' | 'filter', itemId: string): I
     itemId: itemId,
   }
 }
+
+export const itemAlreadyExist = <T>(list: T[], value: string, currentItem: T): boolean => {
+  //@ts-ignore
+  if (list.find((item) => item.name.trim() === value.trim() && item?.id !== currentItem.id)) {
+    return true
+  } else {
+    return false
+  }
+}

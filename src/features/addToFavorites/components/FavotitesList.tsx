@@ -19,22 +19,6 @@ const FavoritesList = ({favorites}: {favorites: IFavorite[]}) => {
   );
 };
 
-const FavoriteItemStyles = {
-  'margin': '0 10px',
-  'padding': '6px 8px',
-  'borderRadius': '4px',
-  'display': 'flex',
-  'justifyContent': 'space-between',
-  '& .delete_favorite-icon': {
-    opacity: 0,
-  },
-  '&:hover': {
-    '& .delete_favorite-icon': {
-      opacity: 1,
-    },
-  },
-}
-
 const FavoriteItem = ({favorite}: {favorite: IFavorite}) => {
   const item = useTagById(favorite.itemId)
   const navigate = useNavigate()
@@ -45,19 +29,18 @@ const FavoriteItem = ({favorite}: {favorite: IFavorite}) => {
     deleteFromFavorites()
   }
 
-  return item ? (<ListItemButton sx={FavoriteItemStyles}
-    onClick={() => navigate('/tags/' + item?.id)}>
+  return item ? (<DrawerListItem onClick={() => navigate('/tags/' + item?.id)}>
     <Box sx={{display: 'flex', alignItems: 'center'}}>
       <TagIcon background={item?.settings.background}/>
       <Typography marginLeft={'10px'}>
         {item?.name}
       </Typography>
     </Box>
-    <CustomIconButton className={'delete_favorite-icon'}
+    <CustomIconButton className={'hover_content'}
       onClick={onDelete}>
       <DeleteOutlineIcon sx={{color: '#808080', fontSize: '18px'}}/>
     </CustomIconButton>
-  </ListItemButton> ) : null
+  </DrawerListItem> ) : null
 }
 
 export default FavoritesList;
