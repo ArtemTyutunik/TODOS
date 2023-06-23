@@ -7,6 +7,8 @@ import {userIdSelector} from '@entities/user/model/store';
 import {getUserTags} from '@entities/tag/store/tagStore';
 import {getUserTodos} from '@shared/api/services/todos';
 import {fetchAllFavoritesThunkCreator} from '@features/addToFavorites/model/thunks';
+import {getInboxId, getProjects} from '@shared/api/services/projects';
+import {getProjectsAction} from '@entities/projects/model/store';
 
 export const useFetchAllUserData = (): [boolean] => {
   const dispatch = useDispatch();
@@ -45,8 +47,30 @@ export const useFetchAllUserData = (): [boolean] => {
     }
   }
 
+  const getUserInboxId = async () => {
+    try {
+      const inboxId = await getInboxId(userId)
+      localStorage.setItem('inboxID', inboxId + '')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getUserProjects = async () => {
+    try {
+      const projects = await getProjects(userId)
+      dispatch(getProjectsAction(projects))
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   useEffect(() => {
     const pageLoader = document.querySelector('.loader-container')
+    const userInboxID = localStorage.getItem('inboxID')
+    if (!userInboxID) {
+      getUserInboxId()
+    }
 
     const timeoutId = setTimeout(() => {
       setIsMinimumTimeEnd(true)
@@ -54,7 +78,7 @@ export const useFetchAllUserData = (): [boolean] => {
     }, 700)
 
 
-    Promise.all([getTodos(), getTags(), getFavorites()])
+    Promise.all([getTodos(), getTags(), getFavorites(), getUserProjects()])
         .then(() => {
           setIsFetching(false)
           isMinimumTimeEnd && pageLoader?.remove()
