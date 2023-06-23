@@ -10,6 +10,7 @@ const initialStateFunction = (todo?: ITodo) => ({
   date: todo?.date || '',
   priority: todo?.priority || '4',
   done: todo?.done || false,
+  isCurrent: todo?.isCurrent || false,
 })
 
 interface formAction {

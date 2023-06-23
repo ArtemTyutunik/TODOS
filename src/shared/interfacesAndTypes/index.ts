@@ -7,7 +7,8 @@ export interface ITodo {
     done?: boolean,
     priority: Priority,
     tags?: tagIdType[],
-    date?: IDate
+    date?: IDate,
+    isCurrent?: boolean
 }
 
 export type TodoId = number

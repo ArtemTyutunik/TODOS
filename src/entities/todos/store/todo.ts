@@ -74,6 +74,10 @@ const todosSlice = createSlice({
         return updateTodoInState(state, {...task, date: payload.newDate})
       }
     },
+    toggleIsCurrent: (state, {payload}: PayloadAction<ITodo>) => {
+      return updateTodoInState(state, payload)
+    },
+
   },
 });
 
@@ -87,6 +91,7 @@ export const {addNewTask,
   dispatchNewDate,
   addNewTodoTag,
   fetchTasks,
-  deleteTodoTag} = todosSlice.actions;
+  deleteTodoTag,
+  toggleIsCurrent} = todosSlice.actions;
 
 export const allTodosSelector = (state: RootReducer) => state.todosReducer.todos
