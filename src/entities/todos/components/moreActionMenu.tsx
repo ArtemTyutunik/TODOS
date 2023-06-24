@@ -9,23 +9,27 @@ import MoveTodo from '@entities/todos/components/MoveTodo';
 import {PrioritiesFlags} from '@shared/constants/PrioritiesFlags';
 import QueueIcon from '@mui/icons-material/Queue';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import {ITodo} from '@shared/interfacesAndTypes';
 
 interface MoreActionsMenuProps {
     onDelete: () => void,
     onDuplicate: () => void,
     onSetPriority: (priority: string) => void,
-    onOpenTodoDetails: () => void
+    onOpenTodoDetails: () => void,
+    setAsCurrent: () => void
+    todo?: ITodo
 }
 
 
-const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority, onOpenTodoDetails}:
+const MoreActionsMenu = ({todo, onDelete, onDuplicate, onSetPriority, onOpenTodoDetails, setAsCurrent}:
                              MoreActionsMenuProps) => {
   const [anchorEl, addAnchorEl, removeAnchorEl] = useAnchorElement(null);
   const [isDeleteModalOpen, openDeleteModalOpen, closeDeleteModalOpen] = useVisable(false)
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     addAnchorEl(event.currentTarget);
-  };
+  }
 
   return (
     <>
@@ -67,6 +71,13 @@ const MoreActionsMenu = ({onDelete, onDuplicate, onSetPriority, onOpenTodoDetail
               <QueueIcon sx={{color: 'grey'}}/>
               <Typography ml={'15px'}>
                           Duplicate
+              </Typography>
+            </ListItemButton>
+
+            <ListItemButton sx = {{padding: '10px 0', marginBottom: '10px'}} onClick={setAsCurrent}>
+              <CheckCircleOutlineIcon sx={{color: todo?.isCurrent ? '#1976d2': 'grey'}}/>
+              <Typography ml={'15px'}>
+                  Set as current
               </Typography>
             </ListItemButton>
           </List>

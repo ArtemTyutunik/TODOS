@@ -9,6 +9,7 @@ export interface ITodo {
     tags: tagIdType[],
     date?: IDate
     projectId?: todoProjectId | null
+    isCurrent?: boolean
 }
 
 export type todoProjectId = string

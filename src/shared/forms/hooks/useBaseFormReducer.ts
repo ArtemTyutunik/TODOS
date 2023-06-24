@@ -11,6 +11,7 @@ const initialStateFunction = (todo?: ITodo) => ({
   priority: todo?.priority || '4',
   done: todo?.done || false,
   projectId: todo?.projectId || localStorage.getItem('inboxID'),
+  isCurrent: todo?.isCurrent || false,
 })
 
 interface formAction {
