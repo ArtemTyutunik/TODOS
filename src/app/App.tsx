@@ -17,7 +17,8 @@ const App = () => {
       localStorage.removeItem('user')
       navigate('login')
     }
-  }, [])
+    localStorage.setItem('inboxId', '1234567890')
+  }, [isAuth])
 
   return (
     <ThemeProvider theme={theme}>

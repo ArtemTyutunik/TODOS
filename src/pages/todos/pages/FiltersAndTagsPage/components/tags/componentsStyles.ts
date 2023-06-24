@@ -1,24 +1,3 @@
-export const inputSectionStyle = (isError: boolean) => ({
-  'display': 'flex',
-  'flexDirection': 'column',
-  'justifyContent': 'flex-start',
-  'padding': '10px 15px',
-  'border': '1px solid #f5f5f5',
-  'borderLeft': 0,
-  'borderRight': 0,
-  'marginBottom': '10px',
-  '& .create-tag-input .MuiInputBase-root': {
-    '& fieldset': {
-      'border': `1px solid  ${isError? 'red' : '#ddd'}`,
-    },
-  },
-  '& .create-tag-input': {
-    'width': '100%',
-    '& .MuiFormHelperText-root': {
-      display: isError ? 'block' : 'none',
-    },
-  },
-})
 
 export const arrowIconStyles = () => ({
   'position': 'absolute',
@@ -53,26 +32,4 @@ export const tagActionStyles = {
 export const iconStyles = {
   color: '#a09f9f',
   fontSize: '20px',
-}
-
-export const selectStyles = {
-  'position': 'relative',
-  'zIndex': 1,
-  'maxHeight': '250px',
-
-  '& fieldset': {
-    border: '1px solid #ddd !important',
-  },
-  '& .MuiSelect-select': {
-    padding: '8px 10px',
-    display: 'flex',
-    alignItems: 'center',
-  },
-}
-
-export const MenuStyles = {
-  '& .MuiPopover-paper': {
-    maxHeight: '250px',
-    marginTop: '10px',
-  },
 }

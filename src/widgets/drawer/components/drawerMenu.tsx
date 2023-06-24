@@ -10,6 +10,7 @@ import {INBOX_LINK, TODAY_LINK, FILTERS_AND_TAGS_LINK} from '@shared/constants';
 import TodosCount from '@shared/components/TodosCount';
 import {Favorites} from '@features/addToFavorites';
 import '../active.css'
+import {Projects} from '@entities/projects';
 
 const drawerLinks = [
   {label: 'Inbox', linkTo: INBOX_LINK, Icon: () => <InboxIcon sx={{color: '#246fe0'}}/>},
@@ -77,6 +78,7 @@ const DrawerMenu = () => {
         }
       </List>
       <Favorites/>
+      <Projects/>
     </>
   );
 };

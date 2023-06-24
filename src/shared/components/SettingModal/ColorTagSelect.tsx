@@ -1,7 +1,6 @@
 import {Box, MenuItem, Select, SelectChangeEvent, Typography} from '@mui/material';
 import {colors} from '@shared/constants/colors';
 import {colorType} from '@shared/interfacesAndTypes';
-import {MenuStyles, selectStyles} from './componentsStyles';
 
 interface Props {
   settings: colorType,
@@ -33,5 +32,27 @@ function SelectItem({color}: {color: colorType}) {
       {color.name}
     </Typography>
   </>
+}
+
+const selectStyles = {
+  'position': 'relative',
+  'zIndex': 1,
+  'maxHeight': '250px',
+
+  '& fieldset': {
+    border: '1px solid #ddd !important',
+  },
+  '& .MuiSelect-select': {
+    padding: '8px 10px',
+    display: 'flex',
+    alignItems: 'center',
+  },
+}
+
+const MenuStyles = {
+  '& .MuiPopover-paper': {
+    maxHeight: '250px',
+    marginTop: '10px',
+  },
 }
 export default ColorTagSelect;
