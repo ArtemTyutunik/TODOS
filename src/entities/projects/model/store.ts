@@ -6,34 +6,28 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  projects: [{
-    name: 'Test',
-    id: '1234566778',
-    color: {name: 'Charcoal', textColor: '000000', background: 'green'},
-  },
-  {
-    name: 'Test',
-    id: '12345886767578',
-    color: {name: 'Charcoal', textColor: '000000', background: 'red'},
-  },
-  ],
+  projects: [],
 }
 
 const ProjectSlice = createSlice({
   name: 'Projects',
   initialState: initialState,
   reducers: {
-    getProjectsAction: (state, action) => {
-      return {...state, projects: [...state.projects, ...action.payload]}
+    getProjectsAction: (state, {payload}: PayloadAction<IProject[]>) => {
+      return {...state, projects: [...payload]}
     },
-    addNewProject: (state, action: PayloadAction<IProject>) => {
-      return {...state, projects: [...state.projects, action.payload]}
+    addNewProject: (state, {payload}: PayloadAction<IProject>) => {
+      return {...state, projects: [...state.projects, payload]}
+    },
+    deleteProject: (state, {payload}: PayloadAction<IProject['id']> ) => {
+      return {...state,
+        projects: state.projects.filter((proj) => proj.id !== payload)}
     },
   },
 })
 
 export const projectReducer = ProjectSlice.reducer
 
-export const {getProjectsAction, addNewProject} = ProjectSlice.actions
+export const {getProjectsAction, addNewProject, deleteProject} = ProjectSlice.actions
 
 export const projectsSelector = (state: RootReducer) => state.projectReducer.projects

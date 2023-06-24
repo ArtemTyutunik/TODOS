@@ -24,3 +24,11 @@ export const addProjectToUserData = async (project: IProject, userId: string) =>
 
   return await fetchRequest(`add_project?user_id=${userId}`, options)
 }
+
+export const deleteProjectRequest = async (userId: string, id: string) => {
+  const options = {
+    method: 'DELETE',
+  }
+
+  return await fetchRequest(`delete_project?user_id=${userId}&id=${id}`, options)
+}
