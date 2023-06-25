@@ -51,9 +51,7 @@ const DetailsCard = ({todo, onComplete}: Props) => {
         <InfoCard todo={todo} onComplete={onComplete}/>
 
         <Box width={'40%'}>
-          <Box width={'100%'} height={'100%'}
-            sx={{backgroundColor: '#fafafa', borderRadius: '0 10px 10px 0'}}
-            padding={'10px 25px'}>
+          <Box sx={panelStyles}>
             <DetailActionPanelItem label={'Due date'}>
               <DueDateButton date={todoDate} variant={'Standard'} onPassDateToBaseForm={onDateSelect}/>
             </DetailActionPanelItem>
@@ -69,5 +67,16 @@ const DetailsCard = ({todo, onComplete}: Props) => {
     </Box>
   );
 };
+
+const panelStyles = {
+  '& .MuiBox-root:last-child hr': {
+    display: 'none',
+  },
+  'width': '100%',
+  'height': '100%',
+  'backgroundColor': '#fafafa',
+  'borderRadius': '0 10px 10px 0',
+  'padding': '20px 25px',
+}
 
 export default DetailsCard;

@@ -14,7 +14,7 @@ const InfoCard = ({todo, onComplete}: Props) => {
   const {label, description} = todo
   const [isEditDetailsOpen, openEditDetails, closeEditDetails] = useVisable(false)
   return (
-    <Box mb={'30px'} display={'flex'} width={'60%'} marginRight={'10px'} marginTop={'10px'}>
+    <Box mb={'30px'} display={'flex'} width={'60%'} marginRight={'10px'} marginTop={'20px'}>
       <>
         <div>
           <CheckboxComponent onComplete={onComplete} todo={todo}/>

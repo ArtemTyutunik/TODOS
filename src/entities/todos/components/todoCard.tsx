@@ -77,22 +77,24 @@ const TodoCard = ({
                     {label}
                   </Typography>
                 </Box>
-                <Typography noWrap sx={todoDescriptionStyles}>
-                  {description}
-                </Typography>
-                <Box paddingLeft={'42px'}>
-                  {
-                    tags && <TagLinks tags={todoFilteredTags}/>
-                  }
-                </Box>
-
-                <Box display={'flex'} alignItems={'center'} >
-                  <Box marginRight={'20px'}>
+                <Box paddingLeft={'10px'}>
+                  <Typography noWrap sx={todoDescriptionStyles}>
+                    {description}
+                  </Typography>
+                  <Box>
                     {
-                      date && <Box ml={'46px'}>
-                        <DueDateButton date={date} variant={'Standard'}/>
-                      </Box>
+                      tags && <TagLinks tags={todoFilteredTags}/>
                     }
+                  </Box>
+
+                  <Box display={'flex'} alignItems={'center'} >
+                    <Box>
+                      {
+                        date && <Box>
+                          <DueDateButton date={date} variant={'Standard'}/>
+                        </Box>
+                      }
+                    </Box>
                   </Box>
                 </Box>
               </Box>

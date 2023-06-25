@@ -5,12 +5,12 @@ import InfoIcon from '@mui/icons-material/Info';
 import DropdownMenu from '@shared/components/dropdownMenu';
 import {useAnchorElement, useVisable} from '@shared/hooks';
 import ConfirmDeleteModal from '@shared/components/ConfirmDeletion';
-import MoveTodo from '@entities/todos/components/MoveTodo';
 import {PrioritiesFlags} from '@shared/constants/PrioritiesFlags';
 import QueueIcon from '@mui/icons-material/Queue';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import {ITodo} from '@shared/interfacesAndTypes';
+import CustomIconButton from '@shared/components/CustomIconButton';
 
 interface MoreActionsMenuProps {
     onDelete: () => void,
@@ -41,53 +41,54 @@ const MoreActionsMenu = ({todo, onDelete, onDuplicate, onSetPriority, onOpenTodo
 
       <DropdownMenu anchorEl={anchorEl} handleClose={removeAnchorEl}>
         {/*//@ts-ignore*/}
-        <Box padding={'0 10px'}>
+        <Box minWidth={'250px'} padding={'5px'}>
           <List>
-            <ListItemButton sx = {{padding: '10px 0'}} onClick={onOpenTodoDetails}>
+            <ListItemButton sx = {listItemStyles} onClick={onOpenTodoDetails}>
               <InfoIcon sx={{color: 'grey'}}/>
-              <Typography ml={'15px'}>
+              <Typography ml={'25px'}>
                       Info
               </Typography>
             </ListItemButton>
             <Divider/>
-            <Box mt={'10px'}>
-              <MoveTodo isUp text='Lift up todo'/>
-              <MoveTodo isUp={false} text='Lift down todo'/>
-              <Divider/>
-            </Box>
-            <Box m={'10px 0'}>
-              <Typography>Set priority</Typography>
+            {/*<Box mt={'10px'}>*/}
+            {/*  <MoveTodo isUp text='Lift up todo'/>*/}
+            {/*  <MoveTodo isUp={false} text='Lift down todo'/>*/}
+            {/*  <Divider/>*/}
+            {/*</Box>*/}
+            <Box sx={listItemStyles} display={'flex'} flexDirection={'column'}>
+              <Typography marginBottom={'5px'}>Set priority</Typography>
               <Box display={'flex'}>
                 {PrioritiesFlags.map((Priority) => <Box mr={'10px'} key={Priority.value}>
-                  <IconButton onClick={() => onSetPriority(Priority.value)}>
+                  <CustomIconButton onClick={() => onSetPriority(Priority.value)}>
                     <Priority.Icon/>
-                  </IconButton>
+                  </CustomIconButton>
                 </Box>,
                 )}
               </Box>
             </Box>
 
-            <ListItemButton sx = {{padding: '10px 0', marginBottom: '10px'}} onClick={onDuplicate}>
+            <ListItemButton sx = {listItemStyles} onClick={onDuplicate}>
               <QueueIcon sx={{color: 'grey'}}/>
-              <Typography ml={'15px'}>
+              <Typography ml={'25px'}>
                           Duplicate
               </Typography>
             </ListItemButton>
 
-            <ListItemButton sx = {{padding: '10px 0', marginBottom: '10px'}} onClick={setAsCurrent}>
+            <ListItemButton sx = {listItemStyles} onClick={setAsCurrent}>
               <CheckCircleOutlineIcon sx={{color: todo?.isCurrent ? '#1976d2': 'grey'}}/>
-              <Typography ml={'15px'}>
+              <Typography ml={'25px'}>
                   Set as current
               </Typography>
             </ListItemButton>
-          </List>
-          <Divider/>
-          <ListItemButton sx = {{padding: '10px 0', margin: '10px 0'}} onClick={openDeleteModalOpen}>
-            <DeleteIcon sx={{color: 'grey'}}/>
-            <Typography ml={'15px'}>
+            <Divider/>
+            <ListItemButton sx = {listItemStyles} onClick={openDeleteModalOpen}>
+              <DeleteIcon sx={{color: 'grey'}}/>
+              <Typography ml={'25px'}>
                       Delete
-            </Typography>
-          </ListItemButton>
+              </Typography>
+            </ListItemButton>
+          </List>
+
         </Box>
       </DropdownMenu>
       {
@@ -98,5 +99,12 @@ const MoreActionsMenu = ({todo, onDelete, onDuplicate, onSetPriority, onOpenTodo
     </>
   );
 };
+
+
+const listItemStyles = {
+  padding: '10px 0',
+  marginBottom: '10px',
+  marginLeft: '10px',
+}
 
 export default MoreActionsMenu;

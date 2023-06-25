@@ -5,9 +5,16 @@ interface Props {
     children: React.ReactNode,
     label: string
 }
+
+const styles = {
+  'display': 'flex',
+  'flexDirection': 'column',
+  'mb': '20px',
+}
+
 const DetailActionPanelItem = ({children, label}: Props) => {
   return (
-    <Box display={'flex'} flexDirection={'column'} mb={'20px'}>
+    <Box sx={styles}>
       <Box mb={'5px'}>
         <Typography fontSize={'12px'} fontWeight={600} color={'rgba(0,0,0,0.56)'}>
           {label}

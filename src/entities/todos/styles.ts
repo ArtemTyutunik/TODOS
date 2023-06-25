@@ -39,5 +39,4 @@ export const todoDescriptionStyles = (theme: Theme) => ({
   fontWeight: 300,
   lineHeight: 1,
   color: theme.text.main,
-  paddingLeft: '42px',
 });
