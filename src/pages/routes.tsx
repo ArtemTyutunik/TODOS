@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux';
 import {RootReducer} from '@shared/interfacesAndTypes';
 import SpinnerComponent from '@shared/components/SpinnerComponent/SpinnerComponent';
 import {TODAY_LINK, INBOX_LINK, FILTERS_AND_TAGS_LINK} from '@shared/constants';
+import {ProjectPage} from '@pages/project';
 
 const TodayTodosPage = lazy(() => import('./todos/pages/TodayPage/TodayTodos'))
 const InboxTodosPage = lazy(() => import('./todos/pages/InboxPage/InboxTodos'))
@@ -31,6 +32,10 @@ const Routing = () => {
           </Suspense>}/>
           <Route path={'/tags/:id'} element={<Suspense fallback={null}>
             <FilteredByTagTodosPage/>
+          </Suspense>}>
+          </Route>
+          <Route path={'/project/:id'} element={<Suspense fallback={null}>
+            <ProjectPage/>
           </Suspense>}>
           </Route>
         </Routes>

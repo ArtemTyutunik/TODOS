@@ -11,8 +11,8 @@ interface Props {
 const FormActions = ({hideActions}: Props) => {
   const {todoDate, setTodoDate, priority, setPriority, todoTags, onSelectTag} = useFormContext()
 
-  return !hideActions ? (
-    <Box display={'flex'} alignItems={'center'}>
+  return !hideActions ? <>
+    <Box display={'flex'} alignItems={'center'} marginBottom={'15px'}>
       <Box mr={'15px'}>
         <DueDateButton date={todoDate} onPassDateToBaseForm={setTodoDate}/>
       </Box>
@@ -22,9 +22,9 @@ const FormActions = ({hideActions}: Props) => {
       <Box>
         <AddTagsButton todoTags={todoTags} onAddNewLabel={(newLabel: string) => onSelectTag(newLabel)}/>
       </Box>
-      <Divider/>
     </Box>
-  ) : null
+    <Divider/>
+  </> : null
 }
 
 

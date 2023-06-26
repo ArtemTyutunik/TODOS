@@ -29,9 +29,9 @@ const Todo = ({todo}: Props) => {
   };
 
   const onDeleteAction = () => {
-    dispatch(deleteTask(id));
     try {
       deleteTodoById(id, userId)
+      dispatch(deleteTask(id));
     } catch (e) {
       console.log(e)
     }

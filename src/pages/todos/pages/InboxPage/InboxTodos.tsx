@@ -1,50 +1,37 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
 import {Box} from '@mui/material';
-
-import NoInboxTodos from './NoInboxTodos';
-import {RootReducer} from '@shared/interfacesAndTypes';
 import {overdueDate} from '@shared/constants';
 import {
   OverdueTodos,
   TodoList,
   PageTitle} from '../../components';
 
-import {useVisable} from '@shared/hooks';
-import {CreateTodoForm} from '@features/todoFeatures/CreateTodo';
+import {useSelector} from 'react-redux';
+import {allTodosSelector} from '@entities/todos/store/todo';
 
 
 const InboxTodosPage = () => {
-  const todos = useSelector((state: RootReducer) => state.todosReducer.todos);
-  const [isOpenForm, openForm, closeForm] = useVisable(false);
+  const inboxId = localStorage.getItem('inboxID');
+  // fixme
+  if (!inboxId) return null
 
-  if (isOpenForm) {
-    return <Box mt={'20px'}>
-      <CreateTodoForm onClose={closeForm}/>
-    </Box>;
-  }
+  const allTodos = useSelector(allTodosSelector);
+  const inboxTodos = allTodos.filter((todo) => todo.projectId === inboxId)
 
-
-  const overdueTodos = todos.filter((todo) => overdueDate(todo.date!) && !todo.done);
-  const inboxTodos = todos.filter((todo) => !overdueDate(todo.date!) || todo.done);
+  const overdueTodos = inboxTodos.filter((todo) => overdueDate(todo.date!) && !todo.done);
+  const renderedTodos = inboxTodos.filter((todo) => !overdueDate(todo.date!) || todo.done);
 
   return (
     <Box paddingTop={'30px'} height={'100%'}>
       <OverdueTodos overdueTodos={overdueTodos}/>
-      {
-        todos.length ? (
-          <Box>
-            <PageTitle>
-                  Inbox
-            </PageTitle>
-            <TodoList todos={inboxTodos}/>
-          </Box>
-        ) : (
-            <NoInboxTodos onClick={openForm}/>
-        )
-      }
-
+      <Box>
+        <PageTitle>
+                    Inbox
+        </PageTitle>
+        <TodoList todos={renderedTodos}/>
+      </Box>
     </Box>
+
   );
 };
 export default InboxTodosPage;

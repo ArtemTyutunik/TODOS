@@ -16,10 +16,11 @@ interface Props {
 
 interface Props {
   onClose: () => void,
-  initialDate?: string
+  initialDate?: string,
+  initialProject?: string
 }
 
-const CreateTodoForm = ({onClose, initialDate}: Props) => {
+const CreateTodoForm = ({onClose, initialDate, initialProject}: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const userId = useSelector(userIdSelector)
@@ -39,7 +40,7 @@ const CreateTodoForm = ({onClose, initialDate}: Props) => {
     }
   };
 
-  return <BaseTodoForm onClose={onClose} onSubmit={onSubmit} initialDate={initialDate}/>
+  return <BaseTodoForm onClose={onClose} onSubmit={onSubmit} initialDate={initialDate} todoProjectId={initialProject}/>
 };
 
 export default CreateTodoForm;
