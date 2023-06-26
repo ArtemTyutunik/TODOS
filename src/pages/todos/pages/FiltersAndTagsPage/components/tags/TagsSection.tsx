@@ -1,5 +1,5 @@
 import {Box, Divider, IconButton, Typography} from '@mui/material';
-import AddIcon from '@shared/components/AddIcon';
+import {AddIcon} from '@shared/components/icons';
 import FilterPageTagsList from '@pages/todos/pages/FiltersAndTagsPage/components/tags/FilterPageTagsList';
 import TagInfoModal from '@pages/todos/pages/FiltersAndTagsPage/components/tags/TagInfoModal';
 import {useVisable} from '@shared/hooks';

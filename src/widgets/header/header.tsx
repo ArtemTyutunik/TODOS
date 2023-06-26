@@ -7,7 +7,7 @@ import {UserSettingsMenu} from './ui';
 
 import BasicModal from '@shared/components/modal';
 import {CreateTodoForm} from '@features/todoFeatures/CreateTodo';
-import AddButtonIcon from '@shared/components/AddIcon';
+import {AddIcon} from '@shared/components/icons';
 import {useVisable} from '@shared/hooks';
 import useToggleDrawer from '../drawer/hooks/useToggleDrawer';
 import ProgressComponent from './ui/ProgresComponent';
@@ -76,7 +76,7 @@ export default memo(function Header() {
             <Box sx={{display: {mobile: 'none', largeMobile: 'flex'}, position: 'relative'}}>
               <Tooltip title={'add todo'}>
                 <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={openAddTaskModalOpen}>
-                  <AddButtonIcon color={'inherit'}/>
+                  <AddIcon color={'inherit'}/>
                 </IconButton>
               </Tooltip>
 

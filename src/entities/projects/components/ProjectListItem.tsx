@@ -1,7 +1,6 @@
 import React from 'react';
 import DrawerListItem from '@shared/components/DrawerListItem';
 import {Box, List, ListItemButton, Typography} from '@mui/material';
-import CircleIcon from '@mui/icons-material/Circle';
 import {IProject} from '@shared/interfacesAndTypes';
 import {useNavigate} from 'react-router-dom';
 import {useAnchorElement} from '@shared/hooks';
@@ -9,6 +8,7 @@ import DropdownMenu from '@shared/components/dropdownMenu';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import CustomIconButton from '@shared/components/CustomIconButton';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import {CircleIcon} from '@shared/components/icons';
 
 interface Props {
   project: IProject,

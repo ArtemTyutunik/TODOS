@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import DrawerToggleList from '@shared/components/DrawerToggleList';
-import AddIcon from '@shared/components/AddIcon';
+import {AddIcon} from '@shared/components/icons';
 import CustomIconButton from '@shared/components/CustomIconButton';
 import {useVisable} from '@shared/hooks';
 import ProjectSettingsModal from '@entities/projects/components/ProjectSettingsModal';

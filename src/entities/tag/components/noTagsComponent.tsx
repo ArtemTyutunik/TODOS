@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {Box, IconButton, List, ListItem, ListItemButton, Typography} from '@mui/material';
 import {userIdSelector} from '@entities/user/model/store/'
-import AddIcon from '@shared/components/AddIcon';
+import {AddIcon} from '@shared/components/icons';
 import {createNewUserTag} from '@shared/api/services/tags';
 import {addNewUserTag} from '@entities/tag/store/tagStore';
 import {configureNewTag} from '@entities/tag/utils/configureInitialTag';

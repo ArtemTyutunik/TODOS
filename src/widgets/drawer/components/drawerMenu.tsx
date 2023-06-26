@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Box, List, ListItem, ListItemButton, ListItemIcon, Typography} from '@mui/material';
-import InboxIcon from '@mui/icons-material/Inbox';
+import {InboxIcon} from '@shared/components/icons'
 import TodayIcon from '@mui/icons-material/Today';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import {styled} from '@mui/material/styles';
@@ -13,7 +13,8 @@ import '../active.css'
 import {Projects} from '@entities/projects';
 
 const drawerLinks = [
-  {label: 'Inbox', linkTo: INBOX_LINK, Icon: () => <InboxIcon sx={{color: '#246fe0'}}/>},
+  {label: 'Inbox', linkTo: INBOX_LINK, Icon: () => <InboxIcon
+    sx={(theme) => ({color: theme.background.inboxIcon})}/>},
   {label: 'Today', linkTo: TODAY_LINK, Icon: () => <TodayIcon sx={{color: '#058527'}}/>},
   {label: 'Filters and Tags', linkTo: FILTERS_AND_TAGS_LINK, Icon: () => <FilterListIcon sx={{color: '#eb8909'}}/>},
 ];
