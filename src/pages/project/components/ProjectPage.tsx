@@ -3,17 +3,14 @@ import {useParams} from 'react-router-dom';
 import {Box} from '@mui/material';
 import {PageTitle, TodoList} from '@pages/todos/components';
 import useProjectById from '@pages/project/hooks/useProjectById';
-import {useSelector} from 'react-redux';
-import {allTodosSelector} from '@entities/todos/store/todo';
+import {useProjectTodos} from '@entities/projects';
 
 const ProjectPage = () => {
   const {id: projectId} = useParams()
   const project = useProjectById(projectId!)
-  const allTodos = useSelector(allTodosSelector);
-  const projectTodos = allTodos.filter((todo) => todo.projectId === projectId)
+  const projectTodos = useProjectTodos(projectId!)
 
   if (!project) return null
-
   //todo move page title to shared
 
   return ( project ? (

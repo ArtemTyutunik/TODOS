@@ -5,9 +5,7 @@ import {
   OverdueTodos,
   TodoList,
   PageTitle} from '../../components';
-
-import {useSelector} from 'react-redux';
-import {allTodosSelector} from '@entities/todos/store/todo';
+import {useProjectTodos} from '@entities/projects';
 
 
 const InboxTodosPage = () => {
@@ -15,8 +13,7 @@ const InboxTodosPage = () => {
   // fixme
   if (!inboxId) return null
 
-  const allTodos = useSelector(allTodosSelector);
-  const inboxTodos = allTodos.filter((todo) => todo.projectId === inboxId)
+  const inboxTodos = useProjectTodos(inboxId)
 
   const overdueTodos = inboxTodos.filter((todo) => overdueDate(todo.date!) && !todo.done);
   const renderedTodos = inboxTodos.filter((todo) => !overdueDate(todo.date!) || todo.done);

@@ -1,5 +1,5 @@
 import Projects from './components/Projects'
-import useProjectTodos from './hooks/getProjectTodos'
+import useProjectTodos from './hooks/useProjectTodos'
 
 export {
   Projects,

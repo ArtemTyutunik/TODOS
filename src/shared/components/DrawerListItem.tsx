@@ -13,11 +13,18 @@ const FavoriteItemStyles = {
   'display': 'flex',
   'justifyContent': 'space-between',
   '& .hover_content': {
+    position: 'absolute',
+    top: '3px',
+    right: '3px',
+    zIndex: '100',
     opacity: 0,
   },
   '&:hover': {
     '& .hover_content': {
       opacity: 1,
+    },
+    '& .todo-count': {
+      display: 'none',
     },
   },
 }
