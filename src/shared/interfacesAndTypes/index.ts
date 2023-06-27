@@ -8,7 +8,7 @@ export interface ITodo {
     priority: Priority,
     tags: tagIdType[],
     date?: IDate
-    projectId?: todoProjectId | null
+    projectId?: todoProjectId
     isCurrent?: boolean
 }
 

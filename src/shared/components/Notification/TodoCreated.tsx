@@ -1,17 +1,11 @@
-import {Box, Button, Link as MuiLink, Typography} from '@mui/material';
-import {Link as RouterLink} from 'react-router-dom';
+import {Box, Typography} from '@mui/material';
 
-export default function TodoCreatedNotification({onNavigate}: {onNavigate: () => void}) {
+export default function TodoCreatedNotification() {
   return (
     <Box display={'flex'} alignItems={'center'}>
       <Typography marginRight={'10px'}>
-          Task added to <MuiLink component={RouterLink} color={'primary.main'} sx={{textDecoration: 'none'}} to={'/Inbox'} >
-          Inbox
-        </MuiLink>
+          Task added
       </Typography>
-      <Button sx={{textTransform: 'none', marginTop: '-2px'}} onClick={onNavigate}>
-          Open
-      </Button>
     </Box>
   )
 }
