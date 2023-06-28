@@ -1,3 +1,4 @@
+import React from 'react';
 import {useReducer} from 'react';
 import {IProject} from '@shared/interfacesAndTypes';
 
@@ -12,6 +13,7 @@ const initialState: InitialStateType = (IProject) => ({
   id: IProject?.id || Date.now() + '',
   name: IProject?.name || '',
   color: IProject?.color || defaultSettings,
+  isPinned: IProject?.isPinned || false,
 })
 
 const Reducer = (state: IProject, action: any) => {

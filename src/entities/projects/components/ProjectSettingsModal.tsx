@@ -7,19 +7,23 @@ import BasicModal from '@shared/components/modal';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 import useProjectState, {setColorAction, setProjectNameAction} from '@entities/projects/hooks/useProjectReducer';
 import {colorType, IProject} from '@shared/interfacesAndTypes';
-import {addNewProject} from '@entities/projects/model/store';
+import {addNewProject, editProjectAction, projectsSelector} from '@entities/projects/model/store';
 import {itemAlreadyExist} from '@shared/helpers';
-import {addProjectToUserData} from '@shared/api/services/projects';
+import {addProjectToUserData, editProjectRequest} from '@shared/api/services/projects';
 import {userIdSelector} from '@entities/user/model/store';
+import {useNavigate} from 'react-router-dom';
 
 interface Props {
     isOpen: boolean,
     onClose: () => void,
-  projects: IProject[]
+    editingMode?: boolean,
+  editingProject?: IProject
 }
-const ProjectSettingsModal = ({isOpen, onClose, projects}: Props) => {
-  const [project, projectDispatcher] = useProjectState()
+const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = false}: Props) => {
+  const projects = useSelector(projectsSelector)
+  const [project, projectDispatcher] = useProjectState(editingProject)
   const [invalidData, setInvalidData] = useState(false)
+  const navigate = useNavigate()
   const userId = useSelector(userIdSelector)
   const dispatch = useDispatch();
 
@@ -36,10 +40,21 @@ const ProjectSettingsModal = ({isOpen, onClose, projects}: Props) => {
     }
   }
 
-  const CreateNewProject = async () => {
+  const createNewProject = async () => {
     try {
       await addProjectToUserData(project, userId)
       dispatch(addNewProject(project))
+      onClose()
+      navigate('/project/' + project.id)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const editProject = async () => {
+    try {
+      await editProjectRequest(userId, project)
+      dispatch(editProjectAction(project))
       onClose()
     } catch (e) {
       console.log(e)
@@ -53,7 +68,7 @@ const ProjectSettingsModal = ({isOpen, onClose, projects}: Props) => {
       <ModalWrapper>
         <Box padding={'10px 15px'}>
           <Typography fontSize={'19px'} fontWeight={600}>
-                      Add Project
+            {editingMode ? 'Edit' : 'Add'} Project
           </Typography>
         </Box>
         <InputsSection isError={invalidData}>
@@ -70,7 +85,9 @@ const ProjectSettingsModal = ({isOpen, onClose, projects}: Props) => {
         <Box margin={'10px 0'} paddingRight={'15px'}>
           <FormSubmissionButtons onClose={onClose}
             isValid={!invalidData && isValid}
-            onSubmit={CreateNewProject}/>
+            onSubmit={() => {
+              editingMode ? editProject() : createNewProject()
+            }}/>
         </Box>
       </ModalWrapper>
     </BasicModal>

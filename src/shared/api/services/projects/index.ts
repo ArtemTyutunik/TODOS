@@ -34,8 +34,14 @@ export const deleteProjectRequest = async (userId: string, id: string) => {
 }
 
 
-export const getProjectTodosRequest = async (userId: string, projectId: string) => {
-  const response = await fetchRequest(`get_project?user_id=${userId}&id=${projectId}`)
+export const editProjectRequest = async (userId: string, project: IProject) => {
+  const options = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(project),
+  }
 
-  return await response.json()
+  return await fetchRequest(`update_project?user_id=${userId}&id=${project.id}`, options)
 }

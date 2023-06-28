@@ -18,6 +18,7 @@ const InboxTodosPage = () => {
   const overdueTodos = inboxTodos.filter((todo) => overdueDate(todo.date!) && !todo.done);
   const renderedTodos = inboxTodos.filter((todo) => !overdueDate(todo.date!) || todo.done);
 
+  console.log(inboxTodos)
   return (
     <Box paddingTop={'30px'} height={'100%'}>
       <OverdueTodos overdueTodos={overdueTodos}/>

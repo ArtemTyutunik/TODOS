@@ -9,6 +9,7 @@ interface Props {
 const FavoriteItemStyles = {
   'margin': '0 10px',
   'padding': '6px 8px',
+  'paddingLeft': '3px',
   'borderRadius': '4px',
   'display': 'flex',
   'justifyContent': 'space-between',
@@ -26,6 +27,12 @@ const FavoriteItemStyles = {
     '& .todo-count': {
       display: 'none',
     },
+  },
+  '& .keepActive': {
+    'opacity': 1,
+  },
+  '& .hide-todo-count': {
+    'opacity': 0,
   },
 }
 

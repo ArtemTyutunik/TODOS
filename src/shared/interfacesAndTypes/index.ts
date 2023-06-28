@@ -50,6 +50,7 @@ export interface IProject {
     name: string,
     id: todoProjectId,
     color: colorType
+    isPinned?: boolean
 }
 
 export type tagIdType = string;
