@@ -21,7 +21,6 @@ function Login() {
       navigate('/today')
       //@ts-ignore
     } catch (error: string) {
-      console.log(error)
       dispatch(authWithError(error))
     }
   };

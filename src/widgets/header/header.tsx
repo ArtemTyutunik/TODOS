@@ -1,6 +1,6 @@
 import {memo} from 'react';
 import {Link} from 'react-router-dom';
-import {Box, AppBar, Toolbar, IconButton, Typography, Container, Tooltip} from '@mui/material';
+import {Box, AppBar, Toolbar, IconButton, Container, Tooltip} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import {UserSettingsMenu} from './ui';
@@ -11,6 +11,7 @@ import {AddIcon} from '@shared/components/icons';
 import {useVisable} from '@shared/hooks';
 import useToggleDrawer from '../drawer/hooks/useToggleDrawer';
 import ProgressComponent from './ui/ProgresComponent';
+import AppLogo from '@shared/components/AppLogo';
 
 
 export default memo(function Header() {
@@ -49,27 +50,10 @@ export default memo(function Header() {
               </IconButton>
             </Tooltip>
 
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{
-                display: {mobile: 'none', largeMobile: 'block'},
-                transform: 'translateY(-2px)',
-              }}
-            >
-              TODOS
-            </Typography>
-
-            {/*<CustomSearch>*/}
-            {/*  <SearchIconWrapper>*/}
-            {/*    <SearchIcon />*/}
-            {/*  </SearchIconWrapper>*/}
-            {/*  <StyledInputBase*/}
-            {/*    placeholder="Search…"*/}
-            {/*    inputProps={{'aria-label': 'search'}}*/}
-            {/*  />*/}
-            {/*</CustomSearch>*/}
+            <AppLogo sx={{
+              display: {mobile: 'none', largeMobile: 'block'},
+              transform: 'translateY(-2px)',
+            }}/>
 
             <Box sx={{flexGrow: 1}} />
 
