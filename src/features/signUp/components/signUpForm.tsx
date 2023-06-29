@@ -13,15 +13,19 @@ const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
   const {handleSubmit, control} = useForm<IFormInputs>({mode: 'onChange'});
 
   return <Box>
-    <Box display={'flex'}>
-      <AppLogo sx={{color: '#1976d2', marginTop: '20px', marginLeft: '20px'}}/>
-      <Box sx={welcomeBackBlock}>
+    <Box display={'flex'} alignItems={'center'}>
+      <Box width={'50%'} display={{mobile: 'none', largeMobile: 'none', tablet: 'block'}}>
+        <AppLogo sx={{color: '#1976d2', marginTop: '20px', marginLeft: '20px'}}/>
+        <Box sx={welcomeBackBlock}>
+        </Box>
       </Box>
-      <Box display={'flex'} margin={'0 auto'} marginTop={'40px'}>
+      <Box display={'flex'} margin={'0 auto'} marginTop={'40px'}
+        maxWidth={{tablet: '35%', laptop: 'fit-content'}}
+        padding={'0 10px'}>
         <CssBaseline />
         <FormWrapper>
           <>
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h5" color={'#1976d2'}>
                   Sign up
             </Typography>
 
@@ -46,8 +50,8 @@ const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
 };
 
 const welcomeBackBlock = {
-  width: '50%',
-  height: '100vh',
+  width: '100%',
+  height: 'calc(100vh - 60px)',
   backgroundImage: 'url("/signUpPageImage.jpg")',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',

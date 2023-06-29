@@ -34,7 +34,9 @@ function LoginForm({onSubmit}: IInputsProps) {
             </Box>
           </Container>
         </Box>
-        <Box display={'flex'} margin={'0 auto'} marginTop={'40px'}>
+        <Box display={'flex'} margin={'0 auto'} marginTop={'40px'}
+          maxWidth={{tablet: '35%', laptop: 'fit-content'}}
+          padding={'0 10px'}>
           <CssBaseline />
           <FormWrapper>
             <>
@@ -67,6 +69,7 @@ function LoginForm({onSubmit}: IInputsProps) {
 
 const welcomeBackBlock = {
   width: '50%',
+  display: {mobile: 'none', largeMobile: 'none', tablet: 'block'},
   height: '100vh',
   backgroundImage: 'url("/loginPageImage.jpg")',
   backgroundSize: 'cover',

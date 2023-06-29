@@ -28,7 +28,7 @@ const HomePage = () => {
         </Typography>
 
         <Typography fontFamily={'JetBrains Mono'}
-          fontSize={'20px'}
+          fontSize={{mobile: '16px', largeMobile: '20px'}}
           letterSpacing={'0.1em'}
           lineHeight={'1.2'}
           fontWeight={500}
@@ -39,9 +39,9 @@ const HomePage = () => {
         <SignUpButton/>
       </Box>
 
-      <Box sx={containerStyles} justifyContent={'center'}>
-        <Box sx={phoneImage}></Box>
-        <Box maxWidth={'35%'}>
+      <Box sx={{...containerStyles, flexDirection: {mobile: 'column', largeMobile: 'column', tablet: 'row'}}} justifyContent={'center'}>
+        <Box sx={phoneImage} marginBottom={'20px'}></Box>
+        <Box maxWidth={{largeMobile: '80%', tablet: '35%'}} textAlign={'center'} padding={'0 10px'}>
           <Typography sx={appDescription} marginBottom={'20px'}>
             <span>TODOS</span> is your ultimate tool for staying organized and productive. With our app, you can easily manage your tasks, set priorities, and never miss a deadline.<br/>
           </Typography>
@@ -63,8 +63,10 @@ const headerStyles = {
 }
 
 const containerStyles = {
-  width: '1300px',
+  width: 'inherit',
+  padding: '0 10px',
   margin: '0 auto',
+  marginBottom: '20px',
   display: 'flex',
   alignItems: 'center',
 }
@@ -93,7 +95,7 @@ const titleSection = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  marginTop: '70px',
+  marginTop: {mobile: '15px', largeMobile: '70px'},
   marginBottom: '35px',
   width: '100%',
   height: 'fit-content',
@@ -102,7 +104,7 @@ const titleSection = {
 
 const pageTitle = {
   'fontWeight': 700,
-  'fontSize': '27px',
+  'fontSize': {mobile: '20px', largeMobile: '27px'},
   'fontFamily': 'JetBrains Mono',
   'background': '-webkit-linear-gradient(90deg, rgba(40,128,214,1) 41%, rgba(18,174,236,1) 56%, rgba(30,149,224,1) 84%)',
   'WebkitBackgroundClip': 'text',
@@ -111,22 +113,19 @@ const pageTitle = {
 
 const phoneImage = {
   height: '350px',
-  width: '30%',
+  width: {mobile: '100%', largeMobile: '30%'},
   backgroundImage: `url('/iphone-12--black 1.png')`,
   backgroundSize: 'contain',
-  backgroundPosition: 'left',
+  backgroundPosition: {mobile: 'center', largeMobile: 'center', tablet: 'left'},
   backgroundRepeat: 'no-repeat',
 }
 
 const appDescription = {
   'lineHeight': '150.6%',
-  'fontSize': '20px',
+  'fontSize': {mobile: '16px', largeMobile: '20px'},
   'fontFamily': 'JetBrains Mono',
   '& span': {
     color: '#1976D2',
-  },
-  '& br': {
-    marginBottom: '10px',
   },
 }
 
