@@ -28,10 +28,10 @@ const userSlice = createSlice({
   initialState: {...configureInitialState()},
   reducers: {
     authUser: (state, {payload}: PayloadAction<IUser>) => {
-      return {...state, isAuth: true, user: {...payload}};
+      return {...state, isAuth: true, user: {...payload}, isError: false};
     },
     signUpUser: (state, {payload}: PayloadAction<IUser>) => {
-      return {...state, isAuth: true, user: {...payload}};
+      return {...state, isAuth: true, user: {...payload}, isError: false};
     },
     logOutUser: (state) => {
       state.isAuth = false;

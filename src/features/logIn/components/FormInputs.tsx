@@ -19,7 +19,7 @@ const LoginInputs = ({control}: Props) => {
         rules={loginValidation}
         render={({field}) => <TextField
           onChange={field.onChange}
-          margin="normal"
+          type={'email'}
           required
           fullWidth
           label="Login"

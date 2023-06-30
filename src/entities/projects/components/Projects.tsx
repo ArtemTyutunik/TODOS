@@ -5,10 +5,10 @@ import {AddIcon} from '@shared/components/icons';
 import CustomIconButton from '@shared/components/CustomIconButton';
 import {useVisable} from '@shared/hooks';
 import ProjectSettingsModal from '@entities/projects/components/ProjectSettingsModal';
-import {deleteProject, projectsSelector, togglePinProject} from '@entities/projects/model/store';
+import {deleteProject, projectsSelector, editProjectAction} from '@entities/projects/model/store';
 import ProjectListItem from '@entities/projects/components/ProjectListItem';
 import {IProject} from '@shared/interfacesAndTypes';
-import {deleteProjectRequest} from '@shared/api/services/projects';
+import {deleteProjectRequest, editProjectRequest} from '@shared/api/services/projects';
 import {userIdSelector} from '@entities/user/model/store';
 import useSortedProjects from '@entities/projects/hooks/useSortedProjects';
 
@@ -32,7 +32,14 @@ const Projects = memo(() => {
 
   const onPinProject = async (id: IProject['id']) => {
     try {
-      dispatch(togglePinProject(id))
+      const project = projects.find((project) => project.id === id)
+      if (project) {
+        const newProject = {...project, isPinned: !project.isPinned}
+        await editProjectRequest(userId, newProject)
+        dispatch(editProjectAction(newProject))
+      } else {
+        throw new Error('error')
+      }
     } catch (e) {
       console.log(e)
     }

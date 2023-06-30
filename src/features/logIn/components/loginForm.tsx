@@ -9,8 +9,9 @@ import LoginInputs from '@features/logIn/components/FormInputs';
 import FormWrapper from '@shared/forms/authorization/FormWrapper';
 import '@features/logIn/components/AuthFormStyles.css'
 import AppLogo from '@shared/components/AppLogo';
+import SpinnerComponent from '@shared/components/SpinnerComponent/SpinnerComponent';
 
-function LoginForm({onSubmit}: IInputsProps) {
+function LoginForm({onSubmit, isPending, isSuccess}: IInputsProps) {
   const {handleSubmit, control} = useForm<IFormInputs>();
 
   return (
@@ -36,7 +37,8 @@ function LoginForm({onSubmit}: IInputsProps) {
         </Box>
         <Box display={'flex'} margin={'0 auto'} marginTop={'40px'}
           maxWidth={{tablet: '35%', laptop: 'fit-content'}}
-          padding={'0 10px'}>
+          height={'fit-content'}
+          padding={'0 10px'} >
           <CssBaseline />
           <FormWrapper>
             <>
@@ -50,19 +52,31 @@ function LoginForm({onSubmit}: IInputsProps) {
                 <LoginInputs control={control}/>
                 <ErrorMessage/>
 
-                <SubmitButton control={control}>
+                <SubmitButton control={control} pending={isPending}>
                               Login
                 </SubmitButton>
                 <FormLink to='/sign-up'>
                   {'Don`t have an account? Sign Up'}
                 </FormLink>
               </Box>
+              {
+                (isPending || isSuccess) && <Box position={'absolute'} display={'flex'} alignItems={'center'} top={0} left={0} right={0} zIndex={10} bottom={0}
+                  sx={{background: 'rgba(255,255,255, 0.8)'}}>
+                  {
+                    isPending && <SpinnerComponent size={'medium'}/>
+                  }
+                  {
+                    isSuccess && <Box width={'150px'} height={'180px'} margin={'0 auto'}>
+                      <img src={'./loading-success.gif'} alt={'success gif'}/>
+                    </Box>
+                  }
+                </Box>
+              }
             </>
           </FormWrapper>
         </Box>
       </Box>
-
-
+      {/*<img src={'./loading-success.gif'} />*/}
     </Box>
   );
 }

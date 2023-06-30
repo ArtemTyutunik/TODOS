@@ -14,7 +14,6 @@ const App = () => {
     if (!isAuth) {
       localStorage.removeItem('user')
     }
-    localStorage.setItem('inboxId', '1234567890')
   }, [isAuth])
 
   return (

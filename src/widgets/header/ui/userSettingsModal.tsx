@@ -42,17 +42,13 @@ export default function UserSettingsMenu() {
   const theme = useTheme();
 
   const menuItems: menuItem[] = [
-    // {
-    //   label: 'settings',
-    //   Icon: () => <SettingsIcon/>,
-    //   onClick: () => {},
-    // },
     {
       label: 'logout',
       Icon: () => <LogoutIcon/>,
       onClick: () => {
         dispatch(logOutUser());
         localStorage.removeItem('user');
+        localStorage.removeItem('inboxID');
         navigate('/');
       },
     }];

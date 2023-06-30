@@ -3,7 +3,7 @@ const REQUIRED_FIELD = 'Required';
 export const loginValidation = {
   required: REQUIRED_FIELD,
   validate: (value: string) => {
-    if (!value.match(/[a-zA-Z]/)) {
+    if (!value.match(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/)) {
       return 'Only latin alphabet allowed ';
     }
 

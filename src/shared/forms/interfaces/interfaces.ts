@@ -1,5 +1,7 @@
 export interface IInputsProps {
-    onSubmit: (data:IFormInputs) => void
+    onSubmit: (data:IFormInputs) => void,
+    isPending?: boolean,
+    isSuccess?: boolean,
 }
 
 export interface IFormInputs {
