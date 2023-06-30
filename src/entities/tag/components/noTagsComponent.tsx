@@ -5,6 +5,9 @@ import {AddIcon} from '@shared/components/icons';
 import {createNewUserTag} from '@shared/api/services/tags';
 import {addNewUserTag} from '@entities/tag/store/tagStore';
 import {configureNewTag} from '@entities/tag/utils/configureInitialTag';
+import {toast} from 'react-toastify';
+import TagsActionFailed from '@shared/components/Notification/errors/tagsActionsFailed';
+import {options} from '@shared/components/Notification/constants';
 
 interface Props {
     search: string
@@ -13,11 +16,16 @@ const NoTagsComponent = ({search}: Props) => {
   const dispatch = useDispatch()
   const userId = useSelector(userIdSelector)
 
-  const onClickHandler = () => {
+  const onClickHandler = async () => {
     const configuredTag = configureNewTag(search)
 
-    createNewUserTag(configuredTag, userId)
-        .then(() => dispatch(addNewUserTag(configuredTag)))
+    try {
+      await createNewUserTag(configuredTag, userId)
+      dispatch(addNewUserTag(configuredTag))
+      console.log('here')
+    } catch (e) {
+      toast(<TagsActionFailed action={'add'}/>, options)
+    }
   }
 
 

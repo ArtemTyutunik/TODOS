@@ -4,12 +4,12 @@ import {Suspense} from 'react';
 import {useSelector} from 'react-redux';
 import {RootReducer} from '@shared/interfacesAndTypes';
 import SpinnerComponent from '@shared/components/SpinnerComponent/SpinnerComponent';
-import {TODAY_LINK, INBOX_LINK, FILTERS_AND_TAGS_LINK} from '@shared/constants';
+import {TODAY_LINK, INBOX_LINK, TAGS_LINK} from '@shared/constants';
 import {ProjectPage} from '@pages/project';
 
 const TodayTodosPage = lazy(() => import('./todos/pages/TodayPage/TodayTodos'))
 const InboxTodosPage = lazy(() => import('./todos/pages/InboxPage/InboxTodos'))
-const FilterAndTagsPage = lazy(() => import('./todos/pages/FiltersAndTagsPage/FiltersAndTagsPage'))
+const FilterAndTagsPage = lazy(() => import('./todos/pages/TagsPage/TagsPage'))
 const FilteredByTagTodosPage = lazy(() => import('./todos/pages/FilteredByTagTodosPage/FilteredByTagTodosPage'))
 
 const Routing = () => {
@@ -27,7 +27,7 @@ const Routing = () => {
           <Route path={INBOX_LINK} element={<Suspense fallback={null}>
             <InboxTodosPage/>
           </Suspense>}/>
-          <Route path={FILTERS_AND_TAGS_LINK} element={<Suspense fallback={null}>
+          <Route path={TAGS_LINK} element={<Suspense fallback={null}>
             <FilterAndTagsPage/>
           </Suspense>}/>
           <Route path={'/tags/:id'} element={<Suspense fallback={null}>

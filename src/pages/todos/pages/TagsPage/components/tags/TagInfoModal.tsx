@@ -11,9 +11,9 @@ import {
   setTagNameAction,
   setTagSettingsAction,
   useTagModalReducer,
-} from '@pages/todos/pages/FiltersAndTagsPage/model/useTagModalReducer';
+} from '@pages/todos/pages/TagsPage/model/useTagModalReducer';
 import {colorType, ITag} from '@shared/interfacesAndTypes';
-import TagInfoModalForm from '@pages/todos/pages/FiltersAndTagsPage/components/tags/TagInfoModalForm';
+import TagInfoModalForm from '@pages/todos/pages/TagsPage/components/tags/TagInfoModalForm';
 import {useToggleFavorite} from '@features/addToFavorites';
 import {itemAlreadyExist} from '@shared/helpers';
 

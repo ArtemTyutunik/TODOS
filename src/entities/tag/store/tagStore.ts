@@ -3,11 +3,14 @@ import {ITag} from '@shared/interfacesAndTypes';
 import {RootReducer} from '@shared/interfacesAndTypes';
 
 interface IInitialTagStore {
-    tags: ITag[]
+  tags: ITag[],
+  errorFetching: boolean,
+
 }
 
 const initialState: IInitialTagStore = {
   tags: [],
+  errorFetching: false,
 }
 
 const tagSlice = createSlice({
@@ -16,6 +19,9 @@ const tagSlice = createSlice({
   reducers: {
     getUserTags: (state, {payload}: PayloadAction<ITag[]>) => {
       return {...state, tags: [...payload]}
+    },
+    errorDuringFetch: (state) => {
+      return {...state, errorFetching: true}
     },
     addNewUserTag: (state, {payload}: PayloadAction<ITag>) => {
       return {...state, tags: [...state.tags, payload]}
@@ -39,6 +45,8 @@ const tagSlice = createSlice({
 
 export const tagReducer = tagSlice.reducer;
 
-export const {getUserTags, addNewUserTag, deleteTag, resetTag} = tagSlice.actions
+export const {getUserTags, addNewUserTag, deleteTag, resetTag, errorDuringFetch} = tagSlice.actions
 
 export const userTagsSelector = (state: RootReducer) => state.tagReducer.tags
+
+export const errorDuringFetchSelector = (state: RootReducer) => state.tagReducer.errorFetching

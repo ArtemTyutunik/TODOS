@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Checkbox, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from '@mui/material';
 import TurnedInIcon from '@mui/icons-material/TurnedIn';
 import {ITag, tagIdType} from '@shared/interfacesAndTypes';
@@ -8,21 +8,18 @@ interface Props {
     todoCurrentTags: tagIdType[],
     onSelect: (newTag: string) => void
 }
-const TagsList = ({tags, todoCurrentTags, onSelect}: Props) => {
-  return (
-    <List>
-      {
+const TagsList = memo(({tags, todoCurrentTags, onSelect}: Props) => {
+  return <List>
+    {
         tags.length > 0 ?
-           tags.map((tag) => <TagsItem tag={tag}
-             key={tag.name}
-             onSelect={() => onSelect(tag.id)}
-             checked={!!todoCurrentTags.find((item) => item === tag.id)}
-           />) :
-           null
-      }
-    </List>
-  );
-};
+            tags.map((tag) => <TagsItem tag={tag}
+              key={tag.name}
+              onSelect={() => onSelect(tag.id)}
+              checked={!!todoCurrentTags.find((item) => item === tag.id)}
+            />) : null
+    }
+  </List>
+});
 
 interface TagsItemProps {
     tag: ITag,

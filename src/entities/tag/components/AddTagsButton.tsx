@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Box, TextField} from '@mui/material';
-import {userTagsSelector} from '@entities/tag/store/tagStore';
+import {errorDuringFetchSelector, userTagsSelector} from '@entities/tag/store/tagStore';
 import ActionButton from '@shared/components/ActionButton';
 import {useAnchorElement} from '@shared/hooks';
 import DropdownMenu from '@shared/components/dropdownMenu';
@@ -10,6 +10,7 @@ import {NoTagsComponent} from '@entities/tag';
 
 import '@entities/tag/components/TagsStyles.css'
 import {ITag, tagIdType} from '@shared/interfacesAndTypes';
+import ErrorComponent from '@entities/tag/components/ErrorComponent';
 
 interface Props {
   todoTags: tagIdType[],
@@ -20,6 +21,7 @@ const AddTagsButton = ({todoTags, onAddNewLabel}: Props) => {
   const [anchorEl, addAnchorEl] = useAnchorElement(null);
   const [search, setSearch] = useState('');
   const tags: ITag[] = useSelector(userTagsSelector)
+  const errorFetching = useSelector(errorDuringFetchSelector)
 
   const filteredTags = tags.filter((item: ITag) => item.name.includes(search));
 
@@ -51,11 +53,15 @@ const AddTagsButton = ({todoTags, onAddNewLabel}: Props) => {
           />
           <Box width={'100%'} maxHeight={'150px'}>
             {
-                filteredTags.length > 0 ?
-                    <TagsList tags={filteredTags}
-                      todoCurrentTags={todoTags}
-                      onSelect={onAddNewLabel}/>:
-                    search ? <NoTagsComponent search={search}/> : null
+              filteredTags.length > 0 ?
+                  <TagsList tags={filteredTags}
+                    todoCurrentTags={todoTags}
+                    onSelect={onAddNewLabel}/> :
+                  search ? <NoTagsComponent search={search}/> : null
+            }
+
+            {
+              errorFetching && <ErrorComponent/>
             }
           </Box>
         </Box>

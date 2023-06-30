@@ -14,4 +14,4 @@ export const TODAY = dateToFormat(dayjs())
 
 export const INBOX_LINK = 'inbox';
 export const TODAY_LINK = 'today';
-export const FILTERS_AND_TAGS_LINK = 'filters-and-tags';
+export const TAGS_LINK = 'tags';

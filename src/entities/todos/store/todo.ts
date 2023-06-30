@@ -4,12 +4,14 @@ import {RootReducer} from '@shared/interfacesAndTypes';
 
 interface IInitialState {
   todos: ITodo[],
-  isFetched: boolean
+  isFetched: boolean,
+  isErrorFetching: boolean
 }
 
 const initialState: IInitialState = {
   todos: [],
   isFetched: false,
+  isErrorFetching: false,
 };
 
 const findTaskById = (state: IInitialState, id: number) => state.todos.find((task) => task.id === id);
@@ -29,6 +31,9 @@ const todosSlice = createSlice({
   reducers: {
     fetchTasks: (state, {payload}: PayloadAction<ITodo[]>) => {
       return {...state, todos: [...payload], isFetched: true};
+    },
+    fetchWithError: (state) => {
+      return {...state, isErrorFetching: true}
     },
     addNewTask: (state, {payload}: PayloadAction<ITodo>) => {
       return {...state, todos: [...state.todos, payload]};
@@ -92,6 +97,9 @@ export const {addNewTask,
   addNewTodoTag,
   fetchTasks,
   deleteTodoTag,
-  toggleIsCurrent} = todosSlice.actions;
+  toggleIsCurrent,
+  fetchWithError} = todosSlice.actions;
 
 export const allTodosSelector = (state: RootReducer) => state.todosReducer.todos
+
+export const isErrorFetchingSelector = (state: RootReducer) => state.todosReducer.isErrorFetching

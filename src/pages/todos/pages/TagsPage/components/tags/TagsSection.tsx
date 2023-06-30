@@ -1,13 +1,13 @@
 import {Box, Divider, IconButton, Typography} from '@mui/material';
 import {AddIcon} from '@shared/components/icons';
-import FilterPageTagsList from '@pages/todos/pages/FiltersAndTagsPage/components/tags/FilterPageTagsList';
-import TagInfoModal from '@pages/todos/pages/FiltersAndTagsPage/components/tags/TagInfoModal';
+import FilterPageTagsList from '@pages/todos/pages/TagsPage/components/tags/FilterPageTagsList';
+import TagInfoModal from '@pages/todos/pages/TagsPage/components/tags/TagInfoModal';
 import {useVisable} from '@shared/hooks';
 import {useSelector} from 'react-redux';
 import {userTagsSelector} from '@entities/tag/store/tagStore';
-import useToggleTag from '@pages/todos/pages/FiltersAndTagsPage/components/tags/hooks/useToggleTags';
+import useToggleTag from '@pages/todos/pages/TagsPage/components/tags/hooks/useToggleTags';
 import ToggleArrowIcon from '@shared/components/toggleArrowIcon';
-import {arrowIconStyles} from '@pages/todos/pages/FiltersAndTagsPage/components/tags/componentsStyles';
+import {arrowIconStyles} from '@pages/todos/pages/TagsPage/components/tags/componentsStyles';
 
 const TagsSection = () => {
   const [isOpenTagList, toggleTagList] = useToggleTag();

@@ -11,7 +11,7 @@ import {useVisable} from '@shared/hooks';
 import {useTodosByQuery} from '@pages/todos/hooks';
 import TodosCount from '@shared/components/TodosCount';
 import CustomIconButton from '@shared/components/CustomIconButton';
-import TagInfoModal from '@pages/todos/pages/FiltersAndTagsPage/components/tags/TagInfoModal';
+import TagInfoModal from '@pages/todos/pages/TagsPage/components/tags/TagInfoModal';
 import ConfirmDeleteModal from '@shared/components/ConfirmDeletion';
 import TagIcon from '@shared/tagIcon';
 import {useToggleFavorite} from '@features/addToFavorites';

@@ -5,7 +5,7 @@ import {deleteUserTag} from '@shared/api/services/tags';
 import {deleteTag} from '@entities/tag/store/tagStore';
 import {userIdSelector} from '@entities/user/model/store';
 import {ITag} from '@shared/interfacesAndTypes';
-import TagItem from '@pages/todos/pages/FiltersAndTagsPage/components/tags/TagListItem';
+import TagItem from '@pages/todos/pages/TagsPage/components/tags/TagListItem';
 
 
 const FilterPageTagsList = memo(({userTags}: {userTags: ITag[]}) => {
