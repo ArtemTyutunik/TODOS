@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {useForm} from 'react-hook-form';
-import {Box, CssBaseline, Typography} from '@mui/material';
+import {Box, Typography} from '@mui/material';
 import {IFormInputs, IInputsProps} from '@shared/forms/interfaces/interfaces';
 import FormInputs from '@features/signUp/components/FormInputs';
 import SubmitButton from '@shared/forms/authorization/SubmitButton';
@@ -8,8 +8,10 @@ import FromLink from '@shared/forms/authorization/FormLink';
 import FormWrapper from '@shared/forms/authorization/FormWrapper';
 import ErrorMessage from '@shared/forms/authorization/ErrorMessage';
 import AppLogo from '@shared/components/AppLogo';
+import FormAuth from '@shared/forms/authorization/Form';
+import LoadingIndicator from '@shared/forms/authorization/loadingIndicator';
 
-const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
+const SignUpForm:FC<IInputsProps> = ({onSubmit, isPending, isSuccess}) => {
   const {handleSubmit, control} = useForm<IFormInputs>({mode: 'onChange'});
 
   return <Box>
@@ -19,14 +21,11 @@ const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
         <Box sx={welcomeBackBlock}>
         </Box>
       </Box>
-      <Box display={'flex'} margin={'0 auto'} marginTop={'40px'}
-        maxWidth={{tablet: '35%', laptop: 'fit-content'}}
-        padding={'0 10px'}>
-        <CssBaseline />
+      <FormAuth>
         <FormWrapper>
           <>
             <Typography component="h1" variant="h5" color={'#1976d2'}>
-                  Sign up
+                Sign up
             </Typography>
 
             <Box component="form"
@@ -35,16 +34,18 @@ const SignUpForm:FC<IInputsProps> = ({onSubmit}) => {
               noValidate sx={{mt: 1}}>
               <FormInputs control={control}/>
               <ErrorMessage/>
-              <SubmitButton control={control}>
-                    Sign up
+              <SubmitButton control={control} pending={isPending}>
+                  Sign up
               </SubmitButton>
               <FromLink to={'/login'}>
-                    Have account? Login
+                  Have account? Login
               </FromLink>
             </Box>
+
+            <LoadingIndicator isPending={isPending} showingSuccess={isSuccess}/>
           </>
         </FormWrapper>
-      </Box>
+      </FormAuth>
     </Box>
   </Box>
 };

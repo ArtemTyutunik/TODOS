@@ -1,6 +1,6 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
-import {Box, Container, CssBaseline, Typography} from '@mui/material';
+import {Box, Container, Typography} from '@mui/material';
 import {IFormInputs, IInputsProps} from '@shared/forms/interfaces/interfaces';
 import ErrorMessage from '@shared/forms/authorization/ErrorMessage';
 import SubmitButton from '@shared/forms/authorization/SubmitButton';
@@ -9,7 +9,8 @@ import LoginInputs from '@features/logIn/components/FormInputs';
 import FormWrapper from '@shared/forms/authorization/FormWrapper';
 import '@features/logIn/components/AuthFormStyles.css'
 import AppLogo from '@shared/components/AppLogo';
-import SpinnerComponent from '@shared/components/SpinnerComponent/SpinnerComponent';
+import FormAuth from '@shared/forms/authorization/Form';
+import LoadingIndicator from '@shared/forms/authorization/loadingIndicator';
 
 function LoginForm({onSubmit, isPending, isSuccess}: IInputsProps) {
   const {handleSubmit, control} = useForm<IFormInputs>();
@@ -35,11 +36,7 @@ function LoginForm({onSubmit, isPending, isSuccess}: IInputsProps) {
             </Box>
           </Container>
         </Box>
-        <Box display={'flex'} margin={'0 auto'} marginTop={'40px'}
-          maxWidth={{tablet: '35%', laptop: 'fit-content'}}
-          height={'fit-content'}
-          padding={'0 10px'} >
-          <CssBaseline />
+        <FormAuth>
           <FormWrapper>
             <>
               <Typography component="h1" variant="h5" color={'#1976d2'}>
@@ -59,24 +56,12 @@ function LoginForm({onSubmit, isPending, isSuccess}: IInputsProps) {
                   {'Don`t have an account? Sign Up'}
                 </FormLink>
               </Box>
-              {
-                (isPending || isSuccess) && <Box position={'absolute'} display={'flex'} alignItems={'center'} top={0} left={0} right={0} zIndex={10} bottom={0}
-                  sx={{background: 'rgba(255,255,255, 0.8)'}}>
-                  {
-                    isPending && <SpinnerComponent size={'medium'}/>
-                  }
-                  {
-                    isSuccess && <Box width={'150px'} height={'180px'} margin={'0 auto'}>
-                      <img src={'./loading-success.gif'} alt={'success gif'}/>
-                    </Box>
-                  }
-                </Box>
-              }
+
+              <LoadingIndicator isPending={isPending} showingSuccess={isSuccess}/>
             </>
           </FormWrapper>
-        </Box>
+        </FormAuth>
       </Box>
-      {/*<img src={'./loading-success.gif'} />*/}
     </Box>
   );
 }
