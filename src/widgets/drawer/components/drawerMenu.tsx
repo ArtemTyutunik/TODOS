@@ -1,20 +1,22 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Box, List, ListItem, ListItemButton, ListItemIcon, Typography} from '@mui/material';
-import InboxIcon from '@mui/icons-material/Inbox';
+import {InboxIcon} from '@shared/components/icons'
 import TodayIcon from '@mui/icons-material/Today';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import {styled} from '@mui/material/styles';
 import useTodosCount from '../hooks/useTodosCount';
-import {INBOX_LINK, TODAY_LINK, FILTERS_AND_TAGS_LINK} from '@shared/constants';
+import {INBOX_LINK, TODAY_LINK, TAGS_LINK} from '@shared/constants';
 import TodosCount from '@shared/components/TodosCount';
 import {Favorites} from '@features/addToFavorites';
 import '../active.css'
+import {Projects} from '@entities/projects';
 
 const drawerLinks = [
-  {label: 'Inbox', linkTo: INBOX_LINK, Icon: () => <InboxIcon sx={{color: '#246fe0'}}/>},
+  {label: 'Inbox', linkTo: INBOX_LINK, Icon: () => <InboxIcon
+    sx={(theme) => ({color: theme.background.inboxIcon})}/>},
   {label: 'Today', linkTo: TODAY_LINK, Icon: () => <TodayIcon sx={{color: '#058527'}}/>},
-  {label: 'Filters and Tags', linkTo: FILTERS_AND_TAGS_LINK, Icon: () => <FilterListIcon sx={{color: '#eb8909'}}/>},
+  {label: 'Tags', linkTo: TAGS_LINK, Icon: () => <FilterListIcon sx={{color: '#eb8909'}}/>},
 ];
 
 const CustomListText = styled(Typography)(({theme}) => ({
@@ -32,7 +34,7 @@ const configureActiveLink = (): string => {
 
   if (url.includes(TODAY_LINK)) return TODAY_LINK;
   else if (url.includes(INBOX_LINK)) return INBOX_LINK;
-  else if (url.includes(FILTERS_AND_TAGS_LINK)) return FILTERS_AND_TAGS_LINK;
+  else if (url.includes(TAGS_LINK)) return TAGS_LINK;
 
   return '';
 };
@@ -77,6 +79,7 @@ const DrawerMenu = () => {
         }
       </List>
       <Favorites/>
+      <Projects/>
     </>
   );
 };

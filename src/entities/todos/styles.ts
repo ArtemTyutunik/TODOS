@@ -4,6 +4,7 @@ export const TodoContainerStyles = {
   'mb': '10px',
   'position': 'relative',
   'display': 'flex',
+  'borderRadius': '10px',
   'alignItems': 'center',
   'justifyContent': 'space-between',
   '&: hover': {
@@ -14,8 +15,8 @@ export const TodoContainerStyles = {
   '& .ActionsMenu': {
     opacity: 0,
     position: 'absolute',
-    top: 0,
-    right: 0,
+    top: '20%',
+    right: '10px',
     zIndex: 5,
     background: '#fff',
   },
@@ -38,5 +39,4 @@ export const todoDescriptionStyles = (theme: Theme) => ({
   fontWeight: 300,
   lineHeight: 1,
   color: theme.text.main,
-  paddingLeft: '42px',
 });

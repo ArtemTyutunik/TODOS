@@ -1,5 +1,5 @@
 import React from 'react';
-import AddButtonIcon from '@shared/components/AddIcon';
+import {AddIcon} from '@shared/components/icons';
 import {Box, Theme, Typography} from '@mui/material';
 
 const boxStyles = (theme: Theme) => ({
@@ -20,7 +20,7 @@ interface Props {
 const AddTaskButton = ({onCreate}: Props) => {
   return (
     <Box sx = {boxStyles} onClick={onCreate}>
-      <AddButtonIcon sx={{color: 'primary.main'}}/>
+      <AddIcon sx={{color: 'primary.main'}}/>
       <Typography ml={'10px'} color={'inherit'} fontSize={'15px'} fontWeight={300}>
          Add task
       </Typography>

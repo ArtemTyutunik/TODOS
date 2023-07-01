@@ -1,7 +1,8 @@
-import {Box, Drawer, Typography} from '@mui/material';
+import {Box, Drawer} from '@mui/material';
 
 import DrawerMenu from './drawerMenu';
 import useToggleDrawer from '../hooks/useToggleDrawer';
+import AppLogo from '@shared/components/AppLogo';
 
 const MobileDrawerStyles = {
   'display': {largeMobile: 'block', tablet: 'none'},
@@ -21,15 +22,7 @@ const MobileDrawer = () => {
       onClose={toggleDrawer}
     >
       <Box>
-        <Typography
-          variant="h6"
-          noWrap
-          component="div"
-          marginLeft={'18px'}
-          sx={(theme) => ({color: theme.palette.primary.main})}
-        >
-          TODOS
-        </Typography>
+        <AppLogo sx={(theme) => ({color: theme.palette.primary.main, marginLeft: '18px'})}/>
         <DrawerMenu/>
       </Box>
     </Drawer>)

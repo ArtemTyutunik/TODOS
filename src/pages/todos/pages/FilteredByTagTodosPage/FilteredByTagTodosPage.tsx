@@ -6,7 +6,7 @@ import {useTodosByQuery} from '@pages/todos/hooks';
 import {PageTitle, TodoList} from '@pages/todos/components';
 import NoTodosWithTag from '@pages/todos/pages/FilteredByTagTodosPage/ui/noTodosWithTag';
 import CustomIconButton from '@shared/components/CustomIconButton';
-import {FILTERS_AND_TAGS_LINK} from '@shared/constants';
+import {TAGS_LINK} from '@shared/constants';
 
 const FilteredByTagTodosPage = () => {
   const {id} = useParams()
@@ -18,7 +18,7 @@ const FilteredByTagTodosPage = () => {
     <>
       <PageTitle>
         <Box sx={{display: 'flex', alignItems: 'center'}}>
-          <CustomIconButton sx={{mr: '10px'}} onClick={() => navigate('/' + FILTERS_AND_TAGS_LINK)}>
+          <CustomIconButton sx={{mr: '10px'}} onClick={() => navigate('/' + TAGS_LINK)}>
             <ArrowBackIcon sx={{fontSize: '18px'}}/>
           </CustomIconButton>
           {tag?.name}

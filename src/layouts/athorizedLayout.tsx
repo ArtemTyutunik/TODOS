@@ -9,6 +9,8 @@ import {LaptopDrawer, MobileDrawer} from '../widgets/drawer';
 import {useFetchAllUserData} from '@app/hooks/useFetchAllUserData';
 import SpinnerComponent from '@app/../shared/components/SpinnerComponent/SpinnerComponent';
 import Header from '../widgets/header/header';
+import TodosFetchFailed from '@shared/components/Notification/errors/todosFetchFailed';
+import {isErrorFetchingSelector} from '@entities/todos/store/todo';
 
 
 const routesStyles = (isDrawerOpen: boolean) => ({
@@ -24,10 +26,14 @@ const routesStyles = (isDrawerOpen: boolean) => ({
 const AuthorizedLayout= () => {
   const {isOpenDrawer} = useSelector((state: RootReducer) => state.drawerReducer);
   const [isFetching] = useFetchAllUserData()
+  const errorFetching = useSelector(isErrorFetchingSelector)
   return (
       isFetching ?
           <SpinnerComponent size={'large'}/> :
     <>
+      {
+        errorFetching && <TodosFetchFailed/>
+      }
       <Header/>
       <Box sx={{marginTop: 0}} height={'calc(100vh - 56px)'}>
         <Box paddingTop={'0 !important'}

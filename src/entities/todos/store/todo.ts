@@ -1,22 +1,24 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {ITodo} from '@shared/interfacesAndTypes';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {ITodo, Priority, tagIdType, TodoId} from '@shared/interfacesAndTypes';
 import {RootReducer} from '@shared/interfacesAndTypes';
 
 interface IInitialState {
   todos: ITodo[],
-  isFetched: boolean
+  isFetched: boolean,
+  isErrorFetching: boolean
 }
 
 const initialState: IInitialState = {
   todos: [],
   isFetched: false,
+  isErrorFetching: false,
 };
 
 const findTaskById = (state: IInitialState, id: number) => state.todos.find((task) => task.id === id);
 
 const updateTodoInState = (state: IInitialState, todo: ITodo) => {
   const index = state.todos.findIndex((element) => element.id === todo.id)
-  if (index !== undefined) {
+  if (index !== -1) {
     return {...state,
       todos: [...state.todos.slice(0, index), todo, ...state.todos.slice(index+1)],
     }
@@ -27,51 +29,60 @@ const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    fetchTasks: (state, action) => {
-      return {...state, todos: [...action.payload], isFetched: true};
+    fetchTasks: (state, {payload}: PayloadAction<ITodo[]>) => {
+      return {...state, todos: [...payload], isFetched: true};
     },
-    addNewTask: (state, action) => {
-      return {...state, todos: [...state.todos, action.payload]};
+    fetchWithError: (state) => {
+      return {...state, isErrorFetching: true}
     },
-    toggleTaskComplete: (state, action) => {
-      const completedTask = findTaskById(state, action.payload);
-            completedTask!.done = !completedTask!.done;
+    addNewTask: (state, {payload}: PayloadAction<ITodo>) => {
+      return {...state, todos: [...state.todos, payload]};
     },
-    editTask: (state, action) => {
-      return updateTodoInState(state, action.payload)
+    toggleTaskComplete: (state, {payload}: PayloadAction<TodoId>) => {
+      const completedTask = findTaskById(state, payload);
+      if (completedTask) {
+        completedTask.done = !completedTask.done;
+      }
     },
-    deleteTask: (state, action) => {
-      const deletedTaskIndex = state.todos.findIndex((task) => task.id === action.payload);
+    editTask: (state, {payload}: PayloadAction<ITodo>) => {
+      return updateTodoInState(state, payload)
+    },
+    deleteTask: (state, {payload}: PayloadAction<TodoId>) => {
+      const deletedTaskIndex = state.todos.findIndex((task) => task.id === payload);
       state.todos = [...state.todos.slice(0, deletedTaskIndex), ...state.todos.slice(deletedTaskIndex + 1)];
     },
-    setPriority: (state, action) => {
-      const task = findTaskById(state, action.payload.id);
+    setPriority: (state, {payload}: PayloadAction<{ id: number, priority: Priority }>) => {
+      const task = findTaskById(state, payload.id);
       if (task) {
-        return updateTodoInState(state, {...task, priority: action.payload.priority})
+        return updateTodoInState(state, {...task, priority: payload.priority})
       }
     },
-    addNewTodoTag: (state, action) => {
-      const task = findTaskById(state, action.payload.id);
+    addNewTodoTag: (state, {payload}: PayloadAction<{id: TodoId, tagId: tagIdType}>) => {
+      const task = findTaskById(state, payload.id);
       if (task) {
-        return updateTodoInState(state, {...task, tags: [...task.tags || [], action.payload.tagId]})
+        return updateTodoInState(state, {...task, tags: [...task.tags || [], payload.tagId]})
       }
     },
-    deleteTodoTag: (state, action) => {
-      const task = findTaskById(state, action.payload.id);
+    deleteTodoTag: (state, {payload}: PayloadAction<{id: TodoId, tagId: tagIdType}>) => {
+      const task = findTaskById(state, payload.id);
       if (task) {
         const {tags} = task
-        const index = tags?.indexOf(action.payload.tagId)
+        const index = tags?.indexOf(payload.tagId)
         return updateTodoInState(state, {...task,
           tags: [...tags!.slice(0, index), ...tags!.slice(index!+1)],
         })
       }
     },
-    dispatchNewDate: (state, action) => {
-      const task = findTaskById(state, action.payload.id);
+    dispatchNewDate: (state, {payload}: PayloadAction<{id: TodoId, newDate: string | undefined}>) => {
+      const task = findTaskById(state, payload.id);
       if (task) {
-        return updateTodoInState(state, {...task, date: action.payload.newDate})
+        return updateTodoInState(state, {...task, date: payload.newDate})
       }
     },
+    toggleIsCurrent: (state, {payload}: PayloadAction<ITodo>) => {
+      return updateTodoInState(state, payload)
+    },
+
   },
 });
 
@@ -85,6 +96,10 @@ export const {addNewTask,
   dispatchNewDate,
   addNewTodoTag,
   fetchTasks,
-  deleteTodoTag} = todosSlice.actions;
+  deleteTodoTag,
+  toggleIsCurrent,
+  fetchWithError} = todosSlice.actions;
 
 export const allTodosSelector = (state: RootReducer) => state.todosReducer.todos
+
+export const isErrorFetchingSelector = (state: RootReducer) => state.todosReducer.isErrorFetching

@@ -42,17 +42,13 @@ export default function UserSettingsMenu() {
   const theme = useTheme();
 
   const menuItems: menuItem[] = [
-    // {
-    //   label: 'settings',
-    //   Icon: () => <SettingsIcon/>,
-    //   onClick: () => {},
-    // },
     {
       label: 'logout',
       Icon: () => <LogoutIcon/>,
       onClick: () => {
         dispatch(logOutUser());
         localStorage.removeItem('user');
+        localStorage.removeItem('inboxID');
         navigate('/');
       },
     }];
@@ -91,7 +87,7 @@ export default function UserSettingsMenu() {
               </Avatar>
               <Box>
                 <Typography fontWeight={'bold'}>
-                  {user?.login}
+                  {user?.login }
                 </Typography>
                 <Typography>
                   {user?.login.replace('@gmail.com', '')}
@@ -118,7 +114,7 @@ export default function UserSettingsMenu() {
         </List>
         <Divider/>
         <Typography textAlign={'center'} fontSize={'13px'} padding={'5px 0'} color={'#202020'}>
-          v. 1.0.0 <span>&#183;</span> Designed by Artem Tyutyunik
+          v. 1.1.0 <span>&#183;</span> Designed by Artem Tyutyunik
         </Typography>
       </DropdownMenu>
     </>

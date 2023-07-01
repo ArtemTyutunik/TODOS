@@ -6,17 +6,18 @@ import {IFormInputs} from '@shared/forms/interfaces/interfaces';
 
 interface Props {
     control: Control<IFormInputs>,
-    children: React.ReactNode
+    children: React.ReactNode,
+    pending?: boolean,
 }
 
-const SubmitButton = ({control, children}: Props) => {
+const SubmitButton = ({control, children, pending = false}: Props) => {
   const {isValid} = useFormState({control});
 
   return (
     <Button
       type="submit"
       fullWidth
-      disabled={!isValid}
+      disabled={!isValid && !pending}
       variant="contained"
       sx={{mt: 3, mb: 2}}
     >

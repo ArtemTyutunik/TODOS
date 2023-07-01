@@ -6,7 +6,8 @@ declare module '@mui/material/styles' {
     description: string,
     background: {
       lightGrey: string,
-      paper: string
+      paper: string,
+      inboxIcon: string,
     },
     text: {
       main: string,
@@ -27,6 +28,7 @@ declare module '@mui/material/styles' {
     background: {
       lightGrey: string,
       paper: string,
+      inboxIcon: string
     },
     text: {
       main: string,
@@ -67,6 +69,7 @@ const theme = createTheme({
   background: {
     lightGrey: '#f5f5f5',
     paper: '#ffffff',
+    inboxIcon: '#246fe0',
   },
   text: {
     main: '#808080',

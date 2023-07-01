@@ -14,7 +14,7 @@ const FormWrapperStyles = {
 
 const FormWrapper = ({children}: Props) => {
   return (
-    <Box sx={FormWrapperStyles}>
+    <Box sx={FormWrapperStyles} position={'relative'}>
       {children}
     </Box>
   );

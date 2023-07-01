@@ -2,19 +2,23 @@ import {RootReducer} from '@app/store';
 
 export interface ITodo {
     label: string,
-    id: number,
-    description?: string,
-    done?: boolean,
+    id: TodoId,
+    description: string,
+    done: boolean,
     priority: Priority,
-    tags?: tagIdType[],
+    tags: tagIdType[],
     date?: IDate
+    projectId?: todoProjectId
+    isCurrent?: boolean
 }
 
+export type todoProjectId = string
+export type TodoId = number
 export type Priority = '1' | '2' | '3'| '4'
 export type IDate = string | undefined
 export type Anchor = null | HTMLElement
 
-export interface IUser {
+export type IUser = {
     accessToken: string,
     login: string,
     todos: ITodo[],
@@ -30,7 +34,7 @@ export type ITag = {
 export type colorType = {
     name: string,
     background: string,
-    textColor: string,
+    textColor?: string,
 }
 
 export type IFavorite = {
@@ -40,6 +44,13 @@ export type IFavorite = {
 
 export type {
   RootReducer,
+}
+
+export interface IProject {
+    name: string,
+    id: todoProjectId,
+    color: colorType
+    isPinned?: boolean
 }
 
 export type tagIdType = string;

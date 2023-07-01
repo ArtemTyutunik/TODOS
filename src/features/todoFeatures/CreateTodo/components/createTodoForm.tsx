@@ -1,6 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {toast} from 'react-toastify';
-import {useNavigate} from 'react-router-dom';
 
 import BaseTodoForm from '@features/todoFeatures/components/baseTodoForm';
 import {addNewTask} from '@entities/todos/store/todo';
@@ -16,28 +15,30 @@ interface Props {
 
 interface Props {
   onClose: () => void,
-  initialDate?: string
+  initialDate?: string,
+  initialProject?: string
 }
 
-const CreateTodoForm = ({onClose, initialDate}: Props) => {
+const CreateTodoForm = ({onClose, initialDate, initialProject}: Props) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
   const userId = useSelector(userIdSelector)
 
-  const notify = (id: number) => {
-    toast(<TodoCreatedNotification onNavigate={() => navigate(`task/${id}`)}/>, options);
+  const notify = () => {
+    toast(<TodoCreatedNotification/>, options);
   }
 
   const onSubmit = (newTodo: ITodo ) => {
-    postNewTodo(newTodo, userId)
-        .then(() => {
-          dispatch(addNewTask(newTodo));
-          notify(newTodo.id)
-          onClose();
-        })
+    try {
+      postNewTodo(newTodo, userId)
+      dispatch(addNewTask(newTodo));
+      notify()
+      onClose();
+    } catch (e) {
+      console.log(e)
+    }
   };
 
-  return <BaseTodoForm onClose={onClose} onSubmit={onSubmit} initialDate={initialDate}/>
+  return <BaseTodoForm onClose={onClose} onSubmit={onSubmit} initialDate={initialDate} todoProjectId={initialProject}/>
 };
 
 export default CreateTodoForm;

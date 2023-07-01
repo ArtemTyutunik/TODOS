@@ -1,36 +1,25 @@
 import React, {useState} from 'react';
-import {Box, Typography} from '@mui/material';
-import ToggleArrowIcon from '@shared/components/toggleArrowIcon';
 import {useSelector} from 'react-redux';
 import {getAllFavorites} from '@features/addToFavorites/model/store';
 import FavoritesList from '@features/addToFavorites/components/FavotitesList';
+import DrawerToggleList from '@shared/components/DrawerToggleList';
 
-const favoritesWrapper = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  padding: '0 10px',
-  marginTop: '25px',
-  marginBottom: '10px',
-}
 
 const Favorites = () => {
-  const [isExpanded, setIsExpanded] = useState(false)
   const favorites = useSelector(getAllFavorites)
+  const [isExpanded, setIsExpanded] = useState(false)
 
-  return favorites.length > 0 ? (
-    <>
-      <Box sx={favoritesWrapper}>
-        <Typography sx={(theme) => ({color: theme.text.main, fontSize: '16px'})}>
-                Favorites
-        </Typography>
-        <ToggleArrowIcon isExpanded={isExpanded}
-          onClick={() => setIsExpanded((prev) => !prev)}
-          sx={{transform: 'rotate(180deg)'}}/>
-      </Box>
-      {isExpanded && <FavoritesList favorites={favorites}/>}
-    </>
+  const onClickHandler = () => setIsExpanded((prevState) => !prevState)
+  return favorites.length ? (
+      <>
+        <DrawerToggleList title={'Favorites'}
+          isExpanded={isExpanded}
+          onArrowClick={onClickHandler}/>
+        {
+          isExpanded && <FavoritesList favorites={favorites}/>
+        }
+      </>
   ) : null
-};
+}
 
 export default Favorites;

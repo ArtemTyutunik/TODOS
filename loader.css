@@ -33,7 +33,16 @@
 .custom-loader-small {
     width:15px;
     height:15px;
-    background:conic-gradient(#0000 10%, #ffffff);
+    background:conic-gradient(#0000 10%, white);
+    /*noinspection CssInvalidPropertyValue*/
+    -webkit-mask:radial-gradient(farthest-side,#0000 calc(100% - 2px),#000 0);
+}
+
+.custom-loader-medium {
+    margin: 0 auto;
+    width:25px;
+    height:25px;
+    background:conic-gradient(#0000 10%, #1976D2);
     /*noinspection CssInvalidPropertyValue*/
     -webkit-mask:radial-gradient(farthest-side,#0000 calc(100% - 2px),#000 0);
 }

@@ -8,12 +8,12 @@ import {sendUpdatedTodo} from '@shared/api/services/todos';
 import {userIdSelector} from '@entities/user/model/store';
 import {toast} from 'react-toastify';
 import {options} from '@shared/components/Notification/constants';
-import TodoEditedNotification from '@shared/components/Notification/TodoEdited';
+import {TodoEditedNotification} from '@shared/components/Notification';
 
 interface Props {
     onClose: () => void,
     todo: ITodo,
-    hideActions?: boolean
+    hideActions?: boolean,
 }
 
 const notify = () => {
@@ -36,7 +36,9 @@ const EditTodoForm = ({onClose, todo, hideActions}: Props) => {
     onClose={onClose}
     onSubmit={onSubmit}
     todo={todo}
-    hideActions = {hideActions}/>;
+    hideActions = {hideActions}
+    todoProjectId={todo.projectId}
+  />;
 };
 
 export default EditTodoForm;
