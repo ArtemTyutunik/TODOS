@@ -1,5 +1,5 @@
 import {useForm} from 'react-hook-form';
-import {Box, MenuItem, Select, SelectChangeEvent, Typography} from '@mui/material';
+import {Box, SelectChangeEvent} from '@mui/material';
 import {BaseFormInputs} from '@shared/forms/interfaces/interfaces';
 import {ITodo, Priority} from '@shared/interfacesAndTypes';
 import {useTags} from '@entities/tag/utils/useTags';
@@ -10,9 +10,7 @@ import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 import BaseFormContext from '@shared/forms/hooks/UseBaseFormContext';
 import useBaseFormReducer, {changeProjectActionCreator} from '@shared/forms/hooks/useBaseFormReducer';
 import {useState} from 'react';
-import {useSelector} from 'react-redux';
-import {projectsSelector} from '@entities/projects/model/store';
-import {CircleIcon, InboxIcon} from '@shared/components/icons';
+import ProjectSelect from '@shared/components/ProjectSelect';
 
 interface Props {
   onClose: () => void,
@@ -92,63 +90,6 @@ const formStyles = {
   padding: '10px 5px 8px 10px',
   borderRadius: '10px',
 };
-
-interface ProjectSelectProps {
-  initialProjectId?: string,
-  onChange: (id: string) => void
-}
-
-const ProjectSelect = ({initialProjectId, onChange}: ProjectSelectProps) => {
-  const inboxID = localStorage.getItem('inboxID')
-  if (!inboxID) return null
-  const [currentProject, setCurrentProject] = useState(initialProjectId || inboxID)
-  const projects = useSelector(projectsSelector)
-
-  const handleChange = (event: SelectChangeEvent) => {
-    const value = event.target.value as string
-    setCurrentProject(value);
-    onChange(value)
-  };
-
-  return <Select value={currentProject}
-    onChange={handleChange}
-    className={'project-select'}
-    sx={selectStyles}
-  >
-    <MenuItem value={inboxID} sx={selectItemStyles}>
-      <InboxIcon sx={(theme) => ({color: theme.background.inboxIcon, fontSize: '17px'})}/>
-      <Typography ml={'10px'} fontSize={'13px'} color={'#202020'}>
-        Inbox
-      </Typography>
-    </MenuItem>
-    {
-      projects.map((project) => <MenuItem key={project.id} value={project.id}>
-        <CircleIcon sx={{fontSize: '12px', color: project.color.background}}/>
-        <Typography ml={'10px'} fontSize={'13px'} color={'#202020'}>
-          {project.name}
-        </Typography>
-      </MenuItem>)
-    }
-  </Select>
-}
-
-const selectStyles = {
-  '& .MuiSelect-select': {
-    padding: 0,
-    display: 'flex',
-    alignItems: 'center',
-    border: 'none',
-  },
-  '& fieldset': {
-    border: 'none',
-  },
-}
-
-const selectItemStyles = {
-  display: 'flex',
-  padding: '0px 15px',
-  alignItems: 'center',
-}
 
 
 export default BaseTodoForm;

@@ -40,7 +40,6 @@ const MoreActionsMenu = ({todo, onDelete, onDuplicate, onSetPriority, onOpenTodo
       </Tooltip>
 
       <DropdownMenu anchorEl={anchorEl} handleClose={removeAnchorEl}>
-        {/*//@ts-ignore*/}
         <Box minWidth={'250px'} padding={'5px'}>
           <List>
             <ListItemButton sx = {listItemStyles} onClick={onOpenTodoDetails}>
@@ -50,11 +49,6 @@ const MoreActionsMenu = ({todo, onDelete, onDuplicate, onSetPriority, onOpenTodo
               </Typography>
             </ListItemButton>
             <Divider/>
-            {/*<Box mt={'10px'}>*/}
-            {/*  <MoveTodo isUp text='Lift up todo'/>*/}
-            {/*  <MoveTodo isUp={false} text='Lift down todo'/>*/}
-            {/*  <Divider/>*/}
-            {/*</Box>*/}
             <Box sx={listItemStyles} display={'flex'} flexDirection={'column'}>
               <Typography marginBottom={'5px'}>Set priority</Typography>
               <Box display={'flex'}>
