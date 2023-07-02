@@ -4,11 +4,12 @@ import {fetchRequest} from '@shared/api/services/constants';
 export const getUserTodos = async <T>(userId: string): Promise<T> => {
   const transformTodo = (todo: ITodo) => {
     const {tags} = todo
+    const projectId = todo.projectId !== null ? todo.projectId : localStorage.getItem('inboxID')
     const transformedTags = tags?.map((tag: string | ITag) => {
       return typeof tag !== 'string' ? tag?.id : tag
     })
 
-    return {...todo, tags: transformedTags}
+    return {...todo, tags: transformedTags, projectId: projectId}
   }
 
   const response = await fetchRequest(`get_all/${userId}`)
