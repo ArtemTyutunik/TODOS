@@ -19,7 +19,7 @@ const SubmitButton = ({control, children, pending = false}: Props) => {
       fullWidth
       disabled={!isValid && !pending}
       variant="contained"
-      sx={{mt: 3, mb: 2}}
+      sx={{mt: '10px', mb: 2}}
     >
       {children}
     </Button>

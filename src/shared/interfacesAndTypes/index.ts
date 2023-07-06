@@ -21,6 +21,8 @@ export type Anchor = null | HTMLElement
 export type IUser = {
     accessToken: string,
     login: string,
+    picture?: string,
+    name?: string,
     todos: ITodo[],
     user_id: string
 }

@@ -6,7 +6,7 @@ import LoginForm from '@features/logIn/components/loginForm';
 import {useLocalStorage} from '@shared/hooks';
 import {loginWithLoginAndPassword} from '@shared/api/services/authorization';
 import {IUser} from '@shared/interfacesAndTypes';
-import useAuth from '@pages/authorization/hooks/useAuth';
+import useAuth from '@pages/authentication/hooks/useAuth';
 
 function Login() {
   const navigate = useNavigate()

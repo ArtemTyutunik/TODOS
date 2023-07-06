@@ -1,8 +1,9 @@
-import Login from '@pages/authorization/login';
 import {Navigate, Route, Routes} from 'react-router-dom';
-import SignUp from '@pages/authorization/signUp';
+import {GoogleOAuthProvider} from '@react-oauth/google';
 import {useEffect} from 'react';
-import HomePage from '@pages/authorization/HomePage/components/HomePage';
+import Login from '@pages/authentication/login';
+import SignUp from '@pages/authentication/signUp';
+import HomePage from '@pages/authentication/HomePage/components/HomePage';
 
 function UnathorizedLayout() {
   useEffect(() => {
@@ -11,12 +12,15 @@ function UnathorizedLayout() {
   }, [])
 
   return (
-    <Routes>
-      <Route path={'/'} element={<HomePage/>}/>
-      <Route path={'/login'} element={<Login/>}/>
-      <Route path={'/sign-up'} element={<SignUp/>}/>
-      <Route path={'*'} element={<Navigate to={'/'} replace={true}/>}/>
-    </Routes>
+    <GoogleOAuthProvider clientId={'63361521589-0s4b1l6p50hqfk5tee4r20scpqkpc9i2.apps.googleusercontent.com'}>
+      <Routes>
+        <Route path={'/'} element={<HomePage/>}/>
+        <Route path={'/login'} element={<Login/>}/>
+        <Route path={'/sign-up'} element={<SignUp/>}/>
+        <Route path={'*'} element={<Navigate to={'/'} replace={true}/>}/>
+      </Routes>
+    </GoogleOAuthProvider>
+
 
   );
 }

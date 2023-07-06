@@ -6,7 +6,7 @@ import {authWithError, signUpUser} from '@entities/user/model/store';
 import SignUpForm from '@features/signUp/components/signUpForm';
 import {useLocalStorage} from '@shared/hooks';
 import {signUpWithLoginAndPassword} from '@shared/api/services/authorization';
-import useAuth from '@pages/authorization/hooks/useAuth';
+import useAuth from '@pages/authentication/hooks/useAuth';
 import {IUser} from '@shared/interfacesAndTypes';
 
 function SignUp() {

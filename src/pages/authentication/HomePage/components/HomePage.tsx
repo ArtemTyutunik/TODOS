@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Typography} from '@mui/material';
 import {Link} from 'react-router-dom';
-import SignUpButton from '@pages/authorization/HomePage/components/SignUpButton';
+import SignUpButton from '@pages/authentication/HomePage/components/SignUpButton';
 import AppLogo from '@shared/components/AppLogo';
 
 const HomePage = () => {

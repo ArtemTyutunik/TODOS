@@ -40,3 +40,22 @@ export const signUpWithLoginAndPassword = async (login: string, password: string
 
   return await processRequest(response)
 }
+type userAccount = {
+  name: string,
+  picture: string
+}
+export const signUpWithGoogleService = async (login: string, data: userAccount) => {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({login, ...data}),
+  }
+
+  console.log(data)
+
+  const response = await fetchRequest('sign_up', options)
+
+  return await processRequest(response)
+}
