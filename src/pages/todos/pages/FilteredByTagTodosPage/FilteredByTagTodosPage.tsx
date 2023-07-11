@@ -16,17 +16,18 @@ const FilteredByTagTodosPage = () => {
 
   return (
     <>
-      <PageTitle>
-        <Box sx={{display: 'flex', alignItems: 'center'}}>
-          <CustomIconButton sx={{mr: '10px'}} onClick={() => navigate('/' + TAGS_LINK)}>
-            <ArrowBackIcon sx={{fontSize: '18px'}}/>
-          </CustomIconButton>
-          {tag?.name}
-        </Box>
-      </PageTitle>
       {
         filteredTodos.length === 0 ? <NoTodosWithTag/> :
-            <TodoList noAddButton todos={filteredTodos}/>
+            <TodoList noAddButton todos={filteredTodos}>
+              <PageTitle>
+                <Box sx={{display: 'flex', alignItems: 'center'}}>
+                  <CustomIconButton sx={{mr: '10px'}} onClick={() => navigate('/' + TAGS_LINK)}>
+                    <ArrowBackIcon sx={{fontSize: '18px'}}/>
+                  </CustomIconButton>
+                  {tag?.name}
+                </Box>
+              </PageTitle>
+            </TodoList>
       }
     </>
   );

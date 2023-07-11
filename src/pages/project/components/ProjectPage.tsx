@@ -15,12 +15,11 @@ const ProjectPage = () => {
 
   return ( project ? (
           <Box>
-            <PageTitle>
-              {project.name}
-            </PageTitle>
-            <Box>
-              <TodoList todos={projectTodos} initialProject={project.id}/>
-            </Box>
+            <TodoList todos={projectTodos} initialProject={project.id}>
+              <PageTitle>
+                {project.name}
+              </PageTitle>
+            </TodoList>
           </Box>
         ): null
   )

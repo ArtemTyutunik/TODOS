@@ -21,12 +21,11 @@ const InboxTodosPage = () => {
   return (
     <Box paddingTop={'30px'} height={'100%'}>
       <OverdueTodos overdueTodos={overdueTodos}/>
-      <Box>
+      <TodoList todos={renderedTodos}>
         <PageTitle>
-                    Inbox
+          Inbox
         </PageTitle>
-        <TodoList todos={renderedTodos}/>
-      </Box>
+      </TodoList>
     </Box>
 
   );

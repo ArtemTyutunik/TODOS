@@ -57,7 +57,7 @@ const TodoCard = ({
           <TodoDetailPage id={id}
             onClose={() => setDetailsVisable(false)}
             isOpen={isDetailsVisable}/>}
-      <Box sx={{mb: '25px', cursor: 'pointer'}}
+      <Box sx={{mb: '25px', cursor: 'pointer', flexGrow: '1'}}
         onClick={() => setDetailsVisable((prevState) => !prevState)}
       >
         <Box sx = {TodoContainerStyles} className={`${isCurrent && 'todo-wrap' || ''}`}>
