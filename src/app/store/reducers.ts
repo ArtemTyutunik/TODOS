@@ -5,6 +5,7 @@ import {tagReducer} from '@entities/tag/store/tagStore';
 import {tagListReducer} from '@pages/todos/pages/TagsPage/components/tags/store';
 import {favoriteReducer} from '@features/addToFavorites';
 import {projectReducer} from '@entities/projects/model/store';
+import {appSetupReducer} from '@app/store/AppStore'
 
 export {
   drawerReducer,
@@ -14,4 +15,5 @@ export {
   tagListReducer,
   favoriteReducer,
   projectReducer,
+  appSetupReducer,
 };

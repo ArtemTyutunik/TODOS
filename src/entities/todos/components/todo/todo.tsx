@@ -1,10 +1,10 @@
 import React, {memo} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {addNewTask, deleteTask, setPriority, toggleTaskComplete} from '../store/todo';
+import {addNewTask, deleteTask, setPriority, toggleTaskComplete} from '../../store/todo';
 import {EditTodoForm} from '@features/todoFeatures/EditTodo';
 import {ITodo, Priority} from '@shared/interfacesAndTypes';
-import TodoCard from './todoCard';
+import TodoCard from '../todoCard';
 import {useVisable} from '@shared/hooks';
 import {deleteTodoById, postNewTodo, sendUpdatedTodo} from '@shared/api/services/todos';
 import {userIdSelector} from '@entities/user/model/store';

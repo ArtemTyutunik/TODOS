@@ -11,6 +11,7 @@ const DropdownMenu = ({anchorEl, handleClose, children}: dropdownMenuProps) => {
   return (
     <Menu
       id="menu"
+      data-testid={'dropdown-menu'}
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: 'bottom',
@@ -23,7 +24,7 @@ const DropdownMenu = ({anchorEl, handleClose, children}: dropdownMenuProps) => {
       }}
       open={Boolean(anchorEl)}
       onClose={handleClose}
-      sx={{marginTop: '10px'}}
+      sx={{marginTop: '10px', minWidth: 'fit-content'}}
     >
       {children}
     </Menu>

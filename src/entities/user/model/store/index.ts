@@ -45,7 +45,7 @@ const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
-//@ts-ignore
-export const userIdSelector = (state: RootReducer) => state.userReducer.user.user_id
+
+export const userIdSelector = (state: RootReducer) => state.userReducer.user?.user_id || ''
 
 export const {authUser, logOutUser, authWithError, signUpUser} = userSlice.actions;

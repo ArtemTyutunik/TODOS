@@ -1,4 +1,5 @@
-import dayjs, {Dayjs} from 'dayjs';
+import {Dayjs} from 'dayjs';
+import * as dayjs from 'dayjs';
 
 export const dateFormat = 'MMM D';
 

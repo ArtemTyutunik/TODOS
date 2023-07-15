@@ -14,8 +14,7 @@ interface Props {
 
 const SelectTodosMenu = ({anchorEl, removeAnchorEl, todos, setChosenTodos}: Props) => {
   const filterByCondition = (conditionFn: (todo: ITodo) => boolean) => {
-    const filteredTodos= todos.reduce((accumulator: ITodo['id'][], currentValue) => {
-      console.log(accumulator)
+    const filteredTodos = todos.reduce((accumulator: ITodo['id'][], currentValue) => {
       if (conditionFn(currentValue)) {
         return [...accumulator, currentValue.id]
       }

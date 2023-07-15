@@ -53,12 +53,15 @@ const TodoCard = ({
 
   return (
     <>
-      {isDetailsVisable &&
-          <TodoDetailPage id={id}
-            onClose={() => setDetailsVisable(false)}
-            isOpen={isDetailsVisable}/>}
+      {isDetailsVisable && <TodoDetailPage id={id}
+        onClose={() => setDetailsVisable(false)}
+        isOpen={isDetailsVisable}
+      />
+      }
+
       <Box sx={{mb: '25px', cursor: 'pointer', flexGrow: '1'}}
         onClick={() => setDetailsVisable((prevState) => !prevState)}
+        data-testid="Todo card"
       >
         <Box sx = {TodoContainerStyles} className={`${isCurrent && 'todo-wrap' || ''}`}>
           <Box sx={{backgroundColor: 'white'}}

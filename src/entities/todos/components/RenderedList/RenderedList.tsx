@@ -1,6 +1,6 @@
 import React from 'react';
 import {ITodo} from '@shared/interfacesAndTypes';
-import Todo from '@entities/todos/components/todo';
+import Todo from '@entities/todos/components/todo/todo';
 import {Box, Checkbox} from '@mui/material';
 
 
@@ -10,11 +10,10 @@ interface Props {
   chosenTodos?: ITodo['id'][]
 }
 const RenderedList = ({todos, onChooseTodo, chosenTodos}: Props) => {
-  const sortedByPriority = todos.sort((first, second) => +first.priority - +second.priority)
   return (
     <>
       {
-        sortedByPriority.map((todo: ITodo) => <Box key={todo.id} sx={todoWrapper}>
+        todos.map((todo: ITodo) => <Box key={todo.id} sx={todoWrapper}>
           <Checkbox sx={checkboxStyles} size={'small'} checked={chosenTodos?.includes(todo.id)}
             onChange={() => onChooseTodo && onChooseTodo(todo.id)}
             className={`todo-checkbox ${chosenTodos?.includes(todo.id) ? 'keep-active': ''}`}/>
