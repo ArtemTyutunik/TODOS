@@ -25,7 +25,7 @@ const SelectMenu = ({chosenTodos,
     <Box display={'flex'} alignItems={'center'} justifyContent={'flex-end'} mr={'10px'}>
       {
         chosenTodos.length > 0 && <>
-          <SelectedTodosActions selectedTodos={chosenTodos}/>
+          <SelectedTodosActions selectedTodos={chosenTodos} setSelectedTodos={setChosenTodos}/>
         </>
       }
 
@@ -34,7 +34,8 @@ const SelectMenu = ({chosenTodos,
           <CustomIconButton>
             <Checkbox sx={{color: '#808080', padding: '0'}}
               size={'small'}
-              checked={allSelected}
+              checked={chosenTodos.length === todos.length && chosenTodos.length > 0}
+              indeterminate={chosenTodos.length < todos.length && chosenTodos.length > 0}
               disableRipple
               onChange={() => toggleSelectAllTodos(!allSelected)}/>
           </CustomIconButton>

@@ -15,9 +15,11 @@ import selectedTodosActionFailed from '@shared/components/Notification/errors/Se
 import {options} from '@shared/components/Notification/constants';
 
 interface Props {
-  selectedTodos: ITodo['id'][]
+  selectedTodos: ITodo['id'][],
+  setSelectedTodos: (newTodos: ITodo['id'][]) => void
 }
-const SelectedTodosActions = ({selectedTodos}: Props) => {
+
+const SelectedTodosActions = ({selectedTodos, setSelectedTodos}: Props) => {
   const userId = useSelector(userIdSelector)
   const [confirmDeletion, showConfirmDeletion, hideConfirmDeletion] = useVisable(false)
   const dispatch = useDispatch()
@@ -27,6 +29,7 @@ const SelectedTodosActions = ({selectedTodos}: Props) => {
       const todos = await deleteSelectedTodo(userId, selectedTodos)
       dispatch(updateTodos(todos))
       hideConfirmDeletion()
+      setSelectedTodos([])
     } catch (e) {
       toast(selectedTodosActionFailed('delete'), options)
       hideConfirmDeletion()
@@ -37,6 +40,7 @@ const SelectedTodosActions = ({selectedTodos}: Props) => {
     try {
       const todos = await completeSelectedTodo(userId, selectedTodos)
       dispatch(updateTodos(todos))
+      setSelectedTodos([])
     } catch (e) {
       toast(selectedTodosActionFailed('complete'), options)
     }
