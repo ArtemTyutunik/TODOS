@@ -7,6 +7,7 @@ import CustomIconButton from '@shared/components/CustomIconButton';
 import {useAnchorElement} from '@shared/hooks';
 import {setSortingValue, sortTypeSelector} from '@app/store/AppStore';
 import {useDispatch, useSelector} from 'react-redux';
+import CloseIcon from '@mui/icons-material/Close';
 
 const SortingMenu = () => {
   const [anchorEl, setAnchorEl, removeAnchorEl] = useAnchorElement(null)
@@ -22,7 +23,7 @@ const SortingMenu = () => {
   return (
     <>
       <CustomIconButton onClick={(e) => setAnchorEl(e.target as HTMLElement)}>
-        {currentSortingType !== 'default' ? (
+        { currentSortingType !== 'default' ? (
             <Box sx={onSortButtonStyles}>
               Sorted by {currentSortingType}
             </Box>
@@ -30,11 +31,18 @@ const SortingMenu = () => {
             <Tooltip title={'sort'}>
               <FilterAltIcon sx={{color: '#808080', fontSize: '20px'}}/>
             </Tooltip>
-        )
-
+            )
         }
-
       </CustomIconButton>
+      { currentSortingType !== 'default' && (
+        <Tooltip title={'Reset sorting'}>
+          <CustomIconButton onClick={() => dispatch(setSortingValue('default'))}>
+            <CloseIcon sx={{fontSize: '18px', color: '#808080'}}/>
+          </CustomIconButton>
+        </Tooltip>
+      )
+      }
+
       <DropdownMenu anchorEl={anchorEl} handleClose={removeAnchorEl}>
         {
           sortOptions.map(({value, label}) => <MenuItem key={value}
@@ -70,13 +78,15 @@ const selectIconsStyles = {
 }
 
 const onSortButtonStyles = {
-  'fontSize': '15px',
+  'fontSize': '12px',
   'color': '#808080',
-  'fontWeight': 500,
+  'fontWeight': 700,
   'padding': '0 10px',
   '&:hover': {
     color: '#202020',
   },
+  'fontFamily': '-apple-system,BlinkMacSystemFont, "Segoe UI",Roboto,"Apple Color Emoji",' +
+      'Helvetica,Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol"',
 }
 
 
