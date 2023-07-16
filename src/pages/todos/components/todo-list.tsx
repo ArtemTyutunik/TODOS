@@ -8,7 +8,7 @@ import {useVisable} from '@shared/hooks';
 import SelectMenu from '@pages/todos/components/SelectMenu/SelectMenu';
 import SortingMenu from '@pages/todos/components/SortMenu/Menu/SortingMenu';
 import {useSelector} from 'react-redux';
-import {sortTypeSelector} from '@app/store/AppStore';
+import {orderSelector, sortTypeSelector} from '@app/store/AppStore';
 import {sortTodosByProperty} from '@shared/helpers';
 
 interface Props {
@@ -24,6 +24,7 @@ const TodoList = memo(({todos, initialDate, initialProject, noAddButton = false,
   const [chosenTodos, setChosenTodos] = useState<ITodo['id'][]>([])
   const [allSelected, setAllSelected] = useState<boolean>(false)
   const sorting = useSelector(sortTypeSelector)
+  const order = useSelector(orderSelector)
 
   const toggleSelectAllTodos = (isAllTodosSelected: boolean) => {
     setAllSelected(isAllTodosSelected)
@@ -37,7 +38,7 @@ const TodoList = memo(({todos, initialDate, initialProject, noAddButton = false,
     })
   }
 
-  const sortedTodos = sortTodosByProperty(sorting, todos)
+  const sortedTodos = sortTodosByProperty(sorting, todos, order)
 
 
   const form = isOpenForm ? (
