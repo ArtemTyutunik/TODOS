@@ -21,7 +21,6 @@ const App = () => {
       {
         <AppLayout isAuth={isAuth}/>
       }
-      <a>Link</a>
     </ThemeProvider>
   );
 };

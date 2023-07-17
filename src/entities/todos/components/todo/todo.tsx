@@ -58,7 +58,7 @@ const Todo = memo(({todo}: Props) => {
 
   if (isEditing) {
     return <Box width={'100%'}>
-      <EditTodoForm onClose={closeEditing} todo={todo}/>;
+      <EditTodoForm onClose={closeEditing} todo={todo}/>
     </Box>
   }
 
