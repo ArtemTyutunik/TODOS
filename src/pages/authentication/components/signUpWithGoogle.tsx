@@ -1,34 +1,34 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
+import {authWithError, signUpUser} from '@entities/user/model/store';
 import {useNavigate} from 'react-router-dom';
-import {IUser} from '@shared/interfacesAndTypes';
-import {authUser, authWithError} from '@entities/user/model/store';
-import {signInWithGoogleService} from '@shared/api/services/authorization';
 import useGoogleAccount from '@pages/authentication/hooks/useGoogleAccount';
+import {IUser} from '@shared/interfacesAndTypes';
+import {signUpWithGoogleService} from '@shared/api/services/authorization';
 import ContinueWithGoogleButton from '@pages/authentication/components/ContinueWithGoogleButton';
 
-const SignInWithGoogle = () => {
+const SignUpWithGoogle = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const onSuccess = (user: IUser) => {
     localStorage.setItem('user', JSON.stringify(user))
-    dispatch(authUser(user))
+    dispatch(signUpUser(user))
     navigate('/today')
   }
 
   const signUpUserAccount = async (accountInfo: unknown) => {
     try {
       //@ts-ignore
-      const {email} = accountInfo
+      const {email = '', picture = '', name = ''} = accountInfo
 
-      const user = await signInWithGoogleService(email)
+      const user = await signUpWithGoogleService(email, {picture, name})
 
       if (user) {
         onSuccess(user)
       }
     } catch (e) {
-      dispatch(authWithError('Something went wrong. Try again'))
+      dispatch(authWithError(e as string))
     }
   }
 
@@ -37,5 +37,4 @@ const SignInWithGoogle = () => {
   return <ContinueWithGoogleButton clickHandler={authGoogleAccount}/>
 };
 
-
-export default SignInWithGoogle;
+export default SignUpWithGoogle;

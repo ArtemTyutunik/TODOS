@@ -1,27 +1,14 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  Avatar,
-  Box,
-  Divider,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Tooltip,
-  Typography,
-  useTheme,
-} from '@mui/material';
-import AccountCircle from '@mui/icons-material/AccountCircle';
+import {Box, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip, Typography} from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 import {RootReducer} from '@shared/interfacesAndTypes';
 import {logOutUser} from '@entities/user/model/store';
 import DropdownMenu from '@shared/components/dropdownMenu';
 import {useAnchorElement} from '@shared/hooks';
+import UserAvatar from './userAvatar';
 
 type menuItem = {
     label: string,
@@ -39,8 +26,6 @@ export default function UserSettingsMenu() {
   const {user} = useSelector((state: RootReducer) => state.userReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const theme = useTheme();
-
   const menuItems: menuItem[] = [
     {
       label: 'logout',
@@ -66,9 +51,11 @@ export default function UserSettingsMenu() {
           aria-label="account of current user"
           aria-haspopup="true"
           color="inherit"
-          sx={{padding: {mobile: '0', tablet: '16px'}, marginRight: '3px'}}
+          sx={{padding: {mobile: '0', tablet: '5px'}, marginRight: '3px', ml: '15px'}}
           onClick={handleOpenUserMenu}>
-          <AccountCircle/>
+          <Box width={'30px'} height={'30px'}>
+            <UserAvatar color={'#ffffff'}/>
+          </Box>
         </IconButton>
       </Tooltip>
       <DropdownMenu anchorEl={anchorElUser} handleClose={removeAnchorEl}>
@@ -77,20 +64,15 @@ export default function UserSettingsMenu() {
             display={'flex'}
             padding = {'5px'}>
             <ListItemButton sx = {ListItemButtonStyles}>
-              <Avatar sx={{
-                border: `2px solid ${theme.avatar}`,
-                background: 'transparent',
-                color: theme.avatar,
-                marginRight: '30px',
-              }}>
-                 A
-              </Avatar>
+              <Box width={'40px'} height={'40px'} mr={'15px'}>
+                <UserAvatar/>
+              </Box>
               <Box>
                 <Typography fontWeight={'bold'}>
                   {user?.login }
                 </Typography>
                 <Typography>
-                  {user?.login.replace('@gmail.com', '')}
+                  {user?.name || user?.login.replace('@gmail.com', '')}
                 </Typography>
               </Box>
             </ListItemButton>
