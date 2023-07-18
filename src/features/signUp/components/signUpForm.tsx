@@ -10,6 +10,7 @@ import ErrorMessage from '@shared/forms/authorization/ErrorMessage';
 import AppLogo from '@shared/components/AppLogo';
 import FormAuth from '@shared/forms/authorization/Form';
 import LoadingIndicator from '@shared/forms/authorization/loadingIndicator';
+import SignUpWithGoogle from '@pages/authentication/components/signUpWithGoogle';
 
 const SignUpForm:FC<IInputsProps> = ({onSubmit, isPending, isSuccess}) => {
   const {handleSubmit, control} = useForm<IFormInputs>({mode: 'onChange'});
@@ -34,6 +35,8 @@ const SignUpForm:FC<IInputsProps> = ({onSubmit, isPending, isSuccess}) => {
               noValidate sx={{mt: 1}}>
               <FormInputs control={control}/>
               <ErrorMessage/>
+
+              <SignUpWithGoogle/>
               <SubmitButton control={control} pending={isPending}>
                   Sign up
               </SubmitButton>

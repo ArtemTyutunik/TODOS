@@ -51,11 +51,11 @@ function LoginForm({onSubmit, isPending, isSuccess}: IInputsProps) {
                 <LoginInputs control={control}/>
                 <ErrorMessage/>
 
+                <SignInWithGoogle/>
                 <SubmitButton control={control} pending={isPending}>
                               Login
                 </SubmitButton>
 
-                <SignInWithGoogle/>
                 <FormLink to='/sign-up'>
                   {'Don`t have an account? Sign Up'}
                 </FormLink>
