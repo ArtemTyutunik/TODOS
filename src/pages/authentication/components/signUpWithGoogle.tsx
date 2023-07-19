@@ -6,13 +6,14 @@ import useGoogleAccount from '@pages/authentication/hooks/useGoogleAccount';
 import {IUser} from '@shared/interfacesAndTypes';
 import {signUpWithGoogleService} from '@shared/api/services/authorization';
 import ContinueWithGoogleButton from '@pages/authentication/components/ContinueWithGoogleButton';
+import setUserDataToLocalStorage from '@shared/helpers/setUserDataToLocalStorage';
 
 const SignUpWithGoogle = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const onSuccess = (user: IUser) => {
-    localStorage.setItem('user', JSON.stringify(user))
+    setUserDataToLocalStorage(user)
     dispatch(signUpUser(user))
     navigate('/today')
   }

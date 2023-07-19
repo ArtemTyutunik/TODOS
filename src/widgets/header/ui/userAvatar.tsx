@@ -5,17 +5,18 @@ import theme from '@app/theme';
 
 const UserAvatar = ({color = theme.avatar}: {color?: string}) => {
   const user = localStorage.getItem('user')
-  const {picture = null, name = undefined, login = undefined} = user ? JSON.parse(user) : {};
+  const userAvatar = localStorage.getItem('userAvatar')
+  const {name = undefined, login = undefined} = user ? JSON.parse(user) : {};
   const AvatarSymbols = configureAvatarSymbols(name, login)
 
   return <Avatar sx={{
-    border: `2px solid ${picture ? 'transparent' : color}`,
+    border: `2px solid ${userAvatar ? 'transparent' : color}`,
     background: 'transparent',
     color: color,
     width: 'inherit',
     height: 'inherit',
   }}>
-    {picture ? <img src={picture} alt={'user avatar'}/> : AvatarSymbols}
+    {userAvatar ? <img src={userAvatar} alt={'user avatar'}/> : AvatarSymbols}
   </Avatar>
 };
 
