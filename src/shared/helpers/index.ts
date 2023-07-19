@@ -1,5 +1,5 @@
 import {IFavorite} from '@shared/interfacesAndTypes';
-import sortTodosByProperty from './sortTodosByProperty'
+import sortTodosByProperty from './sortTodosByProperty/sortTodosByProperty'
 
 export const getBoolValueFromLocalStorage = (key: string) => {
   const currentValue = localStorage.getItem(key)

@@ -1,7 +1,18 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {Box, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip, Typography} from '@mui/material';
+import {
+  Box,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 import {RootReducer} from '@shared/interfacesAndTypes';
@@ -9,6 +20,7 @@ import {logOutUser} from '@entities/user/model/store';
 import DropdownMenu from '@shared/components/dropdownMenu';
 import {useAnchorElement} from '@shared/hooks';
 import UserAvatar from './userAvatar';
+import AvatarPicker from './AvatarPicker';
 
 type menuItem = {
     label: string,
@@ -17,8 +29,9 @@ type menuItem = {
 }
 
 const ListItemButtonStyles = {
-  padding: '15px',
-  borderRadius: '5px'};
+  'padding': '15px',
+  'borderRadius': '5px',
+};
 
 
 export default function UserSettingsMenu() {
@@ -59,17 +72,15 @@ export default function UserSettingsMenu() {
         </IconButton>
       </Tooltip>
       <DropdownMenu anchorEl={anchorElUser} handleClose={removeAnchorEl}>
-        <ListItem sx = {{padding: 0}}>
+        <ListItem sx={{padding: 0}}>
           <Box width={'auto'}
             display={'flex'}
-            padding = {'5px'}>
-            <ListItemButton sx = {ListItemButtonStyles}>
-              <Box width={'40px'} height={'40px'} mr={'15px'}>
-                <UserAvatar/>
-              </Box>
+            padding={'5px'}>
+            <ListItemButton sx={ListItemButtonStyles} onClick={() => console.log('happened')}>
+              <AvatarPicker/>
               <Box>
                 <Typography fontWeight={'bold'}>
-                  {user?.login }
+                  {user?.login}
                 </Typography>
                 <Typography>
                   {user?.name || user?.login.replace('@gmail.com', '')}
@@ -96,7 +107,7 @@ export default function UserSettingsMenu() {
         </List>
         <Divider/>
         <Typography textAlign={'center'} fontSize={'13px'} padding={'5px 0'} color={'#202020'}>
-          v. 1.1.0 <span>&#183;</span> Designed by Artem Tyutyunik
+            v. 1.1.0 <span>&#183;</span> Designed by Artem Tyutyunik
         </Typography>
       </DropdownMenu>
     </>

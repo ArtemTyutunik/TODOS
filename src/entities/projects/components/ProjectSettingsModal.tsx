@@ -63,6 +63,11 @@ const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = fa
 
   const isValid = project.name.trim().length > 0;
 
+  const onSubmit = () => {
+    console.log('here')
+    editingMode ? editProject() : createNewProject()
+  }
+
   return (
     <BasicModal open={isOpen} onClose={onClose}>
       <ModalWrapper>
@@ -71,7 +76,7 @@ const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = fa
             {editingMode ? 'Edit' : 'Add'} Project
           </Typography>
         </Box>
-        <InputsSection isError={invalidData}>
+        <InputsSection isError={invalidData} onSubmit={onSubmit}>
           <NameInput isError={false} inputValue={project.name} onChange={onInputNameChange}/>
           <Box marginBottom={'15px'}>
             <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
@@ -85,9 +90,7 @@ const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = fa
         <Box margin={'10px 0'} paddingRight={'15px'}>
           <FormSubmissionButtons onClose={onClose}
             isValid={!invalidData && isValid}
-            onSubmit={() => {
-              editingMode ? editProject() : createNewProject()
-            }}/>
+            onSubmit={onSubmit}/>
         </Box>
       </ModalWrapper>
     </BasicModal>
