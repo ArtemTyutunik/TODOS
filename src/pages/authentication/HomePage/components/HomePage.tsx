@@ -82,11 +82,13 @@ const signInLink = {
   'color': '#232115',
   'fontWeight': 500,
   'fontFamily': 'Inter',
-  'padding': '3px 12px',
   'cursor': 'pointer',
   'borderRadius': '7px',
   '&: hover': {
     background: 'hsla(53,10%,69%,.2)',
+  },
+  '& a': {
+    padding: '7px 12px',
   },
 }
 
