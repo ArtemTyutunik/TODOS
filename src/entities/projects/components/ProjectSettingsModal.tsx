@@ -75,7 +75,7 @@ const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = fa
             {editingMode ? 'Edit' : 'Add'} Project
           </Typography>
         </Box>
-        <InputsSection isError={invalidData} onSubmit={onSubmit}>
+        <InputsSection isError={invalidData}>
           <NameInput isError={false} inputValue={project.name} onChange={onInputNameChange}/>
           <Box marginBottom={'15px'}>
             <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
