@@ -64,7 +64,6 @@ const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = fa
   const isValid = project.name.trim().length > 0;
 
   const onSubmit = () => {
-    console.log('here')
     editingMode ? editProject() : createNewProject()
   }
 

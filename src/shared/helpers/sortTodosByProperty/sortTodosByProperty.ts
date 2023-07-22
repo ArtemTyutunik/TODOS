@@ -1,5 +1,5 @@
 import {ITodo} from '@shared/interfacesAndTypes';
-import dayjs from 'dayjs';
+import * as dayjs from 'dayjs';
 
 
 const sortTodosByProperty = (sortType: string, todos: ITodo[], order: string) => {

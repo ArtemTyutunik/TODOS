@@ -16,7 +16,7 @@ const UserAvatar = ({color = theme.avatar}: {color?: string}) => {
     width: 'inherit',
     height: 'inherit',
   }}>
-    {userAvatar ? <img src={userAvatar} alt={'user avatar'}/> : AvatarSymbols}
+    {userAvatar ? <img src={userAvatar} alt={'user avatar'} referrerPolicy="no-referrer"/> : AvatarSymbols}
   </Avatar>
 };
 

@@ -22,7 +22,6 @@ const NoTagsComponent = ({search}: Props) => {
     try {
       await createNewUserTag(configuredTag, userId)
       dispatch(addNewUserTag(configuredTag))
-      console.log('here')
     } catch (e) {
       toast(<TagsActionFailed action={'add'}/>, options)
     }

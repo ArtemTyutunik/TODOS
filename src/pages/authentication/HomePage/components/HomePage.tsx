@@ -7,7 +7,6 @@ import AppLogo from '@shared/components/AppLogo';
 const HomePage = () => {
   return (
     <Box>
-      {/* Header*/}
       <Box sx={headerStyles}>
         <Box sx={containerStyles} justifyContent={'space-between'}>
           <AppLogo sx={logoStyles}/>

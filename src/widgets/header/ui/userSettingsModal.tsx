@@ -76,7 +76,7 @@ export default function UserSettingsMenu() {
           <Box width={'auto'}
             display={'flex'}
             padding={'5px'}>
-            <ListItemButton sx={ListItemButtonStyles} onClick={() => console.log('happened')}>
+            <ListItemButton sx={ListItemButtonStyles}>
               <AvatarPicker/>
               <Box>
                 <Typography fontWeight={'bold'}>
