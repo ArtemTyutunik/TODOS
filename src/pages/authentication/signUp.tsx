@@ -4,20 +4,19 @@ import {useNavigate} from 'react-router-dom';
 
 import {authWithError, signUpUser} from '@entities/user/model/store';
 import SignUpForm from '@features/signUp/components/signUpForm';
-import {useLocalStorage} from '@shared/hooks';
 import {signUpWithLoginAndPassword} from '@shared/api/services/authorization';
-import useAuth from '@pages/authorization/hooks/useAuth';
+import useAuth from '@pages/authentication/hooks/useAuth';
 import {IUser} from '@shared/interfacesAndTypes';
+import setUserDataToLocalStorage from '@shared/helpers/setUserDataToLocalStorage';
 
 function SignUp() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const [, setValueLocalStorage] = useLocalStorage('user', null)
 
   const onSuccess = (user: IUser) => {
+    setUserDataToLocalStorage(user)
     dispatch(signUpUser(user));
     navigate('/today')
-    setValueLocalStorage(user);
   }
 
   const onReject = (error: string) => {

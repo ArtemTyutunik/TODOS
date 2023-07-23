@@ -51,3 +51,37 @@ export const sendUpdatedTodo = async (updatedData: unknown, userId: string) => {
   }
   return await fetchRequest(url, options)
 }
+
+
+export const deleteSelectedTodo = async (userId: string, todosId: ITodo['id'][]) => {
+  const options = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(todosId),
+  }
+
+  const METHOD = 'delete'
+
+  const response = await fetchRequest(`mapping?user_id=${userId}&method=${METHOD}`, options)
+
+  return await response.json()
+}
+
+
+export const completeSelectedTodo = async (userId: string, todosId: ITodo['id'][]) => {
+  const options = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(todosId),
+  }
+
+  const METHOD = 'complete'
+
+  const response = await fetchRequest(`mapping?user_id=${userId}&method=${METHOD}`, options)
+
+  return await response.json()
+}

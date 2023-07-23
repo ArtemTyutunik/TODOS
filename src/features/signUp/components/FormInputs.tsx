@@ -3,6 +3,7 @@ import {Control, Controller, useFormState} from 'react-hook-form';
 import {loginValidation, passwordValidation} from '@shared/forms/validation/validation';
 import {TextField} from '@mui/material';
 import {IFormInputs} from '@shared/forms/interfaces/interfaces';
+import PasswordInput from '@shared/forms/authorization/passwordInput';
 
 interface Props {
     control: Control<IFormInputs>
@@ -34,19 +35,8 @@ const FormInputs = ({control}: Props) => {
         control={control}
         name={'password'}
         rules = {passwordValidation}
-        render={({field}) => <TextField
-          onChange={field.onChange}
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-          error={ !!errors?.password?.message }
-          helperText={ errors?.password?.message }
-        />}
+        render={({field}) => <PasswordInput onChange={field.onChange}
+          errorMessage={errors?.password?.message}/> }
       />
     </>
   );

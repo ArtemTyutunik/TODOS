@@ -1,13 +1,12 @@
 import React from 'react';
 import {Box, Typography} from '@mui/material';
 import {Link} from 'react-router-dom';
-import SignUpButton from '@pages/authorization/HomePage/components/SignUpButton';
+import SignUpButton from '@pages/authentication/HomePage/components/SignUpButton';
 import AppLogo from '@shared/components/AppLogo';
 
 const HomePage = () => {
   return (
     <Box>
-      {/* Header*/}
       <Box sx={headerStyles}>
         <Box sx={containerStyles} justifyContent={'space-between'}>
           <AppLogo sx={logoStyles}/>
@@ -83,11 +82,13 @@ const signInLink = {
   'color': '#232115',
   'fontWeight': 500,
   'fontFamily': 'Inter',
-  'padding': '3px 12px',
   'cursor': 'pointer',
   'borderRadius': '7px',
   '&: hover': {
     background: 'hsla(53,10%,69%,.2)',
+  },
+  '& a': {
+    padding: '7px 12px',
   },
 }
 

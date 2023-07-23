@@ -67,7 +67,9 @@ export default memo(function Header() {
               {/* modal window to add a new task*/}
               <BasicModal open={isAddTaskModalOpen}
                 onClose={closeAddTaskModal}>
-                <CreateTodoForm onClose={closeAddTaskModal}/>
+                <Box minWidth={{mobile: '350px', largeMobile: '400px', tablet: '600px'}}>
+                  <CreateTodoForm onClose={closeAddTaskModal}/>
+                </Box>
               </BasicModal>
               <ProgressComponent/>
             </Box>

@@ -11,6 +11,7 @@ import '@features/logIn/components/AuthFormStyles.css'
 import AppLogo from '@shared/components/AppLogo';
 import FormAuth from '@shared/forms/authorization/Form';
 import LoadingIndicator from '@shared/forms/authorization/loadingIndicator';
+import SignInWithGoogle from '@pages/authentication/components/signInWithGoogle';
 
 function LoginForm({onSubmit, isPending, isSuccess}: IInputsProps) {
   const {handleSubmit, control} = useForm<IFormInputs>();
@@ -42,6 +43,7 @@ function LoginForm({onSubmit, isPending, isSuccess}: IInputsProps) {
               <Typography component="h1" variant="h5" color={'#1976d2'}>
                           Login
               </Typography>
+
               <Box component="form"
                 className={'AuthForm'}
                 onSubmit={handleSubmit(onSubmit)}
@@ -49,15 +51,18 @@ function LoginForm({onSubmit, isPending, isSuccess}: IInputsProps) {
                 <LoginInputs control={control}/>
                 <ErrorMessage/>
 
+                <SignInWithGoogle/>
                 <SubmitButton control={control} pending={isPending}>
                               Login
                 </SubmitButton>
+
                 <FormLink to='/sign-up'>
                   {'Don`t have an account? Sign Up'}
                 </FormLink>
               </Box>
 
               <LoadingIndicator isPending={isPending} showingSuccess={isSuccess}/>
+
             </>
           </FormWrapper>
         </FormAuth>

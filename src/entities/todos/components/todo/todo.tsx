@@ -1,19 +1,20 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {addNewTask, deleteTask, setPriority, toggleTaskComplete} from '../store/todo';
+import {addNewTask, deleteTask, setPriority, toggleTaskComplete} from '../../store/todo';
 import {EditTodoForm} from '@features/todoFeatures/EditTodo';
 import {ITodo, Priority} from '@shared/interfacesAndTypes';
-import TodoCard from './todoCard';
+import TodoCard from '../todoCard';
 import {useVisable} from '@shared/hooks';
 import {deleteTodoById, postNewTodo, sendUpdatedTodo} from '@shared/api/services/todos';
 import {userIdSelector} from '@entities/user/model/store';
+import {Box} from '@mui/material';
 
 interface Props {
     todo: ITodo
 }
 
-const Todo = ({todo}: Props) => {
+const Todo = memo(({todo}: Props) => {
   const {id} = todo;
   const dispatch = useDispatch();
   const userId = useSelector(userIdSelector)
@@ -55,7 +56,11 @@ const Todo = ({todo}: Props) => {
     }
   };
 
-  if (isEditing) return <EditTodoForm onClose={closeEditing} todo={todo}/>;
+  if (isEditing) {
+    return <Box width={'100%'}>
+      <EditTodoForm onClose={closeEditing} todo={todo}/>
+    </Box>
+  }
 
   return <TodoCard
     todo={todo}
@@ -64,6 +69,6 @@ const Todo = ({todo}: Props) => {
     setPriorityAction={setPriorityAction}
     onComplete={onComplete}
     onEdit={openEditing}/>;
-};
+});
 
 export default Todo;

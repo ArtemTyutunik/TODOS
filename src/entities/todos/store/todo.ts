@@ -32,6 +32,9 @@ const todosSlice = createSlice({
     fetchTasks: (state, {payload}: PayloadAction<ITodo[]>) => {
       return {...state, todos: [...payload], isFetched: true};
     },
+    updateTodos: (state, {payload}: PayloadAction<ITodo[]> ) => {
+      return {...state, todos: [...payload]}
+    },
     fetchWithError: (state) => {
       return {...state, isErrorFetching: true}
     },
@@ -98,7 +101,8 @@ export const {addNewTask,
   fetchTasks,
   deleteTodoTag,
   toggleIsCurrent,
-  fetchWithError} = todosSlice.actions;
+  fetchWithError,
+  updateTodos} = todosSlice.actions;
 
 export const allTodosSelector = (state: RootReducer) => state.todosReducer.todos
 

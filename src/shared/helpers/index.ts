@@ -1,4 +1,5 @@
 import {IFavorite} from '@shared/interfacesAndTypes';
+import sortTodosByProperty from './sortTodosByProperty/sortTodosByProperty'
 
 export const getBoolValueFromLocalStorage = (key: string) => {
   const currentValue = localStorage.getItem(key)
@@ -16,9 +17,9 @@ export const configureFavoriteItem = (type: 'tag' | 'filter', itemId: string): I
 
 export const itemAlreadyExist = <T>(list: T[], value: string, currentItem: T): boolean => {
   //@ts-ignore
-  if (list.find((item) => item.name.trim() === value.trim() && item?.id !== currentItem.id)) {
-    return true
-  } else {
-    return false
-  }
+  return list.find((item) => item.name.trim() === value.trim() && item?.id !== currentItem.id)
+}
+
+export {
+  sortTodosByProperty,
 }

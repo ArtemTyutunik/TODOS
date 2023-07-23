@@ -63,6 +63,10 @@ const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = fa
 
   const isValid = project.name.trim().length > 0;
 
+  const onSubmit = () => {
+    editingMode ? editProject() : createNewProject()
+  }
+
   return (
     <BasicModal open={isOpen} onClose={onClose}>
       <ModalWrapper>
@@ -85,9 +89,7 @@ const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = fa
         <Box margin={'10px 0'} paddingRight={'15px'}>
           <FormSubmissionButtons onClose={onClose}
             isValid={!invalidData && isValid}
-            onSubmit={() => {
-              editingMode ? editProject() : createNewProject()
-            }}/>
+            onSubmit={onSubmit}/>
         </Box>
       </ModalWrapper>
     </BasicModal>

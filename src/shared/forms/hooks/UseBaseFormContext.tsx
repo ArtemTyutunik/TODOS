@@ -1,4 +1,5 @@
-import React, {useContext} from 'react';
+import * as React from 'react';
+import {useContext, createContext} from 'react';
 import {IDate, Priority, tagIdType} from '@shared/interfacesAndTypes';
 import {SelectChangeEvent} from '@mui/material';
 
@@ -11,7 +12,7 @@ export interface IFormContext {
     onSelectTag: (newTag: string) => void
 }
 
-const FormContext = React.createContext<IFormContext>(null!)
+const FormContext = createContext<IFormContext>(null!)
 
 interface Props {
     values: IFormContext,
