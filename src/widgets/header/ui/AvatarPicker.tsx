@@ -2,6 +2,9 @@ import React, {useRef, useState} from 'react';
 import UserAvatar from './userAvatar';
 import {Box} from '@mui/material';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import {toast} from 'react-toastify';
+import WrongFileSize from '@shared/components/Notification/errors/WrongFileSize';
+import {errorOptions} from '@shared/components/Notification/constants';
 
 
 const AvatarPicker = () => {
@@ -10,20 +13,25 @@ const AvatarPicker = () => {
 
   const onFilePick = (e: React.SyntheticEvent) => {
     e.stopPropagation()
-    //filePickerElement.current?.click()
+    filePickerElement.current?.click()
   }
 
   const onFilePickerChange = (e: React.ChangeEvent) => {
     const file = (e.target as HTMLInputElement)?.files![0]
+    const MAX_SIZE = 1000000
 
     if ( file) {
-      setSelectedFile(file)
+      if (file.size > MAX_SIZE) {
+        toast.error(<WrongFileSize/>, errorOptions)
+      } else {
+        setSelectedFile(file)
+      }
     }
   }
 
   return <Box sx={avatarWrapperStyles} onClick={onFilePick}>
     <UserAvatar/>
-    <Box sx={editAvatarButton}>
+    <Box sx={editAvatarButton} className={'edit-avatar'}>
       <Box width={'fit-content'} margin={'10px auto 0'}>
         <PhotoCameraIcon sx={{color: '#fff', fontSize: '15px'}}/>
       </Box>
