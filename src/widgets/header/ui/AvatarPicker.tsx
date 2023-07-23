@@ -10,7 +10,7 @@ const AvatarPicker = () => {
 
   const onFilePick = (e: React.SyntheticEvent) => {
     e.stopPropagation()
-    filePickerElement.current?.click()
+    //filePickerElement.current?.click()
   }
 
   const onFilePickerChange = (e: React.ChangeEvent) => {
@@ -23,7 +23,7 @@ const AvatarPicker = () => {
 
   return <Box sx={avatarWrapperStyles} onClick={onFilePick}>
     <UserAvatar/>
-    <Box sx={editAvatarButton} className={'edit-avatar'}>
+    <Box sx={editAvatarButton}>
       <Box width={'fit-content'} margin={'10px auto 0'}>
         <PhotoCameraIcon sx={{color: '#fff', fontSize: '15px'}}/>
       </Box>
