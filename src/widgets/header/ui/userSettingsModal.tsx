@@ -107,7 +107,7 @@ export default function UserSettingsMenu() {
         </List>
         <Divider/>
         <Typography textAlign={'center'} fontSize={'13px'} padding={'5px 0'} color={'#202020'}>
-            v. 1.1.0 <span>&#183;</span> Designed by Artem Tyutyunik
+            v. 1.2.0 <span>&#183;</span> Designed by Artem Tyutyunik
         </Typography>
       </DropdownMenu>
     </>
