@@ -63,7 +63,7 @@ const SortingMenu = () => {
                 </Box>
               </CustomIconButton>
               <Tooltip title={'Reset sorting'}>
-                <CustomIconButton onClick={() => dispatch(setSortingValue('default'))}>
+                <CustomIconButton onClick={() => onOptionSelect('default')}>
                   <CloseIcon sx={{fontSize: '18px', color: '#808080'}}/>
                 </CustomIconButton>
               </Tooltip>
