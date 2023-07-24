@@ -1,4 +1,5 @@
 import {ToastOptions} from 'react-toastify';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 export const options: ToastOptions = {
   position: 'bottom-left',
@@ -23,3 +24,7 @@ export const errorOptions: ToastOptions = {
   progress: undefined,
   theme: 'light',
 }
+
+export const SuccessIcon = CheckCircleOutlineIcon
+
+
