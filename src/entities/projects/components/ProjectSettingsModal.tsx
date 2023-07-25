@@ -17,7 +17,7 @@ interface Props {
     isOpen: boolean,
     onClose: () => void,
     editingMode?: boolean,
-  editingProject?: IProject
+    editingProject?: IProject
 }
 const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = false}: Props) => {
   const projects = useSelector(projectsSelector)
@@ -67,6 +67,7 @@ const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = fa
     editingMode ? editProject() : createNewProject()
   }
 
+  const isAllowed = !invalidData && isValid
   return (
     <BasicModal open={isOpen} onClose={onClose}>
       <ModalWrapper>
@@ -76,19 +77,21 @@ const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = fa
           </Typography>
         </Box>
         <InputsSection isError={invalidData}>
-          <NameInput isError={false} inputValue={project.name} onChange={onInputNameChange}/>
+          <NameInput isError={false}
+            inputValue={project.name}
+            onChange={onInputNameChange}
+            onSubmit={isAllowed ? onSubmit : null}/>
           <Box marginBottom={'15px'}>
             <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
-                          Tag color
+              Tag color
             </Typography>
 
             <ColorTagSelect settings={project.color} onSelectChange={onColorSelect}/>
           </Box>
         </InputsSection>
-
         <Box margin={'10px 0'} paddingRight={'15px'}>
           <FormSubmissionButtons onClose={onClose}
-            isValid={!invalidData && isValid}
+            isValid={isAllowed}
             onSubmit={onSubmit}/>
         </Box>
       </ModalWrapper>

@@ -78,11 +78,13 @@ const TagInfoModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
 
   const isValid = tagState.name.trim().length > 0;
 
+  const isAllowed = !isError && isValid
   return (
     <BasicModal open={isOpen} onClose={onClose}>
       <>
         <TagInfoModalForm tagState={tagState}
           isError={isError}
+          onSubmit={isAllowed ? onSubmitModal : null}
           isChecked={chosenAsFavorite}
           onSelectChange={onSelectChange}
           onInputChange={onInputChange}
@@ -90,7 +92,7 @@ const TagInfoModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
         />
         <Box margin={'10px 0'} paddingRight={'15px'}>
           <FormSubmissionButtons onClose={onClose}
-            isValid={isValid && !isError}
+            isValid={isAllowed}
             onSubmit={onSubmitModal}/>
         </Box>
       </>
