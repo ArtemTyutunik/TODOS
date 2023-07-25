@@ -1,6 +1,7 @@
 import {useGoogleLogin} from '@react-oauth/google';
+import {IGoogleAccountInfo} from '@shared/forms/interfaces/interfaces';
 
-const useGoogleAccount = (requestFunction: (userAccount: unknown) => void) => {
+const useGoogleAccount = (requestFunction: (userAccount: IGoogleAccountInfo) => void) => {
   return useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {

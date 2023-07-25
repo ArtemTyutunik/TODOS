@@ -7,6 +7,7 @@ import {IUser} from '@shared/interfacesAndTypes';
 import {signUpWithGoogleService} from '@shared/api/services/authorization';
 import ContinueWithGoogleButton from '@pages/authentication/components/ContinueWithGoogleButton';
 import setUserDataToLocalStorage from '@shared/helpers/setUserDataToLocalStorage';
+import {IGoogleAccountInfo} from '@shared/forms/interfaces/interfaces';
 
 const SignUpWithGoogle = () => {
   const dispatch = useDispatch()
@@ -18,10 +19,9 @@ const SignUpWithGoogle = () => {
     navigate('/today')
   }
 
-  const signUpUserAccount = async (accountInfo: unknown) => {
+  const signUpUserAccount = async (accountInfo: IGoogleAccountInfo) => {
     try {
-      //@ts-ignore
-      const {email = '', picture = '', name = ''} = accountInfo
+      const {email = '', picture, name} = accountInfo
 
       const user = await signUpWithGoogleService(email, {picture, name})
 

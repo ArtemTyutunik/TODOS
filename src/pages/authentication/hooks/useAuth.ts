@@ -42,12 +42,12 @@ const useAuth = (requestFn: params['requestFn'],
       const user = await requestFn(login, password)
       setIsPending(false)
       setUser(user)
-
-      //@ts-ignore
-    } catch (error: string) {
+    } catch (error: unknown) {
       setMinTimePassed(true)
       setIsPending(false)
-      failedRequestHandler(error)
+      if (typeof error === 'string') {
+        failedRequestHandler(error)
+      }
     }
   };
 

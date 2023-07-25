@@ -19,8 +19,8 @@ import {RootReducer} from '@shared/interfacesAndTypes';
 import {logOutUser} from '@entities/user/model/store';
 import DropdownMenu from '@shared/components/dropdownMenu';
 import {useAnchorElement} from '@shared/hooks';
-import UserAvatar from './userAvatar';
-import AvatarPicker from './AvatarPicker';
+import UserAvatar from './UserAvatar/userAvatar';
+import AvatarPicker from './AvatarPicker/AvatarPicker';
 
 type menuItem = {
     label: string,

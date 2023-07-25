@@ -34,12 +34,16 @@ const userSlice = createSlice({
       return {...state, isAuth: true, user: {...payload}, isError: false};
     },
     logOutUser: (state) => {
-      state.isAuth = false;
-      state.user = null;
+      return {...state, user: null, isAuth: false}
     },
     authWithError: ( state, {payload}: PayloadAction<string>) => {
       state.isError = true;
       state.errorMessage = payload;
+    },
+    setUserPicture: (state, {payload}: PayloadAction<string>) => {
+      if (state.user) {
+        return {...state, user: {...state.user, picture: payload}}
+      } else return state
     },
   },
 });
@@ -48,4 +52,4 @@ export const userReducer = userSlice.reducer;
 
 export const userIdSelector = (state: RootReducer) => state.userReducer.user?.user_id || ''
 
-export const {authUser, logOutUser, authWithError, signUpUser} = userSlice.actions;
+export const {authUser, setUserPicture, logOutUser, authWithError, signUpUser} = userSlice.actions;

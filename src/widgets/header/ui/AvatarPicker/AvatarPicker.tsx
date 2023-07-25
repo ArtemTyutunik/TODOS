@@ -1,30 +1,40 @@
-import React, {useRef, useState} from 'react';
-import UserAvatar from './userAvatar';
+import React, {useRef} from 'react';
+import UserAvatar from '../UserAvatar/userAvatar';
 import {Box} from '@mui/material';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import {toast} from 'react-toastify';
 import WrongFileSize from '@shared/components/Notification/errors/WrongFileSize';
 import {errorOptions} from '@shared/components/Notification/constants';
-
+import {setNewAvatar} from '@shared/api/services/user';
+import {useDispatch} from 'react-redux';
+import {setUserPicture} from '@entities/user/model/store';
 
 const AvatarPicker = () => {
   const filePickerElement = useRef<HTMLInputElement | null>(null)
-  const [, setSelectedFile] = useState<null | File>(null)
+  const dispatch = useDispatch()
+  const user = JSON.parse(localStorage.getItem('user') ?? '{}')
 
   const onFilePick = (e: React.SyntheticEvent) => {
     e.stopPropagation()
     filePickerElement.current?.click()
   }
 
-  const onFilePickerChange = (e: React.ChangeEvent) => {
+  const onFilePickerChange = async (e: React.ChangeEvent) => {
     const file = (e.target as HTMLInputElement)?.files![0]
     const MAX_SIZE = 1000000
 
     if ( file) {
-      if (file.size > MAX_SIZE) {
-        toast.error(<WrongFileSize/>, errorOptions)
+      if (file.size <= MAX_SIZE) {
+        try {
+          const response = await setNewAvatar(file, user?.login)
+          const url = await response.text()
+          dispatch(setUserPicture(url));
+          localStorage.setItem('user', JSON.stringify({...user, picture: url}))
+        } catch (e) {
+          console.log(e)
+        }
       } else {
-        setSelectedFile(file)
+        toast.error(<WrongFileSize/>, errorOptions)
       }
     }
   }

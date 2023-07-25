@@ -7,6 +7,7 @@ import {signInWithGoogleService} from '@shared/api/services/authorization';
 import useGoogleAccount from '@pages/authentication/hooks/useGoogleAccount';
 import ContinueWithGoogleButton from '@pages/authentication/components/ContinueWithGoogleButton';
 import setUserDataToLocalStorage from '@shared/helpers/setUserDataToLocalStorage';
+import {IGoogleAccountInfo} from '@shared/forms/interfaces/interfaces';
 
 const SignInWithGoogle = () => {
   const dispatch = useDispatch()
@@ -18,9 +19,8 @@ const SignInWithGoogle = () => {
     navigate('/today')
   }
 
-  const signUpUserAccount = async (accountInfo: unknown) => {
+  const signUpUserAccount = async (accountInfo: IGoogleAccountInfo) => {
     try {
-      //@ts-ignore
       const {email} = accountInfo
 
       const user = await signInWithGoogleService(email)
