@@ -11,6 +11,7 @@ import {IProject} from '@shared/interfacesAndTypes';
 import {deleteProjectRequest, editProjectRequest} from '@shared/api/services/projects';
 import {userIdSelector} from '@entities/user/model/store';
 import useSortedProjects from '@entities/projects/hooks/useSortedProjects';
+import {useNavigate} from 'react-router-dom';
 
 const Projects = memo(() => {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -20,11 +21,13 @@ const Projects = memo(() => {
   const dispatch = useDispatch()
   const toggleList = () => setIsExpanded((prevState) => !prevState)
   const userId = useSelector(userIdSelector)
+  const navigate = useNavigate()
 
   const onDelete = async (id: IProject['id']) => {
     try {
       await deleteProjectRequest(userId, id)
       dispatch(deleteProject(id))
+      navigate('/today')
     } catch (e) {
       console.log(e)
     }
