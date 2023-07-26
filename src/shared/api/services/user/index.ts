@@ -11,5 +11,11 @@ export const setNewAvatar = async (file: File, email: string) => {
     body: formData,
   }
 
-  return await fetchRequest('set_avatar', options)
+  const response = await fetchRequest('set_avatar', options)
+
+  if (!response.ok) {
+    throw new Error('error on server')
+  }
+
+  return await response.text()
 }

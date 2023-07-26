@@ -1,12 +1,12 @@
 import React, {useRef} from 'react';
-import UserAvatar from '../UserAvatar/userAvatar';
+import {useDispatch} from 'react-redux';
 import {Box} from '@mui/material';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import {toast} from 'react-toastify';
-import WrongFileSize from '@shared/components/Notification/errors/WrongFileSize';
+import UserAvatar from '../UserAvatar/userAvatar';
+import {WrongFileSizeNotification, LoadFileServerError} from '@shared/components/Notification';
 import {errorOptions} from '@shared/components/Notification/constants';
 import {setNewAvatar} from '@shared/api/services/user';
-import {useDispatch} from 'react-redux';
 import {setUserPicture} from '@entities/user/model/store';
 
 const AvatarPicker = () => {
@@ -26,15 +26,14 @@ const AvatarPicker = () => {
     if ( file) {
       if (file.size <= MAX_SIZE) {
         try {
-          const response = await setNewAvatar(file, user?.login)
-          const url = await response.text()
+          const url = await setNewAvatar(file, user?.login)
           dispatch(setUserPicture(url));
           localStorage.setItem('user', JSON.stringify({...user, picture: url}))
         } catch (e) {
-          console.log(e)
+          toast.error(<LoadFileServerError/>, errorOptions)
         }
       } else {
-        toast.error(<WrongFileSize/>, errorOptions)
+        toast.error(<WrongFileSizeNotification/>, errorOptions)
       }
     }
   }

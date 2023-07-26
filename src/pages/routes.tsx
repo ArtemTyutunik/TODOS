@@ -6,6 +6,7 @@ import {RootReducer} from '@shared/interfacesAndTypes';
 import SpinnerComponent from '@shared/components/SpinnerComponent/SpinnerComponent';
 import {TODAY_LINK, INBOX_LINK, TAGS_LINK} from '@shared/constants';
 import {ProjectPage} from '@pages/project';
+import NotFound from '@pages/NotFound';
 
 const TodayTodosPage = lazy(() => import('./todos/pages/TodayPage/TodayTodos'))
 const InboxTodosPage = lazy(() => import('./todos/pages/InboxPage/InboxTodos'))
@@ -37,6 +38,9 @@ const Routing = () => {
           <Route path={'/project/:id'} element={<Suspense fallback={null}>
             <ProjectPage/>
           </Suspense>}>
+          </Route>
+          <Route path={'*'} element={<NotFound/>}>
+
           </Route>
         </Routes>
       </>
