@@ -59,6 +59,7 @@ const SelectedTodosActions = ({selectedTodos, setSelectedTodos}: Props) => {
     },
   ]
 
+  const deleteMessage = `${selectedTodos.length} ${selectedTodos.length > 1 ? 'objects' : 'object'}`
   return (
     <Box>
       {
@@ -71,7 +72,10 @@ const SelectedTodosActions = ({selectedTodos, setSelectedTodos}: Props) => {
           </Tooltip>
         </CustomIconButton>)
       }
-      <ConfirmDeleteModal isOpen={confirmDeletion} onClose={hideConfirmDeletion} onSubmit={onDeleteSelected}/>
+      <ConfirmDeleteModal isOpen={confirmDeletion}
+        onClose={hideConfirmDeletion}
+        onSubmit={onDeleteSelected}
+        ownMessage={`Are you sure that you want to delete ${deleteMessage}`}/>
     </Box>
   );
 };
