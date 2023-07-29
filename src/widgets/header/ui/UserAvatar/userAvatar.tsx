@@ -1,6 +1,6 @@
 import React from 'react';
 import {Avatar} from '@mui/material';
-import configureAvatarSymbols from '../../utils/ConfigureAvatarSymbols';
+import configureAvatarSymbols from '../../utils/ConfigureAvatarSymbols/ConfigureAvatarSymbols';
 import theme from '@app/theme';
 import {useSelector} from 'react-redux';
 import {RootReducer} from '@app/store';
@@ -12,14 +12,14 @@ const UserAvatar = ({color = theme.avatar}: {color?: string}) => {
   const picture = useSelector((state: RootReducer ) => state.userReducer?.user?.picture)
 
   return picture ? <UserImage url={picture}/> : (
-      <Avatar sx={defaultAvatar(color)}>
+      <Avatar sx={defaultAvatar(color)} data-testid={'default-avatar'}>
         {AvatarSymbols}
       </Avatar>
   )
 };
 
 const UserImage = ({url}: {url: string}) => {
-  return <Avatar sx={avatarStyles(url)}>
+  return <Avatar sx={avatarStyles(url)} data-testid={'user-avatar'} data-url={url}>
     <></>
   </Avatar>
 }

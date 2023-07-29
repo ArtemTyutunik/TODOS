@@ -1,35 +1,32 @@
 import * as React from 'react';
-import {configureStore} from '@reduxjs/toolkit';
-import * as reducers from '@app/store/reducers'
+import {configureStore, PreloadedState} from '@reduxjs/toolkit';
 import {PropsWithChildren} from 'react';
 import {Provider} from 'react-redux';
-import {render} from '@testing-library/react';
+import {render, RenderOptions} from '@testing-library/react';
 import {ThemeProvider} from '@mui/material';
 import theme from '@app/theme';
-import {IUser} from '@shared/interfacesAndTypes';
+import {RootReducer} from '@shared/interfacesAndTypes';
+import {AppStore} from '@app/store';
+import * as reducers from '@app/store/reducers';
 
-export default function renderWithProviders(ui: React.ReactElement, ...renderOptions: any[]) {
-  const userAccount: Partial<IUser> = {
-    login: 'testUser@gmail.com',
-    accessToken: '',
-    name: 'test user name',
-    user_id: 'test user id',
-    picture: 'test picture url',
-  }
+interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
+  preloadedState?: Partial<PreloadedState<RootReducer>>,
+  store?: AppStore
+}
 
-  localStorage.setItem('user', JSON.stringify(userAccount))
-  const mockStore = configureStore({
-    reducer: {...reducers},
-    preloadedState: {},
-  })
 
+export default function renderWithProviders(ui: React.ReactElement,
+    {
+      preloadedState = {},
+      store = configureStore({reducer: {...reducers}, preloadedState}),
+    }: ExtendedRenderOptions = {}) {
   function Wrapper({children}: PropsWithChildren) {
-    return <Provider store={mockStore}>
+    return <Provider store={store}>
       <ThemeProvider theme={theme}>
         {children}
       </ThemeProvider>
     </Provider>
   }
 
-  return {...render(ui, {wrapper: Wrapper, ...renderOptions}), mockStore}
+  return {...render(ui, {wrapper: Wrapper}), store}
 }
