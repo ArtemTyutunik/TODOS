@@ -20,7 +20,7 @@ export default memo(function Header() {
 
   return (
     <Box sx={{flexGrow: 1}} position={'relative'}>
-      <AppBar position="static" sx = {{boxShadow: 'none'}}>
+      <AppBar position={'relative'} sx = {{boxShadow: 'none'}}>
         <Container sx={{margin: {laptop: '0 auto'},
           width: {laptop: '100%'},
           padding: {mobile: '0px', laptop: '0 16px'}}}>

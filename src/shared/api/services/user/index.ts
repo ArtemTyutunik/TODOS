@@ -19,3 +19,36 @@ export const setNewAvatar = async (file: File, email: string) => {
 
   return await response.text()
 }
+
+export const confirmEmail = async (emailToken: string) => {
+  const body = {
+    emailToken: emailToken,
+  }
+  const options = {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+
+  return await fetchRequest('confirm_email', options)
+}
+
+export const resendEmail = async (login: string) => {
+  const options = {
+    method: 'POST',
+    body: JSON.stringify({
+      login: login,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+  return await fetchRequest('resend_email', options)
+}
+
+export const getVerifiedStatus = async (login: string): Promise<boolean> => {
+  const response = await fetchRequest('get_verification_status?login=' + login)
+  return await response.json()
+}

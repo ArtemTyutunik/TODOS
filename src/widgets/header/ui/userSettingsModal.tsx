@@ -47,6 +47,7 @@ export default function UserSettingsMenu() {
         dispatch(logOutUser());
         localStorage.removeItem('user');
         localStorage.removeItem('inboxID');
+        localStorage.removeItem('verified');
         navigate('/');
       },
     }];

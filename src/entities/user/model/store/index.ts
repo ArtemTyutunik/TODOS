@@ -6,6 +6,13 @@ interface initialState {
   isAuth: boolean,
   errorMessage: string | null,
   isError: boolean,
+  verified: boolean | 'unset',
+}
+
+const getVerifiedStatus = (): boolean | 'unset' => {
+  const storageValue = localStorage.getItem('verified')
+  console.log(storageValue)
+  return storageValue ? JSON.parse(storageValue) : 'unset';
 }
 
 const configureInitialState = (): initialState => {
@@ -15,11 +22,13 @@ const configureInitialState = (): initialState => {
     isAuth: true,
     isError: false,
     errorMessage: null,
+    verified: getVerifiedStatus(),
   } : {
     user: null,
     isAuth: false,
     isError: false,
     errorMessage: null,
+    verified: 'unset',
   };
 };
 
@@ -34,7 +43,7 @@ const userSlice = createSlice({
       return {...state, isAuth: true, user: {...payload}, isError: false};
     },
     logOutUser: (state) => {
-      return {...state, user: null, isAuth: false}
+      return {...state, user: null, isAuth: false, verified: 'unset'}
     },
     authWithError: ( state, {payload}: PayloadAction<string>) => {
       state.isError = true;
@@ -45,6 +54,9 @@ const userSlice = createSlice({
         return {...state, user: {...state.user, picture: payload}}
       } else return state
     },
+    authVerified: (state, {payload}: PayloadAction<boolean>) => {
+      return {...state, verified: payload}
+    },
   },
 });
 
@@ -52,4 +64,11 @@ export const userReducer = userSlice.reducer;
 
 export const userIdSelector = (state: RootReducer) => state.userReducer.user?.user_id || ''
 
-export const {authUser, setUserPicture, logOutUser, authWithError, signUpUser} = userSlice.actions;
+export const isVerifiedSelector = (state: RootReducer) => state.userReducer.verified
+
+export const {authUser,
+  setUserPicture,
+  logOutUser,
+  authWithError,
+  signUpUser,
+  authVerified} = userSlice.actions;
