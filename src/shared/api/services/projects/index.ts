@@ -30,7 +30,9 @@ export const deleteProjectRequest = async (userId: string, id: string) => {
     method: 'DELETE',
   }
 
-  return await fetchRequest(`delete_project?user_id=${userId}&id=${id}`, options)
+  const response = await fetchRequest(`delete_project?user_id=${userId}&id=${id}`, options)
+
+  return await response.json()
 }
 
 
