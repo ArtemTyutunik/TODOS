@@ -23,6 +23,9 @@ const sortTodosByProperty = (sortType: string, todos: ITodo[], order: string) =>
         return order === 'ascending' ? secondPriority - firstPriority : firstPriority - secondPriority
       })
     }
+    case 'completed': {
+      return [...todos].sort((first, second) => compareBooleanValues(first.done, second.done, order))
+    }
     default: return todos
   }
 }
@@ -36,5 +39,15 @@ const compareDates = (first: string | undefined, second: string | undefined, ord
   } else if (dayjs(first).isSame(second)) {
     return 0
   } else return order === 'ascending' ? -1 : 1
+}
+
+const compareBooleanValues = (first: boolean, second: boolean, order: string): number => {
+  if (first === second) {
+    return 0
+  } else if (first) {
+    return order === 'ascending' ? 1 : -1
+  } else {
+    return order === 'ascending' ? -1 : 1
+  }
 }
 
