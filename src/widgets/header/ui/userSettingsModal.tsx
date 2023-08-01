@@ -13,6 +13,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 import {RootReducer} from '@shared/interfacesAndTypes';
@@ -21,21 +22,24 @@ import DropdownMenu from '@shared/components/dropdownMenu';
 import {useAnchorElement} from '@shared/hooks';
 import UserAvatar from './UserAvatar/userAvatar';
 import AvatarPicker from './AvatarPicker/AvatarPicker';
+import {SwitchComponent} from '@shared/components/SwitchComponent';
+import {themeModeSelector, toggleMode} from '@app/store/AppStore';
 
 type menuItem = {
-    label: string,
+    label: React.ReactNode,
     Icon: () => React.ReactElement,
     onClick: () => void
 }
 
 const ListItemButtonStyles = {
-  'padding': '15px',
+  'padding': '10px',
   'borderRadius': '5px',
 };
 
 
 export default function UserSettingsMenu() {
   const [anchorElUser, addAnchorEl, removeAnchorEl] = useAnchorElement(null);
+  const mode = useSelector(themeModeSelector)
   const {user} = useSelector((state: RootReducer) => state.userReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -55,6 +59,12 @@ export default function UserSettingsMenu() {
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     addAnchorEl(event.currentTarget);
   };
+
+  const onDarkModeChange = () => {
+    const newValue = mode === 'dark' ? 'light' : 'dark';
+    dispatch(toggleMode(newValue));
+    localStorage.setItem('mode', newValue);
+  }
 
   return (
     <>
@@ -92,8 +102,8 @@ export default function UserSettingsMenu() {
         </ListItem>
         <Divider/>
         <List>
-          {menuItems.map(({label, Icon, onClick}) => (
-            <ListItem key={label} onClick={() => {
+          {menuItems.map(({label, Icon, onClick}, index) => (
+            <ListItem key={index} onClick={() => {
               onClick();
               removeAnchorEl();
             }}>
@@ -105,6 +115,15 @@ export default function UserSettingsMenu() {
               </ListItemButton>
             </ListItem>
           ))}
+          <ListItem sx={{marginLeft: '10px', marginBottom: '10px'}}>
+            <ListItemIcon>
+              <DarkModeIcon/>
+            </ListItemIcon>
+            <Typography mr={'15px'}>
+                Dark mode
+            </Typography>
+            <SwitchComponent checked={mode === 'dark'} onChange={onDarkModeChange}/>
+          </ListItem>
         </List>
         <Divider/>
         <Typography textAlign={'center'} fontSize={'13px'} padding={'5px 0'} color={'#202020'}>

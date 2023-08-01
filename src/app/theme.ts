@@ -8,6 +8,7 @@ declare module '@mui/material/styles' {
       lightGrey: string,
       paper: string,
       inboxIcon: string,
+      dark: string
     },
     text: {
       main: string,
@@ -28,7 +29,8 @@ declare module '@mui/material/styles' {
     background: {
       lightGrey: string,
       paper: string,
-      inboxIcon: string
+      inboxIcon: string,
+      dark: string
     },
     text: {
       main: string,
@@ -69,6 +71,7 @@ const theme = createTheme({
   background: {
     lightGrey: '#f5f5f5',
     paper: '#ffffff',
+    dark: '#2E2B2B',
     inboxIcon: '#246fe0',
   },
   text: {
