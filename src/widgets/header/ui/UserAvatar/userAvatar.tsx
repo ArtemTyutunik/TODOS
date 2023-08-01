@@ -1,11 +1,10 @@
 import React from 'react';
 import {Avatar} from '@mui/material';
 import configureAvatarSymbols from '../../utils/ConfigureAvatarSymbols/ConfigureAvatarSymbols';
-import theme from '@app/theme';
 import {useSelector} from 'react-redux';
 import {RootReducer} from '@app/store';
 
-const UserAvatar = ({color = theme.avatar}: {color?: string}) => {
+const UserAvatar = ({color = '#48833f'}: {color?: string}) => {
   const user = localStorage.getItem('user')
   const {name = '', login = ''} = user ? JSON.parse(user) : {};
   const AvatarSymbols = configureAvatarSymbols(name, login)

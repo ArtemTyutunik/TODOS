@@ -64,7 +64,7 @@ const TodoCard = ({
         data-testid="Todo card"
       >
         <Box sx = {TodoContainerStyles} className={`${isCurrent && 'todo-wrap' || ''}`}>
-          <Box sx={{backgroundColor: 'white'}}
+          <Box sx={{backgroundColor: 'transparent'}}
             display={'flex'}
             width={'100%'}
             padding={'10px'}

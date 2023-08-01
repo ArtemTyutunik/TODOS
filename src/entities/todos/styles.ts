@@ -1,8 +1,9 @@
 import {Theme} from '@mui/material';
 
-export const TodoContainerStyles = {
+export const TodoContainerStyles = (theme: Theme) => ({
   'mb': '10px',
   'position': 'relative',
+  'background': theme.background.visibleBackground,
   'display': 'flex',
   'borderRadius': '10px',
   'alignItems': 'center',
@@ -20,7 +21,7 @@ export const TodoContainerStyles = {
     zIndex: 5,
     background: '#fff',
   },
-};
+});
 
 export const TodoFlexboxStyles = {
   display: 'flex',
@@ -28,11 +29,12 @@ export const TodoFlexboxStyles = {
   cursor: 'default',
 };
 
-export const TodoLabelStyles = {
+export const TodoLabelStyles = (theme: Theme) => ({
   fontSize: '17px',
   fontWeight: 400,
   lineHeight: 1.3,
-};
+  color: theme.text.main,
+});
 
 export const todoDescriptionStyles = (theme: Theme) => ({
   fontSize: {mobile: '13px', largeMobile: '16px'},

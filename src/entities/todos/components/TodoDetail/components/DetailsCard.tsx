@@ -44,7 +44,7 @@ const DetailsCard = ({todo, onComplete}: Props) => {
   }
 
   return (
-    <Box bgcolor={theme.background.paper}
+    <Box bgcolor={theme.background.appBackground}
       minWidth={{mobile: '330px', largeMobile: '400px', tablet: '800px'}}
       borderRadius={'7px'}>
       <Box display={'flex'}>

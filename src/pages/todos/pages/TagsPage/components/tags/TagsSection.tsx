@@ -1,4 +1,4 @@
-import {Box, Divider, IconButton, Typography} from '@mui/material';
+import {Box, Divider, IconButton, Typography, useTheme} from '@mui/material';
 import {AddIcon} from '@shared/components/icons';
 import FilterPageTagsList from '@pages/todos/pages/TagsPage/components/tags/FilterPageTagsList';
 import TagInfoModal from '@pages/todos/pages/TagsPage/components/tags/TagInfoModal';
@@ -11,6 +11,7 @@ import {arrowIconStyles} from '@pages/todos/pages/TagsPage/components/tags/compo
 
 const TagsSection = () => {
   const [isOpenTagList, toggleTagList] = useToggleTag();
+  const theme = useTheme()
 
   const [isOpen, open, close] = useVisable(false)
   const userTags = useSelector(userTagsSelector)
@@ -23,12 +24,12 @@ const TagsSection = () => {
           <ToggleArrowIcon isExpanded={isOpenTagList}
             onClick={toggleTagList}
             sx={arrowIconStyles}/>
-          <Typography fontWeight={600} fontSize={'15px'}>
+          <Typography fontWeight={600} fontSize={'15px'} color={theme.text.main}>
              Tags
           </Typography>
         </Box>
         <IconButton sx={{padding: '0px', borderRadius: '4px'}} onClick={open}>
-          <AddIcon/>
+          <AddIcon sx={{color: theme.palette.primary.main}}/>
         </IconButton>
       </Box>
       <Divider/>

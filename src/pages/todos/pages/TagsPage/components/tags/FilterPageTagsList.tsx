@@ -24,7 +24,7 @@ const FilterPageTagsList = memo(({userTags}: {userTags: ITag[]}) => {
             userTags.map((tag) => <TagItem key={tag.name}
               tag={tag}
               onDelete={onDeleteTag}/>) :
-            <Box sx={{padding: '16px 0', fontSize: '16px', color: 'grey'}}>
+            <Box sx={(theme) => ({padding: '16px 0', fontSize: '16px', color: theme.text.main})}>
               A place for your tags.
             </Box>
       }

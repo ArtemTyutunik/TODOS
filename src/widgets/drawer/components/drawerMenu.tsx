@@ -20,6 +20,7 @@ const drawerLinks = [
 ];
 
 const CustomListText = styled(Typography)(({theme}) => ({
+  color: theme.text.title,
   [theme.breakpoints.down(450)]: {
     fontSize: '20px',
   },

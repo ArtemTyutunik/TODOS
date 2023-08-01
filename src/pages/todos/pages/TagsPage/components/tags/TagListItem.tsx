@@ -1,5 +1,5 @@
 import {useNavigate} from 'react-router-dom';
-import {Box, Typography} from '@mui/material';
+import {Box, Typography, useTheme} from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -27,12 +27,13 @@ export default function TagItem({tag, onDelete}: TagItemProps) {
   const todoWithThisTagCount = useTodosByQuery('tags', tag.id).length
   const navigate = useNavigate()
   const {isFavorite, toggleFavorite} = useToggleFavorite(tag.id)
+  const theme = useTheme()
 
   return <>
     <Box sx={tagItemContainer} onClick={() => navigate(`/tags/${tag.id}`)}>
       <Box display={'flex'} alignItems={'center'}>
         <TagIcon background={tag?.settings.background}/>
-        <Typography marginLeft={'10px'} color={'#333333'}>{tag.name}</Typography>
+        <Typography marginLeft={'10px'} color={theme.text.main}>{tag.name}</Typography>
       </Box>
       <TodosCount>
         {todoWithThisTagCount !== 0 && todoWithThisTagCount}

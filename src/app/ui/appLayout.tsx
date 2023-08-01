@@ -1,16 +1,10 @@
 import AuthorizedLayout from '@layouts/athorizedLayout';
 import UnauthorizedLayout from '@layouts/unathorizedLayout';
 import {memo} from 'react';
-import {Box, useTheme} from '@mui/material';
-import {themeModeSelector} from '@app/store/AppStore';
-import {useSelector} from 'react-redux';
-
+import {Box} from '@mui/material';
 
 const AppLayout = ({isAuth}: {isAuth: boolean}) => {
-  const themeMode = useSelector(themeModeSelector);
-  const theme = useTheme()
-  return <Box sx={{backgroundColor: themeMode === 'dark' ? theme.background.dark :
-        theme.background.paper}}>
+  return <Box sx={(theme) => ({backgroundColor: theme.background.appBackground})}>
     {
       isAuth ? <>
         <AuthorizedLayout/>

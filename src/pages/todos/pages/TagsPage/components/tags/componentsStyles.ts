@@ -1,3 +1,4 @@
+import {Theme} from '@mui/material';
 
 export const arrowIconStyles = () => ({
   'position': 'absolute',
@@ -29,7 +30,7 @@ export const tagActionStyles = {
   right: 0,
 }
 
-export const iconStyles = {
-  color: '#a09f9f',
+export const iconStyles = (theme: Theme) => ({
+  color: theme.background.lightGrey,
   fontSize: '20px',
-}
+})

@@ -11,7 +11,7 @@ const OverdueTodos = ({overdueTodos} : Props) => {
   return (
         overdueTodos.length ? (
             <Box mb={'40px'}>
-              <Typography fontSize={'16px'} fontWeight={'700'} color={theme.text.title}>
+              <Typography fontSize={'16px'} fontWeight={'700'} color={theme.text.title} mb={'10px'}>
                     Overdue
               </Typography>
               <RenderedList todos={overdueTodos}/>

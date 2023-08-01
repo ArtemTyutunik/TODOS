@@ -4,7 +4,6 @@ import {PropsWithChildren} from 'react';
 import {Provider} from 'react-redux';
 import {render, RenderOptions} from '@testing-library/react';
 import {ThemeProvider} from '@mui/material';
-import theme from '@app/theme';
 import {RootReducer} from '@shared/interfacesAndTypes';
 import {AppStore} from '@app/store';
 import * as reducers from '@app/store/reducers';
@@ -22,7 +21,7 @@ export default function renderWithProviders(ui: React.ReactElement,
     }: ExtendedRenderOptions = {}) {
   function Wrapper({children}: PropsWithChildren) {
     return <Provider store={store}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={{}}>
         {children}
       </ThemeProvider>
     </Provider>
