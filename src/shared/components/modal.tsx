@@ -1,18 +1,19 @@
 import React from 'react';
-import {Box, Modal} from '@mui/material';
+import {Box, Modal, Theme} from '@mui/material';
 
-const style = {
+const style = (theme: Theme) => ({
   position: 'absolute',
   top: '40%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 'auto',
   height: 'auto',
-  backgroundColor: 'background.paper',
+  backgroundColor: theme.background.lightGrey,
+  color: theme.text.title,
   border: 'none',
   borderRadius: '12px',
   boxShadow: 24,
-};
+});
 
 interface Props {
   children?: React.ReactElement;

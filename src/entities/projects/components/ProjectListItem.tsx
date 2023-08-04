@@ -14,6 +14,7 @@ import {useProjectTodos} from '@entities/projects';
 import TodosCount from '@shared/components/TodosCount';
 import ProgressCircle from '@entities/projects/components/PorgressCircle';
 import ProjectSettingsModal from '@entities/projects/components/ProjectSettingsModal';
+import {styled} from '@mui/material/styles';
 
 interface Props {
   project: IProject,
@@ -46,9 +47,9 @@ const ProjectListItem = ({project, onDelete, onPinToggle}: Props) => {
             <ProgressCircle all={allCount} completed={completedCount}/>
             <CircleIcon sx={{fontSize: '12px', color: project.color.background}}/>
           </Box>
-          <Typography ml={'15px'}>
+          <ProjectTitle fontSize={'16px'}>
             {project.name}
-          </Typography>
+          </ProjectTitle>
         </Box>
 
         <Box className={`todo-count ${anchorElement && 'hide-todo-count'}`}>
@@ -59,35 +60,35 @@ const ProjectListItem = ({project, onDelete, onPinToggle}: Props) => {
 
         <Box className={`hover_content ${anchorElement && 'keepActive'}`}>
           <CustomIconButton onClick={handleOpenMenu}>
-            <MoreHorizIcon fontSize={'small'}/>
+            <MoreHorizIcon fontSize={'small'} sx={(theme) => ({color: theme.text.title})}/>
           </CustomIconButton>
+
           <DropdownMenu anchorEl={anchorElement} handleClose={removeAnchorElement}>
             <Box padding={'10px'}>
               <List>
                 <ListItemButton sx={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}
                   onClick={() => onPinToggle(project.id)}>
-                  <PushPinIcon sx={{color: project?.isPinned ? '#e86262' : '#808080',
-                    fontSize: '18px'}}/>
-                  <Typography marginLeft={'15px'} fontSize={'15px'} color={'#202020'}>
+                  <PushPinIcon sx={{color: project?.isPinned ? '#e86262' : '#808080', fontSize: '18px'}}/>
+                  <ProjectTitle>
                     Pin project
-                  </Typography>
+                  </ProjectTitle>
                 </ListItemButton>
 
                 <ListItemButton sx={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}
                   onClick={openEditingForm}>
                   <Edit sx={{color: '#808080', fontSize: '18px'}}/>
-                  <Typography marginLeft={'15px'} fontSize={'15px'} color={'#202020'}>
+                  <ProjectTitle>
                     Edit project
-                  </Typography>
+                  </ProjectTitle>
                 </ListItemButton>
                 <Divider/>
 
                 <ListItemButton sx={{display: 'flex', alignItems: 'center'}}
                   onClick={ () => onDelete(project.id)}>
                   <DeleteOutlineIcon sx={{color: '#808080', fontSize: '18px'}}/>
-                  <Typography marginLeft={'15px'} fontSize={'15px'} color={'#202020'}>
+                  <ProjectTitle>
                     Delete project
-                  </Typography>
+                  </ProjectTitle>
                 </ListItemButton>
                 {
                   editingForm && <ProjectSettingsModal editingMode
@@ -124,5 +125,11 @@ const progressCircleWrapper = {
     },
   },
 }
+
+const ProjectTitle = styled(Typography)(({theme}) => ({
+  marginLeft: '15px',
+  fontSize: '15px',
+  color: theme.text.title,
+}))
 
 export default ProjectListItem;

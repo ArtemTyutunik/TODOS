@@ -3,10 +3,11 @@ import {configureStore, PreloadedState} from '@reduxjs/toolkit';
 import {PropsWithChildren} from 'react';
 import {Provider} from 'react-redux';
 import {render, RenderOptions} from '@testing-library/react';
-import {ThemeProvider} from '@mui/material';
+import {createTheme, ThemeProvider} from '@mui/material';
 import {RootReducer} from '@shared/interfacesAndTypes';
 import {AppStore} from '@app/store';
 import * as reducers from '@app/store/reducers';
+import {getDesignTokens} from '@app/theme';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: Partial<PreloadedState<RootReducer>>,
@@ -20,8 +21,9 @@ export default function renderWithProviders(ui: React.ReactElement,
       store = configureStore({reducer: {...reducers}, preloadedState}),
     }: ExtendedRenderOptions = {}) {
   function Wrapper({children}: PropsWithChildren) {
+    const theme = createTheme(getDesignTokens('light'))
     return <Provider store={store}>
-      <ThemeProvider theme={{}}>
+      <ThemeProvider theme={theme}>
         {children}
       </ThemeProvider>
     </Provider>

@@ -69,14 +69,14 @@ export const getDesignTokens = (mode: 'light' | 'dark'): ThemeOptions => {
   return {
     palette: {
       primary: {
-        main: isDarkMode ? '#8738ea' : '#1976d2',
+        main: isDarkMode ? '#282828' : '#1976d2',
       },
     },
     description: '#515761',
     background: {
-      lightGrey: isDarkMode ? '#383434' : '#f5f5f5',
-      appBackground: isDarkMode ? '#2E2B2B' : '#ffffff',
-      visibleBackground: isDarkMode ? '#383434' : '#ffffff',
+      lightGrey: isDarkMode ? '#242424' : '#f5f5f5',
+      appBackground: isDarkMode ? '#202124' : '#ffffff',
+      visibleBackground: isDarkMode ? 'transparent' : '#ffffff',
       inboxIcon: '#246fe0',
       divider: isDarkMode ? 'transparent' : '#3b3b3b',
     },

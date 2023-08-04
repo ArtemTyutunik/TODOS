@@ -19,7 +19,7 @@ export default memo(function Header() {
   const [isAddTaskModalOpen, openAddTaskModalOpen, closeAddTaskModal] = useVisable(false);
 
   return (
-    <Box sx={{flexGrow: 1}} position={'relative'}>
+    <Box sx={{flexGrow: 1}} position={'relative'} boxShadow={'0 1px 3px 0 rgba(0,0,0,.15)'}>
       <AppBar position={'relative'} sx = {{boxShadow: 'none'}}>
         <Container sx={{margin: {laptop: '0 auto'},
           width: {laptop: '100%'},

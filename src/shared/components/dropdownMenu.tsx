@@ -1,5 +1,5 @@
 import React from 'react';
-import {Menu} from '@mui/material';
+import {Menu, Theme} from '@mui/material';
 import {Anchor} from '@shared/interfacesAndTypes';
 
 interface dropdownMenuProps{
@@ -24,11 +24,20 @@ const DropdownMenu = ({anchorEl, handleClose, children}: dropdownMenuProps) => {
       }}
       open={Boolean(anchorEl)}
       onClose={handleClose}
-      sx={{marginTop: '10px', minWidth: 'fit-content'}}
+      sx={sxStyles}
     >
       {children}
     </Menu>
   );
 };
+
+const sxStyles = (theme: Theme) => ({
+  'marginTop': '10px',
+  'minWidth': 'fit-content',
+  '& .MuiList-root': {
+    backgroundColor: theme.background.lightGrey,
+    color: theme.text.title,
+  },
+})
 
 export default DropdownMenu;
