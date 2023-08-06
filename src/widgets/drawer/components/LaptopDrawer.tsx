@@ -16,14 +16,9 @@ const LaptopDrawerStyles = (theme: Theme) => ({
 })
 
 const CustomDrawer = styled(Drawer)(({theme}) => ({
+  draggable: 'none',
   [theme.breakpoints.down(750)]: {
     display: 'none',
-  },
-  [theme.breakpoints.down(900)]: {
-    width: '250px',
-  },
-  [theme.breakpoints.up(900)]: {
-    width: '320px',
   },
 }));
 

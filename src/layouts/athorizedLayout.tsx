@@ -15,17 +15,7 @@ import {authVerified, isVerifiedSelector} from '@entities/user/model/store';
 import NotVerified from '@shared/components/NotVerifed/NotVerified';
 import {useEffect} from 'react';
 import {getVerifiedStatus} from '@shared/api/services/user';
-
-
-const routesStyles = (isDrawerOpen: boolean) => ({
-  'height': '100%',
-  'overflow': 'scroll',
-  'maxHeight': 'calc(100vh - 56px)',
-  'padding': '0',
-  'paddingTop': '0 !important',
-  'marginLeft': {largeMobile: 0, tablet: isDrawerOpen ? '270px' : 0, laptop: isDrawerOpen ? '350px' : 0},
-  'position': 'relative',
-})
+import Resizable from '@shared/components/resizable/Resizable';
 
 const AuthorizedLayout = () => {
   const {isOpenDrawer} = useSelector((state: RootReducer) => state.drawerReducer);
@@ -34,6 +24,9 @@ const AuthorizedLayout = () => {
   const isVerified = useSelector(isVerifiedSelector)
   const {login = ''} = JSON.parse(localStorage.getItem('user')!)
   const dispatch = useDispatch()
+
+  const drawerWidth = localStorage.getItem('drawerWidth') || '320px'
+  const todoCardWidth = localStorage.getItem('todoCardWidth') || '25%'
 
   useEffect(() => {
     if (isVerified === 'unset') {
@@ -51,25 +44,54 @@ const AuthorizedLayout = () => {
       {errorFetching && <TodosFetchFailed/>}
       {!isVerified && <NotVerified/>}
       <Header/>
-      <Box sx={{marginTop: 0}} height={'calc(100vh - 56px)'}>
-        <Box paddingTop={'0 !important'}
-          position={'absolute'}
-          height={'calc(100vh - 56px)'}
-          display={isOpenDrawer ? 'block' : 'none'}>
-          <LaptopDrawer/>
-          <MobileDrawer/>
-        </Box>
-        <Box sx={routesStyles(isOpenDrawer)}>
+      <Box sx={{marginTop: 0}} height={'calc(100vh - 56px)'} display={'flex'}>
+        {isOpenDrawer && <Resizable
+          width={drawerWidth}
+          direction={'right'}
+          localStorageItem={'drawerWidth'}
+        >
+          <Box paddingTop={'0 !important'}
+            position={'unset'}
+            width={'100%'}
+            height={'calc(100vh - 56px)'}
+          >
+            <LaptopDrawer/>
+            <MobileDrawer/>
+          </Box>
+        </Resizable>
+        }
+
+        <Box sx={routesStyles}>
           <Box width={{mobile: '100%', largeMobile: '80%'}}
             margin={{mobile: '0', largeMobile: '0 auto'}}
             padding={{mobile: '0 20px', largeMobile: 0}}>
             <Routing/>
           </Box>
         </Box>
+        <Resizable direction={'left'}
+          width={todoCardWidth}
+          minWidth={400}
+          maxWidth={700}
+          localStorageItem={'todoCardWidth'}
+        >
+          <Box sx={{background: 'gray', height: '100%'}}>
+          </Box>
+        </Resizable>
       </Box>
       <ToastContainer/>
     </>
   );
 };
+
+const routesStyles = {
+  'height': '100%',
+  'overflow': 'scroll',
+  'maxHeight': 'calc(100vh - 56px)',
+  'flex': '1',
+  'padding': '0',
+  'paddingTop': '0 !important',
+  'position': 'relative',
+  'flexGrow': 1,
+}
 
 export default AuthorizedLayout;
