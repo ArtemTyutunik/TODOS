@@ -1,8 +1,8 @@
 import {useEffect, useRef} from 'react';
 
 const useResizable = (direction: 'left' | 'right',
-    minPx: number | undefined = 200,
-    maxPx: number | undefined = 400,
+    minWidth: number | undefined = 200,
+    maxWidth: number | undefined = 400,
     localStorageItem: string) => {
   const resizerElement = useRef<HTMLDivElement | null>(null)
   const resizableElement = useRef<HTMLDivElement | null>(null)
@@ -13,24 +13,23 @@ const useResizable = (direction: 'left' | 'right',
 
     function initResizerFn(resizer: HTMLDivElement, resizable: HTMLDivElement) {
       // track current mouse position in x var
-      let x: number;
-      let w: number;
+      let userX: number;
+      let resizableBlockWidth: number;
 
       function mousedownHandler(e: MouseEvent) {
-        x = e.clientX;
-        const sbWidth = window.getComputedStyle(resizable).width;
-        w = parseInt(sbWidth, 10);
+        userX = e.clientX;
+        resizableBlockWidth = parseInt(window.getComputedStyle(resizable).width, 10);
 
         document.addEventListener('mousemove', mousemoveHandler);
         document.addEventListener('mouseup', mouseupHandler);
       }
 
       function mousemoveHandler(e: MouseEvent) {
-        const dx = direction === 'right' ? e.clientX - x : x - e.clientX
-        const cw = w + dx; // complete width
+        const diff = direction === 'right' ? e.clientX - userX : userX - e.clientX
+        const newWidth = resizableBlockWidth + diff; // complete width
 
-        if (cw < maxPx && cw > minPx) {
-          resizable.style.width = `${cw}px`;
+        if (newWidth < maxWidth && newWidth > minWidth) {
+          resizable.style.width = `${newWidth}px`;
         }
       }
 
