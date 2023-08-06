@@ -22,8 +22,13 @@ const Resizable = memo(({children,
     <Box sx={ResizerStyles}
       width={width}
       className={'resizable-' + direction}
+      data-testid={'resizable'}
     >
-      <Box className={'resizer resizer-' + direction} sx={resizerStyles(direction)}></Box>
+      <Box className={'resizer resizer-' + direction}
+        sx={resizerStyles(direction)}
+        data-testid={'resizer'}
+      >
+      </Box>
       {children}
     </Box>
   );

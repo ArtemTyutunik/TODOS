@@ -8,6 +8,7 @@ import theme from '@app/theme';
 import {RootReducer} from '@shared/interfacesAndTypes';
 import {AppStore} from '@app/store';
 import * as reducers from '@app/store/reducers';
+import userEvent from '@testing-library/user-event';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: Partial<PreloadedState<RootReducer>>,
@@ -28,5 +29,7 @@ export default function renderWithProviders(ui: React.ReactElement,
     </Provider>
   }
 
-  return {...render(ui, {wrapper: Wrapper}), store}
+  const user = userEvent.setup();
+
+  return {...render(ui, {wrapper: Wrapper}), store, user}
 }

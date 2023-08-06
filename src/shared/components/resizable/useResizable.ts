@@ -18,7 +18,6 @@ const useResizable = (direction: 'left' | 'right',
 
       function mousedownHandler(e: MouseEvent) {
         x = e.clientX;
-
         const sbWidth = window.getComputedStyle(resizable).width;
         w = parseInt(sbWidth, 10);
 
@@ -32,7 +31,6 @@ const useResizable = (direction: 'left' | 'right',
 
         if (cw < maxPx && cw > minPx) {
           resizable.style.width = `${cw}px`;
-          console.log(dx, resizable.style.width, e.clientX, x);
         }
       }
 
