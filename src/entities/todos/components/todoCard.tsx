@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Box, Divider, IconButton, Tooltip, Typography} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
@@ -10,12 +10,12 @@ import CheckboxComponent from './Checkbox';
 import DueDateButton from '@entities/dueDateButton';
 import TagLinks from '@entities/todos/components/TagsPanel';
 import {userTagsSelector} from '@entities/tag/store/tagStore';
-import TodoDetailPage from '@entities/todos/components/TodoDetail/TodoDetailPage';
 
 import '../css/inProcessTodo.css'
 import {toggleIsCurrent} from '@entities/todos/store/todo';
 import {sendUpdatedTodo} from '@shared/api/services/todos';
 import {userIdSelector} from '@entities/user/model/store';
+import {setTodoInfoId} from '@app/store/AppStore';
 
 interface TodoCardProps {
     todo: ITodo,
@@ -38,7 +38,6 @@ const TodoCard = ({
   const userTags = useSelector(userTagsSelector)
   const dispatch = useDispatch()
   const userId = useSelector(userIdSelector)
-  const [isDetailsVisable, setDetailsVisable] = useState(false)
   const todoFilteredTags = userTags.filter((userTag) => tags?.includes(userTag.id))
 
   const setAsCurrent = () => {
@@ -51,16 +50,16 @@ const TodoCard = ({
     }
   }
 
+  const openDetailsPage = () => {
+    const idToString = id.toString()
+    dispatch(setTodoInfoId(idToString))
+    localStorage.setItem('todoInfoId', idToString)
+  }
+
   return (
     <>
-      {isDetailsVisable && <TodoDetailPage id={id}
-        onClose={() => setDetailsVisable(false)}
-        isOpen={isDetailsVisable}
-      />
-      }
-
       <Box sx={{mb: '25px', cursor: 'pointer', flexGrow: '1'}}
-        onClick={() => setDetailsVisable((prevState) => !prevState)}
+        onClick={openDetailsPage}
         data-testid="Todo card"
       >
         <Box sx = {TodoContainerStyles} className={`${isCurrent && 'todo-wrap' || ''}`}>
@@ -111,7 +110,7 @@ const TodoCard = ({
               </Tooltip>
 
               <MoreActionsMenu
-                onOpenTodoDetails={( ) => setDetailsVisable(true)}
+                onOpenTodoDetails={openDetailsPage}
                 onDelete={onDeleteAction}
                 onDuplicate = {onDuplicateAction}
                 setAsCurrent={setAsCurrent}

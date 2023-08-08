@@ -42,7 +42,10 @@ const MoreActionsMenu = ({todo, onDelete, onDuplicate, onSetPriority, onOpenTodo
       <DropdownMenu anchorEl={anchorEl} handleClose={removeAnchorEl}>
         <Box minWidth={'250px'} padding={'5px'}>
           <List>
-            <ListItemButton sx = {listItemStyles} onClick={onOpenTodoDetails}>
+            <ListItemButton sx = {listItemStyles} onClick={() => {
+              removeAnchorEl()
+              onOpenTodoDetails()
+            }}>
               <InfoIcon sx={{color: 'grey'}}/>
               <Typography ml={'25px'}>
                       Info

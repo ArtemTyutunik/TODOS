@@ -16,9 +16,14 @@ import NotVerified from '@shared/components/NotVerifed/NotVerified';
 import {useEffect} from 'react';
 import {getVerifiedStatus} from '@shared/api/services/user';
 import Resizable from '@shared/components/resizable/Resizable';
+import {setTodoInfoId, todoInfoIdSelector} from '@app/store/AppStore';
+import TodoDetailPage from '@entities/todos/components/TodoDetail/TodoDetailPage';
+import checkIsMobile from '@shared/helpers/isMobile';
+import BasicModal from '@shared/components/modal';
 
 const AuthorizedLayout = () => {
   const {isOpenDrawer} = useSelector((state: RootReducer) => state.drawerReducer);
+  const todoInfoId = useSelector(todoInfoIdSelector)
   const [isFetching] = useFetchAllUserData()
   const errorFetching = useSelector(isErrorFetchingSelector)
   const isVerified = useSelector(isVerifiedSelector)
@@ -27,7 +32,7 @@ const AuthorizedLayout = () => {
 
   const drawerWidth = localStorage.getItem('drawerWidth') || '320px'
   const todoCardWidth = localStorage.getItem('todoCardWidth') || '25%'
-
+  const isMobile = checkIsMobile()
   useEffect(() => {
     if (isVerified === 'unset') {
       getVerifiedStatus(login).then((result) => {
@@ -36,6 +41,11 @@ const AuthorizedLayout = () => {
       })
     }
   }, [isVerified])
+
+  const onCloseTodoInfo = () => {
+    dispatch(setTodoInfoId(null))
+    localStorage.removeItem('todoInfoId')
+  }
 
   return (
       isFetching ?
@@ -68,15 +78,26 @@ const AuthorizedLayout = () => {
             <Routing/>
           </Box>
         </Box>
-        <Resizable direction={'left'}
-          width={todoCardWidth}
-          minWidth={400}
-          maxWidth={700}
-          localStorageItem={'todoCardWidth'}
-        >
-          <Box sx={{background: 'gray', height: '100%'}}>
-          </Box>
-        </Resizable>
+        {todoInfoId && (
+          isMobile ? (
+              <BasicModal open onClose={onCloseTodoInfo}>
+                <Box minWidth={{mobile: '300px', largeMobile: '400px', tablet: '700px'}}>
+                  <TodoDetailPage id={todoInfoId}/>
+                </Box>
+              </BasicModal>
+          ) : (
+            <Resizable direction={'left'}
+              width={todoCardWidth}
+              minWidth={400}
+              maxWidth={700}
+              localStorageItem={'todoCardWidth'}
+            >
+              <Box sx={{background: 'gray', height: '100%'}}>
+                <TodoDetailPage id={todoInfoId}/>
+              </Box>
+            </Resizable>
+          )
+        )}
       </Box>
       <ToastContainer/>
     </>
