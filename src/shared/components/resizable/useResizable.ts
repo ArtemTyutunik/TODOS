@@ -7,9 +7,10 @@ const useResizable = (direction: Direction,
     localStorageItem: string) => {
   //
   const resizerElement = useRef<HTMLDivElement | null>(null)
-  const prevClientX = useRef<number>(0)
-  const prevWidth = useRef<number>(0)
   const resizableElement = useRef<HTMLDivElement | null>(null)
+
+  const initialClientX = useRef<number>(0)
+  const initialWidth = useRef<number>(0)
 
   useEffect(() => {
     resizerElement.current = document.querySelector('.resizer-' + direction);
@@ -18,15 +19,21 @@ const useResizable = (direction: Direction,
     if (resizerElement.current && resizableElement.current) {
       resizerElement.current.addEventListener('mousedown', mousedownHandler);
     }
+
+    return () => {
+      resizerElement.current?.removeEventListener('mousedown', mousedownHandler);
+      document.removeEventListener('mouseup', mouseupHandler);
+      document.removeEventListener('mousemove', mousemoveHandler);
+    }
   }, [])
 
 
   const mousedownHandler = (e: MouseEvent) => {
-    prevClientX.current = e.clientX;
+    initialClientX.current = e.clientX;
     const resizable = resizableElement.current;
 
     if (resizable) {
-      prevWidth.current = parseInt(window.getComputedStyle(resizable).width, 10);
+      initialWidth.current = parseInt(window.getComputedStyle(resizable).width, 10);
 
       document.addEventListener('mousemove', mousemoveHandler);
       document.addEventListener('mouseup', mouseupHandler);
@@ -34,12 +41,12 @@ const useResizable = (direction: Direction,
   }
 
   const mousemoveHandler = (e: MouseEvent) => {
-    const clientX = prevClientX.current
+    const clientX = initialClientX.current
     const newClientX = e.clientX;
     if (resizableElement.current && clientX) {
       const diff = direction === 'right' ? newClientX - clientX : clientX - newClientX
 
-      const newWidth = prevWidth.current! + diff;
+      const newWidth = initialWidth.current! + diff;
       if (newWidth < maxWidth && newWidth > minWidth) {
         resizableElement.current.style.width = `${newWidth}px`;
       }
