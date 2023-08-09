@@ -20,6 +20,7 @@
     "@react-oauth/google": "^0.11.0",
     "@reduxjs/toolkit": "^1.9.1",
     "dayjs": "^1.11.7",
+    "html-react-parser": "^4.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.41.1",

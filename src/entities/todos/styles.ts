@@ -26,6 +26,8 @@ export const TodoFlexboxStyles = {
   display: 'flex',
   alignItems: 'center',
   cursor: 'default',
+  maxWidth: '100%',
+  textOverflow: 'ellipsis',
 };
 
 export const TodoLabelStyles = {
@@ -35,8 +37,18 @@ export const TodoLabelStyles = {
 };
 
 export const todoDescriptionStyles = (theme: Theme) => ({
-  fontSize: {mobile: '13px', largeMobile: '16px'},
-  fontWeight: 300,
-  lineHeight: 1,
-  color: theme.text.main,
+  'fontSize': {mobile: '13px', largeMobile: '16px'},
+  'fontWeight': 300,
+  'display': 'flex',
+  'marginTop': '10px',
+  'lineHeight': 1,
+  'maxWidth': '100%',
+  'overflow': 'hidden',
+  'textOverflow': 'ellipsis',
+  'color': theme.text.main,
+  '& div': {
+    'margin': '0 5px',
+    'whiteSpace': 'nowrap',
+    'textOverflow': 'ellipsis',
+  },
 });

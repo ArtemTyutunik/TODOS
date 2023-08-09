@@ -1,3 +1,4 @@
+import React, {useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Box, SelectChangeEvent} from '@mui/material';
 import {BaseFormInputs} from '@shared/forms/interfaces/interfaces';
@@ -9,8 +10,8 @@ import FormActions from '@features/todoFeatures/components/setDataPanel';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 import BaseFormContext from '@shared/forms/hooks/UseBaseFormContext';
 import useBaseFormReducer, {changeProjectActionCreator} from '@shared/forms/hooks/useBaseFormReducer';
-import {useState} from 'react';
 import ProjectSelect from '@shared/components/ProjectSelect';
+import LabelInput from '@shared/forms/ui/DescriptionInput';
 
 interface Props {
   onClose: () => void,
@@ -38,7 +39,7 @@ const BaseTodoForm = ({
   const [todoDate, setTodoDate] = useTodoDate(initialDate || formState?.date, formState?.id);
   const [todoTags, onSelectTag] = useTags(formState, !!todo);
   const [isDisabledAfterSubmit, setIsDisabledAfterSubmit] = useState(false)
-
+  const DescriptionElement = useRef<HTMLDivElement>(null);
 
   const setProject = (projectId: string) => {
     formDispatch(changeProjectActionCreator(projectId))
@@ -57,17 +58,19 @@ const BaseTodoForm = ({
     onSelectTag,
   }
 
+  const onFormSubmit = (data: {label: string}) => {
+    setIsDisabledAfterSubmit(true)
+    const inputsData = {...data, description: DescriptionElement.current?.innerHTML || ''}
+    const newTodo = {...formState, ...inputsData, date: todoDate, tags: todoTags}
+    onSubmit(newTodo)
+  }
   return <Box component='form'
-    onSubmit={handleSubmit((data) => {
-      setIsDisabledAfterSubmit(true)
-      const newTodo = {...formState, ...data, date: todoDate, tags: todoTags}
-      onSubmit(newTodo)
-    })}
+    onSubmit={handleSubmit((onFormSubmit))}
     sx={(theme) => ({color: theme.description})}
   >
     <Box sx={formStyles}>
       <TodoFormInputs control={control}/>
-
+      <LabelInput value={todo?.description || ''} ref={DescriptionElement}/>
       <BaseFormContext values={formContextValues}>
         <FormActions hideActions={hideActions}/>
       </BaseFormContext>

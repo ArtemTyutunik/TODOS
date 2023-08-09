@@ -16,6 +16,7 @@ import {toggleIsCurrent} from '@entities/todos/store/todo';
 import {sendUpdatedTodo} from '@shared/api/services/todos';
 import {userIdSelector} from '@entities/user/model/store';
 import {setTodoInfoId} from '@app/store/AppStore';
+import parse from 'html-react-parser';
 
 interface TodoCardProps {
     todo: ITodo,
@@ -56,6 +57,7 @@ const TodoCard = ({
     localStorage.setItem('todoInfoId', idToString)
   }
 
+  const descriptionHtml = parse(description)
   return (
     <>
       <Box sx={{mb: '25px', cursor: 'pointer', flexGrow: '1'}}
@@ -80,9 +82,9 @@ const TodoCard = ({
                   </Typography>
                 </Box>
                 <Box paddingLeft={'10px'}>
-                  <Typography noWrap sx={todoDescriptionStyles}>
-                    {description}
-                  </Typography>
+                  <Box sx={todoDescriptionStyles}>
+                    {descriptionHtml}
+                  </Box>
                   <Box>
                     {
                       tags && <TagLinks tags={todoFilteredTags}/>
