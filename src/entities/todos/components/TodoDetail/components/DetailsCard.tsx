@@ -9,7 +9,6 @@ import useSelectPriority from '@shared/hooks/useSelectPriority';
 import {useDispatch, useSelector} from 'react-redux';
 import {setPriority} from '@entities/todos/store/todo';
 import {sendUpdatedTodo} from '@shared/api/services/todos';
-import InfoCard from '@entities/todos/components/TodoDetail/components/InfoCard';
 import {userIdSelector} from '@entities/user/model/store';
 import TagsPanel from '@entities/todos/components/TagsPanel';
 import {useTagById} from '@entities/tag';
@@ -19,14 +18,16 @@ interface Props {
   onComplete: (e: React.SyntheticEvent) => void
 }
 
-const DetailsCard = ({todo, onComplete}: Props) => {
+const DetailsCard = ({todo}: Props) => {
   const {date, id} = todo
   const theme = useTheme()
   const userId = useSelector(userIdSelector)
   const dispatch = useDispatch()
   const [todoDate, setTodoDate] = useTodoDate(date, id)
   const [priority, onSelected] = useSelectPriority(todo.priority)
+  const tags = useTagById(todo.tags)
 
+  const renderedTags = Array.isArray(tags) ? tags : [{...tags}]
   const onPriorityHandler = (event: SelectChangeEvent<Priority>) => {
     //@ts-ignore
     const priority: Priority = event.target.value
@@ -36,7 +37,6 @@ const DetailsCard = ({todo, onComplete}: Props) => {
     dispatch(setPriority(data))
   }
 
-  const tags = todo.tags?.map(useTagById)
 
   const onDateSelect = (newDate: IDate) => {
     setTodoDate(newDate)
@@ -47,7 +47,9 @@ const DetailsCard = ({todo, onComplete}: Props) => {
     <Box bgcolor={theme.background.paper}
       borderRadius={'7px'}>
       <Box display={'flex'}>
-        <InfoCard todo={todo} onComplete={onComplete}/>
+        <Box width={'100%'} margin={'10px'} sx={{wordWrap: 'break-word'}} fontWeight={'bold'}>
+          {todo.label}
+        </Box>
 
         <Box width={'40%'}>
           <Box sx={panelStyles}>
@@ -57,9 +59,11 @@ const DetailsCard = ({todo, onComplete}: Props) => {
             <DetailActionPanelItem label={'Set priority'}>
               <PriorityButton initialPriority={priority} changeHandler={onPriorityHandler} variant={'short'}/>
             </DetailActionPanelItem>
-            {tags?.length! > 0 && <DetailActionPanelItem label={'Tags'}>
-              <TagsPanel tags={tags}/>
-            </DetailActionPanelItem>}
+            {
+                renderedTags.length! > 0 && <DetailActionPanelItem label={'Tags'}>
+                <TagsPanel tags={renderedTags}/>
+              </DetailActionPanelItem>
+            }
           </Box>
         </Box>
       </Box>

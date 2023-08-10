@@ -7,11 +7,12 @@ import {PageTitle, TodoList} from '@pages/todos/components';
 import NoTodosWithTag from '@pages/todos/pages/FilteredByTagTodosPage/ui/noTodosWithTag';
 import CustomIconButton from '@shared/components/CustomIconButton';
 import {TAGS_LINK} from '@shared/constants';
+import {ITag} from '@shared/interfacesAndTypes';
 
 const FilteredByTagTodosPage = () => {
   const {id} = useParams()
   const filteredTodos = useTodosByQuery('tags', id!)
-  const tag = useTagById(id)
+  const tag = useTagById<ITag>(id)
   const navigate = useNavigate()
 
   return (

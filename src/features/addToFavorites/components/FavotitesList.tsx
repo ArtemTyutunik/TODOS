@@ -2,7 +2,7 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Box, Typography} from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import {IFavorite} from '@shared/interfacesAndTypes';
+import {IFavorite, ITag} from '@shared/interfacesAndTypes';
 import {useTagById} from '@entities/tag';
 import TagIcon from '@shared/tagIcon';
 import CustomIconButton from '@shared/components/CustomIconButton';
@@ -21,7 +21,7 @@ const FavoritesList = ({favorites}: {favorites: IFavorite[]}) => {
 };
 
 const FavoriteItem = ({favorite}: {favorite: IFavorite}) => {
-  const item = useTagById(favorite.itemId)
+  const item = useTagById<ITag>(favorite.itemId)
   const navigate = useNavigate()
   const {deleteFromFavorites} = useToggleFavorite(item?.id)
 
