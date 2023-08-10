@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Box, SelectChangeEvent} from '@mui/material';
 import {BaseFormInputs} from '@shared/forms/interfaces/interfaces';
@@ -11,7 +11,7 @@ import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 import BaseFormContext from '@shared/forms/hooks/UseBaseFormContext';
 import useBaseFormReducer, {changeProjectActionCreator} from '@shared/forms/hooks/useBaseFormReducer';
 import ProjectSelect from '@shared/components/ProjectSelect';
-import LabelInput from '@shared/forms/ui/DescriptionInput';
+import TodoDescriptionInput from '@shared/forms/ui/TodoDescriptionInput';
 
 interface Props {
   onClose: () => void,
@@ -39,7 +39,7 @@ const BaseTodoForm = ({
   const [todoDate, setTodoDate] = useTodoDate(initialDate || formState?.date, formState?.id);
   const [todoTags, onSelectTag] = useTags(formState, !!todo);
   const [isDisabledAfterSubmit, setIsDisabledAfterSubmit] = useState(false)
-  const DescriptionElement = useRef<HTMLDivElement>(null);
+  const [description, setDescription] = useState(todo?.description || '')
 
   const setProject = (projectId: string) => {
     formDispatch(changeProjectActionCreator(projectId))
@@ -60,17 +60,23 @@ const BaseTodoForm = ({
 
   const onFormSubmit = (data: {label: string}) => {
     setIsDisabledAfterSubmit(true)
-    const inputsData = {...data, description: DescriptionElement.current?.innerHTML || ''}
+    const inputsData = {...data, description: description}
     const newTodo = {...formState, ...inputsData, date: todoDate, tags: todoTags}
     onSubmit(newTodo)
   }
+
+  const onChangeDescription = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setDescription(event.target.value)
+  }
+
   return <Box component='form'
     onSubmit={handleSubmit((onFormSubmit))}
     sx={(theme) => ({color: theme.description})}
   >
     <Box sx={formStyles}>
       <TodoFormInputs control={control}/>
-      <LabelInput value={todo?.description || ''} ref={DescriptionElement}/>
+      <TodoDescriptionInput value={description} onChange={onChangeDescription}/>
+
       <BaseFormContext values={formContextValues}>
         <FormActions hideActions={hideActions}/>
       </BaseFormContext>

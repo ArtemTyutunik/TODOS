@@ -33,6 +33,10 @@ const styles = {
     border: 'none',
     outline: 'none',
   },
+  '& p': {
+    color: '#a2a2a2',
+    fontSize: '16px',
+  },
   'color': 'ligthgray',
   'fontSize': '17px',
 }

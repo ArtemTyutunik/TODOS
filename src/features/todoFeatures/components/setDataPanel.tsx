@@ -3,12 +3,13 @@ import DueDateButton from '@entities/dueDateButton';
 import PriorityButton from '@entities/setPriorityButton/components/PriorityButton';
 import {AddTagsButton} from '@entities/tag';
 import {useFormContext} from '@shared/forms/hooks/UseBaseFormContext';
+import {memo} from 'react';
 
 interface Props {
     hideActions?: boolean
 }
 
-const FormActions = ({hideActions}: Props) => {
+const FormActions = memo(({hideActions}: Props) => {
   const {todoDate, setTodoDate, priority, setPriority, todoTags, onSelectTag} = useFormContext()
 
   return !hideActions ? <>
@@ -25,7 +26,7 @@ const FormActions = ({hideActions}: Props) => {
     </Box>
     <Divider/>
   </> : null
-}
+})
 
 
 export default FormActions;

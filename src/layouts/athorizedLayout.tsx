@@ -33,6 +33,7 @@ const AuthorizedLayout = () => {
   const drawerWidth = localStorage.getItem('drawerWidth') || '320px'
   const todoCardWidth = localStorage.getItem('todoCardWidth') || '25%'
   const isMobile = checkIsMobile()
+
   useEffect(() => {
     if (isVerified === 'unset') {
       getVerifiedStatus(login).then((result) => {
