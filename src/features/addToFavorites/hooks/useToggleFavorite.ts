@@ -17,8 +17,8 @@ const useToggleFavorite = (id: string): ReturnInterface => {
   const allFavorites = useSelector(getAllFavorites)
   const dispatch = useDispatch()
   const userId = useSelector(userIdSelector)
-
   const [isFavorite, setIsFavorite] = useState<boolean>(false)
+
   useEffect(() => {
     setIsFavorite(!!allFavorites.find((item) => item.itemId === id))
   }, [allFavorites])

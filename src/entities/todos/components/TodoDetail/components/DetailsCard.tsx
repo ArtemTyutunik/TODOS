@@ -50,22 +50,6 @@ const DetailsCard = ({todo}: Props) => {
         <Box width={'100%'} margin={'10px'} sx={{wordWrap: 'break-word'}} fontWeight={'bold'}>
           {todo.label}
         </Box>
-
-        <Box width={'40%'}>
-          <Box sx={panelStyles}>
-            <DetailActionPanelItem label={'Due date'}>
-              <DueDateButton date={todoDate} variant={'Standard'} onPassDateToBaseForm={onDateSelect}/>
-            </DetailActionPanelItem>
-            <DetailActionPanelItem label={'Set priority'}>
-              <PriorityButton initialPriority={priority} changeHandler={onPriorityHandler} variant={'short'}/>
-            </DetailActionPanelItem>
-            {
-                renderedTags.length! > 0 && <DetailActionPanelItem label={'Tags'}>
-                <TagsPanel tags={renderedTags}/>
-              </DetailActionPanelItem>
-            }
-          </Box>
-        </Box>
       </Box>
     </Box>
   );
@@ -83,3 +67,20 @@ const panelStyles = {
 }
 
 export default DetailsCard;
+
+
+// <Box width={'40%'}>
+//   <Box sx={panelStyles}>
+//     <DetailActionPanelItem label={'Due date'}>
+//       <DueDateButton date={todoDate} variant={'Standard'} onPassDateToBaseForm={onDateSelect}/>
+//     </DetailActionPanelItem>
+//     <DetailActionPanelItem label={'Set priority'}>
+//       <PriorityButton initialPriority={priority} changeHandler={onPriorityHandler} variant={'short'}/>
+//     </DetailActionPanelItem>
+//     {
+//         renderedTags.length! > 0 && <DetailActionPanelItem label={'Tags'}>
+//           <TagsPanel tags={renderedTags}/>
+//         </DetailActionPanelItem>
+//     }
+//   </Box>
+// </Box>
