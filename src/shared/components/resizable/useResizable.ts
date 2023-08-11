@@ -18,8 +18,6 @@ const useResizable = (direction: Direction,
 
     if (resizerElement.current && resizableElement.current) {
       resizerElement.current.addEventListener('mousedown', mousedownHandler);
-      document.addEventListener('mousemove', mousemoveHandler);
-      document.addEventListener('mouseup', mouseupHandler);
     }
 
     return () => {
@@ -36,6 +34,8 @@ const useResizable = (direction: Direction,
 
     if (resizable) {
       initialWidth.current = parseInt(window.getComputedStyle(resizable).width, 10);
+      document.addEventListener('mousemove', mousemoveHandler);
+      document.addEventListener('mouseup', mouseupHandler);
     }
   }
 

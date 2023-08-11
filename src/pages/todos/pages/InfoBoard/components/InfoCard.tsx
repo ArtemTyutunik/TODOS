@@ -2,7 +2,7 @@ import React from 'react';
 import CheckboxComponent from '@entities/todos/components/Checkbox';
 import {Box} from '@mui/material';
 import {EditTodoForm} from '@features/todoFeatures/EditTodo';
-import TaskOverview from '@entities/todos/components/TodoDetail/components/TaskOverview';
+import TaskOverview from '@pages/todos/pages/InfoBoard/components/TaskOverview';
 import {ITodo} from '@shared/interfacesAndTypes';
 import {useVisable} from '@shared/hooks';
 

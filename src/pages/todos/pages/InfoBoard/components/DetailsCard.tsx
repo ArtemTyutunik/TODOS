@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, SelectChangeEvent, useTheme} from '@mui/material';
 import {IDate, ITodo, Priority} from '@shared/interfacesAndTypes';
-import DetailActionPanelItem from '@entities/todos/components/TodoDetail/components/DetailsActionsPanelItem';
+import DetailActionPanelItem from '@pages/todos/pages/InfoBoard/components/DetailsActionsPanelItem';
 import DueDateButton from '@entities/dueDateButton';
 import {useTodoDate} from '@entities/todos/hooks';
 import PriorityButton from '@entities/setPriorityButton/components/PriorityButton';

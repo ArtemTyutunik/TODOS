@@ -17,7 +17,7 @@ import {useEffect} from 'react';
 import {getVerifiedStatus} from '@shared/api/services/user';
 import Resizable from '@shared/components/resizable/Resizable';
 import {setTodoInfoId, todoInfoIdSelector} from '@app/store/AppStore';
-import TodoDetailPage from '@entities/todos/components/TodoDetail/TodoDetailPage';
+import InfoBoard from '@pages/todos/pages/InfoBoard/InfoBoard';
 import checkIsMobile from '@shared/helpers/isMobile';
 import BasicModal from '@shared/components/modal';
 
@@ -83,7 +83,7 @@ const AuthorizedLayout = () => {
           isMobile ? (
               <BasicModal open onClose={onCloseTodoInfo}>
                 <Box minWidth={{mobile: '300px', largeMobile: '400px', tablet: '700px'}}>
-                  <TodoDetailPage id={todoInfoId}/>
+                  <InfoBoard id={todoInfoId}/>
                 </Box>
               </BasicModal>
           ) : (
@@ -94,7 +94,7 @@ const AuthorizedLayout = () => {
               localStorageItem={'todoCardWidth'}
             >
               <Box sx={{background: 'gray', height: '100%'}}>
-                <TodoDetailPage id={todoInfoId}/>
+                <InfoBoard id={todoInfoId}/>
               </Box>
             </Resizable>
           )

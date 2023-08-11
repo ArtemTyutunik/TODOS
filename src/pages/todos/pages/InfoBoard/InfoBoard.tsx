@@ -12,7 +12,8 @@ import {setTodoInfoId} from '@app/store/AppStore';
 interface Props {
     id: number | string
 }
-const TodoDetailPage = ({id}: Props) => {
+
+const InfoBoard = ({id}: Props) => {
   const todos = useSelector((state: RootReducer) => state.todosReducer.todos);
   const dispatch = useDispatch()
   const detailedTodo = todos.find((todo) => todo.id === Number(id))
@@ -44,4 +45,4 @@ const TodoDetailPage = ({id}: Props) => {
   );
 };
 
-export default TodoDetailPage;
+export default InfoBoard;
