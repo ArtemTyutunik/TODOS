@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {Box, MenuItem, Select, SelectChangeEvent, Typography} from '@mui/material';
 import {colors} from '@shared/constants/colors';
 import {colorType} from '@shared/interfacesAndTypes';
@@ -6,7 +7,7 @@ interface Props {
   settings: colorType,
   onSelectChange: (e: SelectChangeEvent, color: colorType[]) => void
 }
-const ColorTagSelect = ({settings, onSelectChange}: Props) => {
+const ColorTagSelect = memo(({settings, onSelectChange}: Props) => {
   return (
     <Select className={'create-tag-input'}
       value={settings.name}
@@ -22,7 +23,7 @@ const ColorTagSelect = ({settings, onSelectChange}: Props) => {
       }
     </Select>
   );
-};
+});
 
 
 function SelectItem({color}: {color: colorType}) {
