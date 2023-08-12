@@ -11,7 +11,7 @@ import {
   ListItemIcon,
   ListItemText,
   Tooltip,
-  Typography,
+  Typography, useTheme,
 } from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -39,6 +39,7 @@ const ListItemButtonStyles = {
 
 export default function UserSettingsMenu() {
   const [anchorElUser, addAnchorEl, removeAnchorEl] = useAnchorElement(null);
+  const theme = useTheme()
   const mode = useSelector(themeModeSelector)
   const {user} = useSelector((state: RootReducer) => state.userReducer);
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ export default function UserSettingsMenu() {
   const menuItems: menuItem[] = [
     {
       label: 'logout',
-      Icon: () => <LogoutIcon/>,
+      Icon: () => <LogoutIcon sx={{color: theme.text.main}}/>,
       onClick: () => {
         dispatch(logOutUser());
         localStorage.removeItem('user');
@@ -117,7 +118,7 @@ export default function UserSettingsMenu() {
           ))}
           <ListItem sx={{marginLeft: '10px', marginBottom: '10px'}}>
             <ListItemIcon>
-              <DarkModeIcon/>
+              <DarkModeIcon sx={{color: theme.text.main}}/>
             </ListItemIcon>
             <Typography mr={'15px'}>
                 Dark mode

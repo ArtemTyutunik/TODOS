@@ -18,8 +18,8 @@ export const TodoContainerStyles = (theme: Theme) => ({
     position: 'absolute',
     top: '20%',
     right: '10px',
-    zIndex: 5,
-    background: '#fff',
+    zIndex: 10,
+    background: theme.background.visibleBackground,
   },
 });
 

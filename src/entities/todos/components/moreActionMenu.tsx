@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Divider, IconButton, List, ListItemButton, Tooltip, Typography} from '@mui/material';
+import {Box, Divider, IconButton, List, ListItemButton, Tooltip, Typography, useTheme} from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import InfoIcon from '@mui/icons-material/Info';
 import DropdownMenu from '@shared/components/dropdownMenu';
@@ -26,6 +26,7 @@ const MoreActionsMenu = ({todo, onDelete, onDuplicate, onSetPriority, onOpenTodo
                              MoreActionsMenuProps) => {
   const [anchorEl, addAnchorEl, removeAnchorEl] = useAnchorElement(null);
   const [isDeleteModalOpen, openDeleteModalOpen, closeDeleteModalOpen] = useVisable(false)
+  const theme = useTheme();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     addAnchorEl(event.currentTarget);
@@ -35,7 +36,7 @@ const MoreActionsMenu = ({todo, onDelete, onDuplicate, onSetPriority, onOpenTodo
     <>
       <Tooltip title={'More actions'}>
         <IconButton onClick={handleOpenUserMenu}>
-          <MoreHorizIcon color={'action'}/>
+          <MoreHorizIcon sx={{color: theme.text.title}}/>
         </IconButton>
       </Tooltip>
 

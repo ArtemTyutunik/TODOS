@@ -6,21 +6,22 @@ const boxStyles = (theme: Theme) => ({
   'display': 'flex',
   'alignItems': 'center',
   'marginTop': '20px',
-  'color': theme.description,
+  'color': theme.text.main,
   'cursor': 'pointer',
 
   '&:hover': {
-    color: theme.palette.primary.main,
+    color: theme.text.title,
   },
 });
 
 interface Props {
     onCreate(): void
 }
+
 const AddTaskButton = ({onCreate}: Props) => {
   return (
     <Box sx = {boxStyles} onClick={onCreate}>
-      <AddIcon sx={{color: 'primary.main'}}/>
+      <AddIcon sx={{color: 'inherit'}}/>
       <Typography ml={'10px'} color={'inherit'} fontSize={'15px'} fontWeight={300}>
          Add task
       </Typography>

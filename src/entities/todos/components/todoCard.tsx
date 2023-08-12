@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Box, Divider, IconButton, Tooltip, Typography} from '@mui/material';
+import {Box, Divider, IconButton, Tooltip, Typography, useTheme} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -35,6 +35,7 @@ const TodoCard = ({
   setPriorityAction}: TodoCardProps,
 ) => {
   const {label, description, date, id, tags, isCurrent} = todo;
+  const theme = useTheme();
   const userTags = useSelector(userTagsSelector)
   const dispatch = useDispatch()
   const userId = useSelector(userIdSelector)
@@ -106,7 +107,7 @@ const TodoCard = ({
             <Box className={'ActionsMenu'} onClick={(e: React.SyntheticEvent) => e.stopPropagation()}>
               <Tooltip title={'Edit'}>
                 <IconButton onClick={onEdit}>
-                  <EditIcon color={'action'}/>
+                  <EditIcon sx={{color: theme.text.title}}/>
                 </IconButton>
               </Tooltip>
 
