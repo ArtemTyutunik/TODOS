@@ -26,7 +26,6 @@ export const useFetchAllUserData = (): [boolean] => {
       const todos = await getUserTodos<ITodo[]>(userId)
       onFulfilledTodosRequest(todos)
     } catch (e) {
-      console.log(e)
       dispatch(fetchWithError())
     }
   }
@@ -37,7 +36,6 @@ export const useFetchAllUserData = (): [boolean] => {
       dispatch(getUserTags(result))
     } catch (e) {
       dispatch(errorDuringFetch())
-      console.log(e)
     }
   }
 

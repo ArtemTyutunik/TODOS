@@ -40,7 +40,7 @@ export const postNewTodo = async (data: ITodo, userId: string) => {
   return await fetchRequest(url, options)
 }
 
-export const sendUpdatedTodo = async (updatedData: unknown, userId: string) => {
+export const sendUpdatedTodo = async (updatedData: Partial<ITodo>, userId: string) => {
   const url = `update?user_id=${userId}`
   const options = {
     method: 'PUT',
