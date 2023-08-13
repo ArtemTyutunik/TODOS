@@ -26,5 +26,3 @@ const App = () => {
 };
 
 export default withStore(App);
-
-
