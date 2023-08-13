@@ -6,7 +6,7 @@ import {toast} from 'react-toastify';
 import {Box} from '@mui/material';
 import {errorOptions} from '@shared/components/Notification/constants';
 
-const {user_id: userId} = JSON.parse(localStorage.getItem('user') || '');
+const {user_id: userId} = JSON.parse(localStorage.getItem('user') || '{}');
 
 export const addNewProjectThunk = createAsyncThunk(
     'project/addNewProject',

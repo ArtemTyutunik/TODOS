@@ -12,14 +12,15 @@ export const getUserTodos = async <T>(userId: string): Promise<T> => {
     return {...todo, tags: transformedTags, projectId: projectId}
   }
 
-  const response = await fetchRequest(`get_all/${userId}`)
+  const response = await fetchRequest(`todo/get_all?user_id=${userId}`)
+  console.log(response)
   const data = await response.json()
 
   return data.map(transformTodo)
 }
 
 export const deleteTodoById = async (id: number, userId: string) => {
-  const url = `delete?user_id=${userId}&todo_id=${id}`
+  const url = `todo/delete?user_id=${userId}&todo_id=${id}`
   const options = {
     method: 'DELETE',
   }
@@ -28,7 +29,7 @@ export const deleteTodoById = async (id: number, userId: string) => {
 }
 
 export const postNewTodo = async (data: ITodo, userId: string) => {
-  const url = `create_todo?user_id=${userId}`
+  const url = `todo/create?user_id=${userId}`
   const options = {
     method: 'POST',
     headers: {
@@ -41,7 +42,7 @@ export const postNewTodo = async (data: ITodo, userId: string) => {
 }
 
 export const sendUpdatedTodo = async (updatedData: Partial<ITodo>, userId: string) => {
-  const url = `update?user_id=${userId}`
+  const url = `todo/update?user_id=${userId}`
   const options = {
     method: 'PUT',
     headers: {
@@ -64,7 +65,7 @@ export const deleteSelectedTodo = async (userId: string, todosId: ITodo['id'][])
 
   const METHOD = 'delete'
 
-  const response = await fetchRequest(`mapping?user_id=${userId}&method=${METHOD}`, options)
+  const response = await fetchRequest(`todo/mapping?user_id=${userId}&method=${METHOD}`, options)
 
   return await response.json()
 }
@@ -81,7 +82,7 @@ export const completeSelectedTodo = async (userId: string, todosId: ITodo['id'][
 
   const METHOD = 'complete'
 
-  const response = await fetchRequest(`mapping?user_id=${userId}&method=${METHOD}`, options)
+  const response = await fetchRequest(`todo/mapping?user_id=${userId}&method=${METHOD}`, options)
 
   return await response.json()
 }

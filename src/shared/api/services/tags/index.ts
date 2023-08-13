@@ -2,7 +2,7 @@ import {fetchRequest} from '@shared/api/services/constants';
 import {ITag} from '@shared/interfacesAndTypes';
 
 export const fetchUserTags = async <T>(userId: string): Promise<T> => {
-  const url = `get_tags?user_id=${userId}`;
+  const url = `tag/get?user_id=${userId}`;
 
   const response = await fetchRequest(url)
   return await response.json();
@@ -14,17 +14,17 @@ export const createNewUserTag = async (newTag: ITag, userId: string) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(newTag.settings),
+    body: JSON.stringify(newTag),
   }
 
-  fetchRequest(`/add_tag?user_id=${userId}&tag=${newTag.name}&id=${newTag.id}`, options)
+  fetchRequest(`tag/add?user_id=${userId}`, options)
 }
 
 export const deleteUserTag = async (tagId: string, userId: string) => {
   const options = {
     method: 'DELETE',
   }
-  fetchRequest(`delete_tag?user_id=${userId}&id=${tagId}`, options)
+  fetchRequest(`tag/delete?user_id=${userId}&tag_id=${tagId}`, options)
 }
 
 export const editUserTag = async (tag: ITag, userId: string) => {
@@ -33,8 +33,8 @@ export const editUserTag = async (tag: ITag, userId: string) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(tag.settings),
+    body: JSON.stringify(tag),
   }
-  fetchRequest(`update_tag?user_id=${userId}&tag=${tag.name}&id=${tag.id}`, options)
+  fetchRequest(`tag/update?user_id=${userId}`, options)
 }
 
