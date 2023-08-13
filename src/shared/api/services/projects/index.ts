@@ -2,13 +2,13 @@ import {fetchRequest} from '@shared/api/services/constants';
 import {IProject} from '@shared/interfacesAndTypes';
 
 export const getInboxId = async (userId: string): Promise<Response> => {
-  const response = await fetchRequest(`get_inboxID?user_id=${userId}`)
+  const response = await fetchRequest(`project/get_inboxID?user_id=${userId}`)
 
   return await response.json()
 }
 
 export const getProjects = async (userId: string) => {
-  const response = await fetchRequest(`get_projects?user_id=${userId}`)
+  const response = await fetchRequest(`project/get_all?user_id=${userId}`)
 
   return await response.json()
 }
@@ -22,7 +22,7 @@ export const addProjectToUserData = async (project: IProject, userId: string) =>
     body: JSON.stringify(project),
   }
 
-  return await fetchRequest(`add_project?user_id=${userId}`, options)
+  return await fetchRequest(`project/add?user_id=${userId}`, options)
 }
 
 export const deleteProjectRequest = async (userId: string, id: string) => {
@@ -30,7 +30,7 @@ export const deleteProjectRequest = async (userId: string, id: string) => {
     method: 'DELETE',
   }
 
-  const response = await fetchRequest(`delete_project?user_id=${userId}&id=${id}`, options)
+  const response = await fetchRequest(`project/delete?user_id=${userId}&id=${id}`, options)
 
   return await response.json()
 }
@@ -45,5 +45,5 @@ export const editProjectRequest = async (userId: string, project: IProject) => {
     body: JSON.stringify(project),
   }
 
-  return await fetchRequest(`update_project?user_id=${userId}&id=${project.id}`, options)
+  return await fetchRequest(`project/update?user_id=${userId}`, options)
 }
