@@ -64,7 +64,7 @@ export const deleteSelectedTodo = async (userId: string, todosId: ITodo['id'][])
 
   const METHOD = 'delete'
 
-  const response = await fetchRequest(`mapping?user_id=${userId}&method=${METHOD}`, options)
+  const response = await fetchRequest(`todo/mapping?user_id=${userId}&method=${METHOD}`, options)
 
   return await response.json()
 }
@@ -81,7 +81,7 @@ export const completeSelectedTodo = async (userId: string, todosId: ITodo['id'][
 
   const METHOD = 'complete'
 
-  const response = await fetchRequest(`mapping?user_id=${userId}&method=${METHOD}`, options)
+  const response = await fetchRequest(`todo/mapping?user_id=${userId}&method=${METHOD}`, options)
 
   return await response.json()
 }
