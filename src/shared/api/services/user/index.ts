@@ -11,7 +11,7 @@ export const setNewAvatar = async (file: File, email: string) => {
     body: formData,
   }
 
-  const response = await fetchRequest('set_avatar', options)
+  const response = await fetchRequest('user/set_avatar', options)
 
   if (!response.ok) {
     throw new Error('error on server')
@@ -32,7 +32,7 @@ export const confirmEmail = async (emailToken: string) => {
     },
   }
 
-  return await fetchRequest('confirm_email', options)
+  return await fetchRequest('user/confirm_email', options)
 }
 
 export const resendEmail = async (login: string) => {
@@ -45,10 +45,10 @@ export const resendEmail = async (login: string) => {
       'Content-Type': 'application/json',
     },
   }
-  return await fetchRequest('resend_email', options)
+  return await fetchRequest('user/resend_email', options)
 }
 
 export const getVerifiedStatus = async (login: string): Promise<boolean> => {
-  const response = await fetchRequest('get_verification_status?login=' + login)
+  const response = await fetchRequest('user/get_verification_status?login=' + login)
   return await response.json()
 }

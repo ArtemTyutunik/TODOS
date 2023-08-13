@@ -22,7 +22,7 @@ export const loginWithLoginAndPassword = async (login: string, password: string 
     body: JSON.stringify({login, password}),
   }
 
-  const response = await fetchRequest('auth', options)
+  const response = await fetchRequest('user/auth?regType=password', options)
 
   return await processRequest(response)
 }
@@ -36,7 +36,7 @@ export const signUpWithLoginAndPassword = async (login: string, password: string
     body: JSON.stringify({login, password}),
   }
 
-  const response = await fetchRequest('sign_up', options)
+  const response = await fetchRequest('user/sign_up', options)
 
   return await processRequest(response)
 }
@@ -54,7 +54,7 @@ export const signUpWithGoogleService = async (login: string, data: dataProvidedB
     },
     body: JSON.stringify({login, ...data}),
   }
-  const response = await fetchRequest('sign_up', options)
+  const response = await fetchRequest('user/sign_up', options)
 
   return await processRequest(response)
 }
@@ -67,7 +67,7 @@ export const signInWithGoogleService = async (login: string) => {
     },
     body: JSON.stringify({login}),
   }
-  const response = await fetchRequest('auth_with', options)
+  const response = await fetchRequest('user/auth?regType=google', options)
 
   return await processRequest(response)
 }
