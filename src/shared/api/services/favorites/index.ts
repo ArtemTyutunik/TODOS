@@ -1,7 +1,10 @@
 import {fetchRequest} from '@shared/api/services/constants';
 import {IFavorite} from '@shared/interfacesAndTypes';
+import getUserId from '@shared/helpers/getUserId';
 
-export const fetchUserFavorites = async <T>(userId: string): Promise<T> => {
+const userId = getUserId()
+
+export const fetchUserFavorites = async <T>(): Promise<T> => {
   const url = `favorite/get?user_id=${userId}`;
 
   const response = await fetchRequest(url);
@@ -10,7 +13,7 @@ export const fetchUserFavorites = async <T>(userId: string): Promise<T> => {
 }
 
 
-export const addUserFavorite = async (userId: string, newFavorite: IFavorite) => {
+export const addUserFavorite = async (newFavorite: IFavorite) => {
   const url = `favorite/add?user_id=${userId}`;
   const options = {
     method: 'POST',
@@ -23,7 +26,7 @@ export const addUserFavorite = async (userId: string, newFavorite: IFavorite) =>
   return await fetchRequest(url, options)
 }
 
-export const deleteUserFavorite = async (userId: string, itemId: string) => {
+export const deleteUserFavorite = async (itemId: string) => {
   const options = {
     method: 'DELETE',
   }

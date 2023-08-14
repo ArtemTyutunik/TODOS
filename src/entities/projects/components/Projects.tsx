@@ -1,38 +1,31 @@
 import React, {memo, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import DrawerToggleList from '@shared/components/DrawerToggleList';
+import {useSelector} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+import {useAppDispatch} from '@app/store';
+
 import {AddIcon} from '@shared/components/icons';
 import CustomIconButton from '@shared/components/CustomIconButton';
 import {useVisable} from '@shared/hooks';
 import ProjectSettingsModal from '@entities/projects/components/ProjectSettingsModal';
-import {deleteProject, projectsSelector, editProjectAction} from '@entities/projects/model/store';
+import {projectsSelector} from '@entities/projects/model/store';
 import ProjectListItem from '@entities/projects/components/ProjectListItem';
 import {IProject} from '@shared/interfacesAndTypes';
-import {deleteProjectRequest, editProjectRequest} from '@shared/api/services/projects';
-import {userIdSelector} from '@entities/user/model/store';
+import DrawerToggleList from '@shared/components/DrawerToggleList';
 import useSortedProjects from '@entities/projects/hooks/useSortedProjects';
-import {useNavigate} from 'react-router-dom';
-import {updateTodos} from '@entities/todos/store/todo';
+import {deleteProjectThunk, pinProjectThunk} from '@entities/projects/model/thunks';
 
 const Projects = memo(() => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isSettingModalOpen, openSettingMenu, closeSettingMenu] = useVisable(false);
   const projects = useSelector(projectsSelector)
   const [pinnedProjects, unpinnedProjects] = useSortedProjects(projects)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const toggleList = () => setIsExpanded((prevState) => !prevState)
-  const userId = useSelector(userIdSelector)
   const navigate = useNavigate()
 
   const onDelete = async (id: IProject['id']) => {
-    try {
-      const returnedTodos = await deleteProjectRequest(userId, id)
-      dispatch(deleteProject(id))
-      dispatch(updateTodos(returnedTodos))
-      navigate('/today')
-    } catch (e) {
-      console.log(e)
-    }
+    dispatch(deleteProjectThunk(id))
+    navigate('/today')
   }
 
   const onPinProject = async (id: IProject['id']) => {
@@ -40,8 +33,7 @@ const Projects = memo(() => {
       const project = projects.find((project) => project.id === id)
       if (project) {
         const newProject = {...project, isPinned: !project.isPinned}
-        await editProjectRequest(userId, newProject)
-        dispatch(editProjectAction(newProject))
+        dispatch(pinProjectThunk(newProject))
       } else {
         throw new Error('error')
       }

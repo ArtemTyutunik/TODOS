@@ -1,19 +1,23 @@
 import {fetchRequest} from '@shared/api/services/constants';
 import {IProject} from '@shared/interfacesAndTypes';
+import getUserId from '@shared/helpers/getUserId';
 
-export const getInboxId = async (userId: string): Promise<Response> => {
+
+const userId = getUserId()
+
+export const getInboxId = async (): Promise<Response> => {
   const response = await fetchRequest(`project/get_inboxID?user_id=${userId}`)
 
   return await response.json()
 }
 
-export const getProjects = async (userId: string) => {
+export const getProjects = async () => {
   const response = await fetchRequest(`project/get_all?user_id=${userId}`)
 
   return await response.json()
 }
 
-export const addProjectToUserData = async (project: IProject, userId: string) => {
+export const addProjectToUserData = async (project: IProject) => {
   const options = {
     method: 'POST',
     headers: {
@@ -25,7 +29,7 @@ export const addProjectToUserData = async (project: IProject, userId: string) =>
   return await fetchRequest(`project/add?user_id=${userId}`, options)
 }
 
-export const deleteProjectRequest = async (userId: string, id: string) => {
+export const deleteProjectRequest = async (id: string) => {
   const options = {
     method: 'DELETE',
   }
@@ -36,7 +40,7 @@ export const deleteProjectRequest = async (userId: string, id: string) => {
 }
 
 
-export const editProjectRequest = async (userId: string, project: IProject) => {
+export const editProjectRequest = async (project: IProject) => {
   const options = {
     method: 'PUT',
     headers: {

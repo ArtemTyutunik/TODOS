@@ -1,7 +1,8 @@
 import {ITag, ITodo} from '@shared/interfacesAndTypes';
 import {fetchRequest} from '@shared/api/services/constants';
+import getUserId from '@shared/helpers/getUserId';
 
-const {userId} = JSON.parse(localStorage.getItem('user') || '{}')
+const userId = getUserId()
 
 export const getUserTodos = async <T>(userId: string): Promise<T> => {
   const transformTodo = (todo: ITodo) => {
@@ -21,7 +22,7 @@ export const getUserTodos = async <T>(userId: string): Promise<T> => {
   return data.map(transformTodo)
 }
 
-export const deleteTodoById = async (id: number, userId: string) => {
+export const deleteTodoById = async (id: number) => {
   const url = `todo/delete?user_id=${userId}&todo_id=${id}`
   const options = {
     method: 'DELETE',
@@ -30,7 +31,7 @@ export const deleteTodoById = async (id: number, userId: string) => {
   return await fetchRequest(url, options)
 }
 
-export const postNewTodo = async (data: ITodo, userId: string) => {
+export const postNewTodo = async (data: ITodo) => {
   const url = `todo/create?user_id=${userId}`
   const options = {
     method: 'POST',

@@ -1,10 +1,9 @@
 import React, {memo, useEffect, useState} from 'react';
 import {Box, SelectChangeEvent} from '@mui/material';
-import {useDispatch, useSelector} from 'react-redux';
+import {useAppDispatch} from '@app/store';
+import {useSelector} from 'react-redux';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
-import {createNewUserTag, editUserTag} from '@shared/api/services/tags';
-import {userIdSelector} from '@entities/user/model/store';
-import {addNewUserTag, resetTag, userTagsSelector} from '@entities/tag/store/tagStore';
+import {userTagsSelector} from '@entities/tag/store/tagStore';
 import BasicModal from '@shared/components/modal';
 import {
   resetTagModalAction,
@@ -16,6 +15,7 @@ import {colorType, ITag} from '@shared/interfacesAndTypes';
 import TagInfoModalForm from '@pages/todos/pages/TagsPage/components/tags/TagInfoModalForm';
 import {useToggleFavorite} from '@features/addToFavorites';
 import {itemAlreadyExist} from '@shared/helpers';
+import {createNewUserTagThunk, editUserTagThunk} from '@entities/tag/store/tagThunks';
 
 
 interface Props {
@@ -26,10 +26,9 @@ interface Props {
 }
 
 const TagInfoModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const [isError, setIsError] = useState(false)
   const userTags = useSelector(userTagsSelector)
-  const userId = useSelector(userIdSelector)
   const [tagState, tagDispatcher] = useTagModalReducer(tag)
   const {isFavorite, deleteFromFavorites, addNewFavorite} = useToggleFavorite(tagState?.id)
 
@@ -40,17 +39,15 @@ const TagInfoModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
   }, [isFavorite])
 
   const onCreateTag = () => {
-    createNewUserTag(tagState, userId)
-    dispatch(addNewUserTag(tagState))
+    dispatch(createNewUserTagThunk(tagState))
     tagDispatcher(setTagNameAction(''))
     onClose()
   }
 
   const onEditTag = () => {
     if (tag) {
-      editUserTag(tagState, userId)
       tagDispatcher(resetTagModalAction(tagState))
-      dispatch(resetTag(tagState))
+      dispatch(editUserTagThunk(tagState))
       onClose()
     }
   }

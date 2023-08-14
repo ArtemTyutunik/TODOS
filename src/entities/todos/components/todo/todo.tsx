@@ -1,14 +1,12 @@
 import React, {memo} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {Box} from '@mui/material';
 
-import {addNewTask, deleteTask, setPriority, toggleTaskComplete} from '../../store/todo';
 import {EditTodoForm} from '@features/todoFeatures/EditTodo';
 import {ITodo, Priority} from '@shared/interfacesAndTypes';
 import TodoCard from '../todoCard';
 import {useVisable} from '@shared/hooks';
-import {deleteTodoById, postNewTodo, sendUpdatedTodo} from '@shared/api/services/todos';
-import {userIdSelector} from '@entities/user/model/store';
-import {Box} from '@mui/material';
+import * as todoActions from '@entities/todos/store/todoThunks';
+import {useAppDispatch} from '@app/store';
 
 interface Props {
     todo: ITodo
@@ -16,44 +14,25 @@ interface Props {
 
 const Todo = memo(({todo}: Props) => {
   const {id} = todo;
-  const dispatch = useDispatch();
-  const userId = useSelector(userIdSelector)
+  const dispatch = useAppDispatch();
   const [isEditing, openEditing, closeEditing] = useVisable(false);
 
   const onComplete = () => {
-    try {
-      sendUpdatedTodo({id, done: !todo.done})
-      dispatch(toggleTaskComplete(Number(id)));
-    } catch (e) {
-      console.log(e)
-    }
+    dispatch(todoActions.completeTaskThunk({id, done: !todo.done}));
   };
 
   const onDeleteAction = () => {
-    try {
-      deleteTodoById(id, userId)
-      dispatch(deleteTask(id));
-    } catch (e) {
-      console.log(e)
-    }
+    dispatch(todoActions.deleteTaskThunk(id));
   };
+
   const onDuplicateAction = () => {
     const newTodo = ({...todo, id: Date.now()})
-    dispatch(addNewTask(newTodo));
-    try {
-      postNewTodo(newTodo, userId)
-    } catch (e) {
-      console.log(e)
-    }
+    dispatch(todoActions.duplicateTaskThunk(newTodo));
   };
+
   const setPriorityAction = (priority: Priority) => {
-    try {
-      const data = {id, priority}
-      sendUpdatedTodo(data)
-      dispatch(setPriority(data));
-    } catch (e) {
-      console.log(e)
-    }
+    const data = {id, priority}
+    dispatch(todoActions.setPriorityTaskThunk(data))
   };
 
   if (isEditing) {

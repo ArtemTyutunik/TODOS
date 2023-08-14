@@ -1,32 +1,20 @@
-import {useDispatch, useSelector} from 'react-redux';
+import {useAppDispatch} from '@app/store';
 import {Box, IconButton, List, ListItem, ListItemButton, Typography} from '@mui/material';
-import {userIdSelector} from '@entities/user/model/store/'
 import {AddIcon} from '@shared/components/icons';
-import {createNewUserTag} from '@shared/api/services/tags';
-import {addNewUserTag} from '@entities/tag/store/tagStore';
 import {configureNewTag} from '@entities/tag/utils/configureInitialTag';
-import {toast} from 'react-toastify';
-import TagsActionFailed from '@shared/components/Notification/errors/tagsActionsFailed';
-import {options} from '@shared/components/Notification/constants';
+import {createNewUserTagThunk} from '@entities/tag/store/tagThunks';
 
 interface Props {
     search: string
 }
 const NoTagsComponent = ({search}: Props) => {
-  const dispatch = useDispatch()
-  const userId = useSelector(userIdSelector)
+  const dispatch = useAppDispatch()
 
   const onClickHandler = async () => {
     const configuredTag = configureNewTag(search)
 
-    try {
-      await createNewUserTag(configuredTag, userId)
-      dispatch(addNewUserTag(configuredTag))
-    } catch (e) {
-      toast(<TagsActionFailed action={'add'}/>, options)
-    }
+    dispatch(createNewUserTagThunk(configuredTag))
   }
-
 
   return (
     <Box>

@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {IFavorite, RootReducer} from '@shared/interfacesAndTypes';
-import {fetchAllFavoritesThunkCreator} from '@features/addToFavorites/model/thunks';
+import {fetchAllFavoritesThunk} from '@features/addToFavorites/model/thunks';
 
 interface initialStateInterface {
   favorites: IFavorite[],
@@ -22,7 +22,7 @@ const favoriteSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAllFavoritesThunkCreator.fulfilled, (state, {payload}) => {
+    builder.addCase(fetchAllFavoritesThunk.fulfilled, (state, {payload}) => {
       return {...state, favorites: [...payload]}
     })
   },

@@ -6,7 +6,7 @@ import {ITag, ITodo} from '@shared/interfacesAndTypes';
 import {userIdSelector} from '@entities/user/model/store';
 import {errorDuringFetch, getUserTags} from '@entities/tag/store/tagStore';
 import {getUserTodos} from '@shared/api/services/todos';
-import {fetchAllFavoritesThunkCreator} from '@features/addToFavorites/model/thunks';
+import {fetchAllFavoritesThunk} from '@features/addToFavorites/model/thunks';
 import {getInboxId, getProjects} from '@shared/api/services/projects';
 import {getProjectsAction} from '@entities/projects/model/store';
 import {AppDispatch} from '@app/store';
@@ -41,7 +41,7 @@ export const useFetchAllUserData = (): [boolean] => {
 
   const getFavorites = async () => {
     try {
-      dispatch(fetchAllFavoritesThunkCreator(userId))
+      dispatch(fetchAllFavoritesThunk())
     } catch (e) {
       console.log(e)
     }
@@ -49,7 +49,7 @@ export const useFetchAllUserData = (): [boolean] => {
 
   const getUserInboxId = async () => {
     try {
-      const inboxId = await getInboxId(userId)
+      const inboxId = await getInboxId()
       localStorage.setItem('inboxID', inboxId + '')
     } catch (error) {
       console.log(error)
@@ -58,7 +58,7 @@ export const useFetchAllUserData = (): [boolean] => {
 
   const getUserProjects = async () => {
     try {
-      const projects = await getProjects(userId)
+      const projects = await getProjects()
       dispatch(getProjectsAction(projects))
     } catch (e) {
       console.log(e)

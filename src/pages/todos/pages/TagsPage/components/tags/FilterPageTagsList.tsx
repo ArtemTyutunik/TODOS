@@ -1,20 +1,16 @@
 import React, {memo} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import {Box} from '@mui/material';
-import {deleteUserTag} from '@shared/api/services/tags';
-import {deleteTag} from '@entities/tag/store/tagStore';
-import {userIdSelector} from '@entities/user/model/store';
 import {ITag} from '@shared/interfacesAndTypes';
 import TagItem from '@pages/todos/pages/TagsPage/components/tags/TagListItem';
+import {useAppDispatch} from '@app/store';
+import {deleteUserTagThunk} from '@entities/tag/store/tagThunks';
 
 
 const FilterPageTagsList = memo(({userTags}: {userTags: ITag[]}) => {
-  const dispatch = useDispatch()
-  const userId = useSelector(userIdSelector)
+  const dispatch = useAppDispatch()
 
   const onDeleteTag = (tag: string) => {
-    dispatch(deleteTag(tag))
-    deleteUserTag(tag, userId)
+    dispatch(deleteUserTagThunk(tag))
   }
 
   return (
