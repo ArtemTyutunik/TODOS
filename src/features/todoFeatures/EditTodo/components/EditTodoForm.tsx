@@ -1,14 +1,10 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useAppDispatch} from '@app/store';
 
 import BaseTodoForm from '@features/todoFeatures/components/baseTodoForm';
-import {editTask} from '@entities/todos/store/todo';
 import {ITodo} from '@shared/interfacesAndTypes';
-import {sendUpdatedTodo} from '@shared/api/services/todos';
-import {userIdSelector} from '@entities/user/model/store';
-import {toast} from 'react-toastify';
-import {options} from '@shared/components/Notification/constants';
-import {TodoEditedNotification} from '@shared/components/Notification';
+import {editTaskThunk} from '@entities/todos/store/todoThunks';
+
 
 interface Props {
     onClose: () => void,
@@ -16,19 +12,12 @@ interface Props {
     hideActions?: boolean,
 }
 
-const notify = () => {
-  toast(<TodoEditedNotification/>, options);
-}
-
 const EditTodoForm = ({onClose, todo, hideActions}: Props) => {
-  const dispatch = useDispatch();
-  const userId = useSelector(userIdSelector)
+  const dispatch = useAppDispatch();
 
   const onSubmit = (newTodo: ITodo) => {
-    const updated = {...todo, ...newTodo}
-    dispatch(editTask(updated));
-    sendUpdatedTodo(updated, userId)
-        .then(notify)
+    const updatedTodo = {...todo, ...newTodo}
+    dispatch(editTaskThunk(updatedTodo));
     onClose();
   };
 

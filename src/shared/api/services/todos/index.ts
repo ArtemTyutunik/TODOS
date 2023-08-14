@@ -1,6 +1,8 @@
 import {ITag, ITodo} from '@shared/interfacesAndTypes';
 import {fetchRequest} from '@shared/api/services/constants';
 
+const {userId} = JSON.parse(localStorage.getItem('user') || '{}')
+
 export const getUserTodos = async <T>(userId: string): Promise<T> => {
   const transformTodo = (todo: ITodo) => {
     const {tags} = todo
@@ -41,7 +43,7 @@ export const postNewTodo = async (data: ITodo, userId: string) => {
   return await fetchRequest(url, options)
 }
 
-export const sendUpdatedTodo = async (updatedData: Partial<ITodo>, userId: string) => {
+export const sendUpdatedTodo = async (updatedData: Partial<ITodo>) => {
   const url = `todo/update?user_id=${userId}`
   const options = {
     method: 'PUT',

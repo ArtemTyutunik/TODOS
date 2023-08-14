@@ -22,7 +22,7 @@ const Todo = memo(({todo}: Props) => {
 
   const onComplete = () => {
     try {
-      sendUpdatedTodo({id, done: !todo.done}, userId)
+      sendUpdatedTodo({id, done: !todo.done})
       dispatch(toggleTaskComplete(Number(id)));
     } catch (e) {
       console.log(e)
@@ -49,7 +49,7 @@ const Todo = memo(({todo}: Props) => {
   const setPriorityAction = (priority: Priority) => {
     try {
       const data = {id, priority}
-      sendUpdatedTodo(data, userId)
+      sendUpdatedTodo(data)
       dispatch(setPriority(data));
     } catch (e) {
       console.log(e)

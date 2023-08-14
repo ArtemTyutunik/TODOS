@@ -1,5 +1,6 @@
 import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
 import * as reducers from './reducers';
+import {useDispatch} from 'react-redux';
 
 const customizedMiddleware = getDefaultMiddleware({
   serializableCheck: false,
@@ -16,5 +17,7 @@ export const store = configureStore({
 
 export type AppDispatch = typeof store.dispatch
 export type AppStore = typeof store
+
+export const useAppDispatch = () => useDispatch<AppDispatch>()
 
 export type RootReducer = ReturnType<typeof store.getState>

@@ -22,11 +22,13 @@ const FormSubmissionButtons = ({isValid, onClose, onSubmit, withLoading}: Props)
   return (
     <Box display={'flex'} marginTop={'5px'} justifyContent={'flex-end'}>
       <Button variant="contained" color={'inherit'}
+        data-testid={'form-cancel-button'}
         sx={CancelButtonStyles}
         onClick={onClose}>
           Cancel
       </Button>
       <Button variant="contained"
+        data-testid={'form-submit-button'}
         type={'submit'}
         onClick={onSubmit}
         disabled={!isValid}

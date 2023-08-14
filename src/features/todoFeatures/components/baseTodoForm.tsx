@@ -70,6 +70,7 @@ const BaseTodoForm = ({
   }
 
   return <Box component='form'
+    data-testid={'base-todo-form'}
     onSubmit={handleSubmit((onFormSubmit))}
     sx={(theme) => ({color: theme.description})}
   >

@@ -19,7 +19,6 @@ export const addNewProjectThunk = createAsyncThunk(
           throw new Error(response.statusText)
         }
 
-        console.log('here')
         dispatch(addNewProject(project))
       } catch (e) {
         toast.error(<Box>There is a problem to create project. Try later</Box>, errorOptions)

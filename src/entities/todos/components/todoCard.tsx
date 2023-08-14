@@ -14,7 +14,6 @@ import {userTagsSelector} from '@entities/tag/store/tagStore';
 import '../css/inProcessTodo.css'
 import {toggleIsCurrent} from '@entities/todos/store/todo';
 import {sendUpdatedTodo} from '@shared/api/services/todos';
-import {userIdSelector} from '@entities/user/model/store';
 import {setTodoInfoId} from '@app/store/AppStore';
 import parse from 'html-react-parser';
 
@@ -38,13 +37,12 @@ const TodoCard = ({
   const {label, description, date, id, tags, isCurrent} = todo;
   const userTags = useSelector(userTagsSelector)
   const dispatch = useDispatch()
-  const userId = useSelector(userIdSelector)
   const todoFilteredTags = userTags.filter((userTag) => tags?.includes(userTag.id))
 
   const setAsCurrent = () => {
     try {
       const updatedTodo = {...todo, isCurrent: !isCurrent}
-      sendUpdatedTodo(updatedTodo, userId)
+      sendUpdatedTodo(updatedTodo)
       dispatch(toggleIsCurrent(updatedTodo))
     } catch (e) {
       console.log(e)
