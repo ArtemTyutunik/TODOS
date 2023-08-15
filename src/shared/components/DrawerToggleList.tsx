@@ -18,7 +18,7 @@ const DrawerToggleList = ({isExpanded, onArrowClick, title, children}: Props) =>
       {children}
       <ToggleArrowIcon isExpanded={isExpanded}
         onClick={onArrowClick}
-        sx={{transform: 'rotate(180deg)'}}/>
+        sx={{transform: 'rotate(180deg)', color: '#808080'}}/>
     </Box>
 
   </Box>

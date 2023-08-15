@@ -25,7 +25,7 @@ const ToggleArrowButton = ({isExpanded, onClick, sx}: Props) => {
     <CustomArrowButton sx={sx}
       className={isExpanded ? 'rotated': ''}
       onClick={onClick}>
-      <ArrowForwardIosIcon sx={{fontSize: 'inherit', color: 'grey'}}/>
+      <ArrowForwardIosIcon sx={{fontSize: 'inherit'}}/>
     </CustomArrowButton>
   );
 };

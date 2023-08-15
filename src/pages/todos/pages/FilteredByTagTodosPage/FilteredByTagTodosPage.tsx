@@ -22,7 +22,7 @@ const FilteredByTagTodosPage = () => {
               <PageTitle>
                 <Box sx={{display: 'flex', alignItems: 'center'}}>
                   <CustomIconButton sx={{mr: '10px'}} onClick={() => navigate('/' + TAGS_LINK)}>
-                    <ArrowBackIcon sx={{fontSize: '18px'}}/>
+                    <ArrowBackIcon sx={(theme) => ({fontSize: '18px', color: theme.background.icons})}/>
                   </CustomIconButton>
                   {tag?.name}
                 </Box>

@@ -29,7 +29,7 @@ const TagsSection = () => {
           </Typography>
         </Box>
         <IconButton sx={{padding: '0px', borderRadius: '4px'}} onClick={open}>
-          <AddIcon sx={{color: theme.palette.primary.main}}/>
+          <AddIcon sx={{color: theme.background.icons}}/>
         </IconButton>
       </Box>
       <Divider/>
