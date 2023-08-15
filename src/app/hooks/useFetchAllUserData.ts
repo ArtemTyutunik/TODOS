@@ -1,9 +1,8 @@
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {useEffect, useState} from 'react';
 import {fetchTasks, fetchWithError} from '@entities/todos/store/todo'
 import {fetchUserTags} from '@shared/api/services/tags';
 import {ITag, ITodo} from '@shared/interfacesAndTypes';
-import {userIdSelector} from '@entities/user/model/store';
 import {errorDuringFetch, getUserTags} from '@entities/tag/store/tagStore';
 import {getUserTodos} from '@shared/api/services/todos';
 import {fetchAllFavoritesThunk} from '@features/addToFavorites/model/thunks';
@@ -14,7 +13,6 @@ import {AppDispatch} from '@app/store';
 export const useFetchAllUserData = (): [boolean] => {
   const dispatch = useDispatch<AppDispatch>();
   const [isFetching, setIsFetching] = useState(true)
-  const userId = useSelector(userIdSelector)
   const [isMinimumTimeEnd, setIsMinimumTimeEnd] = useState(false)
 
   const getTodos = async () => {
@@ -23,7 +21,7 @@ export const useFetchAllUserData = (): [boolean] => {
     }
 
     try {
-      const todos = await getUserTodos<ITodo[]>(userId)
+      const todos = await getUserTodos<ITodo[]>()
       onFulfilledTodosRequest(todos)
     } catch (e) {
       dispatch(fetchWithError())
@@ -32,7 +30,7 @@ export const useFetchAllUserData = (): [boolean] => {
 
   const getTags = async () => {
     try {
-      const result: ITag[] = await fetchUserTags(userId)
+      const result: ITag[] = await fetchUserTags()
       dispatch(getUserTags(result))
     } catch (e) {
       dispatch(errorDuringFetch())

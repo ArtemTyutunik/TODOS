@@ -3,21 +3,22 @@ import {IProject} from '@shared/interfacesAndTypes';
 import getUserId from '@shared/helpers/getUserId';
 
 
-const userId = getUserId()
-
 export const getInboxId = async (): Promise<Response> => {
+  const userId = getUserId()
   const response = await fetchRequest(`project/get_inboxID?user_id=${userId}`)
 
   return await response.json()
 }
 
 export const getProjects = async () => {
+  const userId = getUserId()
   const response = await fetchRequest(`project/get_all?user_id=${userId}`)
 
   return await response.json()
 }
 
 export const addProjectToUserData = async (project: IProject) => {
+  const userId = getUserId()
   const options = {
     method: 'POST',
     headers: {
@@ -30,6 +31,7 @@ export const addProjectToUserData = async (project: IProject) => {
 }
 
 export const deleteProjectRequest = async (id: string) => {
+  const userId = getUserId()
   const options = {
     method: 'DELETE',
   }
@@ -41,6 +43,7 @@ export const deleteProjectRequest = async (id: string) => {
 
 
 export const editProjectRequest = async (project: IProject) => {
+  const userId = getUserId()
   const options = {
     method: 'PUT',
     headers: {

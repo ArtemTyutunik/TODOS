@@ -2,9 +2,8 @@ import {ITag, ITodo} from '@shared/interfacesAndTypes';
 import {fetchRequest} from '@shared/api/services/constants';
 import getUserId from '@shared/helpers/getUserId';
 
-const userId = getUserId()
 
-export const getUserTodos = async <T>(userId: string): Promise<T> => {
+export const getUserTodos = async <T>(): Promise<T> => {
   const transformTodo = (todo: ITodo) => {
     const {tags} = todo
     const projectId = todo.projectId !== null ? todo.projectId : localStorage.getItem('inboxID')
@@ -15,14 +14,15 @@ export const getUserTodos = async <T>(userId: string): Promise<T> => {
     return {...todo, tags: transformedTags, projectId: projectId}
   }
 
+  const userId = getUserId()
   const response = await fetchRequest(`todo/get_all?user_id=${userId}`)
-  console.log(response)
   const data = await response.json()
 
   return data.map(transformTodo)
 }
 
 export const deleteTodoById = async (id: number) => {
+  const userId = getUserId()
   const url = `todo/delete?user_id=${userId}&todo_id=${id}`
   const options = {
     method: 'DELETE',
@@ -32,6 +32,7 @@ export const deleteTodoById = async (id: number) => {
 }
 
 export const postNewTodo = async (data: ITodo) => {
+  const userId = getUserId()
   const url = `todo/create?user_id=${userId}`
   const options = {
     method: 'POST',
@@ -45,6 +46,7 @@ export const postNewTodo = async (data: ITodo) => {
 }
 
 export const sendUpdatedTodo = async (updatedData: Partial<ITodo>) => {
+  const userId = getUserId()
   const url = `todo/update?user_id=${userId}`
   const options = {
     method: 'PUT',

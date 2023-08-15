@@ -2,9 +2,9 @@ import {fetchRequest} from '@shared/api/services/constants';
 import {ITag} from '@shared/interfacesAndTypes';
 import getUserId from '@shared/helpers/getUserId';
 
-const userId = getUserId()
 
-export const fetchUserTags = async <T>(userId: string): Promise<T> => {
+export const fetchUserTags = async <T>(): Promise<T> => {
+  const userId = getUserId()
   const url = `tag/get?user_id=${userId}`;
 
   const response = await fetchRequest(url)
@@ -12,6 +12,8 @@ export const fetchUserTags = async <T>(userId: string): Promise<T> => {
 }
 
 export const createNewUserTag = async (newTag: ITag) => {
+  const userId = getUserId()
+
   const options = {
     method: 'POST',
     headers: {
@@ -24,6 +26,8 @@ export const createNewUserTag = async (newTag: ITag) => {
 }
 
 export const deleteUserTag = async (tagId: string) => {
+  const userId = getUserId()
+
   const options = {
     method: 'DELETE',
   }
@@ -31,6 +35,8 @@ export const deleteUserTag = async (tagId: string) => {
 }
 
 export const editUserTag = async (tag: ITag) => {
+  const userId = getUserId()
+
   const options = {
     method: 'PUT',
     headers: {
