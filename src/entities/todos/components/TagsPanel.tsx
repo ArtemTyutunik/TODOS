@@ -27,7 +27,6 @@ const TagLink = ({tag}: {tag: ITag}) => {
 
 const CustomTagLink = styled(Typography)(() => ({
   width: 'fit-content',
-  marginTop: '8px',
   fontSize: '13px',
   cursor: 'text',
   padding: '1px 16px',

@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Delete} from '@mui/icons-material';
 import DoneIcon from '@mui/icons-material/Done';
-import {Box, Tooltip} from '@mui/material';
+import {Box, Tooltip, useTheme} from '@mui/material';
 import CustomIconButton from '@shared/components/CustomIconButton';
 import {completeSelectedTodo, deleteSelectedTodo} from '@shared/api/services/todos';
 import {userIdSelector} from '@entities/user/model/store';
@@ -23,6 +23,7 @@ const SelectedTodosActions = ({selectedTodos, setSelectedTodos}: Props) => {
   const userId = useSelector(userIdSelector)
   const [confirmDeletion, showConfirmDeletion, hideConfirmDeletion] = useVisable(false)
   const dispatch = useDispatch()
+  const theme = useTheme()
 
   const onDeleteSelected = async () => {
     try {
@@ -49,12 +50,12 @@ const SelectedTodosActions = ({selectedTodos, setSelectedTodos}: Props) => {
   const selectedTodosActions = [
     {
       label: 'Delete',
-      element: <Delete/>,
+      element: <Delete sx={{color: theme.background.icons, fontSize: '18px'}}/>,
       onClick: () => showConfirmDeletion(),
     },
     {
       label: 'Complete',
-      element: <DoneIcon sx={{color: '#808080', fontSize: '19px'}}/>,
+      element: <DoneIcon sx={{color: theme.background.icons, fontSize: '18px'}}/>,
       onClick: () => onCompleteSelected(),
     },
   ]

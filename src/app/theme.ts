@@ -8,6 +8,7 @@ declare module '@mui/material/styles' {
       lightGrey: string,
       appBackground: string,
       inboxIcon: string,
+      icons: string,
       divider: string,
       visibleBackground: string
     },
@@ -31,6 +32,7 @@ declare module '@mui/material/styles' {
       lightGrey: string,
       appBackground: string,
       inboxIcon: string,
+      icons: string,
       divider: string,
       visibleBackground: string
     },
@@ -65,7 +67,6 @@ declare module '@mui/material/styles' {
 
 export const getDesignTokens = (mode: 'light' | 'dark'): ThemeOptions => {
   const isDarkMode = mode === 'dark'
-  console.log(isDarkMode, mode)
   return {
     palette: {
       primary: {
@@ -78,7 +79,8 @@ export const getDesignTokens = (mode: 'light' | 'dark'): ThemeOptions => {
       appBackground: isDarkMode ? '#202124' : '#ffffff',
       visibleBackground: isDarkMode ? 'transparent' : '#ffffff',
       inboxIcon: '#246fe0',
-      divider: isDarkMode ? 'transparent' : '#3b3b3b',
+      icons: isDarkMode ? '#d9a8f1' : '#808080',
+      divider: isDarkMode ? 'hsla(0,0%,100%,0.1)' : '#f0f0f0',
     },
     text: {
       main: isDarkMode ? '#e8dede' : '#808080',

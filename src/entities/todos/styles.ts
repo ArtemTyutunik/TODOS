@@ -30,15 +30,16 @@ export const TodoFlexboxStyles = {
 };
 
 export const TodoLabelStyles = (theme: Theme) => ({
-  fontSize: '17px',
+  fontSize: '15px',
   fontWeight: 400,
   lineHeight: 1.3,
   color: theme.text.main,
 });
 
 export const todoDescriptionStyles = (theme: Theme) => ({
-  fontSize: {mobile: '13px', largeMobile: '16px'},
+  fontSize: {mobile: '13px', largeMobile: '14px'},
   fontWeight: 300,
   lineHeight: 1,
+  marginBottom: '6px',
   color: theme.text.main,
 });

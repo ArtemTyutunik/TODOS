@@ -16,6 +16,7 @@ import '../css/inProcessTodo.css'
 import {toggleIsCurrent} from '@entities/todos/store/todo';
 import {sendUpdatedTodo} from '@shared/api/services/todos';
 import {userIdSelector} from '@entities/user/model/store';
+import {styled} from '@mui/material/styles';
 
 interface TodoCardProps {
     todo: ITodo,
@@ -60,24 +61,17 @@ const TodoCard = ({
       />
       }
 
-      <Box sx={{mb: '25px', cursor: 'pointer', flexGrow: '1'}}
+      <Box sx={{mb: '10px', cursor: 'pointer', flexGrow: '1'}}
         onClick={() => setDetailsVisable((prevState) => !prevState)}
         data-testid="Todo card"
       >
-        <Box sx = {TodoContainerStyles} className={`${isCurrent && 'todo-wrap' || ''}`}>
-          <Box sx={{backgroundColor: 'transparent'}}
-            display={'flex'}
-            width={'100%'}
-            padding={'10px'}
-            borderRadius={'7px'}
-            alignItems={'center'}
-            justifyContent={'space-between'}
-            zIndex={5}>
+        <Box sx={TodoContainerStyles} className={`${isCurrent && 'todo-wrap' || ''}`}>
+          <BoxWrapper>
             <Box maxWidth={{mobile: '100%'}} sx={TodoFlexboxStyles}>
               <Box width={'100%'} onClick={(e: React.SyntheticEvent) => e.stopPropagation()}>
-                <Box sx = {TodoFlexboxStyles} >
+                <Box sx={TodoFlexboxStyles}>
                   <CheckboxComponent onComplete={onComplete} todo={todo}/>
-                  <Typography sx = {TodoLabelStyles} marginRight={'20px'}>
+                  <Typography sx={TodoLabelStyles} fontFamily={'inherit'} marginRight={'20px'}>
                     {label}
                   </Typography>
                 </Box>
@@ -112,7 +106,7 @@ const TodoCard = ({
               </Tooltip>
 
               <MoreActionsMenu
-                onOpenTodoDetails={( ) => setDetailsVisable(true)}
+                onOpenTodoDetails={() => setDetailsVisable(true)}
                 onDelete={onDeleteAction}
                 onDuplicate = {onDuplicateAction}
                 setAsCurrent={setAsCurrent}
@@ -120,16 +114,30 @@ const TodoCard = ({
                 //@ts-ignore
                 onSetPriority = {setPriorityAction}/>
             </Box>
-          </Box>
+          </BoxWrapper>
         </Box>
         {
-          !isCurrent && <Divider/>
+          !isCurrent && <CustomDriver/>
         }
       </Box>
     </>
-
-
   );
 };
+
+const BoxWrapper = styled(Box)({
+  backgroundColor: 'transparent',
+  display: 'flex',
+  width: '100%',
+  padding: '10px',
+  borderRadius: '7px',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+})
+
+const CustomDriver = styled(Divider)(({theme}) => ({
+  background: theme.background.divider,
+}))
+
 
 export default TodoCard;

@@ -1,6 +1,6 @@
 import React from 'react';
 import DropdownMenu from '@shared/components/dropdownMenu';
-import {Box, MenuItem, Tooltip, Typography} from '@mui/material';
+import {Box, MenuItem, Theme, Tooltip, Typography, useTheme} from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import CustomIconButton from '@shared/components/CustomIconButton';
@@ -24,6 +24,7 @@ const SortingMenu = () => {
   const [anchorEl, setAnchorEl, removeAnchorEl] = useAnchorElement(null)
   const dispatch = useDispatch()
   const currentSortingType = useSelector(sortTypeSelector)
+  const theme = useTheme()
   const order = useSelector(orderSelector)
 
   const onOptionSelect = (newValue: string) => {
@@ -53,7 +54,7 @@ const SortingMenu = () => {
         showDefaultIcon ? (
             <Tooltip title={'sort'}>
               <CustomIconButton onClick={(e) => setAnchorEl(e.target as HTMLElement)}>
-                <FilterAltIcon sx={{color: '#808080', fontSize: '20px'}}/>
+                <FilterAltIcon sx={{color: theme.background.icons, fontSize: '20px'}}/>
               </CustomIconButton>
             </Tooltip>
         ) : (
@@ -62,9 +63,9 @@ const SortingMenu = () => {
                 <CustomIconButton onClick={toggleOrdering}>
                   {
                     order === 'descending' ? (
-                        <NorthIcon sx={{fontSize: '18px', color: '#808080'}}/>
+                        <NorthIcon sx={{fontSize: '18px', color: theme.background.icons}}/>
                     ) : (
-                        <SouthIcon sx={{fontSize: '18px', color: '#808080'}}/>
+                        <SouthIcon sx={{fontSize: '18px', color: theme.background.icons}}/>
                     )
                   }
                 </CustomIconButton>
@@ -76,7 +77,7 @@ const SortingMenu = () => {
               </CustomIconButton>
               <Tooltip title={'Reset sorting'}>
                 <CustomIconButton onClick={() => onOptionSelect('default')}>
-                  <CloseIcon sx={{fontSize: '18px', color: '#808080'}}/>
+                  <CloseIcon sx={{fontSize: '18px', color: theme.background.icons}}/>
                 </CustomIconButton>
               </Tooltip>
             </Box>
@@ -88,7 +89,7 @@ const SortingMenu = () => {
           sortOptions.map(({value, label}) => <MenuItem key={value}
             onClick={() => onOptionSelect(value)}
             sx={menuItemStyles}>
-            <Typography fontSize={'14px'} color={'#202020'} mr={'20px'}>
+            <Typography fontSize={'14px'} color={theme.text.main} mr={'20px'}>
               {label}
             </Typography>
             {currentSortingType === value && <CheckIcon sx={selectIconsStyles}/>}
@@ -117,17 +118,14 @@ const selectIconsStyles = {
   fontSize: '18px',
 }
 
-const onSortButtonStyles = {
+const onSortButtonStyles = (theme: Theme) => ({
   'fontSize': '12px',
-  'color': '#808080',
+  'color': theme.background.icons,
   'fontWeight': 700,
   'padding': '0 5px',
-  '&:hover': {
-    color: '#202020',
-  },
   'fontFamily': '-apple-system,BlinkMacSystemFont, "Segoe UI",Roboto,"Apple Color Emoji",' +
       'Helvetica,Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol"',
-}
+})
 
 
 export default SortingMenu;

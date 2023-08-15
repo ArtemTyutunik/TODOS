@@ -53,7 +53,7 @@ const SelectTodosMenu = ({anchorEl, removeAnchorEl, todos, setChosenTodos}: Prop
     <DropdownMenu anchorEl={anchorEl} handleClose={removeAnchorEl}>
       {
         menuItems.map((item) => <MenuItem key={item.text} onClick={item.onClick}
-          sx={{padding: '5px 35px', fontSize: '16px', color: '#202020'}}
+          sx={(theme) => ({padding: '5px 35px', fontSize: '16px', color: theme.text.main})}
         >
           {item.text}
         </MenuItem>)

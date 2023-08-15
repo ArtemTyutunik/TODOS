@@ -44,7 +44,7 @@ const MoreActionsMenu = ({todo, onDelete, onDuplicate, onSetPriority, onOpenTodo
         <Box minWidth={'250px'} padding={'5px'}>
           <List>
             <ListItemButton sx = {listItemStyles} onClick={onOpenTodoDetails}>
-              <InfoIcon sx={{color: 'grey'}}/>
+              <InfoIcon sx={{color: theme.background.icons}}/>
               <Typography ml={'25px'}>
                       Info
               </Typography>
@@ -63,21 +63,21 @@ const MoreActionsMenu = ({todo, onDelete, onDuplicate, onSetPriority, onOpenTodo
             </Box>
 
             <ListItemButton sx = {listItemStyles} onClick={onDuplicate}>
-              <QueueIcon sx={{color: 'grey'}}/>
+              <QueueIcon sx={{color: theme.background.icons}}/>
               <Typography ml={'25px'}>
                           Duplicate
               </Typography>
             </ListItemButton>
 
             <ListItemButton sx = {listItemStyles} onClick={setAsCurrent}>
-              <CheckCircleOutlineIcon sx={{color: todo?.isCurrent ? '#1976d2': 'grey'}}/>
+              <CheckCircleOutlineIcon sx={{color: todo?.isCurrent ? '#1976d2': theme.background.icons}}/>
               <Typography ml={'25px'}>
                   Set as current
               </Typography>
             </ListItemButton>
             <Divider/>
             <ListItemButton sx = {listItemStyles} onClick={openDeleteModalOpen}>
-              <DeleteIcon sx={{color: 'grey'}}/>
+              <DeleteIcon sx={{color: theme.background.icons}}/>
               <Typography ml={'25px'}>
                       Delete
               </Typography>

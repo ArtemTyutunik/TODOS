@@ -1,7 +1,8 @@
 import React from 'react';
 import {ITodo} from '@shared/interfacesAndTypes';
 import Todo from '@entities/todos/components/todo/todo';
-import {Box, Checkbox} from '@mui/material';
+import {Box, Checkbox, Theme, useTheme} from '@mui/material';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 
 interface Props {
@@ -10,11 +11,13 @@ interface Props {
   chosenTodos?: ITodo['id'][]
 }
 const RenderedList = ({todos, onChooseTodo, chosenTodos}: Props) => {
+  const theme = useTheme()
   return (
     <>
       {
         todos.map((todo: ITodo) => <Box key={todo.id} sx={todoWrapper}>
           <Checkbox sx={checkboxStyles} size={'small'} checked={chosenTodos?.includes(todo.id)}
+            checkedIcon={<CheckBoxIcon sx={{color: theme.background.icons, padding: '0'}}/>}
             onChange={() => onChooseTodo && onChooseTodo(todo.id)}
             className={`todo-checkbox ${chosenTodos?.includes(todo.id) ? 'keep-active': ''}`}/>
           <Todo todo={todo} />
@@ -36,14 +39,14 @@ const todoWrapper = {
     visibility: 'visible !important',
   },
 }
-const checkboxStyles = {
-  color: '#808080',
+const checkboxStyles = (theme: Theme) => ({
+  color: theme.background.icons,
   position: 'absolute',
   visibility: 'hidden',
   zIndex: '10',
   top: 'calc(50% - 20px)',
   left: '0%',
   transform: 'translate(-100%, -50%)',
-}
+})
 
 export default RenderedList;

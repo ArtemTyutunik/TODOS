@@ -1,7 +1,7 @@
 import React from 'react';
 import DrawerListItem from '@shared/components/DrawerListItem';
 import {Edit} from '@mui/icons-material';
-import {Box, Divider, List, ListItemButton, Typography} from '@mui/material';
+import {Box, Divider, List, ListItemButton, Typography, useTheme} from '@mui/material';
 import {IProject} from '@shared/interfacesAndTypes';
 import {useNavigate} from 'react-router-dom';
 import {useAnchorElement, useVisable} from '@shared/hooks';
@@ -24,6 +24,7 @@ interface Props {
 
 const ProjectListItem = ({project, onDelete, onPinToggle}: Props) => {
   const navigate = useNavigate()
+  const theme = useTheme()
   const projectTodos = useProjectTodos(project.id)
   const allCount = projectTodos.length;
   const completedCount = projectTodos.filter((todo) => todo.done).length
@@ -68,7 +69,7 @@ const ProjectListItem = ({project, onDelete, onPinToggle}: Props) => {
               <List>
                 <ListItemButton sx={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}
                   onClick={() => onPinToggle(project.id)}>
-                  <PushPinIcon sx={{color: project?.isPinned ? '#e86262' : '#808080', fontSize: '18px'}}/>
+                  <PushPinIcon sx={{color: project?.isPinned ? '#e86262' : theme.background.icons, fontSize: '18px'}}/>
                   <ProjectTitle>
                     Pin project
                   </ProjectTitle>
@@ -76,7 +77,7 @@ const ProjectListItem = ({project, onDelete, onPinToggle}: Props) => {
 
                 <ListItemButton sx={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}
                   onClick={openEditingForm}>
-                  <Edit sx={{color: '#808080', fontSize: '18px'}}/>
+                  <Edit sx={{color: theme.background.icons, fontSize: '18px'}}/>
                   <ProjectTitle>
                     Edit project
                   </ProjectTitle>
@@ -85,7 +86,7 @@ const ProjectListItem = ({project, onDelete, onPinToggle}: Props) => {
 
                 <ListItemButton sx={{display: 'flex', alignItems: 'center'}}
                   onClick={ () => onDelete(project.id)}>
-                  <DeleteOutlineIcon sx={{color: '#808080', fontSize: '18px'}}/>
+                  <DeleteOutlineIcon sx={{color: theme.background.icons, fontSize: '18px'}}/>
                   <ProjectTitle>
                     Delete project
                   </ProjectTitle>
