@@ -3,7 +3,7 @@ import React from 'react';
 const WrongFileSizeNotification = () => {
   return (
     <div>
-        File size should not exceed 1 MB
+        File size should not exceed 2 MB
     </div>
   );
 };

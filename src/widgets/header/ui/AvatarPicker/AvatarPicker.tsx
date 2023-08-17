@@ -5,9 +5,10 @@ import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import {toast} from 'react-toastify';
 import UserAvatar from '../UserAvatar/userAvatar';
 import {WrongFileSizeNotification, LoadFileServerError} from '@shared/components/Notification';
-import {errorOptions} from '@shared/components/Notification/constants';
+import {errorOptions, options} from '@shared/components/Notification/constants';
 import {setNewAvatar} from '@shared/api/services/user';
 import {setUserPicture} from '@entities/user/model/store';
+import NewAvatarSet from '@shared/components/Notification/NewAvatarSet';
 
 const AvatarPicker = () => {
   const filePickerElement = useRef<HTMLInputElement | null>(null)
@@ -21,7 +22,7 @@ const AvatarPicker = () => {
 
   const onFilePickerChange = async (e: React.ChangeEvent) => {
     const file = (e.target as HTMLInputElement)?.files![0]
-    const MAX_SIZE = 1000000
+    const MAX_SIZE = 2_000_000
 
     if ( file) {
       if (file.size <= MAX_SIZE) {
@@ -29,6 +30,7 @@ const AvatarPicker = () => {
           const url = await setNewAvatar(file, user?.login)
           dispatch(setUserPicture(url));
           localStorage.setItem('user', JSON.stringify({...user, picture: url}))
+          toast.success(<NewAvatarSet/>, options)
         } catch (e) {
           toast.error(<LoadFileServerError/>, errorOptions)
         }

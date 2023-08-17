@@ -2,7 +2,14 @@ import React from 'react';
 import {toast} from 'react-toastify';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {ITodo} from '@shared/interfacesAndTypes';
-import {addNewTask, deleteTask, editTask, setPriority, toggleTaskComplete} from '@entities/todos/store/todo';
+import {
+  addNewTask,
+  deleteTask,
+  editTask,
+  setIsLoading,
+  setPriority,
+  toggleTaskComplete,
+} from '@entities/todos/store/todo';
 import {deleteTodoById, postNewTodo, sendUpdatedTodo} from '@shared/api/services/todos';
 import {TodoEditedNotification} from '@shared/components/Notification';
 import {options} from '@shared/components/Notification/constants';
@@ -12,8 +19,10 @@ export const addNewTaskThunk = createAsyncThunk(
     'todo/addNewTask',
     async (newTodo: ITodo, {dispatch}) => {
       try {
+        dispatch(setIsLoading(true))
         await postNewTodo(newTodo)
         dispatch(addNewTask(newTodo));
+        dispatch(setIsLoading(true))
         toast(<TodoCreatedNotification/>, options)
       } catch (e) {
         console.log(e)

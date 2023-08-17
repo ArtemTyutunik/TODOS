@@ -38,14 +38,11 @@ export const confirmEmail = async (emailToken: string) => {
 export const resendEmail = async (login: string) => {
   const options = {
     method: 'POST',
-    body: JSON.stringify({
-      login: login,
-    }),
     headers: {
       'Content-Type': 'application/json',
     },
   }
-  return await fetchRequest('user/resend_email', options)
+  return await fetchRequest(`user/resend_email?login=${login}`, options)
 }
 
 export const getVerifiedStatus = async (login: string): Promise<boolean> => {
