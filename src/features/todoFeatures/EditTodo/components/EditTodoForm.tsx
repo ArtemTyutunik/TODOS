@@ -17,7 +17,7 @@ const EditTodoForm = ({onClose, todo, hideActions}: Props) => {
 
   const onSubmit = (newTodo: ITodo) => {
     const updatedTodo = {...todo, ...newTodo}
-    dispatch(editTaskThunk(updatedTodo));
+    dispatch(editTaskThunk({updatedTodo, showNotification: true}));
     onClose();
   };
 

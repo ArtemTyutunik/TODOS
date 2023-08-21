@@ -22,9 +22,11 @@ import checkIsMobile from '@shared/helpers/isMobile';
 import BasicModal from '@shared/components/modal';
 
 const AuthorizedLayout = () => {
+  const [isFetching] = useFetchAllUserData()
+
   const {isOpenDrawer} = useSelector((state: RootReducer) => state.drawerReducer);
   const todoInfoId = useSelector(todoInfoIdSelector)
-  const [isFetching] = useFetchAllUserData()
+  //todo refactor selectors
   const errorFetching = useSelector(isErrorFetchingSelector)
   const isVerified = useSelector(isVerifiedSelector)
   const {login = ''} = JSON.parse(localStorage.getItem('user')!)

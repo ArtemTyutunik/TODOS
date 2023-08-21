@@ -32,11 +32,13 @@ export const addNewTaskThunk = createAsyncThunk(
 
 export const editTaskThunk = createAsyncThunk(
     'todo/editTask',
-    async (updatedTodo: ITodo, {dispatch}) => {
+    async ({updatedTodo, showNotification = false}: {updatedTodo: ITodo, showNotification?: boolean}, {dispatch}) => {
       try {
         await sendUpdatedTodo(updatedTodo)
         dispatch(editTask(updatedTodo));
-        toast(<TodoEditedNotification/>, options)
+        if (showNotification) {
+          toast(<TodoEditedNotification/>, options)
+        }
       } catch (e) {
         console.log(e)
       }

@@ -1,15 +1,22 @@
 import React, {useRef} from 'react';
-import {Box} from '@mui/material';
+import {TextareaAutosize} from '@mui/base';
+import {styled} from '@mui/material/styles';
 
 interface Props {
-    value: string,
-    onTitleChange: (e: React.SyntheticEvent) => void
+    initValue: string,
+    onTitleChange: (value: string) => void
 }
-const InfoBoardTitle = ({value, onTitleChange}: Props) => {
+
+const InfoBoardTitle = ({initValue, onTitleChange}: Props) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  const onBlur = (e: React.SyntheticEvent) => {
-    onTitleChange(e);
+  const onBlur = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value
+    if (value.length === 0) {
+      textareaRef!.current!.value = initValue
+    } else {
+      onTitleChange(value);
+    }
   }
 
   const onSubmit = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -19,19 +26,18 @@ const InfoBoardTitle = ({value, onTitleChange}: Props) => {
   }
 
   return (
-    <Box component={'textarea'}
-      sx={styles}
+    <CustomTextArea
       onKeyDown={onSubmit}
       onBlur={onBlur}
       placeholder={'Short title'}
-      defaultValue={value}
-      ref={textareaRef}>
-    </Box>
+      defaultValue={initValue}
+      ref={textareaRef}
+      data-testid="title-input"/>
   );
 };
 
 
-const styles = {
+const CustomTextArea = styled(TextareaAutosize)(() => ({
   '&:focus-visible': {
     border: 'none',
     backgroundColor: 'transparent !important',
@@ -49,10 +55,9 @@ const styles = {
   'resize': 'none',
   'color': '#444343',
   'fontWeight': '600',
-  'height': 'fit-content !important',
   'padding': '5px 10px',
   'borderRadius': '5px',
-  'margin': '10px',
-}
+  'margin': '10px 0',
+}))
 
 export default InfoBoardTitle;
