@@ -105,7 +105,7 @@ const TodoCard = ({
             <Box className={'ActionsMenu'} onClick={(e: React.SyntheticEvent) => e.stopPropagation()}>
               <Tooltip title={'Edit'}>
                 <IconButton onClick={onEdit}>
-                  <EditIcon color={'action'}/>
+                  <EditIcon color={'action'} sx={{fontSize: '19px'}}/>
                 </IconButton>
               </Tooltip>
 

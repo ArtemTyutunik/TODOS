@@ -3,11 +3,11 @@ import {TextareaAutosize} from '@mui/base';
 import {styled} from '@mui/material/styles';
 
 interface Props {
-    initValue: string,
+    initValue?: string,
     onTitleChange: (value: string) => void
 }
 
-const InfoBoardTitle = ({initValue, onTitleChange}: Props) => {
+const InfoBoardTitle = ({initValue = '', onTitleChange}: Props) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   const onBlur = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

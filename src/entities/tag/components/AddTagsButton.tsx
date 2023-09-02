@@ -8,7 +8,6 @@ import DropdownMenu from '@shared/components/dropdownMenu';
 import TagsList from '@entities/tag/components/TagsList';
 import {NoTagsComponent} from '@entities/tag';
 
-import '@entities/tag/components/TagsStyles.css'
 import {ITag, tagIdType} from '@shared/interfacesAndTypes';
 import ErrorComponent from '@entities/tag/components/ErrorComponent';
 
@@ -43,13 +42,13 @@ const AddTagsButton = ({todoTags, onAddNewLabel}: Props) => {
       <DropdownMenu anchorEl={anchorEl} handleClose={onCloseDropdown}>
         <Box>
           <TextField
-            sx={{padding: '0px'}}
+            sx={styles}
             placeholder={'Search tag'}
             className={'tag-selector-input'}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             id={'tagsInputInner'}
-            inputProps={{autoComplete: 'off', id: 'tagsInput'}}
+            inputProps={{autoComplete: 'off'}}
           />
           <Box width={'100%'} maxHeight={'150px'}>
             {
@@ -70,5 +69,11 @@ const AddTagsButton = ({todoTags, onAddNewLabel}: Props) => {
     </ActionButton>
   );
 };
+
+const styles = {
+  '& input': {
+    padding: '4px 8px',
+  },
+}
 
 export default AddTagsButton;

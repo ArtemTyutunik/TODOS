@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Box} from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import {CloseIcon} from '@shared/components/icons';
 import CustomIconButton from '@shared/components/CustomIconButton';
 import {resendEmail as resendEmailAPI} from '@shared/api/services/user';
 

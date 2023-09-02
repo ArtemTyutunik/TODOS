@@ -35,7 +35,7 @@ const MoreActionsMenu = ({todo, onDelete, onDuplicate, onSetPriority, onOpenTodo
     <>
       <Tooltip title={'More actions'}>
         <IconButton onClick={handleOpenUserMenu}>
-          <MoreHorizIcon color={'action'}/>
+          <MoreHorizIcon color={'action'} sx={{fontSize: '19px'}}/>
         </IconButton>
       </Tooltip>
 

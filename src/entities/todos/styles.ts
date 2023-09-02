@@ -15,7 +15,9 @@ export const TodoContainerStyles = {
   '& .ActionsMenu': {
     opacity: 0,
     position: 'absolute',
-    top: '20%',
+    padding: '0px',
+    boxShadow: '-8px 0px 0 0px rgba(250,250, 250, 0.4)',
+    top: '0',
     right: '10px',
     zIndex: 5,
     background: '#fff',

@@ -27,7 +27,7 @@ export const addProjectToUserData = async (project: IProject) => {
     body: JSON.stringify(project),
   }
 
-  return await fetchRequest(`project/add?user_id=${userId}`, options)
+  return await fetchRequest(`project/create?user_id=${userId}`, options)
 }
 
 export const deleteProjectRequest = async (id: string) => {

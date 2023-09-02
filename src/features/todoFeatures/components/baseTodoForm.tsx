@@ -69,7 +69,7 @@ const BaseTodoForm = ({
     setDescription(event.target.value)
   }
 
-  return <Box component='form'
+  return <Box
     data-testid={'base-todo-form'}
     onSubmit={handleSubmit((onFormSubmit))}
     sx={(theme) => ({color: theme.description})}

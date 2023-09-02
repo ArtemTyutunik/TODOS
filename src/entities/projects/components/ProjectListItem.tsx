@@ -14,6 +14,7 @@ import {useProjectTodos} from '@entities/projects';
 import TodosCount from '@shared/components/TodosCount';
 import ProgressCircle from '@entities/projects/components/PorgressCircle';
 import ProjectSettingsModal from '@entities/projects/components/ProjectSettingsModal';
+import ShareProjectItem from '@entities/projects/components/projectListItems/ShareProject/ShareProjectItem';
 
 interface Props {
   project: IProject,
@@ -57,10 +58,12 @@ const ProjectListItem = ({project, onDelete, onPinToggle}: Props) => {
           </TodosCount>
         </Box>
 
-        <Box className={`hover_content ${anchorElement && 'keepActive'}`}>
+        <Box className={`hover_content ${anchorElement && 'keepActive'}`} onClick={(e) => e.stopPropagation()}>
           <CustomIconButton onClick={handleOpenMenu}>
             <MoreHorizIcon fontSize={'small'}/>
           </CustomIconButton>
+
+          {/*Todo remove propagation*/}
           <DropdownMenu anchorEl={anchorElement} handleClose={removeAnchorElement}>
             <Box padding={'10px'}>
               <List>
@@ -80,6 +83,8 @@ const ProjectListItem = ({project, onDelete, onPinToggle}: Props) => {
                     Edit project
                   </Typography>
                 </ListItemButton>
+
+                <ShareProjectItem/>
                 <Divider/>
 
                 <ListItemButton sx={{display: 'flex', alignItems: 'center'}}

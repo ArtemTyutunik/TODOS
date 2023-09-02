@@ -7,7 +7,7 @@ import CustomIconButton from '@shared/components/CustomIconButton';
 import {useAnchorElement} from '@shared/hooks';
 import {orderSelector, setSortingValue, sortTypeSelector, toggleOrder} from '@app/store/AppStore';
 import {useDispatch, useSelector} from 'react-redux';
-import CloseIcon from '@mui/icons-material/Close';
+import {CloseIcon} from '@shared/components/icons';
 import NorthIcon from '@mui/icons-material/North';
 import SouthIcon from '@mui/icons-material/South';
 

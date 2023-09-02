@@ -17,10 +17,11 @@ const NameInput = ({isError, onChange, inputValue, onSubmit}: Props) => {
 
   return <Box mb={'15px'}>
     <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
-                  Tag name
+      Tag name
     </Typography>
     <form onSubmit={onSubmitHandler}>
       <TextField onChange={onChange}
+        sx={styles}
         value={inputValue}
         error={isError}
         helperText={`${inputValue} already exists`}
@@ -31,5 +32,11 @@ const NameInput = ({isError, onChange, inputValue, onSubmit}: Props) => {
 
   </Box>
 };
+
+const styles = {
+  '& input': {
+    padding: '4px 8px',
+  },
+}
 
 export default NameInput;
