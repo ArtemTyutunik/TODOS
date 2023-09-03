@@ -34,6 +34,7 @@ export const TodoFlexboxStyles = {
 
 export const TodoLabelStyles = {
   fontSize: '17px',
+  wordBreak: 'break-all',
   fontWeight: 400,
   lineHeight: 1.3,
 };

@@ -23,6 +23,7 @@ const formReducer = (state: ITodo, action: formAction) => {
   switch (action.type) {
     case 'CHANGE_PRIORITY': return {...state, priority: action.payload}
     case 'CHANGE_PROJECT': return {...state, projectId: action.payload}
+    case 'CHANGE_LABEL': return {...state, label: action.payload}
     default: return state
   }
 }
@@ -36,6 +37,11 @@ const useBaseFormReducer = (todo?: ITodo, projectId?: string): [ITodo, React.Dis
 export const changeProjectActionCreator = (projectId: string) => ({
   type: 'CHANGE_PROJECT',
   payload: projectId,
+})
+
+export const changeLabelActionCreator = (label: string) => ({
+  type: 'CHANGE_LABEL',
+  payload: label,
 })
 
 export default useBaseFormReducer

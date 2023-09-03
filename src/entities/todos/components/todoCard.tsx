@@ -71,7 +71,7 @@ const TodoCard = ({
             alignItems={'center'}
             justifyContent={'space-between'}
             zIndex={5}>
-            <Box maxWidth={{mobile: '100%'}} sx={TodoFlexboxStyles}>
+            <Box maxWidth={'100%'} sx={TodoFlexboxStyles}>
               <Box width={'100%'} onClick={(e: React.SyntheticEvent) => e.stopPropagation()}>
                 <Box sx = {TodoFlexboxStyles} >
                   <CheckboxComponent onComplete={onComplete} todo={todo}/>

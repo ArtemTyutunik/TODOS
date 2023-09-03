@@ -1,17 +1,18 @@
 import React, {useState} from 'react';
-import {useForm} from 'react-hook-form';
 import {Box, SelectChangeEvent} from '@mui/material';
-import {BaseFormInputs} from '@shared/forms/interfaces/interfaces';
 import {ITodo, Priority} from '@shared/interfacesAndTypes';
 import {useTags} from '@entities/tag/utils/useTags';
 import {useTodoDate} from '@entities/todos/hooks';
-import TodoFormInputs from '@shared/forms/ui/Inputs';
 import FormActions from '@features/todoFeatures/components/setDataPanel';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 import BaseFormContext from '@shared/forms/hooks/UseBaseFormContext';
-import useBaseFormReducer, {changeProjectActionCreator} from '@shared/forms/hooks/useBaseFormReducer';
+import useBaseFormReducer, {
+  changeLabelActionCreator,
+  changeProjectActionCreator,
+} from '@shared/forms/hooks/useBaseFormReducer';
 import ProjectSelect from '@shared/components/ProjectSelect';
 import TodoDescriptionInput from '@shared/forms/ui/TodoDescriptionInput';
+import TodoLabelInput from '@shared/forms/ui/todoLabelInput';
 
 interface Props {
   onClose: () => void,
@@ -29,12 +30,6 @@ const BaseTodoForm = ({
   initialDate,
   hideActions,
   todoProjectId}: Props) => {
-  const defaultInputValues = {
-    label: todo?.label || '',
-    description: todo?.description || '',
-  }
-
-  const {control, handleSubmit, formState: {isValid}} = useForm<BaseFormInputs>({defaultValues: defaultInputValues});
   const [formState, formDispatch] = useBaseFormReducer(todo, todoProjectId)
   const [todoDate, setTodoDate] = useTodoDate(initialDate || formState?.date, formState?.id);
   const [todoTags, onSelectTag] = useTags(formState, !!todo);
@@ -58,24 +53,34 @@ const BaseTodoForm = ({
     onSelectTag,
   }
 
-  const onFormSubmit = (data: {label: string}) => {
-    setIsDisabledAfterSubmit(true)
-    const inputsData = {...data, description: description}
-    const newTodo = {...formState, ...inputsData, date: todoDate, tags: todoTags}
-    onSubmit(newTodo)
+  const isLabelInputValid = formState.label.trim().length > 0
+
+  const onFormSubmit = () => {
+    if (isLabelInputValid) {
+      setIsDisabledAfterSubmit(true)
+      const inputsData = {description: description}
+      const newTodo = {...formState, ...inputsData, date: todoDate, tags: todoTags}
+      onSubmit(newTodo)
+    }
   }
 
   const onChangeDescription = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(event.target.value)
   }
 
+  const onLabelChange = (value: string) => {
+    formDispatch(changeLabelActionCreator(value))
+  }
+
   return <Box
     data-testid={'base-todo-form'}
-    onSubmit={handleSubmit((onFormSubmit))}
+    onSubmit={onFormSubmit}
     sx={(theme) => ({color: theme.description})}
   >
     <Box sx={formStyles}>
-      <TodoFormInputs control={control}/>
+      <TodoLabelInput initValue={formState.label}
+        onTitleChange={onLabelChange}
+        onSubmit={onFormSubmit}/>
       <TodoDescriptionInput value={description} onChange={onChangeDescription}/>
 
       <BaseFormContext values={formContextValues}>
@@ -84,7 +89,8 @@ const BaseTodoForm = ({
 
       <Box mt={'3px'} display={'flex'} alignItems={'center'} justifyContent={'space-between'} paddingRight={'10px'}>
         <ProjectSelect initialProjectId={todoProjectId} onChange={setProject}/>
-        <FormSubmissionButtons isValid={!isDisabledAfterSubmit && isValid}
+        <FormSubmissionButtons isValid={!isDisabledAfterSubmit && isLabelInputValid}
+          onSubmit={onFormSubmit}
           onClose={onClose}
           withLoading={isDisabledAfterSubmit}
         />
