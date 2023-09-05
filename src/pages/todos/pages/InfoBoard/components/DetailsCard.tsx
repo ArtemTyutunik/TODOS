@@ -30,7 +30,7 @@ const DetailsCard = ({todo}: Props) => {
     <Box bgcolor={theme.background.paper}
       borderRadius={'7px'}>
       <Box display={'flex'}>
-        <Box width={'100%'} margin={'10px'} sx={{wordWrap: 'break-word'}} fontWeight={'bold'}>
+        <Box width={'100%'} sx={{wordWrap: 'break-word'}} fontWeight={'bold'}>
           <InfoBoardTitle initValue={todo.label} onTitleChange={onTitleChange}/>
           <DescriptionWrapper ml={'10px'} fontSize={'14px'} color={'#202020'} >
             <Typography fontSize={'inherit'} fontWeight={600}>

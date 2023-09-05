@@ -1,37 +1,23 @@
-import React, {useEffect, useRef} from 'react';
-import {Box} from '@mui/material';
+import React from 'react';
+import {TextareaAutosize} from '@mui/material';
+import {styled} from '@mui/material/styles';
 
 interface Props {
     value: string;
+    onBlur?: () => void
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const TodoDescriptionInput = ({value, onChange}: Props) => {
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  useEffect(() => {
-    adjustTextareaHeight();
-  }, [value]);
-
-  const adjustTextareaHeight = () => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-    }
-  };
-
   return (
-    <Box component={'textarea'}
+    <CustomTextArea
       placeholder={'Description'}
-      ref={textareaRef}
-      sx={styles}
       onChange={onChange}
-      value={value}>
-    </Box>
+      value={value}/>
   );
 };
 
-const styles = {
+const CustomTextArea = styled(TextareaAutosize)(() => ({
   '&:focus-visible': {
     border: 'none',
     outline: 'none',
@@ -47,6 +33,6 @@ const styles = {
   'color': '#444343',
   'fontWeight': '300',
   'minHeight': 'fit-content',
-}
+}));
 
 export default TodoDescriptionInput

@@ -4,9 +4,8 @@ import {RootReducer} from '@shared/interfacesAndTypes';
 import DetailsCard from './components/DetailsCard';
 import {toggleTaskComplete} from '@entities/todos/store/todo';
 import {Box} from '@mui/material';
-import CustomIconButton from '@shared/components/CustomIconButton';
-import {Close} from '@mui/icons-material';
 import {setTodoInfoId} from '@app/store/AppStore';
+import InfoBoardActionPanel from '@shared/forms/ui/infoBoardActionPanel';
 
 
 interface Props {
@@ -34,12 +33,7 @@ const InfoBoard = ({id}: Props) => {
       padding={'10px'}
       borderLeft={'1px solid #e0e0e0'}
     >
-      <Box display={'flex'} justifyContent={'flex-end'}>
-        <CustomIconButton onClick={onClose}>
-          <Close sx={{fontSize: '17px'}}/>
-        </CustomIconButton>
-      </Box>
-
+      <InfoBoardActionPanel onClose={onClose} projectId={detailedTodo.projectId} todoId={detailedTodo.id}/>
       <DetailsCard todo={detailedTodo!} onComplete={onComplete}/>
     </Box> ) : null
   );

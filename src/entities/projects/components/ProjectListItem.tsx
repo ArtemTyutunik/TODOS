@@ -32,7 +32,6 @@ const ProjectListItem = ({project, onDelete, onPinToggle}: Props) => {
   const [anchorElement, setAnchorElement, removeAnchorElement] = useAnchorElement(null)
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
-    event.stopPropagation()
     setAnchorElement(event.currentTarget);
   };
 
@@ -58,7 +57,7 @@ const ProjectListItem = ({project, onDelete, onPinToggle}: Props) => {
           </TodosCount>
         </Box>
 
-        <Box className={`hover_content ${anchorElement && 'keepActive'}`} onClick={(e) => e.stopPropagation()}>
+        <Box className={`hover_content ${anchorElement && 'keepActive'}`}>
           <CustomIconButton onClick={handleOpenMenu}>
             <MoreHorizIcon fontSize={'small'}/>
           </CustomIconButton>

@@ -57,7 +57,6 @@ const CustomTextArea = styled(TextareaAutosize)(() => ({
   'fontWeight': '600',
   'padding': '5px 10px',
   'borderRadius': '5px',
-  'margin': '10px 0',
 }))
 
 export default InfoBoardTitle;
