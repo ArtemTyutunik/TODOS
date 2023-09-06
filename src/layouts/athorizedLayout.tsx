@@ -4,8 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {Box} from '@mui/material';
 
 import Routing from '@pages/routes';
-import {RootReducer} from '@shared/interfacesAndTypes';
-import {LaptopDrawer, MobileDrawer} from '../widgets/drawer';
+import {ResizableDrawer} from '../widgets/drawer';
 import {useFetchAllUserData} from '@app/hooks/useFetchAllUserData';
 import SpinnerComponent from '@app/../shared/components/SpinnerComponent/SpinnerComponent';
 import Header from '../widgets/header/header';
@@ -24,7 +23,6 @@ import BasicModal from '@shared/components/modal';
 const AuthorizedLayout = () => {
   const [isFetching] = useFetchAllUserData()
 
-  const {isOpenDrawer} = useSelector((state: RootReducer) => state.drawerReducer);
   const todoInfoId = useSelector(todoInfoIdSelector)
   //todo refactor selectors
   const errorFetching = useSelector(isErrorFetchingSelector)
@@ -32,7 +30,6 @@ const AuthorizedLayout = () => {
   const {login = ''} = JSON.parse(localStorage.getItem('user')!)
   const dispatch = useDispatch()
 
-  const drawerWidth = localStorage.getItem('drawerWidth') || '320px'
   const todoCardWidth = localStorage.getItem('todoCardWidth') || '25%'
   const isMobile = checkIsMobile()
 
@@ -58,22 +55,7 @@ const AuthorizedLayout = () => {
       {!isVerified && <NotVerified/>}
       <Header/>
       <Box sx={{marginTop: 0}} height={'calc(100vh - 56px)'} display={'flex'}>
-        {isOpenDrawer && <Resizable
-          width={drawerWidth}
-          direction={'right'}
-          localStorageItem={'drawerWidth'}
-        >
-          <Box paddingTop={'0 !important'}
-            position={'unset'}
-            width={'100%'}
-            height={'calc(100vh - 56px)'}
-          >
-            <LaptopDrawer/>
-            <MobileDrawer/>
-          </Box>
-        </Resizable>
-        }
-
+        <ResizableDrawer/>
         <Box sx={routesStyles}>
           <Box width={{mobile: '100%', largeMobile: '80%'}}
             margin={{mobile: '0', largeMobile: '0 auto'}}
@@ -81,6 +63,7 @@ const AuthorizedLayout = () => {
             <Routing/>
           </Box>
         </Box>
+
         {todoInfoId && (
           isMobile ? (
               <BasicModal open onClose={onCloseTodoInfo}>

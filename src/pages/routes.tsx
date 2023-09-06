@@ -1,5 +1,5 @@
 import {Route, Routes, Navigate} from 'react-router-dom';
-import {lazy} from 'react';
+import {lazy, memo} from 'react';
 import {Suspense} from 'react';
 import {useSelector} from 'react-redux';
 import {RootReducer} from '@shared/interfacesAndTypes';
@@ -13,7 +13,7 @@ const InboxTodosPage = lazy(() => import('./todos/pages/InboxPage/InboxTodos'))
 const FilterAndTagsPage = lazy(() => import('./todos/pages/TagsPage/TagsPage'))
 const FilteredByTagTodosPage = lazy(() => import('./todos/pages/FilteredByTagTodosPage/FilteredByTagTodosPage'))
 
-const Routing = () => {
+const Routing = memo(() => {
   const isFetched = useSelector((state: RootReducer) => state.todosReducer.isFetched)
 
   return !isFetched ? <SpinnerComponent/> :
@@ -46,6 +46,6 @@ const Routing = () => {
           {/*</Route>*/}
         </Routes>
       </>
-}
+})
 
 export default Routing;

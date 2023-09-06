@@ -25,7 +25,7 @@ const TagLink = ({tag}: {tag: ITag}) => {
   </CustomTagLink>
 }
 
-const CustomTagLink = styled(Typography)(() => ({
+const CustomTagLink = styled(Typography)(({theme}) => ({
   width: 'fit-content',
   marginTop: '8px',
   fontSize: '13px',
@@ -35,7 +35,7 @@ const CustomTagLink = styled(Typography)(() => ({
   lineHeight: '18px',
   borderRadius: '2em',
   marginRight: '10px',
-  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";',
+  fontFamily: theme.typography.fontFamily,
 }));
 
 export default TagLinks;

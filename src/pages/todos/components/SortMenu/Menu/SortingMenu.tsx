@@ -1,6 +1,6 @@
 import React from 'react';
 import DropdownMenu from '@shared/components/dropdownMenu';
-import {Box, MenuItem, Tooltip, Typography} from '@mui/material';
+import {Box, MenuItem, Theme, Tooltip, Typography} from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import CustomIconButton from '@shared/components/CustomIconButton';
@@ -117,7 +117,7 @@ const selectIconsStyles = {
   fontSize: '18px',
 }
 
-const onSortButtonStyles = {
+const onSortButtonStyles = (theme: Theme) => ({
   'fontSize': '12px',
   'color': '#808080',
   'fontWeight': 700,
@@ -125,9 +125,8 @@ const onSortButtonStyles = {
   '&:hover': {
     color: '#202020',
   },
-  'fontFamily': '-apple-system,BlinkMacSystemFont, "Segoe UI",Roboto,"Apple Color Emoji",' +
-      'Helvetica,Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol"',
-}
+  'fontFamily': theme.typography.fontFamily,
+})
 
 
 export default SortingMenu;
