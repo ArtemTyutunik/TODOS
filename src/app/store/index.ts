@@ -1,5 +1,5 @@
 import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
-import * as reducers from './reducers';
+import * as reducers from '../reducers';
 import {useDispatch} from 'react-redux';
 
 const customizedMiddleware = getDefaultMiddleware({

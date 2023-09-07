@@ -1,23 +1,27 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {TextareaAutosize} from '@mui/base';
 import {styled} from '@mui/material/styles';
+import {ITodo} from '@shared/interfacesAndTypes';
 
 interface Props {
     initValue?: string,
-    onTitleChange: (value: string) => void
+    onTitleChange: (updatedTodoValues: Partial<ITodo>) => void
 }
 
 const InfoBoardTitle = ({initValue = '', onTitleChange}: Props) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
-
   const onBlur = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value
     if (value.length === 0) {
       textareaRef!.current!.value = initValue
     } else {
-      onTitleChange(value);
+      onTitleChange({label: value});
     }
   }
+
+  useEffect(() => {
+    textareaRef.current!.value = initValue
+  }, [initValue])
 
   const onSubmit = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {

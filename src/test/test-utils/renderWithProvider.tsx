@@ -1,25 +1,23 @@
 import * as React from 'react';
-import {configureStore, PreloadedState} from '@reduxjs/toolkit';
+import {PreloadedState} from '@reduxjs/toolkit';
 import {PropsWithChildren} from 'react';
 import {Provider} from 'react-redux';
 import {render, RenderOptions} from '@testing-library/react';
 import {ThemeProvider} from '@mui/material';
 import theme from '@app/theme';
-import {RootReducer} from '@shared/interfacesAndTypes';
-import {AppStore} from '@app/store';
-import * as reducers from '@app/store/reducers';
+import {AppMockStore, RootMockState, setupMockStore} from '@test/test-utils/setupStore';
 import userEvent from '@testing-library/user-event';
 
-interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
-  preloadedState?: Partial<PreloadedState<RootReducer>>,
-  store?: AppStore
-}
 
+interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
+  preloadedState?: Partial<PreloadedState<RootMockState>>,
+  store?: AppMockStore
+}
 
 export default function renderWithProviders(ui: React.ReactElement,
     {
       preloadedState = {},
-      store = configureStore({reducer: {...reducers}, preloadedState}),
+      store = setupMockStore(preloadedState),
     }: ExtendedRenderOptions = {}) {
   function Wrapper({children}: PropsWithChildren) {
     return <Provider store={store}>
@@ -31,5 +29,5 @@ export default function renderWithProviders(ui: React.ReactElement,
 
   const user = userEvent.setup();
 
-  return {...render(ui, {wrapper: Wrapper}), store, user}
+  return {store, ...render(ui, {wrapper: Wrapper}), user}
 }

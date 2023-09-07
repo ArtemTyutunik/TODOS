@@ -1,21 +1,24 @@
-import React from 'react';
+import React, {ForwardedRef, forwardRef} from 'react';
 import {TextareaAutosize} from '@mui/material';
 import {styled} from '@mui/material/styles';
 
 interface Props {
     value: string;
-    onBlur?: () => void
-    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onBlur?: () => void,
+    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
-const TodoDescriptionInput = ({value, onChange}: Props) => {
+const TodoDescriptionInput = forwardRef(({value, onBlur}: Props,
+    ref: ForwardedRef<HTMLTextAreaElement>) => {
   return (
     <CustomTextArea
       placeholder={'Description'}
-      onChange={onChange}
-      value={value}/>
+      defaultValue={value}
+      data-testid={'description-input'}
+      ref={ref}
+      onBlur={onBlur}/>
   );
-};
+});
 
 const CustomTextArea = styled(TextareaAutosize)(() => ({
   '&:focus-visible': {

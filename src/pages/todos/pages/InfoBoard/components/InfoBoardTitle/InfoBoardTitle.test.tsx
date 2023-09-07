@@ -27,7 +27,7 @@ describe('InfoBoardTitle', () => {
     await user.type(textArea, '{Enter}');
 
     expect(mockHandler).toBeCalledTimes(1);
-    expect(mockHandler).toBeCalledWith(mockValue + additionalText);
+    expect(mockHandler).toBeCalledWith({label: mockValue + additionalText});
   });
 
   it('shouldn`t call onTitleChange when value is empty', async () => {
