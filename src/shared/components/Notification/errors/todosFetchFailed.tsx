@@ -3,6 +3,7 @@ import {Box, Button, Modal, Typography} from '@mui/material';
 import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {logOutUser} from '@entities/user/model/store';
+import {removeFetchError} from '@entities/todos/store/todo';
 
 const TodosFetchFailed = () => {
   const dispatch = useDispatch()
@@ -11,6 +12,7 @@ const TodosFetchFailed = () => {
   const backToLogin = () => {
     dispatch(logOutUser())
     navigate('/login')
+    dispatch(removeFetchError())
   }
 
   return (

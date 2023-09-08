@@ -83,7 +83,7 @@ const ProjectListItem = ({project, onDelete, onPinToggle}: Props) => {
                   </Typography>
                 </ListItemButton>
 
-                <ShareProjectItem/>
+                <ShareProjectItem project={project}/>
                 <Divider/>
 
                 <ListItemButton sx={{display: 'flex', alignItems: 'center'}}

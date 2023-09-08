@@ -3,8 +3,12 @@ import LockPersonIcon from '@mui/icons-material/LockPerson';
 import {ListItemButton, Typography} from '@mui/material';
 import {useVisable} from '@shared/hooks';
 import ShareProjectModal from '@entities/projects/components/projectListItems/ShareProject/ShareProjectModal';
+import {IProject} from '@shared/interfacesAndTypes';
 
-const ShareProjectItem = () => {
+interface Props {
+    project: IProject
+}
+const ShareProjectItem = ({project}: Props) => {
   const [inviteToProjectModalOpen, openInviteToProjectModal, closeInviteToProjectModal] = useVisable(false)
 
   return (
@@ -18,6 +22,7 @@ const ShareProjectItem = () => {
       </ListItemButton>
       {
         inviteToProjectModalOpen && <ShareProjectModal open={inviteToProjectModalOpen}
+          project={project}
           onClose={closeInviteToProjectModal}/>
       }
     </>

@@ -4,13 +4,15 @@ import CustomIconButton from '@shared/components/CustomIconButton';
 import {CloseIcon} from '@shared/components/icons';
 import BasicModal from '@shared/components/modal';
 import {styled} from '@mui/material/styles';
+import {IProject} from '@shared/interfacesAndTypes';
 
 interface Props {
     open: boolean,
     onClose: () => void,
+    project: IProject
 }
 
-const ShareProjectModal = ({open, onClose}: Props) => {
+const ShareProjectModal = ({open, onClose, project}: Props) => {
   const onCopyLink = async () => {
     //const link = await someRequest()
     //navigator.clipboard.writeText(link)
@@ -19,14 +21,14 @@ const ShareProjectModal = ({open, onClose}: Props) => {
   return (
     <BasicModal open={open}
       onClose={onClose}>
-      <Box minWidth={'400px'} padding={'10px'}>
+      <Box minWidth={'400px'} padding={'20px'}>
         <Box display={'flex'}
           alignItems={'center'}
           justifyContent={'space-between'}
           mb={'5px'}
         >
           <Typography>
-             Share project
+             Share {project.name}
           </Typography>
           <CustomIconButton onClick={onClose}>
             <CloseIcon/>
@@ -39,6 +41,16 @@ const ShareProjectModal = ({open, onClose}: Props) => {
               fullWidth
               placeholder={'Enter user email'}
               autoFocus />
+          </Box>
+          <Box mt={'20px'}>
+            <Typography fontSize={'15px'}>
+              Users invited
+            </Typography>
+          </Box>
+          <Box mt={'20px'}>
+            <Typography fontSize={'15px'}>
+              Shared access
+            </Typography>
           </Box>
           <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} mt={'20px'}>
             <CopyLinkButton variant={'contained'} onClick={onCopyLink}> Copy link</CopyLinkButton>
