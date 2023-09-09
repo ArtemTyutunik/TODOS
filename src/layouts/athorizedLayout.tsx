@@ -27,7 +27,6 @@ const AuthorizedLayout = () => {
   //todo refactor selectors
   const errorFetching = useSelector(isErrorFetchingSelector)
   const isVerified = useSelector(isVerifiedSelector)
-  const {login = ''} = JSON.parse(localStorage.getItem('user')!)
   const dispatch = useDispatch()
 
   const todoCardWidth = localStorage.getItem('todoCardWidth') || '25%'
@@ -35,7 +34,7 @@ const AuthorizedLayout = () => {
 
   useEffect(() => {
     if (isVerified === 'unset') {
-      getVerifiedStatus(login).then((result) => {
+      getVerifiedStatus().then((result) => {
         dispatch(authVerified(result))
         localStorage.setItem('verified', JSON.stringify(result))
       })

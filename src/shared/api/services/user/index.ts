@@ -1,4 +1,5 @@
 import {fetchRequest} from '@shared/api/services/constants';
+import getUserId from '@shared/helpers/getUserId';
 
 
 export const setNewAvatar = async (file: File, email: string) => {
@@ -45,7 +46,8 @@ export const resendEmail = async (login: string) => {
   return await fetchRequest(`user/resend_email?login=${login}`, options)
 }
 
-export const getVerifiedStatus = async (login: string): Promise<boolean> => {
-  const response = await fetchRequest('user/get_verification_status?login=' + login)
+export const getVerifiedStatus = async (): Promise<boolean> => {
+  const userId = getUserId()
+  const response = await fetchRequest('user/get_verification_status?user_id=' + userId)
   return await response.json()
 }
