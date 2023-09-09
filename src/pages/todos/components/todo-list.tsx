@@ -16,10 +16,16 @@ interface Props {
     initialDate?: IDate,
     initialProject?: string,
     noAddButton?:boolean,
+    showProject?: boolean,
     children?: React.ReactElement
 }
 
-const TodoList = memo(({todos, initialDate, initialProject, noAddButton = false, children}: Props) => {
+const TodoList = memo(({todos,
+  initialDate,
+  initialProject,
+  noAddButton = false,
+  children,
+  showProject=false}: Props) => {
   const [isOpenForm, openForm, closeForm] = useVisable(false);
   const [chosenTodos, setChosenTodos] = useState<ITodo['id'][]>([])
   const [allSelected, setAllSelected] = useState<boolean>(false)
@@ -62,7 +68,9 @@ const TodoList = memo(({todos, initialDate, initialProject, noAddButton = false,
         </Box>
 
       </Box>
-      <RenderedList todos={sortedTodos} onChooseTodo={toggleChosenTodo} chosenTodos={chosenTodos}/>
+      <RenderedList todos={sortedTodos} onChooseTodo={toggleChosenTodo}
+        chosenTodos={chosenTodos}
+        showProject={showProject}/>
       {form}
     </Box>
   );

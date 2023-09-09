@@ -7,9 +7,10 @@ import {Box, Checkbox} from '@mui/material';
 interface Props {
   todos: ITodo[],
   onChooseTodo?: (id: ITodo['id']) => void,
-  chosenTodos?: ITodo['id'][]
+  chosenTodos?: ITodo['id'][],
+  showProject?: boolean
 }
-const RenderedList = ({todos, onChooseTodo, chosenTodos}: Props) => {
+const RenderedList = ({todos, onChooseTodo, chosenTodos, showProject}: Props) => {
   return (
     <>
       {
@@ -17,7 +18,7 @@ const RenderedList = ({todos, onChooseTodo, chosenTodos}: Props) => {
           <Checkbox sx={checkboxStyles} size={'small'} checked={chosenTodos?.includes(todo.id)}
             onChange={() => onChooseTodo && onChooseTodo(todo.id)}
             className={`todo-checkbox ${chosenTodos?.includes(todo.id) ? 'keep-active': ''}`}/>
-          <Todo todo={todo} />
+          <Todo todo={todo} showProject={showProject}/>
         </Box>)
       }
     </>

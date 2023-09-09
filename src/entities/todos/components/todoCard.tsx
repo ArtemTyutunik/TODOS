@@ -15,10 +15,12 @@ import '../css/inProcessTodo.css'
 import {toggleIsCurrent} from '@entities/todos/store/todo';
 import {sendUpdatedTodo} from '@shared/api/services/todos';
 import {setTodoInfoId} from '@app/store/AppStore';
-import parse from 'html-react-parser';
+import ProjectView from '@entities/projects/components/projectView';
+import useProjectWithInbox from '@entities/projects/hooks/useProjectsWithInbox';
 
 interface TodoCardProps {
     todo: ITodo,
+    showProject?: boolean,
     onComplete: () => void,
     onEdit: () => void,
     onDeleteAction: () => void,
@@ -28,6 +30,7 @@ interface TodoCardProps {
 
 const TodoCard = ({
   todo,
+  showProject,
   onComplete,
   onEdit,
   onDeleteAction,
@@ -37,6 +40,7 @@ const TodoCard = ({
   const {label, description, date, id, tags, isCurrent} = todo;
   const userTags = useSelector(userTagsSelector)
   const dispatch = useDispatch()
+  const todoProject = useProjectWithInbox(todo.projectId)
   const todoFilteredTags = userTags.filter((userTag) => tags?.includes(userTag.id))
 
   const setAsCurrent = () => {
@@ -55,7 +59,6 @@ const TodoCard = ({
     localStorage.setItem('todoInfoId', idToString)
   }
 
-  const descriptionHtml = parse(description)
   return (
     <>
       <Box sx={{mb: '25px', cursor: 'pointer', flexGrow: '1'}}
@@ -71,7 +74,7 @@ const TodoCard = ({
             alignItems={'center'}
             justifyContent={'space-between'}
             zIndex={5}>
-            <Box maxWidth={'100%'} sx={TodoFlexboxStyles}>
+            <Box maxWidth={'100%'} width={'100%'} sx={TodoFlexboxStyles}>
               <Box width={'100%'} onClick={(e: React.SyntheticEvent) => e.stopPropagation()}>
                 <Box sx = {TodoFlexboxStyles} >
                   <CheckboxComponent onComplete={onComplete} todo={todo}/>
@@ -81,7 +84,7 @@ const TodoCard = ({
                 </Box>
                 <Box paddingLeft={'10px'}>
                   <Box sx={todoDescriptionStyles}>
-                    {descriptionHtml}
+                    {description}
                   </Box>
                   <Box>
                     {
@@ -89,11 +92,25 @@ const TodoCard = ({
                     }
                   </Box>
 
-                  <Box display={'flex'} alignItems={'center'} >
+                  <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} width={'100%'}>
                     <Box>
                       {
                         date && <Box>
                           <DueDateButton date={date} variant={'Standard'}/>
+                        </Box>
+                      }
+                    </Box>
+                    <Box>
+                      {
+                        showProject && todoProject && <Box>
+                          {
+                            typeof todoProject === 'string' ?
+                                <ProjectView id={todoProject}/> : <>
+                                  <ProjectView id={todoProject!.id}
+                                    name={todoProject!.name}
+                                    color={todoProject?.color.background}/>
+                                </>
+                          }
                         </Box>
                       }
                     </Box>

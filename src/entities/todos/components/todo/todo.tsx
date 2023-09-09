@@ -9,10 +9,11 @@ import * as todoActions from '@entities/todos/store/todoThunks';
 import {useAppDispatch} from '@app/store';
 
 interface Props {
-    todo: ITodo
+    todo: ITodo,
+  showProject?: boolean
 }
 
-const Todo = memo(({todo}: Props) => {
+const Todo = memo(({todo, showProject}: Props) => {
   const {id} = todo;
   const dispatch = useAppDispatch();
   const [isEditing, openEditing, closeEditing] = useVisable(false);
@@ -47,7 +48,8 @@ const Todo = memo(({todo}: Props) => {
     onDuplicateAction={onDuplicateAction}
     setPriorityAction={setPriorityAction}
     onComplete={onComplete}
-    onEdit={openEditing}/>;
+    onEdit={openEditing}
+    showProject={showProject}/>;
 });
 
 export default Todo;

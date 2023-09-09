@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Box, Button, TextField, Typography} from '@mui/material';
 import CustomIconButton from '@shared/components/CustomIconButton';
 import {CloseIcon} from '@shared/components/icons';
@@ -17,6 +17,16 @@ const ShareProjectModal = ({open, onClose, project}: Props) => {
     //const link = await someRequest()
     //navigator.clipboard.writeText(link)
   }
+
+  useEffect(() => {
+    const fn = async () => {
+      const response = await fetch(`http://localhost:3000/project/ get_all_members?projectId=${project.id}`)
+      const data = await response.json()
+      console.log(data)
+    }
+
+    fn()
+  }, [])
 
   return (
     <BasicModal open={open}

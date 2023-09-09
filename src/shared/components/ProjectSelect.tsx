@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {projectsSelector} from '@entities/projects/model/store';
-import {MenuItem, Select, SelectChangeEvent, Typography} from '@mui/material';
-import {CircleIcon, InboxIcon} from '@shared/components/icons';
+import {MenuItem, Select, SelectChangeEvent} from '@mui/material';
+import ProjectView from '@entities/projects/components/projectView';
 
 interface ProjectSelectProps {
     initialProjectId?: string,
@@ -10,8 +10,7 @@ interface ProjectSelectProps {
 }
 
 const ProjectSelect = ({initialProjectId, onChange}: ProjectSelectProps) => {
-  const inboxID = localStorage.getItem('inboxID')
-  if (!inboxID) return null
+  const inboxID = localStorage.getItem('inboxID')!
   const [currentProject, setCurrentProject] = useState(initialProjectId || inboxID)
   const projects = useSelector(projectsSelector)
 
@@ -26,18 +25,12 @@ const ProjectSelect = ({initialProjectId, onChange}: ProjectSelectProps) => {
     className={'project-select'}
     sx={selectStyles}
   >
-    <MenuItem value={inboxID} sx={selectItemStyles}>
-      <InboxIcon sx={(theme) => ({color: theme.background.inboxIcon, fontSize: '17px'})}/>
-      <Typography ml={'10px'} fontSize={'13px'} color={'#202020'}>
-                Inbox
-      </Typography>
+    <MenuItem value={inboxID}>
+      <ProjectView id={inboxID}/>
     </MenuItem>
     {
       projects.map((project) => <MenuItem key={project.id} value={project.id}>
-        <CircleIcon sx={{fontSize: '12px', color: project.color.background}}/>
-        <Typography ml={'10px'} fontSize={'13px'} color={'#202020'}>
-          {project.name}
-        </Typography>
+        <ProjectView color={project.color.background} name={project.name} id={project.id}/>
       </MenuItem>)
     }
   </Select>
@@ -53,12 +46,6 @@ const selectStyles = {
   '& fieldset': {
     border: 'none',
   },
-}
-
-const selectItemStyles = {
-  display: 'flex',
-  padding: '0px 15px',
-  alignItems: 'center',
 }
 
 

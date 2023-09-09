@@ -25,7 +25,7 @@ const TodayTodosPage = () => {
     <Box paddingTop={'30px'} height={'100%'}>
       {
         todayTodos.length ? (
-            <TodoList todos={todayTodos} initialDate={TODAY}/>
+            <TodoList todos={todayTodos} initialDate={TODAY} showProject/>
         ) : (
             <NoTodayTodos onClick={openForm}/>
         )
