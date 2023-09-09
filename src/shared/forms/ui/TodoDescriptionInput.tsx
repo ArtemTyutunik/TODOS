@@ -8,7 +8,7 @@ interface Props {
     onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
-const TodoDescriptionInput = forwardRef(({value, onBlur}: Props,
+const TodoDescriptionInput = forwardRef(({value, onBlur, onChange}: Props,
     ref: ForwardedRef<HTMLTextAreaElement>) => {
   return (
     <CustomTextArea
@@ -16,6 +16,7 @@ const TodoDescriptionInput = forwardRef(({value, onBlur}: Props,
       defaultValue={value}
       data-testid={'description-input'}
       ref={ref}
+      onChange={onChange}
       onBlur={onBlur}/>
   );
 });

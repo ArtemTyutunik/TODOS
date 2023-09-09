@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {Box, SelectChangeEvent} from '@mui/material';
 import {ITodo, Priority} from '@shared/interfacesAndTypes';
 import {useTags} from '@entities/tag/utils/useTags';
@@ -7,6 +7,7 @@ import FormActions from '@features/todoFeatures/components/setDataPanel';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 import BaseFormContext from '@shared/forms/hooks/UseBaseFormContext';
 import useBaseFormReducer, {
+  changeDescriptionActionCreator,
   changeLabelActionCreator,
   changeProjectActionCreator,
 } from '@shared/forms/hooks/useBaseFormReducer';
@@ -34,7 +35,7 @@ const BaseTodoForm = ({
   const [todoDate, setTodoDate] = useTodoDate(initialDate || formState?.date, formState?.id);
   const [todoTags, onSelectTag] = useTags(formState, !!todo);
   const [isDisabledAfterSubmit, setIsDisabledAfterSubmit] = useState(false)
-  const [description, setDescription] = useState(todo?.description || '')
+  const descriptionTextArea = useRef<HTMLTextAreaElement>(null)
 
   const setProject = (projectId: string) => {
     formDispatch(changeProjectActionCreator(projectId))
@@ -42,6 +43,14 @@ const BaseTodoForm = ({
 
   const setPriority = (event: SelectChangeEvent<Priority>) => {
     formDispatch({type: 'CHANGE_PRIORITY', payload: event.target.value})
+  }
+
+  const onLabelChange = (value: string) => {
+    formDispatch(changeLabelActionCreator(value))
+  }
+
+  const onChangeDescription = () => {
+    formDispatch(changeDescriptionActionCreator(descriptionTextArea.current?.value || ''))
   }
 
   const formContextValues = {
@@ -58,19 +67,11 @@ const BaseTodoForm = ({
   const onFormSubmit = () => {
     if (isLabelInputValid) {
       setIsDisabledAfterSubmit(true)
-      const inputsData = {description: description}
-      const newTodo = {...formState, ...inputsData, date: todoDate, tags: todoTags}
+      const newTodo = {...formState, date: todoDate, tags: todoTags}
       onSubmit(newTodo)
     }
   }
 
-  const onChangeDescription = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setDescription(event.target.value)
-  }
-
-  const onLabelChange = (value: string) => {
-    formDispatch(changeLabelActionCreator(value))
-  }
 
   return <Box
     data-testid={'base-todo-form'}
@@ -81,7 +82,9 @@ const BaseTodoForm = ({
       <TodoLabelInput initValue={formState.label}
         onTitleChange={onLabelChange}
         onSubmit={onFormSubmit}/>
-      <TodoDescriptionInput value={description} onChange={onChangeDescription}/>
+      <TodoDescriptionInput value={formState.description}
+        onBlur={onChangeDescription}
+        ref={descriptionTextArea}/>
 
       <BaseFormContext values={formContextValues}>
         <FormActions hideActions={hideActions}/>

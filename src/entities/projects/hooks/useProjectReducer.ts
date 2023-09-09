@@ -2,7 +2,7 @@ import React from 'react';
 import {useReducer} from 'react';
 import {IProject} from '@shared/interfacesAndTypes';
 
-type InitialStateType = (project: IProject | undefined) => IProject
+type InitialStateType = (project?: Partial<IProject>) => IProject
 
 const defaultSettings: IProject['color'] = {
   name: 'Charcoal',
