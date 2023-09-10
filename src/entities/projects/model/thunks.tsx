@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {IProject} from '@shared/interfacesAndTypes';
+import {IProject, ProjectModalStateType} from '@shared/interfacesAndTypes';
 import {addProjectToUserData, deleteProjectRequest, editProjectRequest} from '@shared/api/services/projects';
 import {addNewProject, deleteProject, editProjectAction} from '@entities/projects/model/store';
 import {toast} from 'react-toastify';
@@ -7,18 +7,24 @@ import {Box} from '@mui/material';
 import {errorOptions} from '@shared/components/Notification/constants';
 import {updateTodos} from '@entities/todos/store/todo';
 
+interface addNewProjectThunkArgs {
+    project: ProjectModalStateType,
+    callback: (id: string) => void
+}
 
 export const addNewProjectThunk = createAsyncThunk(
     'project/addNewProject',
-    async (project: IProject, {dispatch}) => {
+    async (args: addNewProjectThunkArgs, {dispatch}) => {
       try {
-        const response = await addProjectToUserData(project)
+        const response = await addProjectToUserData(args.project)
 
         if (!response.ok) {
           throw new Error(response.statusText)
         }
 
+        const project = await response.json()
         dispatch(addNewProject(project))
+        args.callback(project.id)
       } catch (e) {
         toast.error(<Box>There is a problem to create project. Try later</Box>, errorOptions)
       }

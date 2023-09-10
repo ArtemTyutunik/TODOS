@@ -5,7 +5,7 @@ import {InputsSection, ModalWrapper, NameInput} from '@shared/components/Setting
 import ColorTagSelect from '@shared/components/SettingModal/ColorTagSelect';
 import BasicModal from '@shared/components/modal';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
-import useProjectState, {setColorAction, setProjectNameAction} from '@entities/projects/hooks/useProjectReducer';
+import useProjectModalState, {setColorAction, setProjectNameAction} from '@entities/projects/hooks/useProjectReducer';
 import {colorType, IProject} from '@shared/interfacesAndTypes';
 import {projectsSelector} from '@entities/projects/model/store';
 import {itemAlreadyExist} from '@shared/helpers';
@@ -22,7 +22,7 @@ interface Props {
 
 const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = false}: Props) => {
   const projects = useSelector(projectsSelector)
-  const [project, projectDispatcher] = useProjectState(editingProject)
+  const [modalState, projectDispatcher] = useProjectModalState(editingProject)
   const [invalidData, setInvalidData] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>();
@@ -30,7 +30,7 @@ const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = fa
   const onInputNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     projectDispatcher(setProjectNameAction(value))
-    setInvalidData(itemAlreadyExist<IProject>(projects, value, project))
+    setInvalidData(itemAlreadyExist<IProject>(projects, value, editingProject?.id))
   }
 
   const onColorSelect = useCallback((e: SelectChangeEvent, colors: colorType[]) => {
@@ -41,15 +41,17 @@ const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = fa
   }, [])
 
   const createNewProject = () => {
-    dispatch(addNewProjectThunk(project))
-    navigate('/project/' + project.id)
+    const callback = (id: string) => navigate('/project/' + id)
+
+    dispatch(addNewProjectThunk({project: modalState, callback: callback}))
   }
 
   const editProject = async () => {
-    dispatch(editProjectThunk(project))
+    if (!editingProject) return
+    dispatch(editProjectThunk({...editingProject, ...modalState}))
   }
 
-  const isValid = project.name.trim().length > 0;
+  const isValid = modalState.name.trim().length > 0;
 
   const onSubmit = () => {
     editingMode ? editProject() : createNewProject()
@@ -68,7 +70,7 @@ const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = fa
         </Box>
         <InputsSection isError={invalidData}>
           <NameInput isError={false}
-            inputValue={project.name}
+            inputValue={modalState.name}
             onChange={onInputNameChange}
             onSubmit={isAllowed ? onSubmit : null}/>
 
@@ -77,7 +79,7 @@ const ProjectSettingsModal = ({isOpen, onClose, editingProject, editingMode = fa
               Tag color
             </Typography>
 
-            <ColorTagSelect settings={project.color} onSelectChange={onColorSelect}/>
+            <ColorTagSelect settings={modalState.color} onSelectChange={onColorSelect}/>
           </Box>
         </InputsSection>
         <Box margin={'10px 0'} paddingRight={'15px'}>

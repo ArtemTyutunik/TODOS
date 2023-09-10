@@ -15,9 +15,9 @@ export const configureFavoriteItem = (type: 'tag' | 'filter', itemId: string): I
   }
 }
 
-export const itemAlreadyExist = <T>(list: T[], value: string, currentItem: T): boolean => {
+export const itemAlreadyExist = <T>(list: T[], value: string, id?: string | number): boolean => {
   //@ts-ignore
-  return list.find((item) => item.name.trim() === value.trim() && item?.id !== currentItem.id)
+  return list.find((item) => item.name.trim() === value.trim() && item?.id !== id)
 }
 
 export {

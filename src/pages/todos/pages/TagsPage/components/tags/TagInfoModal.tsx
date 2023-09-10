@@ -59,7 +59,7 @@ const TagInfoModal = memo(({isOpen, onClose, editMode, tag}: Props) => {
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
 
-    setIsError(itemAlreadyExist<ITag>(userTags, value, tagState))
+    setIsError(itemAlreadyExist<ITag>(userTags, value, tagState.id))
 
     tagDispatcher(setTagNameAction(value))
   }

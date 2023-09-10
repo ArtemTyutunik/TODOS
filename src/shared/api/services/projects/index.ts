@@ -1,5 +1,5 @@
 import {fetchRequest} from '@shared/api/services/constants';
-import {IProject} from '@shared/interfacesAndTypes';
+import {IProject, ProjectModalStateType} from '@shared/interfacesAndTypes';
 import getUserId from '@shared/helpers/getUserId';
 
 
@@ -17,7 +17,7 @@ export const getProjects = async () => {
   return await response.json()
 }
 
-export const addProjectToUserData = async (project: IProject) => {
+export const addProjectToUserData = async (project: ProjectModalStateType) => {
   const userId = getUserId()
   const options = {
     method: 'POST',
