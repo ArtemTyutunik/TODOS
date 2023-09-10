@@ -1,4 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
+import React, {useEffect} from 'react';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Box} from '@mui/material';
@@ -12,7 +13,6 @@ import TodosFetchFailed from '@shared/components/Notification/errors/todosFetchF
 import {isErrorFetchingSelector} from '@entities/todos/store/todo';
 import {authVerified, isVerifiedSelector} from '@entities/user/model/store';
 import NotVerified from '@shared/components/NotVerifed/NotVerified';
-import {useEffect} from 'react';
 import {getVerifiedStatus} from '@shared/api/services/user';
 import Resizable from '@shared/components/resizable/Resizable';
 import {setTodoInfoId, todoInfoIdSelector} from '@app/store/AppStore';

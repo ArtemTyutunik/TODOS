@@ -12,22 +12,27 @@ const ResizableDrawer = memo(() => {
 
   return isOpenDrawer ? (
       <>
-        <Resizable
-          width={drawerWidth}
-          direction={'right'}
-          localStorageItem={'drawerWidth'}
-        >
-          <Box paddingTop={'0 !important'}
-            position={'unset'}
-            width={'100%'}
-            height={'calc(100vh - 56px)'}
+        <Box sx={{'display': {mobile: 'none', largeMobile: 'none', tablet: 'block'}}}>
+          <Resizable
+            width={drawerWidth}
+            direction={'right'}
+            localStorageItem={'drawerWidth'}
           >
-            <LaptopDrawer/>
-            <MobileDrawer/>
-          </Box>
-        </Resizable>
+            <Box paddingTop={'0 !important'}
+              position={'unset'}
+              width={'100%'}
+              height={'calc(100vh - 56px)'}
+            >
+              <LaptopDrawer/>
+            </Box>
+          </Resizable>
+        </Box>
+
+        <MobileDrawer/>
+
       </>
   ) : null
 });
+
 
 export default ResizableDrawer;
