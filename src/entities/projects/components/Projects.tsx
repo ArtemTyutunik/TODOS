@@ -24,8 +24,9 @@ const Projects = memo(() => {
   const navigate = useNavigate()
 
   const onDelete = async (id: IProject['id']) => {
-    dispatch(deleteProjectThunk(id))
-    navigate('/today')
+    const callback = () => navigate('/inbox')
+
+    dispatch(deleteProjectThunk({id, callback}))
   }
 
   const onPinProject = async (id: IProject['id']) => {

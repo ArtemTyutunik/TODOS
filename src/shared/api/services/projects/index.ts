@@ -38,6 +38,10 @@ export const deleteProjectRequest = async (id: string) => {
 
   const response = await fetchRequest(`project/delete?user_id=${userId}&id=${id}`, options)
 
+  if (!response.ok) {
+    throw new Error(response.statusText)
+  }
+
   return await response.json()
 }
 
@@ -53,4 +57,9 @@ export const editProjectRequest = async (project: IProject) => {
   }
 
   return await fetchRequest(`project/update?user_id=${userId}`, options)
+}
+
+export const getProjectMembers = async (id: string) => {
+  const response = await fetchRequest(`project/get_all_members?projectId=${id}`)
+  return await response.json()
 }

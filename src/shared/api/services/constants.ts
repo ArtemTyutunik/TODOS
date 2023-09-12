@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NODE_ENV === 'production' ?
+export const BASE_URL = process.env.NODE_ENV === 'production' ?
     'https://todos-backend-nodejs.fly.dev/' :
     'http://localhost:3000/'
 

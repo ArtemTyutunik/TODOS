@@ -48,12 +48,17 @@ export const editProjectThunk = createAsyncThunk(
     },
 );
 
+interface DeleteProjectOptions {
+    id: string,
+    callback: () => void
+}
 export const deleteProjectThunk = createAsyncThunk(
     'project/deleteProject',
-    async (id: string, {dispatch}) => {
+    async (options: DeleteProjectOptions, {dispatch}) => {
       try {
-        const returnedTodos = await deleteProjectRequest(id)
-        dispatch(deleteProject(id))
+        const returnedTodos = await deleteProjectRequest(options.id)
+        options.callback()
+        dispatch(deleteProject(options.id))
         dispatch(updateTodos(returnedTodos))
       } catch (e) {
         console.log(e)

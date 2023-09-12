@@ -1,10 +1,15 @@
-import React, {useEffect} from 'react';
 import {Box, Button, TextField, Typography} from '@mui/material';
 import CustomIconButton from '@shared/components/CustomIconButton';
 import {CloseIcon} from '@shared/components/icons';
 import BasicModal from '@shared/components/modal';
 import {styled} from '@mui/material/styles';
 import {IProject} from '@shared/interfacesAndTypes';
+import GeneralAccess from '@entities/projects/components/projectListItems/ShareProject/GeneralAccess';
+import {editProjectThunk} from '@entities/projects/model/thunks';
+import {useAppDispatch} from '@app/store';
+import LinkIcon from '@mui/icons-material/Link';
+import {BASE_URL} from '@shared/api/services/constants';
+import InvitedUsers from '@entities/projects/components/projectListItems/ShareProject/InvitedUsers';
 
 interface Props {
     open: boolean,
@@ -13,37 +18,29 @@ interface Props {
 }
 
 const ShareProjectModal = ({open, onClose, project}: Props) => {
+  const dispatch = useAppDispatch()
+
   const onCopyLink = async () => {
-    //const link = await someRequest()
-    //navigator.clipboard.writeText(link)
+    const link = BASE_URL + 'project/' + project.id
+    await navigator.clipboard.writeText(link)
   }
 
-  useEffect(() => {
-    const fn = async () => {
-      const response = await fetch(`http://localhost:3000/project/ get_all_members?projectId=${project.id}`)
-      const data = await response.json()
-      console.log(data)
-    }
-
-    fn()
-  }, [])
+  const updateProjectData = (newValues: Partial<IProject>) => {
+    dispatch(editProjectThunk({...project, ...newValues}))
+  }
 
   return (
     <BasicModal open={open}
       onClose={onClose}>
-      <Box minWidth={'400px'} padding={'20px'}>
-        <Box display={'flex'}
-          alignItems={'center'}
-          justifyContent={'space-between'}
-          mb={'5px'}
-        >
+      <Box minWidth={'400px'} padding={'20px'} onClick={(e) => e.stopPropagation()}>
+        <TopPanel>
           <Typography>
-             Share {project.name}
+             Share &quot;{project.name}&quot;
           </Typography>
           <CustomIconButton onClick={onClose}>
             <CloseIcon/>
           </CustomIconButton>
-        </Box>
+        </TopPanel>
 
         <Box display={'flex'} flexDirection={'column'} mt={'15px'}>
           <Box display={'flex'}>
@@ -52,19 +49,22 @@ const ShareProjectModal = ({open, onClose, project}: Props) => {
               placeholder={'Enter user email'}
               autoFocus />
           </Box>
+
+          <InvitedUsers id={project.id}/>
+
           <Box mt={'20px'}>
             <Typography fontSize={'15px'}>
-              Users invited
+              General access
             </Typography>
+            <GeneralAccess shared={project.shared} updateProjectData={updateProjectData}/>
           </Box>
-          <Box mt={'20px'}>
-            <Typography fontSize={'15px'}>
-              Shared access
-            </Typography>
-          </Box>
+
           <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} mt={'20px'}>
-            <CopyLinkButton variant={'contained'} onClick={onCopyLink}> Copy link</CopyLinkButton>
-            <InviteButton variant={'contained'} onClick={onClose}> Done</InviteButton>
+            <CopyLinkButton variant={'contained'} onClick={onCopyLink}>
+              <LinkIcon sx={{marginRight: '10px', fontSize: '20px'}}/>
+              Copy link
+            </CopyLinkButton>
+            <InviteButton variant={'contained'} onClick={onClose}>Done</InviteButton>
           </Box>
         </Box>
       </Box>
@@ -100,6 +100,13 @@ const UserEmailInput = styled(TextField)(() => ({
     },
   },
   '&:hover': {},
+}))
+
+const TopPanel = styled(Box)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  mb: '5px',
 }))
 
 

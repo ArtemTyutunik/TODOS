@@ -49,12 +49,27 @@ export type {
   RootReducer,
 }
 
+interface IMember {
+    name: string,
+    picture: string,
+    login: string,
+    role: 'member' | 'owner'
+}
+
 export interface IProject {
     name: string,
     id: todoProjectId,
-    color: colorType
-    isPinned?: boolean
+    color: colorType,
+    isPinned?: boolean,
+    members: IMember[],
+    shared: 'public' | 'private',
 }
+
+export interface ProjectModalStateType {
+    name: IProject['name'],
+    color: IProject['color']
+}
+
 
 export type tagIdType = string;
 
