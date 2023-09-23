@@ -1,4 +1,4 @@
-import {Box, Button, TextField, Typography} from '@mui/material';
+import {Box, Button, Typography} from '@mui/material';
 import CustomIconButton from '@shared/components/CustomIconButton';
 import {CloseIcon} from '@shared/components/icons';
 import BasicModal from '@shared/components/modal';
@@ -8,8 +8,10 @@ import GeneralAccess from '@entities/projects/components/projectListItems/ShareP
 import {editProjectThunk} from '@entities/projects/model/thunks';
 import {useAppDispatch} from '@app/store';
 import LinkIcon from '@mui/icons-material/Link';
-import {BASE_URL} from '@shared/api/services/constants';
+import {HOST_URL} from '@shared/api/services/constants';
 import InvitedUsers from '@entities/projects/components/projectListItems/ShareProject/InvitedUsers';
+import UserInviteInput from '@entities/projects/components/projectListItems/ShareProject/UserInviteInput';
+import {useEffect, useRef, useState} from 'react';
 
 interface Props {
     open: boolean,
@@ -19,9 +21,12 @@ interface Props {
 
 const ShareProjectModal = ({open, onClose, project}: Props) => {
   const dispatch = useAppDispatch()
+  const [isFocusedList, setIsFocusedList] = useState(false)
+  const inputWrapperElement = useRef<HTMLDivElement>(null)
+  const modalElement = useRef<HTMLDivElement>(null)
 
   const onCopyLink = async () => {
-    const link = BASE_URL + 'project/' + project.id
+    const link = HOST_URL + 'project/' + project.id
     await navigator.clipboard.writeText(link)
   }
 
@@ -29,10 +34,26 @@ const ShareProjectModal = ({open, onClose, project}: Props) => {
     dispatch(editProjectThunk({...project, ...newValues}))
   }
 
+  useEffect(() => {
+    const onClickOutsideList = (e: MouseEvent) => {
+      const listElement = inputWrapperElement.current
+      if (listElement?.contains(e.target as HTMLElement)) {
+        setIsFocusedList(true)
+      } else {
+        setIsFocusedList(false)
+      }
+    }
+
+    modalElement.current?.addEventListener('click', onClickOutsideList)
+
+    return () => modalElement.current?.removeEventListener('click', onClickOutsideList)
+  })
+
   return (
     <BasicModal open={open}
+      ref={modalElement}
       onClose={onClose}>
-      <Box minWidth={'400px'} padding={'20px'} onClick={(e) => e.stopPropagation()}>
+      <Box minWidth={'400px'} padding={'20px'}>
         <TopPanel>
           <Typography>
              Share &quot;{project.name}&quot;
@@ -43,13 +64,8 @@ const ShareProjectModal = ({open, onClose, project}: Props) => {
         </TopPanel>
 
         <Box display={'flex'} flexDirection={'column'} mt={'15px'}>
-          <Box display={'flex'}>
-            <UserEmailInput id={'shared_user_email'}
-              fullWidth
-              placeholder={'Enter user email'}
-              autoFocus />
-          </Box>
 
+          <UserInviteInput listFocused={isFocusedList} ref={inputWrapperElement} projectId={project.id}/>
           <InvitedUsers id={project.id}/>
 
           <Box mt={'20px'}>
@@ -90,16 +106,6 @@ const CopyLinkButton = styled(Button)(() => ({
   '&:hover': {
     backgroundColor: '#f1f1f1',
   },
-}))
-
-const UserEmailInput = styled(TextField)(() => ({
-  '& input': {
-    'padding': '4px 8px',
-    '&::placeholder': {
-      fontSize: '14px',
-    },
-  },
-  '&:hover': {},
 }))
 
 const TopPanel = styled(Box)(() => ({

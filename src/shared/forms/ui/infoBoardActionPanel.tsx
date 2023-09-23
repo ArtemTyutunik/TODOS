@@ -39,7 +39,7 @@ const InfoBoardActionPanel = ({onClose, projectId, todoId}: Props) => {
 };
 
 const ProjectName = memo(({projectId}: {projectId: string | undefined}) => {
-  const project = useProjectById(projectId)
+  const [project] = useProjectById(projectId)
   const inboxId = localStorage.getItem('inboxID')!
 
   return <Box display={'flex'} alignItems={'center'} padding={'0 5px'}>

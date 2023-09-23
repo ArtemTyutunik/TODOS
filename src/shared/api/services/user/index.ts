@@ -51,3 +51,16 @@ export const getVerifiedStatus = async (): Promise<boolean> => {
   const response = await fetchRequest('user/get_verification_status?user_id=' + userId)
   return await response.json()
 }
+
+export interface SearchedUser {
+  name: string
+  login: string
+  picture: string
+  regType: string
+}
+
+export const searchUsers = async (query: string, projectId: string) => {
+  const response = await fetchRequest(`user/get_users_by_nickname?login=${query}&projectId=${projectId}`)
+
+  return await response.json()
+}

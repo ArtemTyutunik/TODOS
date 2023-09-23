@@ -10,6 +10,12 @@ export const getInboxId = async (): Promise<Response> => {
   return await response.json()
 }
 
+export const getProjectById = async (id: string) => {
+  const response = await fetchRequest(`project/get?id=${id}`)
+
+  return await response.json()
+}
+
 export const getProjects = async () => {
   const userId = getUserId()
   const response = await fetchRequest(`project/get_all?user_id=${userId}`)
@@ -62,4 +68,16 @@ export const editProjectRequest = async (project: IProject) => {
 export const getProjectMembers = async (id: string) => {
   const response = await fetchRequest(`project/get_all_members?projectId=${id}`)
   return await response.json()
+}
+
+export const sendInviteToProject = async (projectId: string, email: string, regType: string) => {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({projectId, email, regType}),
+  }
+
+  return await fetchRequest(`project/send_invite`, options)
 }

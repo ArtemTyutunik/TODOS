@@ -49,10 +49,15 @@ export type {
   RootReducer,
 }
 
-interface IMember {
+export interface IMemberUser {
     name: string,
     picture: string,
     login: string,
+    role: 'member' | 'owner'
+}
+
+interface IMember {
+    id: string,
     role: 'member' | 'owner'
 }
 

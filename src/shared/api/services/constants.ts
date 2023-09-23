@@ -1,7 +1,10 @@
-export const BASE_URL = process.env.NODE_ENV === 'production' ?
+const BASE_URL = process.env.NODE_ENV === 'production' ?
     'https://todos-backend-nodejs.fly.dev/' :
     'http://localhost:3000/'
 
+export const HOST_URL = process.env.NODE_ENV === 'production' ?
+    'https://https://my-todos-three.vercel.app/' :
+    'http://localhost:5173/'
 
 const user = JSON.parse(localStorage.getItem('user') || '{}')
 export const fetchRequest = async (url: string, defaultOptions: RequestInit = {}) => {

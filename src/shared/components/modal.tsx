@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import {Box, Modal} from '@mui/material';
 
 const style = {
@@ -20,12 +20,12 @@ interface Props {
   onClose: () => void
 }
 
-const BasicModal = ({children, open, onClose}: Props) => {
-  return <Modal open={open} onClose={onClose}>
+const BasicModal = forwardRef(({children, open, onClose}: Props, ref: React.ForwardedRef<HTMLDivElement> | null) => {
+  return <Modal open={open} onClose={onClose} ref={ref}>
     <Box sx = {style}>
       {children}
     </Box>
   </Modal>;
-};
+});
 
 export default BasicModal;

@@ -36,11 +36,11 @@ const InvitedUsers = memo(({id}: Props) => {
                 Users invited
       </Typography>
       {
-                loading ? <>
-                  <Loader/>
-                  <Loader/>
-                  <Loader/>
-                </> : <MemberList members={data}/>
+        loading ? <>
+          <Loader/>
+          <Loader/>
+          <Loader/>
+        </> : <MemberList members={data}/>
       }
     </Box>
   );
