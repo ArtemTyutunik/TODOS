@@ -64,3 +64,14 @@ export const searchUsers = async (query: string, projectId: string) => {
 
   return await response.json()
 }
+
+export const addToMembers = async (userId: string, projectId: string) => {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+
+  return await fetchRequest(`project/${projectId}/add_user/${userId}`, options)
+}

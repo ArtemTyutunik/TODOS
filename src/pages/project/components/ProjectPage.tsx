@@ -5,9 +5,13 @@ import {PageTitle, TodoList} from '@pages/todos/components';
 import {useProjectById, useProjectTodos} from '@entities/projects';
 import NotFound from '@pages/NotFound';
 import getUserId from '@shared/helpers/getUserId';
+import {useAppDispatch} from '@app/store';
+import {addMemberToProjectThunk} from '@entities/projects/model/thunks';
+import AccessRestricted from './AccessResricted';
 
 const ProjectPage = () => {
   const {id: projectId} = useParams()
+  const dispatch = useAppDispatch()
   const [project] = useProjectById(projectId!)
   const projectTodos = useProjectTodos(projectId!)
   const [accessRestricted, setAccessRestricted] = useState<boolean | null>(null)
@@ -16,7 +20,6 @@ const ProjectPage = () => {
     const userId = getUserId()
     const isUserMember = project?.members.find((member) => member.id === userId) !== undefined
 
-    console.log(isUserMember)
     if (!isUserMember && project?.shared === 'private') {
       setAccessRestricted(true)
     }
@@ -24,12 +27,15 @@ const ProjectPage = () => {
     if (isUserMember || project?.shared === 'public') {
       setAccessRestricted(false)
     }
-  }, [project])
+
+    if (!isUserMember && project?.shared === 'public' && projectId && project) {
+      dispatch(addMemberToProjectThunk({projectId, userId, project}))
+    }
+  }, [project, projectId])
 
   if (!project) return <NotFound/>
-  console.log(project)
 
-  if (accessRestricted || accessRestricted === null) return <> Restricted</>
+  if (accessRestricted || accessRestricted === null) return <AccessRestricted/>
 
 
   return ( project ? (

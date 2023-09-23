@@ -6,6 +6,7 @@ import {toast} from 'react-toastify';
 import {Box} from '@mui/material';
 import {errorOptions} from '@shared/components/Notification/constants';
 import {updateTodos} from '@entities/todos/store/todo';
+import {addToMembers} from '@shared/api/services/user';
 
 interface addNewProjectThunkArgs {
     project: ProjectModalStateType,
@@ -71,6 +72,18 @@ export const pinProjectThunk = createAsyncThunk(
       try {
         await editProjectRequest(newProject)
         dispatch(editProjectAction(newProject))
+      } catch (e) {
+        console.log(e)
+      }
+    },
+)
+
+export const addMemberToProjectThunk = createAsyncThunk(
+    'project/addMemberToProject',
+    async ({projectId, userId, project}: {projectId: string, userId: string, project: IProject}, {dispatch}) => {
+      try {
+        await addToMembers(userId, projectId)
+        dispatch(addNewProject(project))
       } catch (e) {
         console.log(e)
       }
