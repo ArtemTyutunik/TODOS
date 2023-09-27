@@ -1,5 +1,5 @@
 import {ITodo} from '@shared/interfacesAndTypes';
-import * as dayjs from 'dayjs';
+import {DAY_JS} from '@shared/constants'
 
 
 const sortTodosByProperty = (sortType: string, todos: ITodo[], order: string) => {
@@ -34,9 +34,9 @@ export default sortTodosByProperty
 
 
 const compareDates = (first: string | undefined, second: string | undefined, order: string): number => {
-  if (dayjs(first).isAfter(second)) {
+  if (DAY_JS(first).isAfter(second)) {
     return order === 'ascending' ? 1 : -1
-  } else if (dayjs(first).isSame(second)) {
+  } else if (DAY_JS(first).isSame(second)) {
     return 0
   } else return order === 'ascending' ? -1 : 1
 }
