@@ -94,7 +94,7 @@ const TodoCard = ({
                     <Box>
                       {
                         date && <Box>
-                          <DueDateButton date={date} variant={'Standard'}/>
+                          <DueDateButton date={date} variant={'Standard'} disabled/>
                         </Box>
                       }
                     </Box>

@@ -30,6 +30,7 @@
         "semi": "off",
         "@typescript-eslint/ban-ts-comment": "off",
         "linebreak-style": "off",
-        "react/display-name": "off"
+        "react/display-name": "off",
+        "new-cap": "off"
     }
 }

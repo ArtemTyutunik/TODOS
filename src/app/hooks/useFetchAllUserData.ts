@@ -9,12 +9,14 @@ import {getUserTodos} from '@shared/api/services/todos';
 import {fetchAllFavoritesThunkCreator} from '@features/addToFavorites/model/thunks';
 import {getInboxId, getProjects} from '@shared/api/services/projects';
 import {getProjectsAction} from '@entities/projects/model/store';
+import {AppDispatch} from '@app/store';
 
 export const useFetchAllUserData = (): [boolean] => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [isFetching, setIsFetching] = useState(true)
   const userId = useSelector(userIdSelector)
   const [isMinimumTimeEnd, setIsMinimumTimeEnd] = useState(false)
+
   const getTodos = async () => {
     const onFulfilledTodosRequest = (result: ITodo[]) => {
       dispatch(fetchTasks(result))
@@ -41,7 +43,6 @@ export const useFetchAllUserData = (): [boolean] => {
 
   const getFavorites = async () => {
     try {
-      //@ts-ignore
       dispatch(fetchAllFavoritesThunkCreator(userId))
     } catch (e) {
       console.log(e)

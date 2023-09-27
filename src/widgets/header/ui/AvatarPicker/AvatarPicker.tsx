@@ -1,29 +1,46 @@
-import React, {useRef, useState} from 'react';
-import UserAvatar from './userAvatar';
+import React, {useRef} from 'react';
+import {useDispatch} from 'react-redux';
 import {Box} from '@mui/material';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
-
+import {toast} from 'react-toastify';
+import UserAvatar from '../UserAvatar/userAvatar';
+import {WrongFileSizeNotification, LoadFileServerError} from '@shared/components/Notification';
+import {errorOptions} from '@shared/components/Notification/constants';
+import {setNewAvatar} from '@shared/api/services/user';
+import {setUserPicture} from '@entities/user/model/store';
 
 const AvatarPicker = () => {
   const filePickerElement = useRef<HTMLInputElement | null>(null)
-  const [, setSelectedFile] = useState<null | File>(null)
+  const dispatch = useDispatch()
+  const user = JSON.parse(localStorage.getItem('user') ?? '{}')
 
   const onFilePick = (e: React.SyntheticEvent) => {
     e.stopPropagation()
-    //filePickerElement.current?.click()
+    filePickerElement.current?.click()
   }
 
-  const onFilePickerChange = (e: React.ChangeEvent) => {
+  const onFilePickerChange = async (e: React.ChangeEvent) => {
     const file = (e.target as HTMLInputElement)?.files![0]
+    const MAX_SIZE = 1000000
 
     if ( file) {
-      setSelectedFile(file)
+      if (file.size <= MAX_SIZE) {
+        try {
+          const url = await setNewAvatar(file, user?.login)
+          dispatch(setUserPicture(url));
+          localStorage.setItem('user', JSON.stringify({...user, picture: url}))
+        } catch (e) {
+          toast.error(<LoadFileServerError/>, errorOptions)
+        }
+      } else {
+        toast.error(<WrongFileSizeNotification/>, errorOptions)
+      }
     }
   }
 
   return <Box sx={avatarWrapperStyles} onClick={onFilePick}>
     <UserAvatar/>
-    <Box sx={editAvatarButton}>
+    <Box sx={editAvatarButton} className={'edit-avatar'}>
       <Box width={'fit-content'} margin={'10px auto 0'}>
         <PhotoCameraIcon sx={{color: '#fff', fontSize: '15px'}}/>
       </Box>

@@ -11,6 +11,7 @@ interface Props {
     isError: boolean,
     tagState: ITag,
     toggleIsFavorite(): void,
+    onSubmit: (() => void) | null
     isChecked: boolean
 }
 
@@ -20,7 +21,8 @@ const TagInfoModalForm = ({
   isError,
   tagState,
   toggleIsFavorite,
-  isChecked}: Props) => {
+  isChecked,
+  onSubmit}: Props) => {
   return (
     <ModalWrapper>
       <Box padding={'10px 15px'}>
@@ -29,7 +31,10 @@ const TagInfoModalForm = ({
         </Typography>
       </Box>
       <InputsSection isError={isError}>
-        <NameInput isError={isError} onChange={onInputChange} inputValue={tagState.name}/>
+        <NameInput isError={isError}
+          onChange={onInputChange}
+          onSubmit={onSubmit}
+          inputValue={tagState.name}/>
         <Box marginBottom={'15px'}>
           <Typography fontSize={'15px'} fontWeight={600} mb={'5px'}>
                Tag color

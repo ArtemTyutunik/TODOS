@@ -5,10 +5,15 @@ import AppLayout from './ui/appLayout';
 import theme from '@app/theme';
 import {withStore} from './providers/withStore';
 import {RootReducer} from '@shared/interfacesAndTypes';
+import registerServiceWorker from '../../registerServiceWorker';
 
 
 const App = () => {
   const {isAuth} = useSelector((state: RootReducer) => state.userReducer)
+
+  useEffect(() => {
+    registerServiceWorker()
+  }, []);
 
   useEffect(()=> {
     if (!isAuth) {

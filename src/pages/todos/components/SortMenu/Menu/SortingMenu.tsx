@@ -11,6 +11,15 @@ import CloseIcon from '@mui/icons-material/Close';
 import NorthIcon from '@mui/icons-material/North';
 import SouthIcon from '@mui/icons-material/South';
 
+
+const sortOptions = [
+  {value: 'default', label: 'Default'},
+  {value: 'name', label: 'Name'},
+  {value: 'date', label: 'Due date'},
+  {value: 'priority', label: 'Priority'},
+  {value: 'completed', label: 'Completed'},
+]
+
 const SortingMenu = () => {
   const [anchorEl, setAnchorEl, removeAnchorEl] = useAnchorElement(null)
   const dispatch = useDispatch()
@@ -23,13 +32,16 @@ const SortingMenu = () => {
     removeAnchorEl()
   }
 
+  const updateOrder = (newOrder: 'descending' | 'ascending') => {
+    dispatch(toggleOrder(newOrder))
+    localStorage.setItem('ordering', newOrder)
+  }
+
   const toggleOrdering = () => {
     if (order === 'ascending') {
-      dispatch(toggleOrder('descending'))
-      localStorage.setItem('ordering', 'descending')
+      updateOrder('descending')
     } else if (order === 'descending') {
-      dispatch(toggleOrder('ascending'))
-      localStorage.setItem('ordering', 'ascending')
+      updateOrder('ascending')
     }
   }
 
@@ -63,7 +75,7 @@ const SortingMenu = () => {
                 </Box>
               </CustomIconButton>
               <Tooltip title={'Reset sorting'}>
-                <CustomIconButton onClick={() => dispatch(setSortingValue('default'))}>
+                <CustomIconButton onClick={() => onOptionSelect('default')}>
                   <CloseIcon sx={{fontSize: '18px', color: '#808080'}}/>
                 </CustomIconButton>
               </Tooltip>
@@ -117,12 +129,5 @@ const onSortButtonStyles = {
       'Helvetica,Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol"',
 }
 
-
-const sortOptions = [
-  {value: 'default', label: 'Default'},
-  {value: 'name', label: 'Name'},
-  {value: 'date', label: 'Due date'},
-  {value: 'priority', label: 'Priority'},
-]
 
 export default SortingMenu;

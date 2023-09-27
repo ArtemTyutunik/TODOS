@@ -4,14 +4,14 @@ import {Box} from '@mui/material';
 import {PageTitle, TodoList} from '@pages/todos/components';
 import useProjectById from '@pages/project/hooks/useProjectById';
 import {useProjectTodos} from '@entities/projects';
+import NotFound from '@pages/NotFound';
 
 const ProjectPage = () => {
   const {id: projectId} = useParams()
   const project = useProjectById(projectId!)
   const projectTodos = useProjectTodos(projectId!)
 
-  if (!project) return null
-  //todo move page title to shared
+  if (!project) return <NotFound/>
 
   return ( project ? (
           <Box>

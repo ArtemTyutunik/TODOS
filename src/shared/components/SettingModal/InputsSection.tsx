@@ -3,8 +3,9 @@ import {Box} from '@mui/material';
 
 interface Props {
     isError: boolean,
-    children: React.ReactNode
+    children: React.ReactNode,
 }
+
 const InputsSection = ({children, isError}: Props) => {
   return (
     <Box sx={inputSectionStyle(isError)}>

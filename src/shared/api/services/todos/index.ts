@@ -13,7 +13,6 @@ export const getUserTodos = async <T>(userId: string): Promise<T> => {
   }
 
   const response = await fetchRequest(`todo/get_all?user_id=${userId}`)
-  console.log(response)
   const data = await response.json()
 
   return data.map(transformTodo)

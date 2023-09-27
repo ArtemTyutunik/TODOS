@@ -20,6 +20,7 @@ export type Anchor = null | HTMLElement
 
 export type IUser = {
     accessToken: string,
+    emailIsVerified: boolean,
     login: string,
     picture?: string,
     name?: string,

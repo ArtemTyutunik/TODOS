@@ -14,4 +14,7 @@ export const store = configureStore({
   preloadedState,
 });
 
+export type AppDispatch = typeof store.dispatch
+export type AppStore = typeof store
+
 export type RootReducer = ReturnType<typeof store.getState>
