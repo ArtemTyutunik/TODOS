@@ -16,9 +16,10 @@ interface Props {
     date: IDate | undefined,
     variant?: DueDateButtonType
     onPassDateToBaseForm?: (date: IDate) => void
+    disabled?: boolean
 }
 
-const DueDateButton = ({date, onPassDateToBaseForm, variant = 'Outline'}: Props) => {
+const DueDateButton = ({date, onPassDateToBaseForm, variant = 'Outline', disabled = false}: Props) => {
   const [anchorElUser, addAnchorEl, removeAnchorEl] = useAnchorElement(null);
 
   const onSetDate = (date: IDate) => {
@@ -27,7 +28,7 @@ const DueDateButton = ({date, onPassDateToBaseForm, variant = 'Outline'}: Props)
   };
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
-    addAnchorEl(event.currentTarget);
+    !disabled && addAnchorEl(event.currentTarget);
   };
 
   const isOverdue = overdueDate(date!);

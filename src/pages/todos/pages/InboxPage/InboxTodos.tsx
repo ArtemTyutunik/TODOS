@@ -10,7 +10,7 @@ import {useProjectTodos} from '@entities/projects';
 
 const InboxTodosPage = () => {
   const inboxId = localStorage.getItem('inboxID');
-  // fixme
+
   if (!inboxId) return null
 
   const inboxTodos = useProjectTodos(inboxId)

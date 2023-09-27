@@ -1,16 +1,22 @@
 import React from 'react';
-import {ITodo} from '@shared/interfacesAndTypes';
+import {IDate, ITodo} from '@shared/interfacesAndTypes';
 import {useReducer} from 'react';
 
-const initialStateFunction = (todo?: ITodo, initialProject?: string) => ({
+type Options = {
+  todoProjectId?: string,
+  initialDate?: string
+}
+
+
+const initialStateFunction = (todo?: ITodo, options?: Options) => ({
   id: todo?.id || Date.now(),
   label: todo?.label || '',
   description: todo?.description || '',
   tags: todo?.tags || [],
-  date: todo?.date || '',
+  date: todo?.date || options?.initialDate || '',
   priority: todo?.priority || '4',
   done: todo?.done || false,
-  projectId: todo?.projectId || initialProject || localStorage.getItem('inboxID'),
+  projectId: todo?.projectId || options?.todoProjectId || localStorage.getItem('inboxID'),
   isCurrent: todo?.isCurrent || false,
 })
 
@@ -23,12 +29,14 @@ const formReducer = (state: ITodo, action: formAction) => {
   switch (action.type) {
     case 'CHANGE_PRIORITY': return {...state, priority: action.payload}
     case 'CHANGE_PROJECT': return {...state, projectId: action.payload}
+    case 'CHANGE_DATE': return {...state, date: action.payload}
     default: return state
   }
 }
 
-const useBaseFormReducer = (todo?: ITodo, projectId?: string): [ITodo, React.Dispatch<formAction>] => {
-  const [state, dispatchAction] = useReducer(formReducer, initialStateFunction(todo, projectId));
+
+const useBaseFormReducer = (todo?: ITodo, options?: Options): [ITodo, React.Dispatch<formAction>] => {
+  const [state, dispatchAction] = useReducer(formReducer, initialStateFunction(todo, options));
 
   return [state, dispatchAction]
 }
@@ -36,6 +44,11 @@ const useBaseFormReducer = (todo?: ITodo, projectId?: string): [ITodo, React.Dis
 export const changeProjectActionCreator = (projectId: string) => ({
   type: 'CHANGE_PROJECT',
   payload: projectId,
+})
+
+export const changeDateActionCreator = (date: IDate) => ({
+  type: 'CHANGE_DATE',
+  payload: date,
 })
 
 export default useBaseFormReducer

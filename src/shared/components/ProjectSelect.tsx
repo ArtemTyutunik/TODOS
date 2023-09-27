@@ -21,6 +21,8 @@ const ProjectSelect = ({initialProjectId, onChange}: ProjectSelectProps) => {
     onChange(value)
   };
 
+  console.log(projects)
+
   return <Select value={currentProject}
     onChange={handleChange}
     className={'project-select'}
