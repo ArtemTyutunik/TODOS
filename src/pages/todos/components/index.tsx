@@ -1,6 +1,6 @@
 import OverdueTodos from './OverdueTodos';
-import PageTitle from './PageTitle';
-import TodoList from './todo-list';
+import PageTitle from '../../components/PageTitle';
+import TodoList from '../../components/todo-list';
 
 export {
   OverdueTodos,

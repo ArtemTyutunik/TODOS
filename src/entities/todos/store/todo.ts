@@ -115,5 +115,4 @@ export const {addNewTask,
   removeFetchError} = todosSlice.actions;
 
 export const allTodosSelector = (state: RootReducer) => state.todosReducer.todos
-export const isLoadingTodoActionSelector = (state: RootReducer) => state.todosReducer.isRequestPending
 export const isErrorFetchingSelector = (state: RootReducer) => state.todosReducer.isErrorFetching

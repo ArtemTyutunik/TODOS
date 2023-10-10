@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootReducer} from '@shared/interfacesAndTypes';
-import DetailsCard from './components/DetailsCard';
+import DetailsCard from './components/DetailsCard/DetailsCard';
 import {Box} from '@mui/material';
 import {setTodoInfoId} from '@app/store/AppStore';
 import InfoBoardActionPanel from '@shared/forms/ui/infoBoardActionPanel';
@@ -22,7 +22,7 @@ const InfoBoard = ({id}: Props) => {
   }
 
   return (
-    detailedTodo ? ( <Box width={'100%'} height={'100%'}
+    detailedTodo ? ( <Box width={'100%'} height={'100%'} maxHeight={'100vh'} overflow={'scroll'}
       sx={{backgroundColor: '#fff'}}
       padding={'10px'}
       borderLeft={'1px solid #e0e0e0'}

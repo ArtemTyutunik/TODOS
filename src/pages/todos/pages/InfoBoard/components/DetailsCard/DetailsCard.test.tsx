@@ -1,5 +1,5 @@
 import renderWithProviders from '@test/test-utils/renderWithProvider';
-import DetailsCard from '@pages/todos/pages/InfoBoard/components/DetailsCard';
+import DetailsCard from '@pages/todos/pages/InfoBoard/components/DetailsCard/DetailsCard';
 import configureRandomTodo from '@test/test-utils/configureRandomTodo';
 import {screen} from '@testing-library/react';
 
