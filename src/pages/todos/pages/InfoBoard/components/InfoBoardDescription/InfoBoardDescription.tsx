@@ -25,7 +25,7 @@ const InfoBoardDescription = ({initValue, onTodoUpdate}: Props) => {
 
   return (
     <DescriptionWrapper ml={'10px'} fontSize={'14px'} color={'#202020'} >
-      <Typography fontSize={'inherit'} fontWeight={600} fontFamily={theme.typography.fontFamily}>
+      <Typography fontSize={'inherit'} fontWeight={600} fontFamily={theme.typography.fontFamily} mb={'5px'}>
               Description
       </Typography>
       <TodoDescriptionInput value={initValue}
@@ -40,7 +40,10 @@ const DescriptionWrapper = styled(Box)(() => ({
   '& textarea': {
     'borderRadius': '5px',
     'padding': '8px',
-    '&: hover': {backgroundColor: `rgb(235, 236, 240)`},
+    'transform': 'translateX(-8px)',
+    '&: hover': {
+      backgroundColor: `rgb(235, 236, 240)`,
+    },
     '&: focus': {
       backgroundColor: `#fff`,
     },

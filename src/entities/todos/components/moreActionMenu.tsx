@@ -42,7 +42,7 @@ const MoreActionsMenu = ({todo, onDelete, onDuplicate, onSetPriority, onOpenTodo
       <DropdownMenu anchorEl={anchorEl} handleClose={removeAnchorEl}>
         <Box minWidth={'250px'} padding={'5px'}>
           <List>
-            <ListItemButton sx = {listItemStyles} onClick={() => {
+            <ListItemButton tabIndex={1} sx = {listItemStyles} onClick={() => {
               removeAnchorEl()
               onOpenTodoDetails()
             }}>
@@ -78,7 +78,7 @@ const MoreActionsMenu = ({todo, onDelete, onDuplicate, onSetPriority, onOpenTodo
               </Typography>
             </ListItemButton>
             <Divider/>
-            <ListItemButton sx = {listItemStyles} onClick={openDeleteModalOpen}>
+            <ListItemButton sx = {listItemStyles} onClick={openDeleteModalOpen} role={'link'} tabIndex={1}>
               <DeleteIcon sx={{color: 'grey'}}/>
               <Typography ml={'25px'}>
                       Delete

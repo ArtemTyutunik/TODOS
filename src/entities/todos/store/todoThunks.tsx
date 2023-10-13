@@ -8,7 +8,6 @@ import {
   editTask,
   setIsLoading,
   setPriority,
-  toggleTaskComplete,
 } from '@entities/todos/store/todo';
 import {deleteTodoById, postNewTodo, sendUpdatedTodo} from '@shared/api/services/todos';
 import {TodoEditedNotification} from '@shared/components/Notification';
@@ -39,18 +38,6 @@ export const editTaskThunk = createAsyncThunk(
         if (showNotification) {
           toast(<TodoEditedNotification/>, options)
         }
-      } catch (e) {
-        console.log(e)
-      }
-    },
-)
-
-export const completeTaskThunk = createAsyncThunk(
-    'todo/completeTask',
-    async (newTodo: Partial<ITodo>, {dispatch}) => {
-      try {
-        await sendUpdatedTodo(newTodo)
-        dispatch(toggleTaskComplete(Number(newTodo.id)));
       } catch (e) {
         console.log(e)
       }

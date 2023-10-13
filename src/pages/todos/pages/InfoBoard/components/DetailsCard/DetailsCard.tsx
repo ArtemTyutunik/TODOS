@@ -5,6 +5,8 @@ import InfoBoardTitle from '@pages/todos/pages/InfoBoard/components/InfoBoardTit
 import {useAppDispatch} from '@app/store';
 import {editTaskThunk} from '@entities/todos/store/todoThunks';
 import InfoBoardDescription from '@pages/todos/pages/InfoBoard/components/InfoBoardDescription/InfoBoardDescription';
+import TodoDetailsSection from '@pages/todos/pages/InfoBoard/components/TodoDetailsSection/TodoDetailsSection';
+import CompleteHandler from '@pages/todos/pages/InfoBoard/components/completeHandler/CompleteHandler';
 
 interface Props {
   todo: ITodo,
@@ -25,7 +27,9 @@ const DetailsCard = ({todo}: Props) => {
       <Box display={'flex'}>
         <Box width={'100%'} sx={{wordWrap: 'break-word'}} fontWeight={'bold'}>
           <InfoBoardTitle initValue={todo.label} onTitleChange={onTodoUpdate}/>
+          <CompleteHandler isComplete={todo.done}/>
           <InfoBoardDescription onTodoUpdate={onTodoUpdate} initValue={todo.description}/>
+          <TodoDetailsSection/>
         </Box>
       </Box>
     </Box>

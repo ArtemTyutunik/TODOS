@@ -49,11 +49,8 @@ const todosSlice = createSlice({
     addNewTask: (state, {payload}: PayloadAction<ITodo>) => {
       return {...state, todos: [...state.todos, payload]};
     },
-    toggleTaskComplete: (state, {payload}: PayloadAction<TodoId>) => {
-      const completedTask = findTaskById(state, payload);
-      if (completedTask) {
-        completedTask.done = !completedTask.done;
-      }
+    updateTargetTodo: (state, {payload}: PayloadAction<ITodo>) => {
+      return updateTodoInState(state, payload)
     },
     editTask: (state, {payload}: PayloadAction<ITodo>) => {
       return updateTodoInState(state, payload)
@@ -100,7 +97,7 @@ const todosSlice = createSlice({
 export const todosReducer = todosSlice.reducer;
 
 export const {addNewTask,
-  toggleTaskComplete,
+  updateTodos,
   editTask,
   deleteTask,
   setPriority,
@@ -110,8 +107,8 @@ export const {addNewTask,
   deleteTodoTag,
   toggleIsCurrent,
   fetchWithError,
-  updateTodos,
   setIsLoading,
+  updateTargetTodo,
   removeFetchError} = todosSlice.actions;
 
 export const allTodosSelector = (state: RootReducer) => state.todosReducer.todos
