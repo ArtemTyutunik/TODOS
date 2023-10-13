@@ -1,5 +1,5 @@
 import renderWithProviders from '@test/test-utils/renderWithProvider';
-import RenderedList from '@entities/todos/components/RenderedList/RenderedList';
+import RenderedList from '@pages/components/RenderedList/RenderedList';
 import {screen} from '@testing-library/react'
 
 const mockTodos = [

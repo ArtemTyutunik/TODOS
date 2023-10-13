@@ -17,12 +17,13 @@ import {sendUpdatedTodo} from '@shared/api/services/todos';
 import {setTodoInfoId} from '@app/store/AppStore';
 import ProjectView from '@entities/projects/components/projectView';
 import useProjectWithInbox from '@entities/projects/hooks/useProjectsWithInbox';
+import {useVisable} from '@shared/hooks';
+import {EditTodoForm} from '@features/todoFeatures/EditTodo';
 
 interface TodoCardProps {
     todo: ITodo,
     showProject?: boolean,
     onComplete: () => void,
-    onEdit: () => void,
     onDeleteAction: () => void,
     onDuplicateAction: () => void,
     setPriorityAction: (priority: Priority) => void
@@ -32,12 +33,13 @@ const TodoCard = ({
   todo,
   showProject,
   onComplete,
-  onEdit,
   onDeleteAction,
   onDuplicateAction,
   setPriorityAction}: TodoCardProps,
 ) => {
   const {label, description, date, id, tags, isCurrent} = todo;
+  const [isEditing, openEditing, closeEditing] = useVisable(false);
+
   const userTags = useSelector(userTagsSelector)
   const dispatch = useDispatch()
   const todoProject = useProjectWithInbox(todo.projectId)
@@ -57,6 +59,12 @@ const TodoCard = ({
     const idToString = id.toString()
     dispatch(setTodoInfoId(idToString))
     localStorage.setItem('todoInfoId', idToString)
+  }
+
+  if (isEditing) {
+    return <Box width={'100%'}>
+      <EditTodoForm onClose={closeEditing} todo={todo}/>
+    </Box>
   }
 
   return (
@@ -121,7 +129,7 @@ const TodoCard = ({
 
             <Box className={'ActionsMenu'} onClick={(e: React.SyntheticEvent) => e.stopPropagation()}>
               <Tooltip title={'Edit'}>
-                <IconButton onClick={onEdit}>
+                <IconButton onClick={openEditing}>
                   <EditIcon color={'action'} sx={{fontSize: '19px'}}/>
                 </IconButton>
               </Tooltip>

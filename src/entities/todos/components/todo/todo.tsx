@@ -1,12 +1,9 @@
 import React, {memo} from 'react';
-import {Box} from '@mui/material';
-
-import {EditTodoForm} from '@features/todoFeatures/EditTodo';
 import {ITodo, Priority} from '@shared/interfacesAndTypes';
 import TodoCard from '../todoCard';
-import {useVisable} from '@shared/hooks';
 import * as todoActions from '@entities/todos/store/todoThunks';
 import {useAppDispatch} from '@app/store';
+import useTodos from '@entities/todos/hooks/useTodos';
 
 interface Props {
     todo: ITodo,
@@ -15,12 +12,8 @@ interface Props {
 
 const Todo = memo(({todo, showProject}: Props) => {
   const {id} = todo;
+  const todoAPI = useTodos(id);
   const dispatch = useAppDispatch();
-  const [isEditing, openEditing, closeEditing] = useVisable(false);
-
-  const onComplete = () => {
-    dispatch(todoActions.completeTaskThunk({id, done: !todo.done}));
-  };
 
   const onDeleteAction = () => {
     dispatch(todoActions.deleteTaskThunk(id));
@@ -36,19 +29,12 @@ const Todo = memo(({todo, showProject}: Props) => {
     dispatch(todoActions.setPriorityTaskThunk(data))
   };
 
-  if (isEditing) {
-    return <Box width={'100%'}>
-      <EditTodoForm onClose={closeEditing} todo={todo}/>
-    </Box>
-  }
-
   return <TodoCard
     todo={todo}
     onDeleteAction={onDeleteAction}
     onDuplicateAction={onDuplicateAction}
     setPriorityAction={setPriorityAction}
-    onComplete={onComplete}
-    onEdit={openEditing}
+    onComplete={todoAPI.onComplete}
     showProject={showProject}/>;
 });
 

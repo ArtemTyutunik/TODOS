@@ -1,7 +1,7 @@
 import React from 'react';
 import {ITodo} from '@shared/interfacesAndTypes';
 import {Box, Typography, useTheme} from '@mui/material';
-import RenderedList from '@entities/todos/components/RenderedList/RenderedList';
+import RenderedList from '@pages/components/RenderedList/RenderedList';
 
 interface Props {
     overdueTodos: ITodo[]
@@ -14,7 +14,7 @@ const OverdueTodos = ({overdueTodos} : Props) => {
               <Typography fontSize={'16px'} fontWeight={'700'} color={theme.text.title}>
                     Overdue
               </Typography>
-              <RenderedList todos={overdueTodos}/>
+              <RenderedList todos={overdueTodos} projectTodoList={false}/>
             </Box>
         ) : null
   );

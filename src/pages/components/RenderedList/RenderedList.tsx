@@ -1,16 +1,20 @@
 import React from 'react';
 import {ITodo} from '@shared/interfacesAndTypes';
-import Todo from '@entities/todos/components/todo/todo';
 import {Box, Checkbox} from '@mui/material';
+import ProjectTodo from '@entities/todos/components/todo/ProjectTodo';
+import Todo from '@entities/todos/components/todo/todo';
 
 
 interface Props {
   todos: ITodo[],
   onChooseTodo?: (id: ITodo['id']) => void,
   chosenTodos?: ITodo['id'][],
-  showProject?: boolean
+  showProject?: boolean,
+  projectTodoList: boolean,
 }
-const RenderedList = ({todos, onChooseTodo, chosenTodos, showProject}: Props) => {
+const RenderedList = ({todos, onChooseTodo, chosenTodos, showProject, projectTodoList}: Props) => {
+  const TodoComponent = projectTodoList ? ProjectTodo : Todo;
+
   return (
     <>
       {
@@ -18,7 +22,7 @@ const RenderedList = ({todos, onChooseTodo, chosenTodos, showProject}: Props) =>
           <Checkbox sx={checkboxStyles} size={'small'} checked={chosenTodos?.includes(todo.id)}
             onChange={() => onChooseTodo && onChooseTodo(todo.id)}
             className={`todo-checkbox ${chosenTodos?.includes(todo.id) ? 'keep-active': ''}`}/>
-          <Todo todo={todo} showProject={showProject}/>
+          <TodoComponent todo={todo} showProject={showProject}/>
         </Box>)
       }
     </>
