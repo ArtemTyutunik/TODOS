@@ -1,6 +1,6 @@
 import React, {memo, useState} from 'react';
 import {Box} from '@mui/material';
-import {IDate, ITag, ITodo} from '@shared/interfacesAndTypes';
+import {IDate, ITodo} from '@shared/interfacesAndTypes';
 import CreateTodoForm from '@features/todoFeatures/CreateTodo/components/createTodoForm';
 import AddTaskButton from '@features/todoFeatures/CreateTodo/components/AddTaskButton';
 import RenderedList from '@entities/todos/components/RenderedList/RenderedList';
@@ -14,8 +14,8 @@ import {sortTodosByProperty} from '@shared/helpers';
 interface Props {
     todos: ITodo[],
     initialDate?: IDate,
-    initialProject?: string,
-    initialTag?: ITag['id'][],
+    initialProject?: ITodo['projectId'],
+    initialTag?: ITodo['tags'],
     noAddButton?:boolean,
     children?: React.ReactElement
 }

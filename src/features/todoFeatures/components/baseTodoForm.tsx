@@ -1,7 +1,7 @@
 import {useForm} from 'react-hook-form';
 import {Box, SelectChangeEvent} from '@mui/material';
 import {BaseFormInputs} from '@shared/forms/interfaces/interfaces';
-import {IDate, ITag, ITodo, Priority} from '@shared/interfacesAndTypes';
+import {IDate, ITodo, Priority} from '@shared/interfacesAndTypes';
 import {useTags} from '@entities/tag/utils/useTags';
 import TodoFormInputs from '@shared/forms/ui/Inputs';
 import FormActions from '@features/todoFeatures/components/setDataPanel';
@@ -19,7 +19,7 @@ interface Props {
   onSubmit: (newTodo: ITodo) => void,
   todo?: ITodo,
   initialDate?: string,
-  initialTag?:ITag['id'][],
+  initialTag?: ITodo['tags'],
   hideActions?: boolean,
   todoProjectId?: string
 }

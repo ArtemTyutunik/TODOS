@@ -1,11 +1,11 @@
 import React from 'react';
-import {IDate, ITag, ITodo} from '@shared/interfacesAndTypes';
+import {IDate, ITodo} from '@shared/interfacesAndTypes';
 import {useReducer} from 'react';
 
 type Options = {
   todoProjectId?: string,
   initialDate?: string
-  initialTag: ITag['id'][]
+  initialTag: ITodo['tags'],
 }
 
 
