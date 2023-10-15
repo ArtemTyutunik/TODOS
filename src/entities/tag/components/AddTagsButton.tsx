@@ -11,6 +11,7 @@ import {NoTagsComponent} from '@entities/tag';
 import '@entities/tag/components/TagsStyles.css'
 import {ITag, tagIdType} from '@shared/interfacesAndTypes';
 import ErrorComponent from '@entities/tag/components/ErrorComponent';
+import {styled} from '@mui/material/styles';
 
 interface Props {
   todoTags: tagIdType[],
@@ -42,8 +43,7 @@ const AddTagsButton = ({todoTags, onAddNewLabel}: Props) => {
 
       <DropdownMenu anchorEl={anchorEl} handleClose={onCloseDropdown}>
         <Box>
-          <TextField
-            sx={{padding: '0px'}}
+          <ThemeInput
             placeholder={'Search tag'}
             className={'tag-selector-input'}
             value={search}
@@ -70,5 +70,12 @@ const AddTagsButton = ({todoTags, onAddNewLabel}: Props) => {
     </ActionButton>
   );
 };
+
+const ThemeInput = styled(TextField)(({theme}) => ({
+  'padding': '0px',
+  '& .MuiOutlinedInput-root': {
+    color: theme.text.main,
+  },
+}))
 
 export default AddTagsButton;

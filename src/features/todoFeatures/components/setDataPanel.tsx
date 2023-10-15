@@ -3,6 +3,7 @@ import DueDateButton from '@entities/dueDateButton';
 import PriorityButton from '@entities/setPriorityButton/components/PriorityButton';
 import {AddTagsButton} from '@entities/tag';
 import {useFormContext} from '@shared/forms/hooks/UseBaseFormContext';
+import {styled} from '@mui/material/styles';
 
 interface Props {
     hideActions?: boolean
@@ -23,9 +24,13 @@ const FormActions = ({hideActions}: Props) => {
         <AddTagsButton todoTags={todoTags} onAddNewLabel={(newLabel: string) => onSelectTag(newLabel)}/>
       </Box>
     </Box>
-    <Divider/>
+    <CustomDivider/>
   </> : null
 }
+
+const CustomDivider = styled(Divider)(({theme}) => ({
+  background: theme.background.divider,
+}))
 
 
 export default FormActions;

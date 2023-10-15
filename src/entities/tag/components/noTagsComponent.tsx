@@ -8,6 +8,7 @@ import {configureNewTag} from '@entities/tag/utils/configureInitialTag';
 import {toast} from 'react-toastify';
 import TagsActionFailed from '@shared/components/Notification/errors/tagsActionsFailed';
 import {options} from '@shared/components/Notification/constants';
+import {styled} from '@mui/material/styles';
 
 interface Props {
     search: string
@@ -30,9 +31,9 @@ const NoTagsComponent = ({search}: Props) => {
 
   return (
     <Box>
-      <Typography textAlign={'center'} fontSize={'13px'} color={'#555555'} fontFamily={'sans-serif'}>
+      <InfoText>
         Tag not found
-      </Typography>
+      </InfoText>
       <List sx={{padding: '0 8px'}}>
         <ListItem sx={{padding: 0}}>
           <ListItemButton onClick={onClickHandler}
@@ -41,20 +42,30 @@ const NoTagsComponent = ({search}: Props) => {
               padding: 0}
             }>
             <IconButton>
-              <AddIcon fontSize={'small'}/>
+              <AddIcon fontSize={'small'} sx={(theme) => ({color: theme.background.icons})}/>
             </IconButton>
-            <Typography textAlign={'center'}
-              fontSize={'13px'}
-              color={'#555555'}
-              fontFamily={'sans-serif'}
-              fontWeight={700}>
+            <ActionText>
                 Add new {search}
-            </Typography>
+            </ActionText>
           </ListItemButton>
         </ListItem>
       </List>
     </Box>
   );
 };
+
+const InfoText = styled(Typography)(({theme}) => ({
+  textAlign: 'center',
+  fontSize: '13px',
+  color: theme.text.title,
+  fontFamily: 'sans-serif',
+}))
+
+const ActionText = styled(Typography)(({theme}) => ({
+  textAlign: 'center',
+  fontSize: '13px',
+  color: theme.text.title,
+  fontFamily: 'sans-serif',
+}))
 
 export default NoTagsComponent;
