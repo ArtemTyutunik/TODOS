@@ -14,11 +14,13 @@ const FilteredByTagTodosPage = () => {
   const tag = useTagById(id)
   const navigate = useNavigate()
 
+  if (!id) return <NoTodosWithTag/>
+
   return (
     <>
       {
         filteredTodos.length === 0 ? <NoTodosWithTag/> :
-            <TodoList noAddButton todos={filteredTodos}>
+            <TodoList todos={filteredTodos} initialTag={[id]}>
               <PageTitle>
                 <Box sx={{display: 'flex', alignItems: 'center'}}>
                   <CustomIconButton sx={{mr: '10px'}} onClick={() => navigate('/' + TAGS_LINK)}>

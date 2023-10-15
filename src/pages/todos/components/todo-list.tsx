@@ -1,6 +1,6 @@
 import React, {memo, useState} from 'react';
 import {Box} from '@mui/material';
-import {IDate, ITodo} from '@shared/interfacesAndTypes';
+import {IDate, ITag, ITodo} from '@shared/interfacesAndTypes';
 import CreateTodoForm from '@features/todoFeatures/CreateTodo/components/createTodoForm';
 import AddTaskButton from '@features/todoFeatures/CreateTodo/components/AddTaskButton';
 import RenderedList from '@entities/todos/components/RenderedList/RenderedList';
@@ -15,11 +15,12 @@ interface Props {
     todos: ITodo[],
     initialDate?: IDate,
     initialProject?: string,
+    initialTag?: ITag['id'][],
     noAddButton?:boolean,
     children?: React.ReactElement
 }
 
-const TodoList = memo(({todos, initialDate, initialProject, noAddButton = false, children}: Props) => {
+const TodoList = memo(({todos, initialDate, initialProject, noAddButton = false, children, initialTag}: Props) => {
   const [isOpenForm, openForm, closeForm] = useVisable(false);
   const [chosenTodos, setChosenTodos] = useState<ITodo['id'][]>([])
   const [allSelected, setAllSelected] = useState<boolean>(false)
@@ -43,7 +44,10 @@ const TodoList = memo(({todos, initialDate, initialProject, noAddButton = false,
 
   const form = isOpenForm ? (
           <Box mt={'20px'}>
-            <CreateTodoForm onClose={closeForm} initialDate={initialDate} initialProject={initialProject}/>
+            <CreateTodoForm onClose={closeForm}
+              initialDate={initialDate}
+              initialTag={initialTag}
+              initialProject={initialProject}/>
           </Box>
       ) : !noAddButton && <AddTaskButton onCreate={openForm}/>
 

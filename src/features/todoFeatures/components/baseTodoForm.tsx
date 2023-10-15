@@ -1,7 +1,7 @@
 import {useForm} from 'react-hook-form';
 import {Box, SelectChangeEvent} from '@mui/material';
 import {BaseFormInputs} from '@shared/forms/interfaces/interfaces';
-import {IDate, ITodo, Priority} from '@shared/interfacesAndTypes';
+import {IDate, ITag, ITodo, Priority} from '@shared/interfacesAndTypes';
 import {useTags} from '@entities/tag/utils/useTags';
 import TodoFormInputs from '@shared/forms/ui/Inputs';
 import FormActions from '@features/todoFeatures/components/setDataPanel';
@@ -19,6 +19,7 @@ interface Props {
   onSubmit: (newTodo: ITodo) => void,
   todo?: ITodo,
   initialDate?: string,
+  initialTag?:ITag['id'][],
   hideActions?: boolean,
   todoProjectId?: string
 }
@@ -28,6 +29,7 @@ const BaseTodoForm = ({
   onSubmit,
   todo,
   initialDate,
+  initialTag = [],
   hideActions,
   todoProjectId}: Props) => {
   const defaultInputValues = {
@@ -36,10 +38,9 @@ const BaseTodoForm = ({
   }
 
   const {control, handleSubmit, formState: {isValid}} = useForm<BaseFormInputs>({defaultValues: defaultInputValues});
-  const [formState, formDispatch] = useBaseFormReducer(todo, {todoProjectId, initialDate})
+  const [formState, formDispatch] = useBaseFormReducer(todo, {todoProjectId, initialDate, initialTag})
   const [todoTags, onSelectTag] = useTags(formState, !!todo);
   const [isDisabledAfterSubmit, setIsDisabledAfterSubmit] = useState(false)
-
 
   const setProject = (projectId: string) => {
     formDispatch(changeProjectActionCreator(projectId))
