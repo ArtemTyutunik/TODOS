@@ -28,7 +28,7 @@ const Todo = memo(({todo}: Props) => {
     try {
       sendUpdatedTodo({id, projectId, done: !todo.done, isCurrent: isCurrent}, userId)
       dispatch(toggleTaskComplete(Number(id)));
-      dispatch(toggleIsCurrent(todo));
+      if (isCurrent != todo.isCurrent) dispatch(toggleIsCurrent(todo));
     } catch (e) {
       console.log(e)
     }

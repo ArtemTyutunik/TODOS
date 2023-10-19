@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import {Checkbox, FormControlLabel, FormGroup} from '@mui/material';
 import {useLocalStorage} from '@shared/hooks';
-import CustomIconButton from '@shared/components/CustomIconButton';
 import FormSubmissionButtons from '@shared/forms/ui/FormSubmissionButtons';
 
 const style = {
@@ -12,11 +11,15 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 700,
+  height: 200,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
 };
 
 interface ModalProps{
@@ -46,13 +49,15 @@ const ModalWindow = ({opened, close, confirmComplete}:ModalProps) => {
     aria-describedby="modal-modal-description"
   >
     <Box sx={style}>
-      <Typography id="modal-modal-title" variant="h6" component="h2">
-        You are going to complete the current task. Do you want do remove this status?
+      <Typography id="modal-modal-title" variant="h6" component="h3">
+        We have noticed that this task is market as yours current in progress.<br/>Would you like to remove this status?
       </Typography>
-      <FormSubmissionButtons isValid={true} onClose={() => changeCurrent(false)} onSubmit={() => changeCurrent(true)} />
-      <FormGroup>
-        <FormControlLabel control={<Checkbox />} onChange={rememberChoice} label="Remember the choice"/>
-      </FormGroup>
+      <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+        <FormGroup>
+          <FormControlLabel control={<Checkbox />} onChange={rememberChoice} label="Remember the choice"/>
+        </FormGroup>
+        <FormSubmissionButtons isValid={true} onClose={() => changeCurrent(false)} onSubmit={() => changeCurrent(true)} />
+      </Box>
     </Box>
   </Modal>;
 }
