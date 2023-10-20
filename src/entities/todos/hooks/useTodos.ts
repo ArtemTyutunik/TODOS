@@ -5,6 +5,8 @@ import {IProject, ITodo} from '@shared/interfacesAndTypes';
 import {useCallback, useContext, useMemo} from 'react';
 import {projectsSelector} from '@entities/projects/model/store';
 import {ProjectContext} from '@layouts/athorizedLayout';
+import {ProjectWebSocketMessage, WebSocketType} from '@shared/interfacesAndTypes/webSocketConnection';
+import {sendUpdatedTodo} from '@shared/api/services/todos';
 
 //if we pass updateProjectTodos it means this todos should update by webSocket
 
@@ -19,19 +21,27 @@ const useTodoApi = (id: ITodo['id']) => {
 
   const isTodoInProject = useMemo(() => isTodoInProjectHelper(id, projects), [id, projects])
 
-  const sendUpdatedTodo = useCallback(async (updatedTodo: ITodo) => {
+  const sendApiRequest = useCallback(async (messageInfo: ProjectWebSocketMessage, type: WebSocketType) => {
     if (isTodoInProject) {
-      connectProjectToWebSocket(updatedTodo);
+      connectProjectToWebSocket(messageInfo, type);
       return;
     }
-    await sendUpdatedTodo(updatedTodo);
-  }, [isTodoInProject])
+    await sendUpdatedTodo(messageInfo.data as Partial<ITodo>);
+  },
+  [isTodoInProject])
 
   const onComplete = async (computedValue?: boolean) => {
     if (targetTodo) {
       const updatedTodo = {...targetTodo, done: computedValue ?? !targetTodo.done};
       dispatch(updateTargetTodo(updatedTodo));
-      await sendUpdatedTodo(updatedTodo);
+
+      const message: ProjectWebSocketMessage = {
+        projectId: updatedTodo.projectId,
+        id: updatedTodo.id,
+        data: {done: updatedTodo.done},
+      }
+
+      await sendApiRequest(message, 'update_todo');
     }
   }
 

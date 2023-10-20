@@ -19,10 +19,10 @@ import {setTodoInfoId, todoInfoIdSelector} from '@app/store/AppStore';
 import InfoBoard from '@pages/todos/pages/InfoBoard/InfoBoard';
 import checkIsMobile from '@shared/helpers/isMobile';
 import BasicModal from '@shared/components/modal';
-import useProjectWebSocketConnection, {UpdateFunctionMessage} from '@pages/project/hooks/useProjectWebSocketConnection';
+import useProjectWebSocketConnection from '@pages/project/hooks/useProjectWebSocketConnection';
+import {SendWebSocketMassage} from '@shared/interfacesAndTypes/webSocketConnection';
 
-export const ProjectContext = createContext<null |
-    {connectProjectToWebSocket:(message: UpdateFunctionMessage) => void}>(null)
+export const ProjectContext = createContext<null | {connectProjectToWebSocket: SendWebSocketMassage}>(null)
 
 const AuthorizedLayout = () => {
   const [isFetching] = useFetchAllUserData()

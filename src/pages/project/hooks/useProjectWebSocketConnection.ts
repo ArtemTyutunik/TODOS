@@ -1,11 +1,11 @@
-import {IProject, ITodo} from '@shared/interfacesAndTypes';
 import useWebsocket, {ReadyState} from 'react-use-websocket';
 import {useCallback} from 'react';
 import getUserId from '@shared/helpers/getUserId';
-import {WebSocketLike} from 'react-use-websocket/dist/lib/types';
-
-export type UpdateFunctionMessage = Partial<IProject> | Partial<ITodo>
-export type ReturnUpdateProjectFunction = [(message: UpdateFunctionMessage) => void, () => (WebSocketLike | null)]
+import {
+  ProjectWebSocketMessage,
+  ReturnUpdateProjectFunction, WebSocketMassage,
+  WebSocketType,
+} from '@shared/interfacesAndTypes/webSocketConnection';
 
 
 const useProjectWebSocketConnection = (): ReturnUpdateProjectFunction => {
@@ -13,9 +13,9 @@ const useProjectWebSocketConnection = (): ReturnUpdateProjectFunction => {
   const WEB_SOCKET_URL = `ws://localhost:3000/id=${userId}`;
   const {sendJsonMessage, readyState, getWebSocket} = useWebsocket(WEB_SOCKET_URL)
 
-  const sendMessage = useCallback((message: UpdateFunctionMessage) => {
+  const sendMessage = useCallback((message: ProjectWebSocketMessage, type: WebSocketType) => {
     if (readyState === ReadyState.OPEN) {
-      sendJsonMessage({update: message, type: 'updateProject'})
+      sendJsonMessage<WebSocketMassage>({payload: message, type: type})
     }
   }, [readyState])
 
