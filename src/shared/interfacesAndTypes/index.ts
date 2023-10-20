@@ -8,7 +8,7 @@ export interface ITodo {
     priority: Priority,
     tags: tagIdType[],
     date?: IDate
-    projectId?: todoProjectId
+    projectId: todoProjectId
     isCurrent?: boolean
 }
 
@@ -66,6 +66,7 @@ export interface IProject {
     id: todoProjectId,
     color: colorType,
     isPinned?: boolean,
+    todos: ITodo[],
     members: IMember[],
     shared: 'public' | 'private',
 }

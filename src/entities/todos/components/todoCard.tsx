@@ -85,7 +85,7 @@ const TodoCard = ({
             <Box maxWidth={'100%'} width={'100%'} sx={TodoFlexboxStyles}>
               <Box width={'100%'} onClick={(e: React.SyntheticEvent) => e.stopPropagation()}>
                 <Box sx = {TodoFlexboxStyles} >
-                  <CheckboxComponent onComplete={onComplete} todo={todo}/>
+                  <CheckboxComponent onComplete={() => onComplete()} todo={todo}/>
                   <Typography sx = {TodoLabelStyles} marginRight={'20px'}>
                     {label}
                   </Typography>

@@ -5,7 +5,6 @@ import {addNewProject, deleteProject, editProjectAction} from '@entities/project
 import {toast} from 'react-toastify';
 import {Box} from '@mui/material';
 import {errorOptions} from '@shared/components/Notification/constants';
-import {updateTodos} from '@entities/todos/store/todo';
 import {addToMembers} from '@shared/api/services/user';
 
 interface addNewProjectThunkArgs {
@@ -57,10 +56,9 @@ export const deleteProjectThunk = createAsyncThunk(
     'project/deleteProject',
     async (options: DeleteProjectOptions, {dispatch}) => {
       try {
-        const returnedTodos = await deleteProjectRequest(options.id)
-        options.callback()
         dispatch(deleteProject(options.id))
-        dispatch(updateTodos(returnedTodos))
+        await deleteProjectRequest(options.id)
+        options.callback()
       } catch (e) {
         console.log(e)
       }

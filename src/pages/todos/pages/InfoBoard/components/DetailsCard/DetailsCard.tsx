@@ -7,6 +7,7 @@ import {editTaskThunk} from '@entities/todos/store/todoThunks';
 import InfoBoardDescription from '@pages/todos/pages/InfoBoard/components/InfoBoardDescription/InfoBoardDescription';
 import TodoDetailsSection from '@pages/todos/pages/InfoBoard/components/TodoDetailsSection/TodoDetailsSection';
 import CompleteHandler from '@pages/todos/pages/InfoBoard/components/completeHandler/CompleteHandler';
+import useTodos from '@entities/todos/hooks/useTodos';
 
 interface Props {
   todo: ITodo,
@@ -15,6 +16,7 @@ interface Props {
 const DetailsCard = ({todo}: Props) => {
   const theme = useTheme()
   const dispatch = useAppDispatch()
+  const todosApi = useTodos(todo.id)
 
   const onTodoUpdate = useCallback((updatedTodoValues: Partial<ITodo>) => {
     const updatedTodo = {...todo, ...updatedTodoValues}
@@ -27,7 +29,7 @@ const DetailsCard = ({todo}: Props) => {
       <Box display={'flex'}>
         <Box width={'100%'} sx={{wordWrap: 'break-word'}} fontWeight={'bold'}>
           <InfoBoardTitle initValue={todo.label} onTitleChange={onTodoUpdate}/>
-          <CompleteHandler isComplete={todo.done}/>
+          <CompleteHandler isComplete={todo.done} onComplete={todosApi.onComplete}/>
           <InfoBoardDescription onTodoUpdate={onTodoUpdate} initValue={todo.description}/>
           <TodoDetailsSection/>
         </Box>

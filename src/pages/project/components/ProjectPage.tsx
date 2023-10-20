@@ -8,10 +8,6 @@ import getUserId from '@shared/helpers/getUserId';
 import {useAppDispatch} from '@app/store';
 import {addMemberToProjectThunk} from '@entities/projects/model/thunks';
 import AccessRestricted from './AccessResricted';
-import useProjectWebSocketConnection, {UpdateFunctionMessage} from '@pages/project/hooks/useProjectWebSocketConnection';
-
-export const ProjectContext = React.createContext<null |
-    {connectProjectToWebSocket:(message: UpdateFunctionMessage) => void}>(null)
 
 const ProjectPage = () => {
   const {id: projectId} = useParams()
@@ -19,7 +15,6 @@ const ProjectPage = () => {
   const [project] = useProjectById(projectId!)
   const projectTodos = useProjectTodos(projectId!)
   const [accessRestricted, setAccessRestricted] = React.useState<boolean | null>(null)
-  const connectProjectToWebSocket = useProjectWebSocketConnection(projectId as string)
 
   React.useEffect(() => {
     const userId = getUserId()
@@ -43,16 +38,15 @@ const ProjectPage = () => {
 
 
   return ( project ? (
-      <ProjectContext.Provider value={{connectProjectToWebSocket}}>
         <Box>
-          <TodoList todos={projectTodos} initialProject={project.id} projectTodoList>
+          <TodoList todos={projectTodos} initialProject={project.id}>
             <PageTitle>
               {project.name}
             </PageTitle>
           </TodoList>
         </Box>
-      </ProjectContext.Provider>
-        ): null
+
+      ): null
   )
 };
 

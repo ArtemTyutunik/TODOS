@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
-import React, {useEffect} from 'react';
+import React, {useEffect, createContext} from 'react';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Box} from '@mui/material';
@@ -19,15 +19,21 @@ import {setTodoInfoId, todoInfoIdSelector} from '@app/store/AppStore';
 import InfoBoard from '@pages/todos/pages/InfoBoard/InfoBoard';
 import checkIsMobile from '@shared/helpers/isMobile';
 import BasicModal from '@shared/components/modal';
+import useProjectWebSocketConnection, {UpdateFunctionMessage} from '@pages/project/hooks/useProjectWebSocketConnection';
+
+export const ProjectContext = createContext<null |
+    {connectProjectToWebSocket:(message: UpdateFunctionMessage) => void}>(null)
 
 const AuthorizedLayout = () => {
   const [isFetching] = useFetchAllUserData()
-
   const todoInfoId = useSelector(todoInfoIdSelector)
-  //todo refactor selectors
   const errorFetching = useSelector(isErrorFetchingSelector)
   const isVerified = useSelector(isVerifiedSelector)
   const dispatch = useDispatch()
+
+  //web socket connection
+  const [sendMessage] = useProjectWebSocketConnection()
+
 
   const todoCardWidth = localStorage.getItem('todoCardWidth') || '25%'
   const isMobile = checkIsMobile()
@@ -50,20 +56,21 @@ const AuthorizedLayout = () => {
       isFetching ?
           <SpinnerComponent size={'large'}/> :
     <>
-      {errorFetching && <TodosFetchFailed/>}
-      {!isVerified && <NotVerified/>}
-      <Header/>
-      <Box sx={{marginTop: 0}} height={'calc(100vh - 56px)'} display={'flex'}>
-        <ResizableDrawer/>
-        <Box sx={routesStyles}>
-          <Box width={{mobile: '100%', largeMobile: '80%'}}
-            margin={{mobile: '0', largeMobile: '0 auto'}}
-            padding={{mobile: '0 20px', largeMobile: 0}}>
-            <Routing/>
+      <ProjectContext.Provider value={{connectProjectToWebSocket: sendMessage}}>
+        {errorFetching && <TodosFetchFailed/>}
+        {!isVerified && <NotVerified/>}
+        <Header/>
+        <Box sx={{marginTop: 0}} height={'calc(100vh - 56px)'} display={'flex'}>
+          <ResizableDrawer/>
+          <Box sx={routesStyles}>
+            <Box width={{mobile: '100%', largeMobile: '80%'}}
+              margin={{mobile: '0', largeMobile: '0 auto'}}
+              padding={{mobile: '0 20px', largeMobile: 0}}>
+              <Routing/>
+            </Box>
           </Box>
-        </Box>
 
-        {todoInfoId && (
+          {todoInfoId && (
           isMobile ? (
               <BasicModal open onClose={onCloseTodoInfo}>
                 <Box minWidth={{mobile: '300px', largeMobile: '400px', tablet: '700px'}}>
@@ -82,9 +89,10 @@ const AuthorizedLayout = () => {
               </Box>
             </Resizable>
           )
-        )}
-      </Box>
-      <ToastContainer/>
+          )}
+        </Box>
+        <ToastContainer/>
+      </ProjectContext.Provider>
     </>
   );
 };

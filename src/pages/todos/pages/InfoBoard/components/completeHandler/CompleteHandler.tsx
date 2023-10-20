@@ -1,17 +1,20 @@
 import React, {memo, useEffect, useState} from 'react';
 import {Box, MenuItem, Select, SelectChangeEvent} from '@mui/material';
 import {styled} from '@mui/material/styles';
+import {ITodoApi} from '@entities/todos/hooks/useTodos';
 
 interface Props {
-  isComplete: boolean
+  isComplete: boolean,
+  onComplete: ITodoApi['onComplete']
 }
-const CompleteHandler = memo(({isComplete}: Props) => {
-  const [value, setValue] = useState<string>('');
 
+const CompleteHandler = memo(({isComplete, onComplete}: Props) => {
+  const [value, setValue] = useState<string>('');
 
   const onChange = (e: SelectChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value as string;
     setValue(newValue);
+    onComplete(newValue === 'true');
   }
 
   useEffect(() => {
