@@ -12,7 +12,7 @@ import {sendUpdatedTodo} from '@shared/api/services/todos';
 import InfoCard from '@entities/todos/components/TodoDetail/components/InfoCard';
 import {userIdSelector} from '@entities/user/model/store';
 import TagsPanel from '@entities/todos/components/TagsPanel';
-import {useTagById} from '@entities/tag';
+import {userTagsSelector} from '@entities/tag/store/tagStore';
 
 interface Props {
   todo: ITodo,
@@ -23,9 +23,11 @@ const DetailsCard = ({todo, onComplete}: Props) => {
   const {date, id} = todo
   const theme = useTheme()
   const userId = useSelector(userIdSelector)
+  const userTags = useSelector(userTagsSelector)
   const dispatch = useDispatch()
   const [todoDate, setTodoDate] = useTodoDate(date, id)
   const [priority, onSelected] = useSelectPriority(todo.priority)
+  const todoTags = userTags.filter((userTag) => todo.tags.includes(userTag.id))
 
   const onPriorityHandler = (event: SelectChangeEvent<Priority>) => {
     //@ts-ignore
@@ -35,8 +37,6 @@ const DetailsCard = ({todo, onComplete}: Props) => {
     sendUpdatedTodo(data, userId)
     dispatch(setPriority(data))
   }
-
-  const tags = todo.tags?.map(useTagById)
 
   const onDateSelect = (newDate: IDate) => {
     setTodoDate(newDate)
@@ -58,8 +58,8 @@ const DetailsCard = ({todo, onComplete}: Props) => {
             <DetailActionPanelItem label={'Set priority'}>
               <PriorityButton initialPriority={priority} changeHandler={onPriorityHandler} variant={'short'}/>
             </DetailActionPanelItem>
-            {tags?.length! > 0 && <DetailActionPanelItem label={'Tags'}>
-              <TagsPanel tags={tags}/>
+            {todo.tags.length! > 0 && <DetailActionPanelItem label={'Tags'}>
+              <TagsPanel tags={todoTags}/>
             </DetailActionPanelItem>}
           </Box>
         </Box>
