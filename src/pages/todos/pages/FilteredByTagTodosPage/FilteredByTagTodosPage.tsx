@@ -14,12 +14,13 @@ const FilteredByTagTodosPage = () => {
   const tag = useTagById(id)
   const navigate = useNavigate()
 
-  if (!id) return <NoTodosWithTag/>
+  const initialTagToCreateTodo = [tag.id]
+  if (!id) return <NoTodosWithTag initialTag={initialTagToCreateTodo}/>
 
   return (
     <>
       {
-        filteredTodos.length === 0 ? <NoTodosWithTag/> :
+        filteredTodos.length === 0 ? <NoTodosWithTag initialTag={initialTagToCreateTodo}/> :
             <TodoList todos={filteredTodos} initialTag={[id]}>
               <PageTitle>
                 <Box sx={{display: 'flex', alignItems: 'center'}}>

@@ -16,11 +16,10 @@ interface Props {
     initialDate?: IDate,
     initialProject?: ITodo['projectId'],
     initialTag?: ITodo['tags'],
-    noAddButton?:boolean,
     children?: React.ReactElement
 }
 
-const TodoList = memo(({todos, initialDate, initialProject, noAddButton = false, children, initialTag}: Props) => {
+const TodoList = memo(({todos, initialDate, initialProject, children, initialTag}: Props) => {
   const [isOpenForm, openForm, closeForm] = useVisable(false);
   const [chosenTodos, setChosenTodos] = useState<ITodo['id'][]>([])
   const [allSelected, setAllSelected] = useState<boolean>(false)
@@ -41,7 +40,6 @@ const TodoList = memo(({todos, initialDate, initialProject, noAddButton = false,
 
   const sortedTodos = sortTodosByProperty(sorting, todos, order)
 
-
   const form = isOpenForm ? (
           <Box mt={'20px'}>
             <CreateTodoForm onClose={closeForm}
@@ -49,7 +47,7 @@ const TodoList = memo(({todos, initialDate, initialProject, noAddButton = false,
               initialTag={initialTag}
               initialProject={initialProject}/>
           </Box>
-      ) : !noAddButton && <AddTaskButton onCreate={openForm}/>
+      ) : <AddTaskButton onCreate={openForm}/>
 
   return (
     <Box mt={'20px'} paddingBottom={'20px'}>
