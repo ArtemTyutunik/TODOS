@@ -10,7 +10,7 @@ export const useTags = (formState: ITodo, doesTodoExist: boolean):
   const allTodos = useSelector(allTodosSelector)
 
   const existingTodoTags: tagIdType[] = allTodos.find((todo) => todo.id === formState.id)?.tags || []
-  const [creatingTodoTags, setCreatingTodoTags] = useState<tagIdType[]>([])
+  const [creatingTodoTags, setCreatingTodoTags] = useState<tagIdType[]>(formState.tags)
 
   const todoTags = doesTodoExist ? existingTodoTags: creatingTodoTags
 

@@ -19,6 +19,7 @@ interface Props {
   onSubmit: (newTodo: ITodo) => void,
   todo?: ITodo,
   initialDate?: string,
+  initialTag?: ITodo['tags'],
   hideActions?: boolean,
   todoProjectId?: string
 }
@@ -28,6 +29,7 @@ const BaseTodoForm = ({
   onSubmit,
   todo,
   initialDate,
+  initialTag = [],
   hideActions,
   todoProjectId}: Props) => {
   const defaultInputValues = {
@@ -36,10 +38,9 @@ const BaseTodoForm = ({
   }
 
   const {control, handleSubmit, formState: {isValid}} = useForm<BaseFormInputs>({defaultValues: defaultInputValues});
-  const [formState, formDispatch] = useBaseFormReducer(todo, {todoProjectId, initialDate})
+  const [formState, formDispatch] = useBaseFormReducer(todo, {todoProjectId, initialDate, initialTag})
   const [todoTags, onSelectTag] = useTags(formState, !!todo);
   const [isDisabledAfterSubmit, setIsDisabledAfterSubmit] = useState(false)
-
 
   const setProject = (projectId: string) => {
     formDispatch(changeProjectActionCreator(projectId))

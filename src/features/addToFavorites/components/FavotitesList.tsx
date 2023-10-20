@@ -23,7 +23,7 @@ const FavoritesList = ({favorites}: {favorites: IFavorite[]}) => {
 const FavoriteItem = ({favorite}: {favorite: IFavorite}) => {
   const item = useTagById(favorite.itemId)
   const navigate = useNavigate()
-  const {deleteFromFavorites} = useToggleFavorite(item?.id)
+  const {deleteFromFavorites} = useToggleFavorite(item?.id!)
 
   const onDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()

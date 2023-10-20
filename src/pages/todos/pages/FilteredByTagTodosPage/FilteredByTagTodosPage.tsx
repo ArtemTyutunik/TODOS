@@ -7,6 +7,7 @@ import {PageTitle, TodoList} from '@pages/todos/components';
 import NoTodosWithTag from '@pages/todos/pages/FilteredByTagTodosPage/ui/noTodosWithTag';
 import CustomIconButton from '@shared/components/CustomIconButton';
 import {TAGS_LINK} from '@shared/constants';
+import NotFound from '@pages/NotFound';
 
 const FilteredByTagTodosPage = () => {
   const {id} = useParams()
@@ -14,11 +15,15 @@ const FilteredByTagTodosPage = () => {
   const tag = useTagById(id)
   const navigate = useNavigate()
 
+  if (!id || !tag) return <NotFound/>
+
+  const initialTagToCreateTodo = [tag.id]
+
   return (
     <>
       {
-        filteredTodos.length === 0 ? <NoTodosWithTag/> :
-            <TodoList noAddButton todos={filteredTodos}>
+        filteredTodos.length === 0 ? <NoTodosWithTag initialTag={initialTagToCreateTodo}/> :
+            <TodoList todos={filteredTodos} initialTag={[id]}>
               <PageTitle>
                 <Box sx={{display: 'flex', alignItems: 'center'}}>
                   <CustomIconButton sx={{mr: '10px'}} onClick={() => navigate('/' + TAGS_LINK)}>

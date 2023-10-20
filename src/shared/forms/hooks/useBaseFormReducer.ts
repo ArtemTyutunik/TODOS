@@ -5,6 +5,7 @@ import {useReducer} from 'react';
 type Options = {
   todoProjectId?: string,
   initialDate?: string
+  initialTag: ITodo['tags'],
 }
 
 
@@ -12,7 +13,7 @@ const initialStateFunction = (todo?: ITodo, options?: Options) => ({
   id: todo?.id || Date.now(),
   label: todo?.label || '',
   description: todo?.description || '',
-  tags: todo?.tags || [],
+  tags: todo?.tags || options?.initialTag || [],
   date: todo?.date || options?.initialDate || '',
   priority: todo?.priority || '4',
   done: todo?.done || false,

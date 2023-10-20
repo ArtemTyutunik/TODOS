@@ -14,12 +14,12 @@ import {sortTodosByProperty} from '@shared/helpers';
 interface Props {
     todos: ITodo[],
     initialDate?: IDate,
-    initialProject?: string,
-    noAddButton?:boolean,
+    initialProject?: ITodo['projectId'],
+    initialTag?: ITodo['tags'],
     children?: React.ReactElement
 }
 
-const TodoList = memo(({todos, initialDate, initialProject, noAddButton = false, children}: Props) => {
+const TodoList = memo(({todos, initialDate, initialProject, children, initialTag}: Props) => {
   const [isOpenForm, openForm, closeForm] = useVisable(false);
   const [chosenTodos, setChosenTodos] = useState<ITodo['id'][]>([])
   const [allSelected, setAllSelected] = useState<boolean>(false)
@@ -40,12 +40,14 @@ const TodoList = memo(({todos, initialDate, initialProject, noAddButton = false,
 
   const sortedTodos = sortTodosByProperty(sorting, todos, order)
 
-
   const form = isOpenForm ? (
           <Box mt={'20px'}>
-            <CreateTodoForm onClose={closeForm} initialDate={initialDate} initialProject={initialProject}/>
+            <CreateTodoForm onClose={closeForm}
+              initialDate={initialDate}
+              initialTag={initialTag}
+              initialProject={initialProject}/>
           </Box>
-      ) : !noAddButton && <AddTaskButton onCreate={openForm}/>
+      ) : <AddTaskButton onCreate={openForm}/>
 
   return (
     <Box mt={'20px'} paddingBottom={'20px'}>
