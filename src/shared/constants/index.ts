@@ -1,9 +1,7 @@
-import {Dayjs} from 'dayjs';
-import * as dayjsModule from 'dayjs';
-import dayJsDefault from 'dayjs'
+import dayjs, {Dayjs} from 'dayjs';
 
 export const dateFormat = 'MMM D';
-const dayjs = process.env.NODE_ENV === 'production' ? dayJsDefault : dayjsModule
+
 export const overdueDate = (date: string): boolean => {
   return dayjs(date).isBefore(dayjs().format(dateFormat));
 };
