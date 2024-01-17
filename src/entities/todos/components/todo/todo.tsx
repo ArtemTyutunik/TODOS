@@ -1,32 +1,47 @@
-import React, {memo} from 'react';
+import React, {memo, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {addNewTask, deleteTask, setPriority, toggleTaskComplete} from '../../store/todo';
+import {addNewTask, deleteTask, setPriority, toggleIsCurrent, toggleTaskComplete} from '../../store/todo';
 import {EditTodoForm} from '@features/todoFeatures/EditTodo';
 import {ITodo, Priority} from '@shared/interfacesAndTypes';
 import TodoCard from '../todoCard';
-import {useVisable} from '@shared/hooks';
+import {useLocalStorage, useVisable} from '@shared/hooks';
 import {deleteTodoById, postNewTodo, sendUpdatedTodo} from '@shared/api/services/todos';
 import {userIdSelector} from '@entities/user/model/store';
 import {Box} from '@mui/material';
+import ModalWindow from '@entities/todos/components/onCompleteChangeCurrentStatusModal';
 
 interface Props {
     todo: ITodo
 }
 
 const Todo = memo(({todo}: Props) => {
-  const {id} = todo;
+  const {id, projectId, isCurrent} = todo;
   const dispatch = useDispatch();
   const userId = useSelector(userIdSelector)
   const [isEditing, openEditing, closeEditing] = useVisable(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [askToDeleteCurrentStatus] = useLocalStorage('askToDeleteCurrentStatus', true)
+  const [removeIsCurrentStatus] = useLocalStorage('removeIsCurrentStatus', true)
 
-  const onComplete = () => {
+  const confirmComplete = (isCurrent?:boolean) => {
     try {
-      sendUpdatedTodo({id, done: !todo.done}, userId)
+      sendUpdatedTodo({id, projectId, done: !todo.done, isCurrent: isCurrent}, userId)
       dispatch(toggleTaskComplete(Number(id)));
+      if (isCurrent != todo.isCurrent) dispatch(toggleIsCurrent(todo));
     } catch (e) {
       console.log(e)
     }
+  }
+
+  const onComplete = () => {
+    if (!todo.done) {
+      if (askToDeleteCurrentStatus === true && todo.isCurrent) {
+        setIsModalOpen(true)
+      } else if (isCurrent) {
+        confirmComplete(!removeIsCurrentStatus)
+      } else confirmComplete(isCurrent)
+    } else confirmComplete(isCurrent)
   };
 
   const onDeleteAction = () => {
@@ -62,13 +77,18 @@ const Todo = memo(({todo}: Props) => {
     </Box>
   }
 
-  return <TodoCard
-    todo={todo}
-    onDeleteAction={onDeleteAction}
-    onDuplicateAction={onDuplicateAction}
-    setPriorityAction={setPriorityAction}
-    onComplete={onComplete}
-    onEdit={openEditing}/>;
+  return (
+    <>
+      <TodoCard
+        todo={todo}
+        onDeleteAction={onDeleteAction}
+        onDuplicateAction={onDuplicateAction}
+        setPriorityAction={setPriorityAction}
+        onComplete={onComplete}
+        onEdit={openEditing}/>
+      <ModalWindow opened={isModalOpen} close={() => setIsModalOpen(false)} confirmComplete={confirmComplete}/>
+    </>
+  );
 });
 
 export default Todo;

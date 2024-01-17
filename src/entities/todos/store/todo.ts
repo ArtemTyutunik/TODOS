@@ -83,7 +83,10 @@ const todosSlice = createSlice({
       }
     },
     toggleIsCurrent: (state, {payload}: PayloadAction<ITodo>) => {
-      return updateTodoInState(state, payload)
+      const currentTask = findTaskById(state, payload.id);
+      if (currentTask) {
+        currentTask.isCurrent = !currentTask.isCurrent;
+      }
     },
 
   },
